@@ -35,6 +35,7 @@ class CreateCommercesTable extends Migration
             $table->decimal('lng', 8, 5)->nullable();
             $table->string('livraison', 1)->nullable();
             $table->string('conditionLivraison')->nullable();
+            $table->text('horairesOuverture')->nullable();
 
             $table->foreignId('user_id')->constrained();
 
