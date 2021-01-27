@@ -42,9 +42,8 @@ class CreateCommercesTable extends Migration
 
             $table->foreignId('ville_INSEE')->references('INSEE')->on('villes');
 
-            $table->foreignId('type_id')->constrained();
-
-            $table->foreignId('categorie_id')->nullable()->constrained();
+            $table->foreignId('categorie_id')->constrained();
+            $table->timestamps();
         });
     }
 

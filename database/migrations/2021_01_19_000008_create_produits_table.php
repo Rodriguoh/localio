@@ -14,7 +14,7 @@ class CreateProduitsTable extends Migration
 
     /**
      * Run the migrations.
-     * @table Produit
+     * @table produits
      *
      * @return void
      */
@@ -26,9 +26,9 @@ class CreateProduitsTable extends Migration
             $table->text('description')->nullable();
             $table->decimal('prix', 8, 2);
             $table->integer('stock')->nullable();
-            $table->string('supprimer', 1)->nullable();
-
+            $table->foreignId('unite_id')->constrained();
             $table->foreignId('commerce_id')->constrained();
+            $table->timestamps();
         });
     }
 

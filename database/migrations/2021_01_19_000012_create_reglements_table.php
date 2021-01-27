@@ -27,6 +27,7 @@ class CreateReglementsTable extends Migration
             $table->string('titulaire', 100);
             $table->string('banque', 50);
             $table->foreignId('commande_id')->constrained();
+            $table->timestamps();
         });
     }
 
