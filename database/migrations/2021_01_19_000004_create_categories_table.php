@@ -23,11 +23,8 @@ class CreateCategoriesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
             $table->string('libelle', 20)->nullable();
-            $table->integer('idType');
 
-            $table->index(["idType"], 'idType_idx');
-
-            $table->foreignId('type_id')->constrained();
+            $table->foreignId('categorie_id')->nullable()->constrained();
 
             $table->timestamps();
         });

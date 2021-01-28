@@ -4,17 +4,18 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFavorisTable extends Migration
+class CreateUserCommerceTable extends Migration
 {
     /**
+     * = Table FAVORIS
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'favoris';
+    public $tableName = 'user_commerce';
 
     /**
      * Run the migrations.
-     * @table Favoris
+     * @table user_commerce
      *
      * @return void
      */
@@ -23,8 +24,6 @@ class CreateFavorisTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('commerce_id')->constrained();
-
-            $table->primary(['user_id', 'commerce_id']);
         });
     }
 
