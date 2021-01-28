@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Photo extends Model
 {
     use HasFactory;
+
+    /**
+     * Get the commerce corresponding to this photo
+     */
+    public function commerce()
+    {
+        return $this->belongsTo(Commerce::class);
+    }
 }
