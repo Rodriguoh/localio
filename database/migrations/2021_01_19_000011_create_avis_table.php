@@ -27,6 +27,7 @@ class CreateAvisTable extends Migration
             $table->dateTime('date')->nullable();
             $table->foreignId('commerce_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 

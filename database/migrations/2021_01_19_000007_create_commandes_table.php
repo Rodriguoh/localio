@@ -25,6 +25,7 @@ class CreateCommandesTable extends Migration
             $table->string('statut', 10)->nullable();
 
             $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 

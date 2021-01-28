@@ -35,6 +35,7 @@ class CreateCommercesTable extends Migration
             $table->decimal('lng', 8, 5)->nullable();
             $table->string('livraison', 1)->nullable();
             $table->string('conditionLivraison')->nullable();
+            $table->text('horairesOuverture')->nullable();
 
             $table->foreignId('user_id')->constrained();
 
@@ -42,9 +43,8 @@ class CreateCommercesTable extends Migration
 
             $table->foreignId('ville_INSEE')->references('INSEE')->on('villes');
 
-            $table->foreignId('type_id')->constrained();
-
-            $table->foreignId('categorie_id')->nullable()->constrained();
+            $table->foreignId('categorie_id')->constrained();
+            $table->timestamps();
         });
     }
 

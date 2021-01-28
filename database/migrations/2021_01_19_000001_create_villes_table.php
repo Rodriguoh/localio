@@ -26,6 +26,7 @@ class CreateVillesTable extends Migration
             $table->string('CP', 10)->nullable();
             $table->decimal('lat', 8, 5)->nullable();
             $table->decimal('lng', 8, 5)->nullable();
+            $table->timestamps();
         });
     }
 
