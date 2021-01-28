@@ -40,4 +40,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get User's role
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Get User's favorit stores
+     */
+    public function favoritStores()
+    {
+        return $this->belongsToMany(Store::class);
+    }
+
+    /**
+     * Get all moderation the user has done
+     */
+    public function moderations()
+    {
+        return $this->hasMany(Moderation::class);
+    }
+
+    /**
+     * Get all avis posted by the user
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

@@ -22,9 +22,9 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string('libelle', 20)->nullable();
+            $table->string('label', 20)->nullable();
 
-            $table->foreignId('categorie_id')->nullable()->constrained();
+            $table->foreignId('category_id')->nullable()->constrained();
 
             $table->timestamps();
         });

@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAvisTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'avis';
+    public $tableName = 'comments';
 
     /**
      * Run the migrations.
-     * @table Avis
+     * @table Comments
      *
      * @return void
      */
@@ -23,9 +23,9 @@ class CreateAvisTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
             $table->decimal('note', 2, 1);
-            $table->text('commentaire');
+            $table->text('comment');
             $table->dateTime('date')->nullable();
-            $table->foreignId('commerce_id')->constrained();
+            $table->foreignId('store_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

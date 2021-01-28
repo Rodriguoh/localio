@@ -22,7 +22,7 @@ class CreateRolesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string('type', 15)->nullable();
+            $table->string('name', 15)->nullable();
             $table->timestamps();
         });
     }

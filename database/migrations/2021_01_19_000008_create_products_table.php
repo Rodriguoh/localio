@@ -4,26 +4,31 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserCommerceTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
-     * = Table FAVORIS
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'user_commerce';
+    public $tableName = 'products';
 
     /**
      * Run the migrations.
-     * @table user_commerce
+     * @table products
      *
      * @return void
      */
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('commerce_id')->constrained();
+            $table->id();
+            $table->string('name', 80);
+            $table->text('description')->nullable();
+            $table->decimal('price', 8, 2);
+            $table->integer('stock')->nullable();
+            $table->foreignId('unit_id')->constrained();
+            $table->foreignId('store_id')->constrained();
+            $table->timestamps();
         });
     }
 

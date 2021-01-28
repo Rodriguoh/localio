@@ -15,11 +15,11 @@ class CreateModerationsTable extends Migration
     {
         Schema::create('moderations', function (Blueprint $table) {
             $table->dateTime('date')->useCurrent();
-            $table->foreignId('commerce_id')->constrained();
+            $table->foreignId('store_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->string('action')->nullable();
 
-            $table->primary(['date', 'commerce_id', 'user_id']);
+            $table->primary(['date', 'store_id', 'user_id']);
 
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ class CreateModerationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moderations');
+        Schema::dropIfExists($this->tableName);
     }
 }
