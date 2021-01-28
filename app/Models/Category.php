@@ -20,7 +20,7 @@ class Category extends Model
     /**
      * Get All store of the category plus of her first stage categories child
      */
-    public function getAllstoresWithAllChilds()
+    public function getAllStoresWithAllChilds()
     {
         $result[] = $this->stores();
 
