@@ -25,8 +25,8 @@ class CreatePhotosTable extends Migration
             $table->string('url', 200)->nullable();
             $table->string('alt')->nullable();
 
-            $table->foreignId('commerce_id')->nullable()->constrained();
-            $table->foreignId('produit_id')->nullable()->constrained();
+            $table->foreignId('store_id')->nullable()->constrained();
+            $table->foreignId('product_id')->nullable()->constrained();
         });
     }
 

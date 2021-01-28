@@ -10,10 +10,10 @@ class Photo extends Model
     use HasFactory;
 
     /**
-     * Get the commerce corresponding to this photo
+     * Get the store corresponding to this photo
      */
-    public function commerce()
+    public function store()
     {
-        return $this->belongsTo(Commerce::class);
+        return $this->belongsTo(Store::class);
     }
 }

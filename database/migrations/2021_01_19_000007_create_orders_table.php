@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReglementsTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'reglements';
+    public $tableName = 'orders';
 
     /**
      * Run the migrations.
-     * @table Reglement
+     * @table Commande
      *
      * @return void
      */
@@ -22,11 +22,9 @@ class CreateReglementsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->decimal('montant', 10, 2)->nullable();
-            $table->date('date');
-            $table->string('titulaire', 100);
-            $table->string('banque', 50);
-            $table->foreignId('commande_id')->constrained();
+            $table->string('state', 10)->nullable();
+
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

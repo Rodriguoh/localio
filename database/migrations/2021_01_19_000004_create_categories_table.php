@@ -24,7 +24,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('libelle', 20)->nullable();
 
-            $table->foreignId('categorie_id')->nullable()->constrained();
+            $table->foreignId('category_id')->nullable()->constrained();
 
             $table->timestamps();
         });

@@ -50,11 +50,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Get User's favorites commerces
+     * Get User's favorit stores
      */
-    public function favorisCommerce()
+    public function favoritStores()
     {
-        return $this->belongsToMany(Commerce::class);
+        return $this->belongsToMany(Store::class);
     }
 
     /**
@@ -68,8 +68,8 @@ class User extends Authenticatable
     /**
      * Get all avis posted by the user
      */
-    public function avis()
+    public function comments()
     {
-        return $this->hasMany(Avi::class);
+        return $this->hasMany(Comment::class);
     }
 }

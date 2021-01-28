@@ -10,10 +10,10 @@ class Consultation extends Model
     use HasFactory;
 
     /**
-     * Get the commerce who get this visit
+     * Get the store who get this visit
      */
-    public function commerce()
+    public function store()
     {
-        return $this->belongsTo(Commerce::class);
+        return $this->belongsTo(Store::class);
     }
 }

@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ville extends Model
+class City extends Model
 {
     use HasFactory;
 
     /**
-     * Get all commerce in the city
+     * Get all store in the city
      */
-    public function commerces()
+    public function stores()
     {
-        return $this->hasMany(Commerce::class);
+        return $this->hasMany(Store::class);
     }
 }

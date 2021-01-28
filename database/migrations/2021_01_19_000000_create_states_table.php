@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProduitsTable extends Migration
+class CreateStatesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'produits';
+    public $tableName = 'states';
 
     /**
      * Run the migrations.
-     * @table produits
+     * @table State
      *
      * @return void
      */
@@ -22,12 +22,7 @@ class CreateProduitsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string('nom', 80);
-            $table->text('description')->nullable();
-            $table->decimal('prix', 8, 2);
-            $table->integer('stock')->nullable();
-            $table->foreignId('unite_id')->constrained();
-            $table->foreignId('commerce_id')->constrained();
+            $table->string('label', 20)->nullable();
             $table->timestamps();
         });
     }

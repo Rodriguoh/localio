@@ -10,11 +10,11 @@ class Moderation extends Model
     use HasFactory;
 
     /**
-     * Get on wich commerce this moderation has been done
+     * Get on wich store this moderation has been done
      */
-    public function commerce()
+    public function store()
     {
-        return $this->belongsTo(Commerce::class);
+        return $this->belongsTo(Store::class);
     }
 
     /**

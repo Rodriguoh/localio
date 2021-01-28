@@ -5,36 +5,36 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Commerce extends Model
+class Store extends Model
 {
     use HasFactory;
 
     /**
-     * Get commerce's state
+     * Get store's state
      */
-    public function etat()
+    public function state()
     {
-        return $this->belongsTo(Etat::class);
+        return $this->belongsTo(State::class);
     }
 
     /**
-     * Get the commerce's city
+     * Get the store's city
      */
-    public function ville()
+    public function city()
     {
-        return $this->belongsTo(Ville::class);
+        return $this->belongsTo(City::class);
     }
 
     /**
-     * Get the commerce's categorie
+     * Get the store's category
      */
-    public function categorie()
+    public function category()
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**
-     * Get all consultation who has been done on this commerce
+     * Get all consultation who has been done on this store
      */
     public function consultations()
     {
@@ -42,7 +42,7 @@ class Commerce extends Model
     }
 
     /**
-     * Get all photos of this commerce
+     * Get all photos of this store
      */
     public function photos()
     {
@@ -50,7 +50,7 @@ class Commerce extends Model
     }
 
     /**
-     * Get all users who has this commerce in favoris
+     * Get all users who has this store in favoris
      */
     public function favorisUsers()
     {
@@ -58,7 +58,7 @@ class Commerce extends Model
     }
 
     /**
-     * Get all moderation who has been done on this commerce
+     * Get all moderation who has been done on this store
      */
     public function moderations()
     {
@@ -66,10 +66,10 @@ class Commerce extends Model
     }
 
     /**
-     * Get all avis on this commerce
+     * Get all comments on this store
      */
-    public function avis()
+    public function Comments()
     {
-        return $this->hasMany(Avi::class);
+        return $this->hasMany(Comment::class);
     }
 }

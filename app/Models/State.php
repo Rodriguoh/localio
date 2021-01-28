@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Etat extends Model
+class State extends Model
 {
     use HasFactory;
 
     /**
-     * Get all commerces with this state
+     * Get all stores with this state
      */
-    public function commerces()
+    public function stores()
     {
-        return $this->hasMany(Commerce::class);
+        return $this->hasMany(Store::class);
     }
 }

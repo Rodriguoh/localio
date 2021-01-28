@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommandesTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'commandes';
+    public $tableName = 'payments';
 
     /**
      * Run the migrations.
-     * @table Commande
+     * @table Payment
      *
      * @return void
      */
@@ -22,9 +22,11 @@ class CreateCommandesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string('statut', 10)->nullable();
-
-            $table->foreignId('user_id')->constrained();
+            $table->decimal('amount', 10, 2)->nullable();
+            $table->date('date');
+            $table->string('owner', 100);
+            $table->string('bank', 50);
+            $table->foreignId('order_id')->constrained();
             $table->timestamps();
         });
     }

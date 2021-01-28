@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVillesTable extends Migration
+class CreateCitiesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'villes';
+    public $tableName = 'cities';
 
     /**
      * Run the migrations.
-     * @table Ville
+     * @table Cities
      *
      * @return void
      */
@@ -22,8 +22,8 @@ class CreateVillesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id('INSEE');
-            $table->string('nom', 100)->nullable();
-            $table->string('CP', 10)->nullable();
+            $table->string('name', 100)->nullable();
+            $table->string('ZIPcode', 10)->nullable();
             $table->decimal('lat', 8, 5)->nullable();
             $table->decimal('lng', 8, 5)->nullable();
             $table->timestamps();

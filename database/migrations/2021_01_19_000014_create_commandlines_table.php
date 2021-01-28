@@ -4,26 +4,31 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEtatsTable extends Migration
+class CreateCommandLinesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'etats';
+    public $tableName = 'commandlines';
 
     /**
      * Run the migrations.
-     * @table Etat
+     * @table Commandline
      *
      * @return void
      */
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->id();
-            $table->string('libelle', 20)->nullable();
-            $table->timestamps();
+
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('order_id')->constrained();
+
+            $table->integer('quantity');
+            $table->decimal('priceProduct', 10, 2);
+
+            $table->primary(['product_id', 'order_id']);
         });
     }
 
