@@ -23,6 +23,7 @@ class CreateStatesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
             $table->string('label', 20)->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
