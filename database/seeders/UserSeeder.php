@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class UserSeeder extends Seeder
 
 
         //Création d'un compte administrateur
-        \DB::table('users')->insert(
+        DB::table('users')->insert(
             [
                 "email" => "ladministrateur@gmail.com",
                 "password" => Hash::make('password'),
@@ -31,7 +32,7 @@ class UserSeeder extends Seeder
         );
 
         //Création d'un compte modérateur
-        \DB::table('users')->insert(
+        DB::table('users')->insert(
             [
                 "email" => "lemoderateur@gmail.com",
                 "password" => Hash::make('password'),
@@ -43,7 +44,7 @@ class UserSeeder extends Seeder
         );
 
         //Création d'un compte owner
-        \DB::table('users')->insert(
+        DB::table('users')->insert(
             [
                 "email" => "lowner@gmail.com",
                 "password" => Hash::make('password'),
@@ -55,7 +56,7 @@ class UserSeeder extends Seeder
         );
 
         //Création d'un compte utilisateur
-        \DB::table('users')->insert(
+        DB::table('users')->insert(
             [
                 "email" => "lutilisateur@gmail.com",
                 "password" => Hash::make('password'),
