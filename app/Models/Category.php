@@ -34,7 +34,7 @@ class Category extends Model
     /**
      * Get the parent's categorie of this categorie
      */
-    public function categorieParent()
+    public function categoryParent()
     {
         return $this->belongsTo(self::class);
     }
@@ -42,7 +42,7 @@ class Category extends Model
     /**
      * Get all categorie's child of this categorie
      */
-    public function categoriesEnfant()
+    public function categoriesChild()
     {
         return $this->hasMany(self::class);
     }

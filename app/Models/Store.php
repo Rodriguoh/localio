@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Store extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * Get store's state
@@ -52,7 +53,7 @@ class Store extends Model
     /**
      * Get all users who has this store in favoris
      */
-    public function favorisUsers()
+    public function favoritesUsers()
     {
         return $this->belongsToMany(User::class);
     }
@@ -68,7 +69,7 @@ class Store extends Model
     /**
      * Get all comments on this store
      */
-    public function Comments()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }

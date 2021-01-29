@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -50,9 +51,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Get User's favorit stores
+     * Get User's favorite stores
      */
-    public function favoritStores()
+    public function favoritesStores()
     {
         return $this->belongsToMany(Store::class);
     }
@@ -71,5 +72,15 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Know if a user has a role
+     * @param string $roleName
+     * @return bool
+     */
+    public function hasRole(string $roleName)
+    {
+        return $this->role()->get($roleName)->exists();
     }
 }
