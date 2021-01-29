@@ -23,14 +23,14 @@ class CreateUsersTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
             $table->string('username', 16);
-            $table->string('password', 32);
+            $table->string('password');
             $table->string('nom', 32)->nullable();
             $table->string('prenom', 32)->nullable();
             $table->string('email', 80)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('tel', 20)->nullable();
 
-            $table->foreignId('role_id')->constrained();
+            $table->foreignId('role_id')->default(1)->constrained(); //Par défaut l'user est utilisateur
 
             $table->rememberToken();
             $table->timestamps();
