@@ -45,6 +45,7 @@ class CreateStoresTable extends Migration
 
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -27,6 +27,7 @@ class CreatePhotosTable extends Migration
 
             $table->foreignId('store_id')->nullable()->constrained();
             $table->foreignId('product_id')->nullable()->constrained();
+            $table->softDeletes();
         });
     }
 
