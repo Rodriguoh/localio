@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 "lastname" => "Sophie",
                 "firstname" => "Administratorus",
                 "phone" => "0620987635",
-                "role_id" => 4
+                "role_id" => \App\Models\Role::where('name', 'admin')->first()->id
             ]
         );
 
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
                 "lastname" => "Antoine",
                 "firstname" => "Moderatorus",
                 "phone" => "0620321283",
-                "role_id" => 3
+                "role_id" => \App\Models\Role::where('name', 'moderator')->first()->id
             ]
         );
 
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
                 "lastname" => "Thomas",
                 "firstname" => "Ownorus",
                 "phone" => "0787653421",
-                "role_id" => 2
+                "role_id" => \App\Models\Role::where('name', 'owner')->first()->id
             ]
         );
 
@@ -62,7 +62,7 @@ class UserSeeder extends Seeder
                 "lastname" => "Karim",
                 "firstname" => "utilisatorus",
                 "phone" => "0782659421",
-                "role_id" => 1
+                "role_id" => \App\Models\Role::where('name', 'user')->first()->id
             ]
         );
     }
