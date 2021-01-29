@@ -53,7 +53,7 @@ class Store extends Model
     /**
      * Get all users who has this store in favoris
      */
-    public function favorisUsers()
+    public function favoritesUsers()
     {
         return $this->belongsToMany(User::class);
     }
@@ -69,7 +69,7 @@ class Store extends Model
     /**
      * Get all comments on this store
      */
-    public function Comments()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }

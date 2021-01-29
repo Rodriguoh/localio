@@ -51,9 +51,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Get User's favorit stores
+     * Get User's favorite stores
      */
-    public function favoritStores()
+    public function favoritesStores()
     {
         return $this->belongsToMany(Store::class);
     }
