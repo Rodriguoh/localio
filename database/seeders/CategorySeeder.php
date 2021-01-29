@@ -15,15 +15,45 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             "restaurant" => [
+                "indien",
+                "chinois",
+                "thailandais",
+                "italien",
                 "pizzeria",
                 "gastronomique",
-                "kebab",
             ],
-            "bar" => [],
             "alimentaire" => [
-                "maraicher",
-                "eleveur bovin",
-            ]
+                "epicerie",
+                "marché paysan",
+                "boulangerie - pâtisserie",
+                "poissonerie",
+                "boucherie - charcuterie",
+                "fromagerie",
+            ],
+            "bio" => [
+                "epicerie",
+                "marché paysan",
+                "fromagerie",
+                "boucherie - charcuterie",
+            ],
+            "non alimentaire" => [
+                "fleuriste",
+                "quincaillerie",
+                "tapisserie",
+                "bureau de tabac",
+                "matériel informatique",
+            ],
+            "culture" => [
+                "librairie",
+                "presse",
+                "matériel de sport",
+                "jeux vidéos",
+                "matériel de musique",
+            ],
+            "habillement" => [
+                "vêtements",
+                "chaussures",
+            ],
         ];
 
         foreach ($categories as $category => $underCategories) {
