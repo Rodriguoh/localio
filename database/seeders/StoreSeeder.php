@@ -6,8 +6,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker;
 
-//$faker = Faker\Factory::create('fr_FR');
-$faker = Faker\Factory::create('fr_FR');
 class StoreSeeder extends Seeder
 {
     /**
@@ -16,43 +14,15 @@ class StoreSeeder extends Seeder
      * @return void
      */
 
-    public function __construct($faker)
+    public function __construct()
     {
-        $this->faker = $faker;
+        
     }
-    public function run($faker)
+    public function run()
     {
        
         \App\Models\Store::factory(10)->create();
-        \DB::table('stores')->insert(
-            [
-                "name" => $faker->company,
-                "description" => $faker->text,
-                "codeComment" => $faker->regexify('[A-Za-z0-9]{10}'),
-                "number" => $faker->buildingNumber,
-                "street" => $faker->streetName,
-                "phone" => $faker->phoneNumber,
-                "mail" => $faker->freeEmail,
-                "siret" => $faker->siret,
-                "url" => $faker->url,
-                "lat" => $faker->latitude(48.330991, 44.158475),
-                "lng" => $faker->longitude(-0.442661, 5.139075),
-                "delivery" => $faker->boolean,
-                "conditionDelivery" => $faker->sentence($nbWords = 5, $variableNbWords = true),
-                "openingHours" => '{
-                    "Monday" : [08:30, 16:30]
-                    "Tuesday" : [08:30, 16:30]
-                    "Wednesday" : [08:30, 12:30]
-                    "Thursday" : [08:30, 16:30]
-                    "Friday" :  [08:30, 16:30]
-                    "Saturday" : [08:30, 16:30]
-                    "Sunday" :  [08:30, 12:30]
-                }',
-                "user_id" => \App\Models\User::all()->where('role_id','2')->random(1)[0]->id,
-                "city_INSEE" => \App\Models\City::all()->random(1)[0]->INSEE,
-                "category_id" => \App\Models\Category::all()->random(1)[0]->id
-            ]
-        );
+      
         /*
          $table->id();
             $table->string('name', 100);
