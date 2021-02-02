@@ -21,10 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StateSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(StoreSeeder::class);
-       
-    
-       
-
-
+        $this->call(CommentSeeder::class);
     }
 }
