@@ -14,6 +14,6 @@ class City extends Model
      */
     public function stores()
     {
-        return $this->hasMany(Store::class);
+        return $this->hasMany(Store::class, 'store_INSEE', 'INSEE');
     }
 }
