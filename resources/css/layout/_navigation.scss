@@ -1,2 +1,59 @@
 @import "../abstract/mixins";
 @import "../abstract/variables";
+
+.navbar{
+    @include flex-row-HorizontalBetween;
+    align-items: center;
+    width: 80%;
+    height: 110px;
+    margin: auto;
+
+    & .site-logo{
+        width: 40%;
+    }
+    & .main-menu{
+        margin-top: 2px;
+        width: 23%;
+        max-width: 80px;
+        list-style-type: none;
+    }
+    & .menu-link{
+        display: none;
+    }
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+
+    .navbar {
+
+        .site-logo {
+            width: 15%;
+            padding: 10px;
+        }
+
+        .main-menu {
+            @include flex-row-HorizontalBetween;
+            width: 310px;
+            margin-top: 0;
+            max-width: none;
+        }
+
+        .menu-link {
+            display: block;
+            padding: 18px 0 0 0;
+            font-size: $sizeSubTitle;
+        }
+
+        .menu-burger {
+            display: none;
+        }
+    }
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+}

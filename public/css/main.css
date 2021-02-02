@@ -348,9 +348,62 @@ template {
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 110px;
+  margin: auto;
+}
+.navbar .site-logo {
+  width: 40%;
+}
+.navbar .main-menu {
+  margin-top: 2px;
+  width: 23%;
+  max-width: 80px;
+  list-style-type: none;
+}
+.navbar .menu-link {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .navbar .site-logo {
+    width: 15%;
+    padding: 10px;
+  }
+  .navbar .main-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 310px;
+    margin-top: 0;
+    max-width: none;
+  }
+  .navbar .menu-link {
+    display: block;
+    padding: 18px 0 0 0;
+    font-size: 20px;
+  }
+  .navbar .menu-burger {
+    display: none;
+  }
+}
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
+header {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  header {
+    box-shadow: 0 1px 10px grey;
+  }
+}
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/

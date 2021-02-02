@@ -1,2 +1,20 @@
 @import "../abstract/mixins";
 @import "../abstract/variables";
+
+header{
+    width: 100%;
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+
+    header{
+        box-shadow: 0 1px 10px grey;
+    }
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+}
