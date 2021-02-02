@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Store extends JsonResource
+class StoreThumbResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,7 +20,7 @@ class Store extends JsonResource
             'short_description' => $this->description,
             'category' => $this->category->label,
             'thumbnails' => '',
-            'coord' => [$this->lat, $this->lon],
+            'coord' => [$this->lat, $this->lng],
         ];
     }
 }

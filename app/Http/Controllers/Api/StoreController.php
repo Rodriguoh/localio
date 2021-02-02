@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StoreSimpleResource;
+use App\Http\Resources\StoreThumbResource;
 use Illuminate\Http\Request;
 use App\Models\Store;
+use App\Models\User;
 
 class StoreController extends Controller
 {
@@ -16,8 +19,7 @@ class StoreController extends Controller
      */
     public function getStoresByName($name)
     {
-        $store = [$name];
-        return $store;
+        return StoreSimpleResource::collection(Store::where('name', 'LIKE', '%' . $name . '%')->get());
     }
 
     /**
