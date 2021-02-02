@@ -29,16 +29,16 @@ class CreateStoresTable extends Migration
             $table->string('street', 45);
             $table->string('phone', 20);
             $table->string('mail', 80);
-            $table->string('SIRET', 14);
-            $table->string('url')->nullable();
+            $table->string('SIRET', 20);
+            $table->string('url')->nullable();           
             $table->decimal('lat', 8, 5)->nullable();
             $table->decimal('lng', 8, 5)->nullable();
             $table->string('delivery', 1)->nullable();
-            $table->string('conditionDelivery')->nullable();
+            $table->string('conditionDelivery')->nullable();          
             $table->text('openingHours')->nullable();
 
             $table->foreignId('user_id')->constrained();
-
+            
             $table->foreignId('state_id')->nullable()->constrained();
 
             $table->foreignId('city_INSEE')->references('INSEE')->on('cities');

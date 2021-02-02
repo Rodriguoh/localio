@@ -23,13 +23,31 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'email' => $this->faker->unique()->safeEmail,
-            'lastname' => $this->faker->lastName,
-            'firstname' => $this->faker->firstName,
-            'phone' => $this->faker->e164PhoneNumber(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            "name" => $this->faker->company,
+                "description" => $this->faker->text,
+                "codeComment" => $this->faker->regexify('[A-Za-z0-9]{10}'),
+                "number" => $this->faker->buildingNumber,
+                "street" => $this->faker->streetName,
+                "phone" => $this->faker->phoneNumber,
+                "mail" => $this->faker->freeEmail,
+                "siret" => $this->faker->siret,
+                "url" => $this->faker->url,
+                "lat" => $this->faker->latitude(48.330991, 44.158475),
+                "lng" => $this->faker->longitude(-0.442661, 5.139075),
+                "delivery" => $this->faker->boolean,
+                "conditionDelivery" => $this->faker->sentence($nbWords = 5, $variableNbWords = true),
+                "openingHours" => '{
+                    "Monday" : [08:30, 16:30]
+                    "Tuesday" : [08:30, 16:30]
+                    "Wednesday" : [08:30, 12:30]
+                    "Thursday" : [08:30, 16:30]
+                    "Friday" :  [08:30, 16:30]
+                    "Saturday" : [08:30, 16:30]
+                    "Sunday" :  [08:30, 12:30]
+                }',
+                "user_id" => \App\Models\User::all()->where('role_id','2')->random(1)[0]->id,
+                "city_INSEE" => \App\Models\City::all()->random(1)[0]->INSEE,
+                "category_id" => \App\Models\Category::all()->random(1)[0]->id
         ];
     }
 }
