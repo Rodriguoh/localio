@@ -10,12 +10,26 @@
             <a href="#" class="menu-link">
                 <li>Mon compte</li>
             </a>
-            <a href="#" class="menu-burger">
-                <li>
-                    <img src="{{asset('img/menu.svg')}}">
-                </li>
-            </a>
         </ul>
+        <input type="checkbox" class="burger-menu">
+        <div class="burger-menu">
+            <hr>
+            <hr>
+            <hr>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <a href="#">
+                    <li>Accueil</li>
+                </a>
+                <a href="#">
+                    <li>Connexion</li>
+                </a>
+                <a href="#">
+                    <li>S'inscrire</li>
+                </a>
+            </ul>
+        </div>
     </nav>
 </header>
 
