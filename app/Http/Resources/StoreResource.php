@@ -33,7 +33,7 @@ class StoreResource extends JsonResource
             'isDelivering' => $this->delivery,
             'conditionDelivery' => $this->conditionDelivery,
             'openingHours' => $this->openingHours,
-            //'product' => $this->products,
+            'product' => $this->products,
         ];
     }
 }

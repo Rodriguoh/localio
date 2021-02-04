@@ -21,7 +21,13 @@ class StoreController extends Controller
      */
     public function getStoresByName(string $name)
     {
-        return StoreSimpleResource::collection(Store::where('name', 'LIKE', '%' . $name . '%')->get());
+        return StoreSimpleResource::collection(
+            Store::where('name', 'LIKE', '%' . $name . '%')
+                ->where('state_id', State::select('id')
+                    ->where('label', '=', 'approved')
+                    ->first()->id)
+                ->get()
+        );
     }
 
     /**
