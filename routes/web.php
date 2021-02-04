@@ -22,3 +22,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+// route test ckEditor
+Route::resource('Ckeditor','CkeditorController');
+Route::post('Ckeditor/upload','CkeditorController@upload')->name('ckeditor.upload');

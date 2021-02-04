@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,7 +29,9 @@ class AppServiceProvider extends ServiceProvider
         // force urls to https
         if (env('APP_ENV') !== 'local'){
             URL::forceScheme('https');
-            //test
         }
+
+        // Pb Clé primaire trop grand
+        Schema::defaultStringLength(191);
     }
 }

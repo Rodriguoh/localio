@@ -12,3 +12,10 @@ php artisan breeze:install
 npm install
 
 npm run dev
+
+
+# CkFinder 
+
+https://github.com/ckfinder/ckfinder-laravel-package
+
+
