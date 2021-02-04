@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StoreSimpleResource;
 use App\Http\Resources\StoreThumbResource;
+use App\Http\Resources\StoreResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Store;
-use App\Models\User;
 use App\Models\State;
 
 class StoreController extends Controller
@@ -25,14 +25,14 @@ class StoreController extends Controller
     }
 
     /**
-     * Get a detail for a store
+     * Get complete detail for a store
      *
      * @param  string  $id
      * @return \Illuminate\Http\Response
      */
     public function getStore(string $id)
     {
-        return Store::find($id);
+        return new StoreResource(Store::find($id));
     }
 
 
@@ -66,7 +66,7 @@ class StoreController extends Controller
                     [
                         $request->category
                     ],
-                    array_map( // get all category child
+                    array_map( // get all category's childs
                         function ($cat) {
                             return $cat['id'];
                         },

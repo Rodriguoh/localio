@@ -20,7 +20,10 @@ class StoreThumbResource extends JsonResource
             'short_description' => $this->description,
             'category' => $this->category->label,
             'thumbnails' => '',
-            'coord' => [$this->lat, $this->lng],
+            'latnlg' => [
+                'lat' => $this->lat,
+                'lng' => $this->lng
+            ],
         ];
     }
 }
