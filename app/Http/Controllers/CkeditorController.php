@@ -16,7 +16,11 @@ class CkeditorController extends Controller
         return view('pages/ckeditor');
     }
 
-    /*public function upload(Request $request){
+    /**
+     * Upload images function
+     * @param Request $request
+     */
+    public function upload(Request $request){
 
         if($request->hasFile('upload')){
             $originName = $request->file('upload')->getClientOriginalName();
@@ -24,17 +28,17 @@ class CkeditorController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $fileName.'_'.time().'.'.$extension;
 
-            $request->file('upload')->move(public_path('images'), $fileName);
+            $request->file('upload')->move(public_path('images/store/'), $fileName); // place l'image uploadé dans images/store
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('public/images/'.$fileName);
+            $url = asset('images/store/'.$fileName); // Ckeditor récupère l'image uploadé
             $msg = 'Image Uploaded successfully';
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum,'$url','$msg')</script>";
 
             @header('Content-type: text/html; charset=utf-8');
             echo $response;
         }
-    }*/
+    }
 
     /**
      * Show the form for creating a new resource.

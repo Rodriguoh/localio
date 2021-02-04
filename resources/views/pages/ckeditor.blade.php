@@ -2,7 +2,8 @@
     <head>
         <meta charset="utf-8">
         <title>CkEditor</title>
-        <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
     </head>
 
     <body>
@@ -14,25 +15,14 @@
             </form>
         </div>
 
-
         <script>
-            var editor;
-
-                ClassicEditor
-                    .create( document.querySelector('#editor'),{
-                        ckfinder: {
-                            uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
-                        },
-                        toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
-
-                    } )
-                    .then( newEditor => {
-                        editor = newEditor;
-                    } )
-
-                    .catch( error => {
-                        console.error( error );
-                    });
+            var editor = CKEDITOR.replace( 'editor', {
+                filebrowserUploadUrl: "{{route('ckeditor.upload',['_token' => csrf_token() ])}}",
+                filebrowserUploadMethod: 'form',
+                uiColor: '#ADD8E6',
+                width:'85%',
+                height:500
+            } );
 
             document.getElementById("btn-submit").addEventListener("click", () => {
                const dataEditor = editor.getData(); // retourne les données au format html
