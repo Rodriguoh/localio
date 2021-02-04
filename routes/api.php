@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/stores/map', [StoreController::class, 'getStoresOnMap']);
 Route::get('/stores/{name}', [StoreController::class, 'getStoresByName']);
 Route::get('/store/{id}', [StoreController::class, 'getStore']);
+Route::get('/store/{id}/comments', [StoreController::class, 'getStoreComments']);
 
 
 Route::get('/cities/{name}', [CityController::class, 'getCitiesByName']);

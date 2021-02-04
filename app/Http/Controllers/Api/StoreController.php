@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\StoreSimpleResource;
 use App\Http\Resources\StoreThumbResource;
 use App\Http\Resources\StoreResource;
-use App\Models\Category;
+use App\Http\Resources\CommentsCollection;
+
 use Illuminate\Http\Request;
+
 use App\Models\Store;
 use App\Models\State;
+use App\Models\Category;
+use App\Models\Comment;
 
 class StoreController extends Controller
 {
@@ -39,6 +44,18 @@ class StoreController extends Controller
     public function getStore(string $id)
     {
         return new StoreResource(Store::find($id));
+    }
+
+
+    /**
+     * Get all comments on a store with paginate
+     *
+     * @param  string  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getStoreComments(string $id)
+    {
+        return new CommentsCollection(Comment::where('store_id', '=', $id)->paginate(2));
     }
 
 
