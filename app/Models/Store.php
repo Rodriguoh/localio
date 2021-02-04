@@ -73,4 +73,13 @@ class Store extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+
+    /**
+     * Get all products from this store
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
