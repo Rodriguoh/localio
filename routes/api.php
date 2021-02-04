@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/stores/{name}', [StoreController::class, 'getStoresByName']);
+Route::get('/store/map', [StoreController::class, 'getStoresOnMap']);
 Route::get('/store/{id}', [StoreController::class, 'getStore']);
+
 
 Route::get('/cities/{name}', [CityController::class, 'getCitiesByName']);
