@@ -8,6 +8,7 @@ use App\Http\Resources\StoreThumbResource;
 use Illuminate\Http\Request;
 use App\Models\Store;
 use App\Models\User;
+use App\Models\State;
 
 class StoreController extends Controller
 {
@@ -43,6 +44,8 @@ class StoreController extends Controller
         $stores = Store::select('*')
             ->whereBetween('lat', [$request->lat_sw, $request->lat_ne])
             ->whereBetween('lng', [$request->lng_sw, $request->lng_ne])
+            ->where('category_id', 'like', isset($request->category) ? $request->category : '%')
+            ->where('state_id', State::select('id')->where('label', '=', 'approved')->first()->id)
             ->get();
         return StoreThumbResource::collection($stores);
     }
