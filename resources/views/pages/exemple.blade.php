@@ -8,8 +8,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
 </head>
 <body>
-@extends('layouts.navigation')
-
+<header>
+    @extends('layouts.navigation')
+</header>
 </body>
 </html>
 
