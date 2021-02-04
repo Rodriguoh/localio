@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StoreSimpleResource;
 use App\Http\Resources\StoreThumbResource;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Store;
 use App\Models\User;
@@ -35,18 +36,55 @@ class StoreController extends Controller
     }
 
 
+    /**
+     * Get all store contains on a map section and who are activated
+     * We also are looking at if the has the category or if his category
+     * has the category needed in parents.
+     *
+     * @param Request $request
+     * params needed :
+     *  - lat_ne
+     *  - lng_ne
+     *  - lat_sw
+     *  - lng_sw
+     *  - category (optionnal)
+     *
+     * @throws Error 500 if params are missings
+     * @return \Illuminate\Http\Response
+     */
     public function getStoresOnMap(Request $request)
     {
         if (!isset($request->lat_ne) || !isset($request->lng_ne) || !isset($request->lat_sw) || !isset($request->lng_sw)) {
             return response()->json(['error' => 'You need to pass at least lat_ne, lng_ne, lat_sw, lng_sw in our request params'], 500);
         }
 
-        $stores = Store::select('*')
-            ->whereBetween('lat', [$request->lat_sw, $request->lat_ne])
-            ->whereBetween('lng', [$request->lng_sw, $request->lng_ne])
-            ->where('category_id', 'like', isset($request->category) ? $request->category : '%')
-            ->where('state_id', State::select('id')->where('label', '=', 'approved')->first()->id)
-            ->get();
+        if (isset($request->category)) {
+            $stores = Store::select('*')
+                ->whereBetween('lat', [$request->lat_sw, $request->lat_ne])
+                ->whereBetween('lng', [$request->lng_sw, $request->lng_ne])
+                ->whereIn('category_id', array_merge( // check for category
+                    [
+                        $request->category
+                    ],
+                    array_map( // get all category child
+                        function ($cat) {
+                            return $cat['id'];
+                        },
+                        Category::select('id')
+                            ->where('category_id', '=', $request->category)
+                            ->get()
+                            ->toArray()
+                    )
+                ))
+                ->where('state_id', State::select('id')->where('label', '=', 'approved')->first()->id) // check for approved state
+                ->get();
+        } else {
+            $stores = Store::select('*')
+                ->whereBetween('lat', [$request->lat_sw, $request->lat_ne])
+                ->whereBetween('lng', [$request->lng_sw, $request->lng_ne])
+                ->where('state_id', State::select('id')->where('label', '=', 'approved')->first()->id)
+                ->get();
+        }
         return StoreThumbResource::collection($stores);
     }
 }
