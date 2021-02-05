@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('exemple', function () {
+    return view('pages/exemple');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+//Création d'une route vers TestController pour effectuer des tests
+Route::get('/test', [TestController::class, 'index']);
 
 require __DIR__.'/auth.php';
 

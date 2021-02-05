@@ -26,4 +26,8 @@ Homestead.json
 .idea/*
 .idea
 
+
 public/images/store
+
+resources/views/pages/exemple.blade.php
+

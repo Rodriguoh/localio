@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
@@ -57,10 +58,10 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category => $underCategories) {
-            $catId = \DB::table('categories')->insertGetId(["label" => $category]);
+            $catId = DB::table('categories')->insertGetId(["label" => $category]);
 
             foreach ($underCategories as $underCategory) {
-                \DB::table('categories')->insert(
+                DB::table('categories')->insert(
                     [
                         "label" => $underCategory,
                         "category_id" => $catId,
