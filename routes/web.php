@@ -30,3 +30,7 @@ Route::get('/dashboard', function () {
 Route::get('/test', [TestController::class, 'index']);
 
 require __DIR__.'/auth.php';
+
+// route test ckEditor
+Route::resource('Ckeditor','CkeditorController');
+Route::post('Ckeditor/upload','CkeditorController@upload')->name('ckeditor.upload');
