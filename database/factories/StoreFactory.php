@@ -44,7 +44,7 @@ class StoreFactory extends Factory
                     "Saturday" : [08:30, 16:30]
                     "Sunday" :  [08:30, 12:30]
                 }',
-            "user_id" => \App\Models\User::all()->where('role_id', '2')->random(1)[0]->id,
+            "user_id" => \App\Models\User::all()->where('role_id', \App\Models\Role::where('name', 'owner')->first()->id)->random(1)[0]->id,
             "city_INSEE" => \App\Models\City::all()->random(1)[0]->INSEE,
             "category_id" => \App\Models\Category::all()->random(1)[0]->id,
             "state_id" => \App\Models\State::all()->random(1)[0]->id
