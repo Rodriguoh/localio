@@ -23,7 +23,7 @@ class Store extends Model
      */
     public function city()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'city_INSEE', 'INSEE');
     }
 
     /**
@@ -72,5 +72,14 @@ class Store extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+
+    /**
+     * Get all products from this store
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

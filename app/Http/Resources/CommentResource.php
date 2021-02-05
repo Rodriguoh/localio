@@ -4,8 +4,10 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Store extends JsonResource
+class CommentResource extends JsonResource
 {
+
+
     /**
      * Transform the resource into an array.
      *
@@ -16,11 +18,10 @@ class Store extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'short_description' => $this->description,
-            'category' => $this->category->label,
-            'thumbnails' => '',
-            'coord' => [$this->lat, $this->lon],
+            'note' => $this->note,
+            'comment' => $this->comment,
+            'date' => $this->date,
+            'user_firstname' => $this->user->firstname,
         ];
     }
 }

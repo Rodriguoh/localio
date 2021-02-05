@@ -28,6 +28,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock')->nullable();
             $table->foreignId('unit_id')->constrained();
             $table->foreignId('store_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
