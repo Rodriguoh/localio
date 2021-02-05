@@ -8,9 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
 </head>
 <body>
-<header>
     @extends('layouts.navigation')
-</header>
 </body>
 </html>
 
