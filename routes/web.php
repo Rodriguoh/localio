@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 
@@ -14,9 +15,7 @@ use App\Http\Controllers\TestController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('exemple', function () {
     return view('pages/exemple');
@@ -29,8 +28,8 @@ Route::get('/dashboard', function () {
 //Création d'une route vers TestController pour effectuer des tests
 Route::get('/test', [TestController::class, 'index']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // route test ckEditor
-Route::resource('Ckeditor','CkeditorController');
-Route::post('Ckeditor/upload','CkeditorController@upload')->name('ckeditor.upload');
+Route::resource('Ckeditor', 'CkeditorController');
+Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.upload');
