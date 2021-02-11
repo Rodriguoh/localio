@@ -3793,7 +3793,56 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
+__webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js"); // Librairie
+
+
+function _id(x) {
+  return document.getElementById(x);
+}
+
+;
+
+function _class(x) {
+  return document.getElementsByClassName(x);
+}
+
+;
+
+function _tag(x) {
+  return document.getElementsByTagName(x);
+}
+
+;
+
+function cl(x) {
+  return console.log(x);
+}
+
+; //Accueil
+
+function scrollChange() {
+  var scroll = this;
+  var arrow = scroll.firstChild;
+  var url = this.href.substring(this.href.lastIndexOf('/') + 1);
+
+  if (url == '#top') {
+    arrow.style.transform = 'rotate(90deg)';
+  } else {
+    arrow.style.transform = 'rotate(-90deg)';
+  }
+
+  setTimeout(function () {
+    if (url == '#top') {
+      scroll.href = '#bottom';
+      arrow.style.transform = 'rotate(90deg)';
+    } else {
+      scroll.href = '#top';
+      arrow.style.transform = 'rotate(-90deg)';
+    }
+  }, 1000);
+}
+
+_id('scroll').addEventListener('click', scrollChange);
 
 /***/ }),
 
