@@ -14,7 +14,7 @@
             </a>
             @else
             <a href="{{route('login')}}" class="menu-link">
-                <li>Se connecter</li>
+                <li>Connexion</li>
             </a>
             @endif
         </ul>
@@ -29,12 +29,20 @@
             <a href="{{route('home')}}">
                 <li>Accueil</li>
             </a>
-            <a href="#">
+            @if(Auth::check())
+            <a href="{{route('homeAccount')}}">
+                <li>Mon compte</li>
+            </a>
+            @else
+            <a href="{{route('login')}}">
                 <li>Connexion</li>
             </a>
+            @endif
+            <!--
             <a href="#">
                 <li>S'inscrire</li>
             </a>
+            -->
         </ul>
     </nav>
 </header>
