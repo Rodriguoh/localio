@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -18,6 +19,7 @@
         #map {
             width: 100%;
             height: 100vh;
+            z-index:1;
         }
     </style>
 </head>

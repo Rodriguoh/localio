@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use App\Http\Controllers\TestController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('exemple', function () {
     return view('pages/exemple');
@@ -33,3 +34,12 @@ require __DIR__ . '/auth.php';
 // route test ckEditor
 Route::resource('Ckeditor', 'CkeditorController');
 Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.upload');
+
+
+Route::get('/homeAccount','HomeAccountController@index')->name('homeAccount'); 
+
+
+// Log out : 
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
+                ->middleware('auth')
+                ->name('logout');
