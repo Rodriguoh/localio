@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -22,6 +23,7 @@
     </style>
 </head>
 <body>
+@include('layouts.navigation')
     <div id="app">
         <div id="map"></div>
     </div>
