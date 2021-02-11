@@ -31,6 +31,7 @@ class StoreController extends Controller
                 ->where('state_id', State::select('id')
                     ->where('label', '=', 'approved')
                     ->first()->id)
+                ->limit(5)
                 ->get()
         );
     }
