@@ -99,7 +99,7 @@ var app = new Vue({
      */
     getStoresOnMap: function () {
       var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var requestOptions, url, req, rep;
+        var requestOptions, url, req, rep, i, lat, lon, marker;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -127,8 +127,16 @@ var app = new Vue({
 
               case 8:
                 rep = _context2.sent;
+                rep = rep.data;
 
-              case 9:
+                for (i = 0; i < rep.length; i++) {
+                  lat = rep[i].latnlg.lat;
+                  lon = rep[i].latnlg.lng;
+                  marker = L.marker([lat, lon]);
+                  marker.addTo(this.map);
+                }
+
+              case 11:
               case "end":
                 return _context2.stop();
             }
