@@ -54,6 +54,16 @@ var app = new Vue({
 
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
+            rep = rep.data;
+
+            for (let i = 0; i < rep.length; i++) {
+
+                let lat = rep[i].latnlg.lat;
+                let lon = rep[i].latnlg.lng;
+
+                let marker = L.marker([lat, lon]);
+                marker.addTo(this.map);
+            }
         },
         /**
          * Function to get all details on a store
