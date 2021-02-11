@@ -24,13 +24,19 @@
     </style>
 </head>
 <body>
-@include('layouts.navigation')
+    @include('layouts.navigation')
     <div id="app">
-        <div id="map"></div>
+        <a id="scroll" href="#bottom">
+            <img src="{{asset('img/arrow.svg')}}">
+        </a>
+        <div id="map">
+        </div>
     </div>
+    @include('layouts.footer')
 
     {{-- Import VueJS via CDN pour la phase de dev --}}
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="js/mapScript.js"></script>
 </body>
 </html>
