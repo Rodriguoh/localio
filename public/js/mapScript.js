@@ -100,7 +100,7 @@ var app = new Vue({
      */
     getStoresOnMap: function () {
       var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var requestOptions, url, req, rep, markers, i, lat, lon, marker;
+        var requestOptions, url, req, rep, markers, i, icone_img, icone, lat, lon, marker;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -130,17 +130,63 @@ var app = new Vue({
                 rep = _context2.sent;
                 rep = rep.data;
                 markers = [];
+                i = 0;
 
-                for (i = 0; i < rep.length; i++) {
-                  lat = rep[i].latnlg.lat;
-                  lon = rep[i].latnlg.lng;
-                  marker = L.marker([lat, lon]);
-                  markers.push(marker);
+              case 12:
+                if (!(i < rep.length)) {
+                  _context2.next = 35;
+                  break;
                 }
 
+                icone_img = '';
+                _context2.t0 = rep[i].category_id;
+                _context2.next = _context2.t0 === 1 ? 17 : _context2.t0 === 71 ? 19 : _context2.t0 === 141 ? 21 : _context2.t0 === 191 ? 23 : _context2.t0 === 251 ? 25 : 27;
+                break;
+
+              case 17:
+                icone_img = "img/markers/restauration.png";
+                return _context2.abrupt("break", 27);
+
+              case 19:
+                icone_img = "img/markers/alimentaire.png";
+                return _context2.abrupt("break", 27);
+
+              case 21:
+                icone_img = "img/markers/bio.png";
+                return _context2.abrupt("break", 27);
+
+              case 23:
+                icone_img = "img/markers/sante.png";
+                return _context2.abrupt("break", 27);
+
+              case 25:
+                icone_img = "img/markers/culture.png";
+                return _context2.abrupt("break", 27);
+
+              case 27:
+                icone = L.icon({
+                  iconUrl: icone_img,
+                  shadowUrl: 'img/markers/shadow.png',
+                  iconSize: [30, 42.5],
+                  shadowSize: [40, 40],
+                  shadowAnchor: [15, 19]
+                });
+                lat = rep[i].latnlg.lat;
+                lon = rep[i].latnlg.lng;
+                marker = L.marker([lat, lon], {
+                  icon: icone
+                });
+                markers.push(marker);
+
+              case 32:
+                i++;
+                _context2.next = 12;
+                break;
+
+              case 35:
                 this.markers = L.layerGroup(markers);
 
-              case 13:
+              case 36:
               case "end":
                 return _context2.stop();
             }

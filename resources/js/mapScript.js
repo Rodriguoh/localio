@@ -60,10 +60,26 @@ var app = new Vue({
 
             for (let i = 0; i < rep.length; i++) {
 
+                let icone_img ='';
+                switch (rep[i].category_id){
+                    case 1   :  icone_img = "img/markers/restauration.png";    break;
+                    case 71  :  icone_img = "img/markers/alimentaire.png";     break;
+                    case 141 :  icone_img = "img/markers/bio.png";             break;
+                    case 191 :  icone_img = "img/markers/sante.png";           break;
+                    case 251 :  icone_img = "img/markers/culture.png";         break;
+                }
+                let icone = L.icon({
+                    iconUrl: icone_img,
+                    shadowUrl: 'img/markers/shadow.png',
+                    iconSize: [30, 42.5],
+                    shadowSize:   [40, 40],
+                    shadowAnchor: [15, 19]
+                })
+
                 let lat = rep[i].latnlg.lat;
                 let lon = rep[i].latnlg.lng;
 
-                let marker = L.marker([lat, lon]);
+                let marker = L.marker([lat, lon], {icon: icone});
                 markers.push(marker);
             }
 
