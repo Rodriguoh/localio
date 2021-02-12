@@ -18,6 +18,7 @@ class StoreThumbResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'short_description' => $this->description,
+            'category_id' => $this->category->category_id == null ? $this->category->id : $this->category->category_id,
             'category' => $this->category->label,
             'thumbnails' => '',
             'latnlg' => [
