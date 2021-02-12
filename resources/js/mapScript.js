@@ -1,6 +1,6 @@
 // import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
 // var _ = require("lodash"); Import lodash en cas de besoin
-
+import debounce from "lodash/debounce";
 var app = new Vue({
     el: `#app`,
     data: {
@@ -18,6 +18,8 @@ var app = new Vue({
         baseUrl: "https://localio-app.herokuapp.com", // http://localhost/localio/public mettre l'url sur laquelle on travail
         searchName: "",
         categorySelected: "",
+        inputCity: "",
+        limitAutoCompletion: ""
     },
     methods: {
         /**
@@ -83,6 +85,25 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
         },
+        showCitiesInDatalist: async function () {       
+            //Récupération des noms de villes en fonction de l'entrée utilisateur
+            var requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+            };
+            let url = new URL(`https://geo.api.gouv.fr/communes`);
+            url.search = new URLSearchParams({
+                ...({ nom: this.inputCity, format: 'geojson', fields: 'code,departement', boost: 'population', limit: this.limitAutoCompletion }),
+            });
+            let req = await fetch(url, requestOptions);
+            let data = await req.json();
+            console.log(data);
+
+
+            //Conserver le tableau des villes
+
+
+        }
     },
     mounted: function () {
         // setting up map
@@ -95,5 +116,10 @@ var app = new Vue({
         this.map.on("moveend", () => {
             this.getStoresOnMap();
         });
+
+
+
+        inputCity.addEventListener('input', debounce(this.showCitiesInDatalist, 300));
+
     },
 });

@@ -7,23 +7,25 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/main.css">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
     <style>
         #map {
             width: 100%;
             height: 100vh;
         }
+
     </style>
 </head>
 <body>
     @include('layouts.navigation')
     <div id="app">
+        <div class="">
+            <input v-model="inputCity" list="listCity" type="text" id="inputCity" name="inputCity" placeholder="Rechercher par le nom d'une ville" style="min-width: 300px;height: 40px;">
+            <datalist id="listCity">
+            </datalist>
+        </div>
         <a id="scroll" href="#bottom">
             <img src="{{asset('img/arrow.svg')}}">
         </a>
