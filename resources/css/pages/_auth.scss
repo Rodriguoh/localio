@@ -1,0 +1,62 @@
+@import "../abstract/mixins";
+@import "../abstract/variables";
+
+.auth-card {
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    max-width: 400px;
+    box-shadow: 0px 0px 1px 0px black;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 1em;
+
+    h1 {
+        text-align: center;
+    }
+}
+
+.auth-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    label {
+        margin: 0;
+    }
+
+    input {
+        padding: 5px;
+        border-radius: 0.4em;
+        border: black 1px solid;
+        background: none;
+    }
+}
+
+.auth-block-button {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-submit {
+    padding: 10px 20px;
+    background-color: $vert;
+    border-radius: 0.4em;
+    border: none;
+    max-width: 200px;
+    width: 100%;
+    margin: 0 auto;
+
+    &:hover {
+        background-color: lighten($vert, 20%);
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+}
