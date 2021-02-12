@@ -534,3 +534,53 @@ footer {
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
+/* -- Desktop --*/
+/* --Mobile--*/
+/* --Epaisseur police --*/
+.auth-card {
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  max-width: 400px;
+  box-shadow: 0px 0px 1px 0px black;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 1em;
+}
+.auth-card h1 {
+  text-align: center;
+}
+
+.auth-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.auth-input label {
+  margin: 0;
+}
+.auth-input input {
+  padding: 5px;
+  border-radius: 0.4em;
+  border: black 1px solid;
+  background: none;
+}
+
+.auth-block-button {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-submit {
+  padding: 10px 20px;
+  background-color: #3DA136;
+  border-radius: 0.4em;
+  border: none;
+  max-width: 200px;
+  width: 100%;
+  margin: 0 auto;
+}
+.auth-submit:hover {
+  background-color: #75cf6e;
+}
