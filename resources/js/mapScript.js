@@ -5,6 +5,7 @@ var app = new Vue({
     el: `#app`,
     data: {
         map: undefined,
+        markers: undefined,
         mapTiles: [
             "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
             {
@@ -55,6 +56,7 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
             rep = rep.data;
+            let markers = [];
 
             for (let i = 0; i < rep.length; i++) {
 
@@ -62,8 +64,10 @@ var app = new Vue({
                 let lon = rep[i].latnlg.lng;
 
                 let marker = L.marker([lat, lon]);
-                marker.addTo(this.map);
+                markers.push(marker);
             }
+
+            this.markers =  L.layerGroup(markers);
         },
         /**
          * Function to get all details on a store
@@ -98,12 +102,18 @@ var app = new Vue({
         // setting up map
         this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
         L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+        this.markers = L.layerGroup();
 
         this.getStoresOnMap();
+        this.map.addLayer(this.markers);
 
         // add eventListener on the map movment
-        this.map.on("moveend", () => {
-            this.getStoresOnMap();
+        this.map.on("moveend", async() => {
+
+            await this.map.removeLayer(this.markers)
+            await this.getStoresOnMap();
+            await this.map.addLayer(this.markers);
+
         });
     },
 });

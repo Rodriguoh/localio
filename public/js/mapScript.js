@@ -40,6 +40,7 @@ var app = new Vue({
   el: "#app",
   data: {
     map: undefined,
+    markers: undefined,
     mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
       attribution: "",
       minNativeZoom: 4,
@@ -99,7 +100,7 @@ var app = new Vue({
      */
     getStoresOnMap: function () {
       var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var requestOptions, url, req, rep, i, lat, lon, marker;
+        var requestOptions, url, req, rep, markers, i, lat, lon, marker;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -128,15 +129,18 @@ var app = new Vue({
               case 8:
                 rep = _context2.sent;
                 rep = rep.data;
+                markers = [];
 
                 for (i = 0; i < rep.length; i++) {
                   lat = rep[i].latnlg.lat;
                   lon = rep[i].latnlg.lng;
                   marker = L.marker([lat, lon]);
-                  marker.addTo(this.map);
+                  markers.push(marker);
                 }
 
-              case 11:
+                this.markers = L.layerGroup(markers);
+
+              case 13:
               case "end":
                 return _context2.stop();
             }
@@ -248,11 +252,33 @@ var app = new Vue({
     // setting up map
     this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
     L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-    this.getStoresOnMap(); // add eventListener on the map movment
+    this.markers = L.layerGroup();
+    this.getStoresOnMap();
+    this.map.addLayer(this.markers); // add eventListener on the map movment
 
-    this.map.on("moveend", function () {
-      _this.getStoresOnMap();
-    });
+    this.map.on("moveend", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return _this.map.removeLayer(_this.markers);
+
+            case 2:
+              _context5.next = 4;
+              return _this.getStoresOnMap();
+
+            case 4:
+              _context5.next = 6;
+              return _this.map.addLayer(_this.markers);
+
+            case 6:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    })));
   }
 });
 
