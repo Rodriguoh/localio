@@ -5,6 +5,7 @@ var app = new Vue({
     el: `#app`,
     data: {
         map: undefined,
+        markers: undefined,
         mapTiles: [
             "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
             {
@@ -55,15 +56,34 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
             rep = rep.data;
+            let markers = [];
 
             for (let i = 0; i < rep.length; i++) {
+
+                let icone_img ='';
+                switch (rep[i].category_id){
+                    case 1   :  icone_img = "img/markers/restauration.png";    break;
+                    case 71  :  icone_img = "img/markers/alimentaire.png";     break;
+                    case 141 :  icone_img = "img/markers/bio.png";             break;
+                    case 191 :  icone_img = "img/markers/sante.png";           break;
+                    case 251 :  icone_img = "img/markers/culture.png";         break;
+                }
+                let icone = L.icon({
+                    iconUrl: icone_img,
+                    shadowUrl: 'img/markers/shadow.png',
+                    iconSize: [30, 42.5],
+                    shadowSize:   [40, 40],
+                    shadowAnchor: [15, 19]
+                })
 
                 let lat = rep[i].latnlg.lat;
                 let lon = rep[i].latnlg.lng;
 
-                let marker = L.marker([lat, lon]);
-                marker.addTo(this.map);
+                let marker = L.marker([lat, lon], {icon: icone});
+                markers.push(marker);
             }
+
+            this.markers =  L.layerGroup(markers);
         },
         /**
          * Function to get all details on a store
@@ -100,10 +120,15 @@ var app = new Vue({
         L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
 
         this.getStoresOnMap();
+        this.map.addLayer(this.markers);
 
         // add eventListener on the map movment
-        this.map.on("moveend", () => {
-            this.getStoresOnMap();
+        this.map.on("moveend", async() => {
+
+            this.map.removeLayer(this.markers)
+            await this.getStoresOnMap();
+            await this.map.addLayer(this.markers);
+
         });
     },
 });
