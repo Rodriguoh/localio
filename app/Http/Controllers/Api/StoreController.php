@@ -83,19 +83,20 @@ class StoreController extends Controller
         }
 
         if (isset($request->category)) {
+            $category_id = Category::where('label', 'like', '%' . $request->category . '%')->first()->id;
             $stores = Store::select('*')
                 ->whereBetween('lat', [$request->lat_sw, $request->lat_ne])
                 ->whereBetween('lng', [$request->lng_sw, $request->lng_ne])
                 ->whereIn('category_id', array_merge( // check for category
                     [
-                        $request->category
+                        $category_id
                     ],
                     array_map( // get all category's childs
                         function ($cat) {
                             return $cat['id'];
                         },
                         Category::select('id')
-                            ->where('category_id', '=', $request->category)
+                            ->where('category_id', '=', $category_id)
                             ->get()
                             ->toArray()
                     )
