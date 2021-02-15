@@ -16,7 +16,6 @@ var app = new Vue({
         mapCenter: [44.5667, 6.0833],
         mapZoom: 13,
         baseUrl: "https://localio-app.herokuapp.com", // http://localhost/localio/public mettre l'url sur laquelle on travail
-        searchName: "",
         categorySelected: "",
         querySearch: "",
         resultsQueryCity: [],
@@ -28,16 +27,17 @@ var app = new Vue({
          * Function for search stores by name in autocomplete
          */
         getStoresByName: async function () {
-            var requestOptions = {
+            let requestOptions = {
                 method: "GET",
                 redirect: "follow",
             };
-
-            let req = await fetch(
-                `${this.baseUrl}/api/stores/${this.searchName}`, // modifier la variable search
+            let reqStores = await fetch(
+                `${this.baseUrl}/api/stores/${this.querySearch}`, // modifier la variable search
                 requestOptions
             );
-            let rep = await req.json();
+            let data = await reqStores.json();
+            console.log(data);
+            return data.data;
         },
         /**
          * Function to get all store to display on map
@@ -98,9 +98,20 @@ var app = new Vue({
             url.search = new URLSearchParams({
                 ...({ nom: this.querySearch, format: 'geojson', fields: 'code,departement', boost: 'population', limit: this.limitAutoCompletion }),
             });
-            let req = await fetch(url, requestOptions);
-            let data = await req.json();
+            let reqCities = await fetch(url, requestOptions);
+            var data = await reqCities.json();
             app.resultsQueryCity = data.features;
+
+            this.resultsQueryStore = [];
+
+            let reqStores = await fetch(
+                `${this.baseUrl}/api/stores/${this.querySearch}`, // modifier la variable search
+                requestOptions
+            );
+            let dataStores = await reqStores.json();
+
+            app.resultsQueryStore = dataStores.data;
+
         },
         setViewMap: function(lat, lon){
             this.map.setView([lat, lon], 14);
@@ -129,6 +140,9 @@ var app = new Vue({
     computed:{
         computedResultsQueryCity(){
           return this.limitAutoCompletion ? this.resultsQueryCity.slice(0,this.limitAutoCompletion) : this.resultsQueryCity
-        }
+        },
+        computedResultsQueryStore(){
+            return this.limitAutoCompletion ? this.resultsQueryStore.slice(0,this.limitAutoCompletion) : this.resultsQueryStore
+          }
       }
 });
