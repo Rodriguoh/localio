@@ -118,7 +118,6 @@ var app = new Vue({
         // setting up map
         this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
         L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-        this.markers = L.layerGroup();
 
         this.getStoresOnMap();
         this.map.addLayer(this.markers);
@@ -126,7 +125,7 @@ var app = new Vue({
         // add eventListener on the map movment
         this.map.on("moveend", async() => {
 
-            await this.map.removeLayer(this.markers)
+            this.map.removeLayer(this.markers)
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
 
