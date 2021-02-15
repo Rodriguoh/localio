@@ -54,8 +54,10 @@ var app = new Vue({
     // http://localhost/localio/public mettre l'url sur laquelle on travail
     searchName: "",
     categorySelected: "",
-    inputCity: "",
-    limitAutoCompletion: ""
+    querySearch: "",
+    resultsQueryCity: [],
+    resultsQueryStore: [],
+    limitAutoCompletion: 5
   },
   methods: {
     /**
@@ -238,41 +240,38 @@ var app = new Vue({
 
       return getStoreComments;
     }(),
-    showCitiesInDatalist: function () {
-      var _showCitiesInDatalist = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var requestOptions, url, req, data, i;
+    autoComplete: function () {
+      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var requestOptions, url, req, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                //Récupération des noms de villes en fonction de l'entrée utilisateur
+                this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
+
                 requestOptions = {
                   method: 'GET',
                   redirect: 'follow'
                 };
                 url = new URL("https://geo.api.gouv.fr/communes");
                 url.search = new URLSearchParams(_objectSpread({}, {
-                  nom: this.inputCity,
+                  nom: this.querySearch,
                   format: 'geojson',
                   fields: 'code,departement',
                   boost: 'population',
                   limit: this.limitAutoCompletion
                 }));
-                _context5.next = 5;
+                _context5.next = 6;
                 return fetch(url, requestOptions);
 
-              case 5:
+              case 6:
                 req = _context5.sent;
-                _context5.next = 8;
+                _context5.next = 9;
                 return req.json();
 
-              case 8:
+              case 9:
                 data = _context5.sent;
-                console.log(data); //Affichage dans l'input
-
-                for (i = 0; i < data.features.length; i++) {
-                  console.log(data.features[i]);
-                }
+                app.resultsQueryCity = data.features;
 
               case 11:
               case "end":
@@ -282,12 +281,18 @@ var app = new Vue({
         }, _callee5, this);
       }));
 
-      function showCitiesInDatalist() {
-        return _showCitiesInDatalist.apply(this, arguments);
+      function autoComplete() {
+        return _autoComplete.apply(this, arguments);
       }
 
-      return showCitiesInDatalist;
-    }()
+      return autoComplete;
+    }(),
+    setViewMap: function setViewMap(lat, lon) {
+      this.map.setView([lat, lon], 14);
+    },
+    consolelog: function consolelog(message) {
+      console.log(message);
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -299,8 +304,12 @@ var app = new Vue({
 
     this.map.on("moveend", function () {
       _this.getStoresOnMap();
-    });
-    inputCity.addEventListener('input', lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(this.showCitiesInDatalist, 300));
+    }); //inputCity.addEventListener('input', debounce(this.showCitiesInDatalist, 300));
+  },
+  computed: {
+    computedResultsQueryCity: function computedResultsQueryCity() {
+      return this.limitAutoCompletion ? this.resultsQueryCity.slice(0, this.limitAutoCompletion) : this.resultsQueryCity;
+    }
   }
 });
 

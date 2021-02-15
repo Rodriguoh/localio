@@ -18,8 +18,10 @@ var app = new Vue({
         baseUrl: "https://localio-app.herokuapp.com", // http://localhost/localio/public mettre l'url sur laquelle on travail
         searchName: "",
         categorySelected: "",
-        inputCity: "",
-        limitAutoCompletion: ""
+        querySearch: "",
+        resultsQueryCity: [],
+        resultsQueryStore: [],
+        limitAutoCompletion: 5
     },
     methods: {
         /**
@@ -85,7 +87,8 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
         },
-        showCitiesInDatalist: async function () {       
+        autoComplete: async function () {
+            this.resultsQueryCity = [];
             //Récupération des noms de villes en fonction de l'entrée utilisateur
             var requestOptions = {
                 method: 'GET',
@@ -93,16 +96,17 @@ var app = new Vue({
             };
             let url = new URL(`https://geo.api.gouv.fr/communes`);
             url.search = new URLSearchParams({
-                ...({ nom: this.inputCity, format: 'geojson', fields: 'code,departement', boost: 'population', limit: this.limitAutoCompletion }),
+                ...({ nom: this.querySearch, format: 'geojson', fields: 'code,departement', boost: 'population', limit: this.limitAutoCompletion }),
             });
             let req = await fetch(url, requestOptions);
             let data = await req.json();
-            console.log(data);
-
-
-            //Conserver le tableau des villes
-
-
+            app.resultsQueryCity = data.features;
+        },
+        setViewMap: function(lat, lon){
+            this.map.setView([lat, lon], 14);
+        },
+        consolelog(message){
+            console.log(message);
         }
     },
     mounted: function () {
@@ -119,7 +123,12 @@ var app = new Vue({
 
 
 
-        inputCity.addEventListener('input', debounce(this.showCitiesInDatalist, 300));
+        //inputCity.addEventListener('input', debounce(this.showCitiesInDatalist, 300));
 
     },
+    computed:{
+        computedResultsQueryCity(){
+          return this.limitAutoCompletion ? this.resultsQueryCity.slice(0,this.limitAutoCompletion) : this.resultsQueryCity
+        }
+      }
 });
