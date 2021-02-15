@@ -52,7 +52,6 @@ var app = new Vue({
     mapZoom: 13,
     baseUrl: "https://localio-app.herokuapp.com",
     // http://localhost/localio/public mettre l'url sur laquelle on travail
-    searchName: "",
     categorySelected: "",
     querySearch: "",
     resultsQueryCity: [],
@@ -65,7 +64,7 @@ var app = new Vue({
      */
     getStoresByName: function () {
       var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var requestOptions, req, rep;
+        var requestOptions, reqStores, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -75,18 +74,20 @@ var app = new Vue({
                   redirect: "follow"
                 };
                 _context.next = 3;
-                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.searchName), // modifier la variable search
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
                 requestOptions);
 
               case 3:
-                req = _context.sent;
+                reqStores = _context.sent;
                 _context.next = 6;
-                return req.json();
+                return reqStores.json();
 
               case 6:
-                rep = _context.sent;
+                data = _context.sent;
+                console.log(data);
+                return _context.abrupt("return", data.data);
 
-              case 7:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -242,7 +243,7 @@ var app = new Vue({
     }(),
     autoComplete: function () {
       var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var requestOptions, url, req, data;
+        var requestOptions, url, reqCities, data, reqStores, dataStores;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
@@ -265,15 +266,28 @@ var app = new Vue({
                 return fetch(url, requestOptions);
 
               case 6:
-                req = _context5.sent;
+                reqCities = _context5.sent;
                 _context5.next = 9;
-                return req.json();
+                return reqCities.json();
 
               case 9:
                 data = _context5.sent;
                 app.resultsQueryCity = data.features;
+                this.resultsQueryStore = [];
+                _context5.next = 14;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
 
-              case 11:
+              case 14:
+                reqStores = _context5.sent;
+                _context5.next = 17;
+                return reqStores.json();
+
+              case 17:
+                dataStores = _context5.sent;
+                app.resultsQueryStore = dataStores.data;
+
+              case 19:
               case "end":
                 return _context5.stop();
             }
@@ -309,6 +323,9 @@ var app = new Vue({
   computed: {
     computedResultsQueryCity: function computedResultsQueryCity() {
       return this.limitAutoCompletion ? this.resultsQueryCity.slice(0, this.limitAutoCompletion) : this.resultsQueryCity;
+    },
+    computedResultsQueryStore: function computedResultsQueryStore() {
+      return this.limitAutoCompletion ? this.resultsQueryStore.slice(0, this.limitAutoCompletion) : this.resultsQueryStore;
     }
   }
 });

@@ -24,12 +24,20 @@
     <div id="app">
         <div class="">
             <input v-model="querySearch" v-on:keyup="autoComplete" type="text" id="inputCity" name="inputCity" placeholder="Rechercher par le nom d'une ville" style="min-width: 300px;height: 40px;">
-            <div class="panel-footer" v-if="resultsQueryCity">
-              
-                <button class="btn btn-primary" style="padding: 5px" v-for="city  in computedResultsQueryCity" v-on:click="setViewMap(city.geometry.coordinates[1],city.geometry.coordinates[0])">     
-                    @{{city.properties.nom}}
-                </button>
-            </div>
+            <template v-if="resultsQueryCity.length > 0 || resultsQueryStore.length > 0">
+                <div class="panel-footer">
+
+                    <button class="btn btn-primary" style="padding: 5px" v-for="city  in computedResultsQueryCity" v-on:click="setViewMap(city.geometry.coordinates[1],city.geometry.coordinates[0])">
+                        @{{city.properties.nom}}
+                    </button>
+
+                    <button class="btn btn-secondary" style="padding: 5px" v-for="store in computedResultsQueryStore" v-on:click="setViewMap(store.latnlg.lat, store.latnlg.lng)">
+                        <!--   -->
+                        @{{store.name}}
+                    </button>
+                </div>
+            </template>
+
         </div>
         <a id="scroll" href="#bottom">
             <img src="{{asset('img/arrow.svg')}}">
