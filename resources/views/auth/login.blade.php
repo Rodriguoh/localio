@@ -44,7 +44,10 @@
                 <x-button class="auth-submit">
                     {{ __('Login') }}
                 </x-button>
-
+                <a class="auth-google" href="{{ route('google-auth') }}">
+                    <x-google-button></x-google-button>
+                    <span>{{ __('Login') }} with Google</span>
+                </a>
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}

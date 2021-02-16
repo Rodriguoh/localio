@@ -146,7 +146,7 @@ var app = new Vue({
                   break;
                 }
 
-                icone_img = '';
+                icone_img = "";
                 _context2.t0 = rep[i].category_id;
                 _context2.next = _context2.t0 === 1 ? 17 : _context2.t0 === 71 ? 19 : _context2.t0 === 141 ? 21 : _context2.t0 === 191 ? 23 : _context2.t0 === 251 ? 25 : 27;
                 break;
@@ -174,7 +174,7 @@ var app = new Vue({
               case 27:
                 icone = L.icon({
                   iconUrl: icone_img,
-                  shadowUrl: 'img/markers/shadow.png',
+                  shadowUrl: "img/markers/shadow.png",
                   iconSize: [30, 42.5],
                   shadowSize: [40, 40],
                   shadowAnchor: [15, 19]
@@ -309,15 +309,15 @@ var app = new Vue({
                 this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
 
                 requestOptions = {
-                  method: 'GET',
-                  redirect: 'follow'
+                  method: "GET",
+                  redirect: "follow"
                 };
                 url = new URL("https://geo.api.gouv.fr/communes");
                 url.search = new URLSearchParams(_objectSpread({}, {
                   nom: this.querySearch,
-                  format: 'geojson',
-                  fields: 'code,departement',
-                  boost: 'population',
+                  format: "geojson",
+                  fields: "code,departement",
+                  boost: "population",
                   limit: this.limitAutoCompletion
                 }));
                 _context5.next = 6;
@@ -330,7 +330,7 @@ var app = new Vue({
 
               case 9:
                 data = _context5.sent;
-                app.resultsQueryCity = data.features;
+                this.resultsQueryCity = data.features;
                 this.resultsQueryStore = [];
                 _context5.next = 14;
                 return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
@@ -343,7 +343,7 @@ var app = new Vue({
 
               case 17:
                 dataStores = _context5.sent;
-                app.resultsQueryStore = dataStores.data;
+                this.resultsQueryStore = dataStores.data;
 
               case 19:
               case "end":
@@ -406,7 +406,11 @@ var app = new Vue({
                     }
                   }
                 }, _callee6);
+<<<<<<< HEAD
               }))); //inputCity.addEventListener('input', debounce(this.showCitiesInDatalist, 300));
+=======
+              })));
+>>>>>>> main
 
             case 7:
             case "end":
