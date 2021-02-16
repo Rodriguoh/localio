@@ -1,4 +1,3 @@
-
 <header>
     <nav class="navbar" id="top">
         <a href="{{route('home')}}" class="site-logo">
@@ -46,4 +45,3 @@
         </ul>
     </nav>
 </header>
-

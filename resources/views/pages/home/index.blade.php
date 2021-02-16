@@ -21,11 +21,10 @@
             height: 100vh;
             z-index:1;
         }
-
     </style>
 </head>
 <body>
-    @include('layouts.navigation')
+    @include('layouts.home.navigation')
     <div id="app">
         <div class="">
             <input v-model="querySearch" v-on:keyup="autoComplete" type="text" id="inputCity" name="inputCity" placeholder="Rechercher par le nom d'une ville" style="min-width: 300px;height: 40px;">
