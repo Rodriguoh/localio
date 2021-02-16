@@ -30,7 +30,7 @@ function scrollChange(){
         }else{
             scroll.href = '#top';
             arrow.style.transform = 'rotate(-90deg)';
-        }}, 1000)
+        }}, 50)
 }
 
 _id('scroll').addEventListener('click', scrollChange);
