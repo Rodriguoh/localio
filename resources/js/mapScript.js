@@ -91,7 +91,6 @@ var app = new Vue({
 
                 let lat = rep[i].latnlg.lat;
                 let lon = rep[i].latnlg.lng;
-
                 let marker = L.marker([lat, lon], { icon: icone });
                 allMarkers.push(marker);
             }
