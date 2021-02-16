@@ -1,10 +1,11 @@
 // import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
 // var _ = require("lodash"); Import lodash en cas de besoin
-
+import debounce from "lodash/debounce";
 var app = new Vue({
     el: `#app`,
     data: {
         map: undefined,
+        markers: undefined,
         mapTiles: [
             "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
             {
@@ -16,24 +17,28 @@ var app = new Vue({
         mapCenter: [44.5667, 6.0833],
         mapZoom: 13,
         baseUrl: "https://localio-app.herokuapp.com", // http://localhost/localio/public mettre l'url sur laquelle on travail
-        searchName: "",
         categorySelected: "",
+        querySearch: "",
+        resultsQueryCity: [],
+        resultsQueryStore: [],
+        limitAutoCompletion: 5,
     },
     methods: {
         /**
          * Function for search stores by name in autocomplete
          */
         getStoresByName: async function () {
-            var requestOptions = {
+            let requestOptions = {
                 method: "GET",
                 redirect: "follow",
             };
-
-            let req = await fetch(
-                `${this.baseUrl}/api/stores/${this.searchName}`, // modifier la variable search
+            let reqStores = await fetch(
+                `${this.baseUrl}/api/stores/${this.querySearch}`, // modifier la variable search
                 requestOptions
             );
-            let rep = await req.json();
+            let data = await reqStores.json();
+            console.log(data);
+            return data.data;
         },
         /**
          * Function to get all store to display on map
@@ -55,15 +60,42 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
             rep = rep.data;
+            let allMarkers = [];
 
             for (let i = 0; i < rep.length; i++) {
+                let icone_img = "";
+                switch (rep[i].category_id) {
+                    case 1:
+                        icone_img = "img/markers/restauration.png";
+                        break;
+                    case 71:
+                        icone_img = "img/markers/alimentaire.png";
+                        break;
+                    case 141:
+                        icone_img = "img/markers/bio.png";
+                        break;
+                    case 191:
+                        icone_img = "img/markers/sante.png";
+                        break;
+                    case 251:
+                        icone_img = "img/markers/culture.png";
+                        break;
+                }
+                let icone = L.icon({
+                    iconUrl: icone_img,
+                    shadowUrl: "img/markers/shadow.png",
+                    iconSize: [30, 42.5],
+                    shadowSize: [40, 40],
+                    shadowAnchor: [15, 19],
+                });
 
                 let lat = rep[i].latnlg.lat;
                 let lon = rep[i].latnlg.lng;
-
-                let marker = L.marker([lat, lon]);
-                marker.addTo(this.map);
+                let marker = L.marker([lat, lon], { icon: icone });
+                allMarkers.push(marker);
             }
+
+            this.markers = L.layerGroup(allMarkers);
         },
         /**
          * Function to get all details on a store
@@ -93,17 +125,69 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
         },
+        autoComplete: async function () {
+            this.resultsQueryCity = [];
+            //Récupération des noms de villes en fonction de l'entrée utilisateur
+            let requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+            let url = new URL(`https://geo.api.gouv.fr/communes`);
+            url.search = new URLSearchParams({
+                ...{
+                    nom: this.querySearch,
+                    format: "geojson",
+                    fields: "code,departement",
+                    boost: "population",
+                    limit: this.limitAutoCompletion,
+                },
+            });
+            let reqCities = await fetch(url, requestOptions);
+            let data = await reqCities.json();
+            this.resultsQueryCity = data.features;
+
+            this.resultsQueryStore = [];
+
+            let reqStores = await fetch(
+                `${this.baseUrl}/api/stores/${this.querySearch}`, // modifier la variable search
+                requestOptions
+            );
+            let dataStores = await reqStores.json();
+
+            this.resultsQueryStore = dataStores.data;
+        },
+        setViewMap: function (lat, lon) {
+            this.map.setView([lat, lon], 14);
+        },
+        consolelog(message) {
+            console.log(message);
+        },
     },
-    mounted: function () {
+    mounted: async function () {
         // setting up map
         this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
         L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
 
-        this.getStoresOnMap();
+        await this.getStoresOnMap();
+        await this.map.addLayer(this.markers);
 
         // add eventListener on the map movment
-        this.map.on("moveend", () => {
-            this.getStoresOnMap();
+        this.map.on("moveend", async () => {
+            this.map.removeLayer(this.markers);
+            await this.getStoresOnMap();
+            await this.map.addLayer(this.markers);
         });
+    },
+    computed: {
+        computedResultsQueryCity() {
+            return this.limitAutoCompletion
+                ? this.resultsQueryCity.slice(0, this.limitAutoCompletion)
+                : this.resultsQueryCity;
+        },
+        computedResultsQueryStore() {
+            return this.limitAutoCompletion
+                ? this.resultsQueryStore.slice(0, this.limitAutoCompletion)
+                : this.resultsQueryStore;
+        },
     },
 });
