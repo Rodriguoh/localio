@@ -53,6 +53,12 @@
     }
 }
 
+.auth-google {
+    display: flex;
+    align-items: center;
+    background-color: #4285f4;
+}
+
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
 }
