@@ -537,6 +537,114 @@ footer {
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
+.container {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 22px;
+  text-align: center;
+}
+
+.account-info {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.titre-section {
+  font-size: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 auto;
+}
+.titre-section a {
+  text-transform: lowercase;
+  color: blue;
+}
+
+.info {
+  margin: 30px auto;
+  display: flex;
+  justify-content: space-between;
+}
+.info .data {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  padding: 8px;
+}
+.row p {
+  margin-left: 10px;
+}
+
+.gestion-commerce {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.new-commerce {
+  margin: 30px auto;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+}
+
+.bar-vertical {
+  position: absolute;
+  height: 50px;
+  width: 5px;
+  background-color: black;
+  margin-left: 48px;
+  margin-top: 25px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.bar-horizontal {
+  position: absolute;
+  height: 5px;
+  width: 50px;
+  background-color: black;
+  margin-top: 48px;
+  margin-left: 25px;
+}
+
+@media (min-width: 768px) {
+  .account-info, .gestion-commerce {
+    margin: 0px;
+    width: 80%;
+    align-self: center;
+  }
+
+  .info {
+    margin-left: 25%;
+  }
+
+  .info .data {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .row {
+    width: 50%;
+  }
+}
+/* -- Desktop --*/
+/* --Mobile--*/
+/* --Epaisseur police --*/
 .auth-card {
   margin: 0 auto;
   margin-top: 20px;
