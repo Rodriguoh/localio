@@ -150,13 +150,13 @@ var app = new Vue({
             console.log(message);
         }
     },
-    mounted: function () {
+    mounted: async function () {
         // setting up map
         this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
         L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
 
-        this.getStoresOnMap();
-        this.map.addLayer(this.markers);
+        await this.getStoresOnMap();
+        await this.map.addLayer(this.markers);
 
         // add eventListener on the map movment
         this.map.on("moveend", async() => {
@@ -166,8 +166,6 @@ var app = new Vue({
             await this.map.addLayer(this.markers);
 
         });
-
-
 
         //inputCity.addEventListener('input', debounce(this.showCitiesInDatalist, 300));
 

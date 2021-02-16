@@ -366,37 +366,62 @@ var app = new Vue({
       console.log(message);
     }
   },
-  mounted: function mounted() {
-    var _this = this;
+  mounted: function () {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+      var _this = this;
 
-    // setting up map
-    this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
-    L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-    this.getStoresOnMap();
-    this.map.addLayer(this.markers); // add eventListener on the map movment
-
-    this.map.on("moveend", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
-              _this.map.removeLayer(_this.markers);
+              // setting up map
+              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+              _context7.next = 4;
+              return this.getStoresOnMap();
 
-              _context6.next = 3;
-              return _this.getStoresOnMap();
+            case 4:
+              _context7.next = 6;
+              return this.map.addLayer(this.markers);
 
-            case 3:
-              _context6.next = 5;
-              return _this.map.addLayer(_this.markers);
+            case 6:
+              // add eventListener on the map movment
+              this.map.on("moveend", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+                  while (1) {
+                    switch (_context6.prev = _context6.next) {
+                      case 0:
+                        _this.map.removeLayer(_this.markers);
 
-            case 5:
+                        _context6.next = 3;
+                        return _this.getStoresOnMap();
+
+                      case 3:
+                        _context6.next = 5;
+                        return _this.map.addLayer(_this.markers);
+
+                      case 5:
+                      case "end":
+                        return _context6.stop();
+                    }
+                  }
+                }, _callee6);
+              }))); //inputCity.addEventListener('input', debounce(this.showCitiesInDatalist, 300));
+
+            case 7:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee6);
-    }))); //inputCity.addEventListener('input', debounce(this.showCitiesInDatalist, 300));
-  },
+      }, _callee7, this);
+    }));
+
+    function mounted() {
+      return _mounted.apply(this, arguments);
+    }
+
+    return mounted;
+  }(),
   computed: {
     computedResultsQueryCity: function computedResultsQueryCity() {
       return this.limitAutoCompletion ? this.resultsQueryCity.slice(0, this.limitAutoCompletion) : this.resultsQueryCity;
