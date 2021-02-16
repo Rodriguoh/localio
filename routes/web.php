@@ -43,3 +43,5 @@ Route::get('/homeAccount','HomeAccountController@index')->name('homeAccount');
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
+
+

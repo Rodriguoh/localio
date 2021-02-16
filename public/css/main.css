@@ -537,7 +537,13 @@ footer {
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
-<<<<<<< HEAD
+.container {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
 h1 {
   font-size: 22px;
   text-align: center;
@@ -603,6 +609,10 @@ h1 {
   margin-top: 25px;
 }
 
+.label {
+  font-weight: bold;
+}
+
 .bar-horizontal {
   position: absolute;
   height: 5px;
@@ -610,7 +620,31 @@ h1 {
   background-color: black;
   margin-top: 48px;
   margin-left: 25px;
-=======
+}
+
+@media (min-width: 768px) {
+  .account-info, .gestion-commerce {
+    margin: 0px;
+    width: 80%;
+    align-self: center;
+  }
+
+  .info {
+    margin-left: 25%;
+  }
+
+  .info .data {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .row {
+    width: 50%;
+  }
+}
+/* -- Desktop --*/
+/* --Mobile--*/
+/* --Epaisseur police --*/
 .auth-card {
   margin: 0 auto;
   margin-top: 20px;
@@ -657,5 +691,4 @@ h1 {
 }
 .auth-submit:hover {
   background-color: #75cf6e;
->>>>>>> 8f830388beca133a38b0b8180d59206dc292d040
 }
