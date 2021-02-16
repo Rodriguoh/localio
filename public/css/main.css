@@ -692,3 +692,9 @@ h1 {
 .auth-submit:hover {
   background-color: #75cf6e;
 }
+
+.auth-google {
+  display: flex;
+  align-items: center;
+  background-color: #4285f4;
+}
