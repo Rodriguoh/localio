@@ -49,8 +49,7 @@ var app = new Vue({
          * Function to get all store to display on map
          */
         getStoresOnMap: async function () {
-
-            if (this.prevCatSelected != this.categorySelected){
+            if (this.prevCatSelected != this.categorySelected) {
                 this.categoryFilter = "";
             }
             let requestOptions = {
@@ -112,21 +111,12 @@ var app = new Vue({
                 let lon = rep[i].latnlg.lng;
                 let marker = L.marker([lat, lon], { icon: icone });
 
-                 marker.on("click", async () => {
-
-                   await this.getStore(rep[i].id); 
-                   await halfmoon.toggleModal("modal-store");
-                
+                marker.on("click", async () => {
+                    await this.getStore(rep[i].id);
+                    await halfmoon.toggleModal("modal-store");
                 });
 
                 allMarkers.push(marker);
-            }
-
-                    let lat = rep[i].latnlg.lat;
-                    let lon = rep[i].latnlg.lng;
-                    let marker = L.marker([lat, lon], { icon: icone });
-                    allMarkers.push(marker);
-
             }
             this.prevCatSelected = this.categorySelected;
             this.markers = L.layerGroup(allMarkers);
@@ -143,8 +133,7 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
 
-            this.storeSelected =  rep.data;
-            
+            this.storeSelected = rep.data;
         },
         /**
          * Function to get comments with paginate on a store
@@ -185,8 +174,16 @@ var app = new Vue({
 
             this.resultsQueryStore = [];
 
+            let urlStore = new URL(
+                `${this.baseUrl}/api/stores/${this.querySearch}`
+            );
+            urlStore.search = new URLSearchParams({
+                ...(this.categorySelected.length > 0 && {
+                    category: this.categorySelected,
+                }),
+            });
             let reqStores = await fetch(
-                `${this.baseUrl}/api/stores/${this.querySearch}`, // modifier la variable search
+                urlStore, // modifier la variable search
                 requestOptions
             );
             let dataStores = await reqStores.json();
@@ -196,18 +193,12 @@ var app = new Vue({
         setViewMap: function (lat, lon) {
             this.map.setView([lat, lon], 14);
         },
-        refreshMapView: async function(){
+        refreshMapView: async function () {
             await this.map.removeLayer(this.markers);
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
-          
-            localStorage.setItem("centerMap", [
-                this.map.getCenter().lat,
-                this.map.getCenter().lng,
-            ]);
-            localStorage.setItem("zoomMap",this.map.getZoom()); // Insert les données de la map en localstorage
         },
-        categoriesFilter: async function (){
+        categoriesFilter: async function () {
             let requestOptions = {
                 method: "GET",
                 redirect: "follow",
@@ -218,28 +209,29 @@ var app = new Vue({
             let mainCats = rep.data;
             let subCats = new Object();
 
-            for (let i = 0; i < mainCats.length; i++){
+            for (let i = 0; i < mainCats.length; i++) {
                 let subCat = [];
-                mainCats[i].child.forEach(element => subCat.push(element.label));
+                mainCats[i].child.forEach((element) =>
+                    subCat.push(element.label)
+                );
                 subCats[mainCats[i].label] = subCat;
             }
 
             this.mainCat = await mainCats;
             this.subCat = await subCats;
-        }
+        },
     },
     mounted: async function () {
-
         // get last map position from localStorage
         localStorage.getItem("centerMap") &&
-            (this.centerMap = localStorage.getItem("centerMap").split(","));
+            (this.mapCenter = localStorage.getItem("centerMap").split(","));
 
         // get last map zoom from localStorage
         localStorage.getItem("zoomMap") &&
-            (this.zoomMap = localStorage.getItem("zoomMap"));    
+            (this.mapZoom = localStorage.getItem("zoomMap"));
 
-        // setting up map
-        this.map = L.map("map").setView(this.centerMap, this.zoomMap);
+        //setting up map
+        this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
 
         L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
 
@@ -248,8 +240,14 @@ var app = new Vue({
         await this.categoriesFilter();
 
         // add eventListener on the map movment
-        this.map.on("moveend", this.refreshMapView);
-
+        this.map.on("moveend", () => {
+            this.refreshMapView;
+            localStorage.setItem("centerMap", [
+                this.map.getCenter().lat,
+                this.map.getCenter().lng,
+            ]);
+            localStorage.setItem("zoomMap", this.map.getZoom()); // Insert les données de la map en localstorage
+        });
     },
 
     computed: {

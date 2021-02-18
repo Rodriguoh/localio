@@ -12,40 +12,33 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
-/***/ "./node_modules/lodash/_Symbol.js":
-/*!****************************************!*\
-  !*** ./node_modules/lodash/_Symbol.js ***!
-  \****************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./resources/js/mapScript.js":
+/*!***********************************!*\
+  !*** ./resources/js/mapScript.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
 
-/** Built-in value references. */
-var Symbol = root.Symbol;
 
-module.exports = Symbol;
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-/***/ }),
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-/***/ "./node_modules/lodash/_baseGetTag.js":
-/*!********************************************!*\
-  !*** ./node_modules/lodash/_baseGetTag.js ***!
-  \********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
-    getRawTag = __webpack_require__(/*! ./_getRawTag */ "./node_modules/lodash/_getRawTag.js"),
-    objectToString = __webpack_require__(/*! ./_objectToString */ "./node_modules/lodash/_objectToString.js");
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-/** `Object#toString` result references. */
-var nullTag = '[object Null]',
-    undefinedTag = '[object Undefined]';
+// import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
+// var _ = require("lodash"); Import lodash en cas de besoin
 
-<<<<<<< HEAD
-/** Built-in value references. */
-var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
-=======
 var app = new Vue({
   el: "#app",
   data: {
@@ -89,7 +82,511 @@ var app = new Vue({
                 _context.next = 3;
                 return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
                 requestOptions);
->>>>>>> main
+
+              case 3:
+                reqStores = _context.sent;
+                _context.next = 6;
+                return reqStores.json();
+
+              case 6:
+                data = _context.sent;
+                console.log(data);
+                return _context.abrupt("return", data.data);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getStoresByName() {
+        return _getStoresByName.apply(this, arguments);
+      }
+
+      return getStoresByName;
+    }(),
+
+    /**
+     * Function to get all store to display on map
+     */
+    getStoresOnMap: function () {
+      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var _this = this;
+
+        var requestOptions, url, req, rep, allMarkers, _loop, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (this.prevCatSelected != this.categorySelected) {
+                  this.categoryFilter = "";
+                }
+
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                }; //if(this.categoryFilter != ""){this.categorySelected = this.categoryFilter};
+
+                console.log(this.categoryFilter);
+                url = new URL("".concat(this.baseUrl, "/api/stores/map"));
+                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, this.categorySelected.length > 0 && {
+                  category: this.categorySelected
+                }), {}, {
+                  lat_ne: this.map.getBounds()._northEast.lat,
+                  lng_ne: this.map.getBounds()._northEast.lng,
+                  lat_sw: this.map.getBounds()._southWest.lat,
+                  lng_sw: this.map.getBounds()._southWest.lng
+                }));
+                _context3.next = 7;
+                return fetch(url, requestOptions);
+
+              case 7:
+                req = _context3.sent;
+                _context3.next = 10;
+                return req.json();
+
+              case 10:
+                rep = _context3.sent;
+                rep = rep.data;
+                allMarkers = [];
+
+                _loop = function _loop(i) {
+                  var icone_img = "";
+
+                  switch (rep[i].category_id) {
+                    case 1:
+                      icone_img = "img/markers/restauration.png";
+                      break;
+
+                    case 71:
+                      icone_img = "img/markers/alimentaire.png";
+                      break;
+
+                    case 141:
+                      icone_img = "img/markers/bio.png";
+                      break;
+
+                    case 191:
+                      icone_img = "img/markers/sante.png";
+                      break;
+
+                    case 251:
+                      icone_img = "img/markers/culture.png";
+                      break;
+
+                    case 311:
+                      icone_img = "img/markers/habillement.png";
+                      break;
+
+                    default:
+                      icone_img = "img/markers/default.png";
+                      break;
+                  }
+
+                  var icone = L.icon({
+                    iconUrl: icone_img,
+                    shadowUrl: "img/markers/shadow.png",
+                    iconSize: [30, 42.5],
+                    shadowSize: [40, 40],
+                    shadowAnchor: [15, 19]
+                  });
+                  var lat = rep[i].latnlg.lat;
+                  var lon = rep[i].latnlg.lng;
+                  var marker = L.marker([lat, lon], {
+                    icon: icone
+                  });
+                  marker.on("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            _context2.next = 2;
+                            return _this.getStore(rep[i].id);
+
+                          case 2:
+                            _context2.next = 4;
+                            return halfmoon.toggleModal("modal-store");
+
+                          case 4:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  })));
+                  allMarkers.push(marker);
+                };
+
+                for (i = 0; i < rep.length; i++) {
+                  _loop(i);
+                }
+
+                this.prevCatSelected = this.categorySelected;
+                this.markers = L.layerGroup(allMarkers);
+
+              case 17:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function getStoresOnMap() {
+        return _getStoresOnMap.apply(this, arguments);
+      }
+
+      return getStoresOnMap;
+    }(),
+
+    /**
+     * Function to get all details on a store
+     */
+    getStore: function () {
+      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(storeId) {
+        var requestOptions, url, req, rep;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
+                _context4.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context4.sent;
+                _context4.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context4.sent;
+                this.storeSelected = rep.data;
+
+              case 9:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function getStore(_x) {
+        return _getStore.apply(this, arguments);
+      }
+
+      return getStore;
+    }(),
+
+    /**
+     * Function to get comments with paginate on a store
+     */
+    getStoreComments: function () {
+      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(storeId) {
+        var nbPage,
+            requestOptions,
+            url,
+            req,
+            rep,
+            _args5 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                nbPage = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : null;
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId, "/comments"));
+                url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
+                  page: nbPage
+                }));
+                _context5.next = 6;
+                return fetch(url, requestOptions);
+
+              case 6:
+                req = _context5.sent;
+                _context5.next = 9;
+                return req.json();
+
+              case 9:
+                rep = _context5.sent;
+
+              case 10:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function getStoreComments(_x2) {
+        return _getStoreComments.apply(this, arguments);
+      }
+
+      return getStoreComments;
+    }(),
+    autoComplete: function () {
+      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var requestOptions, url, reqCities, data, urlStore, reqStores, dataStores;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
+
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("https://geo.api.gouv.fr/communes");
+                url.search = new URLSearchParams(_objectSpread({}, {
+                  nom: this.querySearch,
+                  format: "geojson",
+                  fields: "code,departement",
+                  boost: "population",
+                  limit: this.limitAutoCompletion
+                }));
+                _context6.next = 6;
+                return fetch(url, requestOptions);
+
+              case 6:
+                reqCities = _context6.sent;
+                _context6.next = 9;
+                return reqCities.json();
+
+              case 9:
+                data = _context6.sent;
+                this.resultsQueryCity = data.features;
+                this.resultsQueryStore = [];
+                urlStore = new URL("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch));
+                urlStore.search = new URLSearchParams(_objectSpread({}, this.categorySelected.length > 0 && {
+                  category: this.categorySelected
+                }));
+                _context6.next = 16;
+                return fetch(urlStore, // modifier la variable search
+                requestOptions);
+
+              case 16:
+                reqStores = _context6.sent;
+                _context6.next = 19;
+                return reqStores.json();
+
+              case 19:
+                dataStores = _context6.sent;
+                this.resultsQueryStore = dataStores.data;
+
+              case 21:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function autoComplete() {
+        return _autoComplete.apply(this, arguments);
+      }
+
+      return autoComplete;
+    }(),
+    setViewMap: function setViewMap(lat, lon) {
+      this.map.setView([lat, lon], 14);
+    },
+    refreshMapView: function () {
+      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.next = 2;
+                return this.map.removeLayer(this.markers);
+
+              case 2:
+                _context7.next = 4;
+                return this.getStoresOnMap();
+
+              case 4:
+                _context7.next = 6;
+                return this.map.addLayer(this.markers);
+
+              case 6:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function refreshMapView() {
+        return _refreshMapView.apply(this, arguments);
+      }
+
+      return refreshMapView;
+    }(),
+    categoriesFilter: function () {
+      var _categoriesFilter = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var requestOptions, url, req, rep, mainCats, subCats, _loop2, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/categories"));
+                _context8.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context8.sent;
+                _context8.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context8.sent;
+                mainCats = rep.data;
+                subCats = new Object();
+
+                _loop2 = function _loop2(i) {
+                  var subCat = [];
+                  mainCats[i].child.forEach(function (element) {
+                    return subCat.push(element.label);
+                  });
+                  subCats[mainCats[i].label] = subCat;
+                };
+
+                for (i = 0; i < mainCats.length; i++) {
+                  _loop2(i);
+                }
+
+                _context8.next = 14;
+                return mainCats;
+
+              case 14:
+                this.mainCat = _context8.sent;
+                _context8.next = 17;
+                return subCats;
+
+              case 17:
+                this.subCat = _context8.sent;
+
+              case 18:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
+
+      function categoriesFilter() {
+        return _categoriesFilter.apply(this, arguments);
+      }
+
+      return categoriesFilter;
+    }()
+  },
+  mounted: function () {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+      var _this2 = this;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              // get last map position from localStorage
+              localStorage.getItem("centerMap") && (this.mapCenter = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
+
+              localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap")); //setting up map
+
+              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+              _context9.next = 6;
+              return this.getStoresOnMap();
+
+            case 6:
+              _context9.next = 8;
+              return this.map.addLayer(this.markers);
+
+            case 8:
+              _context9.next = 10;
+              return this.categoriesFilter();
+
+            case 10:
+              // add eventListener on the map movment
+              this.map.on("moveend", function () {
+                _this2.refreshMapView;
+                localStorage.setItem("centerMap", [_this2.map.getCenter().lat, _this2.map.getCenter().lng]);
+                localStorage.setItem("zoomMap", _this2.map.getZoom()); // Insert les données de la map en localstorage
+              });
+
+            case 11:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9, this);
+    }));
+
+    function mounted() {
+      return _mounted.apply(this, arguments);
+    }
+
+    return mounted;
+  }(),
+  computed: {
+    computedResultsQueryCity: function computedResultsQueryCity() {
+      return this.limitAutoCompletion ? this.resultsQueryCity.slice(0, this.limitAutoCompletion) : this.resultsQueryCity;
+    },
+    computedResultsQueryStore: function computedResultsQueryStore() {
+      return this.limitAutoCompletion ? this.resultsQueryStore.slice(0, this.limitAutoCompletion) : this.resultsQueryStore;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Symbol.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_Symbol.js ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGetTag.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseGetTag.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    getRawTag = __webpack_require__(/*! ./_getRawTag */ "./node_modules/lodash/_getRawTag.js"),
+    objectToString = __webpack_require__(/*! ./_objectToString */ "./node_modules/lodash/_objectToString.js");
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
 
 /**
  * The base implementation of `getTag` without fallbacks for buggy environments.
@@ -118,7 +615,6 @@ module.exports = baseGetTag;
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-<<<<<<< HEAD
 /** Detect free variable `global` from Node.js. */
 var freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;
 
@@ -179,51 +675,10 @@ function getRawTag(value) {
 }
 
 module.exports = getRawTag;
-=======
-    /**
-     * Function to get all store to display on map
-     */
-    getStoresOnMap: function () {
-      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var _this = this;
-
-        var requestOptions, url, req, rep, allMarkers, _loop, i;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                if (this.prevCatSelected != this.categorySelected) {
-                  this.categoryFilter = "";
-                }
-
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                }; //if(this.categoryFilter != ""){this.categorySelected = this.categoryFilter};
-
-                console.log(this.categoryFilter);
-                url = new URL("".concat(this.baseUrl, "/api/stores/map"));
-                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, this.categorySelected.length > 0 && {
-                  category: this.categorySelected
-                }), {}, {
-                  lat_ne: this.map.getBounds()._northEast.lat,
-                  lng_ne: this.map.getBounds()._northEast.lng,
-                  lat_sw: this.map.getBounds()._southWest.lat,
-                  lng_sw: this.map.getBounds()._southWest.lng
-                }));
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
->>>>>>> main
 
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/lodash/_objectToString.js":
 /*!************************************************!*\
   !*** ./node_modules/lodash/_objectToString.js ***!
@@ -250,47 +705,10 @@ var nativeObjectToString = objectProto.toString;
 function objectToString(value) {
   return nativeObjectToString.call(value);
 }
-=======
-    /**
-     * Function to get all details on a store
-     */
-    getStore: function () {
-      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(storeId) {
-        var requestOptions, url, req, rep;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
-                _context4.next = 4;
-                return fetch(url, requestOptions);
-
-              case 4:
-                req = _context4.sent;
-                _context4.next = 7;
-                return req.json();
-
-              case 7:
-                rep = _context4.sent;
-                this.storeSelected = rep.data;
-
-              case 9:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
->>>>>>> main
 
 module.exports = objectToString;
 
 
-<<<<<<< HEAD
 /***/ }),
 
 /***/ "./node_modules/lodash/_root.js":
@@ -303,55 +721,10 @@ var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-=======
-    /**
-     * Function to get comments with paginate on a store
-     */
-    getStoreComments: function () {
-      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(storeId) {
-        var nbPage,
-            requestOptions,
-            url,
-            req,
-            rep,
-            _args5 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                nbPage = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : null;
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId, "/comments"));
-                url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
-                  page: nbPage
-                }));
-                _context5.next = 6;
-                return fetch(url, requestOptions);
-
-              case 6:
-                req = _context5.sent;
-                _context5.next = 9;
-                return req.json();
-
-              case 9:
-                rep = _context5.sent;
-
-              case 10:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
->>>>>>> main
 
 /** Used as a reference to the global object. */
 var root = freeGlobal || freeSelf || Function('return this')();
 
-<<<<<<< HEAD
 module.exports = root;
 
 
@@ -373,63 +746,6 @@ var FUNC_ERROR_TEXT = 'Expected a function';
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max,
     nativeMin = Math.min;
-=======
-      return getStoreComments;
-    }(),
-    autoComplete: function () {
-      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-        var requestOptions, url, reqCities, data, reqStores, dataStores;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
-
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("https://geo.api.gouv.fr/communes");
-                url.search = new URLSearchParams(_objectSpread({}, {
-                  nom: this.querySearch,
-                  format: "geojson",
-                  fields: "code,departement",
-                  boost: "population",
-                  limit: this.limitAutoCompletion
-                }));
-                _context6.next = 6;
-                return fetch(url, requestOptions);
-
-              case 6:
-                reqCities = _context6.sent;
-                _context6.next = 9;
-                return reqCities.json();
-
-              case 9:
-                data = _context6.sent;
-                this.resultsQueryCity = data.features;
-                this.resultsQueryStore = [];
-                _context6.next = 14;
-                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
-                requestOptions);
-
-              case 14:
-                reqStores = _context6.sent;
-                _context6.next = 17;
-                return reqStores.json();
-
-              case 17:
-                dataStores = _context6.sent;
-                this.resultsQueryStore = dataStores.data;
-
-              case 19:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, this);
-      }));
->>>>>>> main
 
 /**
  * Creates a debounced function that delays invoking `func` until after `wait`
@@ -497,7 +813,6 @@ function debounce(func, wait, options) {
       maxing = false,
       trailing = true;
 
-<<<<<<< HEAD
   if (typeof func != 'function') {
     throw new TypeError(FUNC_ERROR_TEXT);
   }
@@ -548,125 +863,6 @@ function debounce(func, wait, options) {
     return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
       (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
   }
-=======
-      return autoComplete;
-    }(),
-    setViewMap: function setViewMap(lat, lon) {
-      this.map.setView([lat, lon], 14);
-    },
-    refreshMapView: function () {
-      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                this.map.removeLayer(this.markers);
-                _context6.next = 3;
-                return this.getStoresOnMap();
-
-              case 3:
-                _context6.next = 5;
-                return this.map.addLayer(this.markers);
-
-              case 5:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, this);
-      }));
-
-      function refreshMapView() {
-        return _refreshMapView.apply(this, arguments);
-      }
-
-      return refreshMapView;
-    }(),
-    categoriesFilter: function () {
-      var _categoriesFilter = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-        var requestOptions, url, req, rep, mainCats, subCats, _loop, i;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
-          while (1) {
-            switch (_context7.prev = _context7.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/categories"));
-                _context7.next = 4;
-                return fetch(url, requestOptions);
-
-              case 4:
-                req = _context7.sent;
-                _context7.next = 7;
-                return req.json();
-
-              case 7:
-                rep = _context7.sent;
-                mainCats = rep.data;
-                subCats = new Object();
-
-                _loop = function _loop(i) {
-                  var subCat = [];
-                  mainCats[i].child.forEach(function (element) {
-                    return subCat.push(element.label);
-                  });
-                  subCats[mainCats[i].label] = subCat;
-                };
-
-                for (i = 0; i < mainCats.length; i++) {
-                  _loop(i);
-                }
-
-                _context7.next = 14;
-                return mainCats;
-
-              case 14:
-                this.mainCat = _context7.sent;
-                _context7.next = 17;
-                return subCats;
-
-              case 17:
-                this.subCat = _context7.sent;
-
-              case 18:
-              case "end":
-                return _context7.stop();
-            }
-          }
-        }, _callee7, this);
-      }));
-
-      function categoriesFilter() {
-        return _categoriesFilter.apply(this, arguments);
-      }
-
-      return categoriesFilter;
-    }()
-  },
-  mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-        while (1) {
-          switch (_context8.prev = _context8.next) {
-            case 0:
-              // get last map position from localStorage
-              localStorage.getItem("centerMap") && (this.centerMap = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
-
-              localStorage.getItem("zoomMap") && (this.zoomMap = localStorage.getItem("zoomMap")); // setting up map
-
-              this.map = L.map("map").setView(this.centerMap, this.zoomMap);
-              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-            case 9:
-            case "end":
-              return _context8.stop();
-          }
-        }
-      }, _callee8, this);
-    }));
->>>>>>> main
 
   function timerExpired() {
     var time = now();
@@ -1752,8 +1948,8 @@ try {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
 /******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
+/******/ 				() => module['default'] :
+/******/ 				() => module;
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
@@ -1785,7 +1981,7 @@ try {
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
@@ -1800,426 +1996,9 @@ try {
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-/*!***********************************!*\
-  !*** ./resources/js/mapScript.js ***!
-  \***********************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-// import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
-// var _ = require("lodash"); Import lodash en cas de besoin
-
-var app = new Vue({
-  el: "#app",
-  data: {
-    map: undefined,
-    markers: undefined,
-    mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-      attribution: "",
-      minNativeZoom: 4,
-      minZoom: 4
-    }],
-    mapCenter: [44.5667, 6.0833],
-    mapZoom: 13,
-    baseUrl: "https://localio-app.herokuapp.com",
-    // http://localhost/localio/public mettre l'url sur laquelle on travail
-    categorySelected: "",
-    querySearch: "",
-    resultsQueryCity: [],
-    resultsQueryStore: [],
-    limitAutoCompletion: 5
-  },
-  methods: {
-    /**
-     * Function for search stores by name in autocomplete
-     */
-    getStoresByName: function () {
-      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var requestOptions, reqStores, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                _context.next = 3;
-                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
-                requestOptions);
-
-              case 3:
-                reqStores = _context.sent;
-                _context.next = 6;
-                return reqStores.json();
-
-              case 6:
-                data = _context.sent;
-                console.log(data);
-                return _context.abrupt("return", data.data);
-
-              case 9:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getStoresByName() {
-        return _getStoresByName.apply(this, arguments);
-      }
-
-      return getStoresByName;
-    }(),
-
-    /**
-     * Function to get all store to display on map
-     */
-    getStoresOnMap: function () {
-      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var requestOptions, url, req, rep, allMarkers, i, icone_img, icone, lat, lon, marker;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/stores/map"));
-                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, typeof categorySelected == "string" && {
-                  category: ""
-                }), {}, {
-                  lat_ne: this.map.getBounds()._northEast.lat,
-                  lng_ne: this.map.getBounds()._northEast.lng,
-                  lat_sw: this.map.getBounds()._southWest.lat,
-                  lng_sw: this.map.getBounds()._southWest.lng
-                }));
-                _context2.next = 5;
-                return fetch(url, requestOptions);
-
-              case 5:
-                req = _context2.sent;
-                _context2.next = 8;
-                return req.json();
-
-              case 8:
-                rep = _context2.sent;
-                rep = rep.data;
-                allMarkers = [];
-                i = 0;
-
-              case 12:
-                if (!(i < rep.length)) {
-                  _context2.next = 35;
-                  break;
-                }
-
-                icone_img = "";
-                _context2.t0 = rep[i].category_id;
-                _context2.next = _context2.t0 === 1 ? 17 : _context2.t0 === 71 ? 19 : _context2.t0 === 141 ? 21 : _context2.t0 === 191 ? 23 : _context2.t0 === 251 ? 25 : 27;
-                break;
-
-              case 17:
-                icone_img = "img/markers/restauration.png";
-                return _context2.abrupt("break", 27);
-
-              case 19:
-                icone_img = "img/markers/alimentaire.png";
-                return _context2.abrupt("break", 27);
-
-              case 21:
-                icone_img = "img/markers/bio.png";
-                return _context2.abrupt("break", 27);
-
-              case 23:
-                icone_img = "img/markers/sante.png";
-                return _context2.abrupt("break", 27);
-
-              case 25:
-                icone_img = "img/markers/culture.png";
-                return _context2.abrupt("break", 27);
-
-              case 27:
-                icone = L.icon({
-                  iconUrl: icone_img,
-                  shadowUrl: "img/markers/shadow.png",
-                  iconSize: [30, 42.5],
-                  shadowSize: [40, 40],
-                  shadowAnchor: [15, 19]
-                });
-                lat = rep[i].latnlg.lat;
-                lon = rep[i].latnlg.lng;
-                marker = L.marker([lat, lon], {
-                  icon: icone
-                });
-                allMarkers.push(marker);
-
-              case 32:
-                i++;
-                _context2.next = 12;
-                break;
-
-              case 35:
-                this.markers = L.layerGroup(allMarkers);
-
-              case 36:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function getStoresOnMap() {
-        return _getStoresOnMap.apply(this, arguments);
-      }
-
-      return getStoresOnMap;
-    }(),
-
-    /**
-     * Function to get all details on a store
-     */
-    getStore: function () {
-      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(storeId) {
-        var requestOptions, url, req, rep;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
-                _context3.next = 4;
-                return fetch(url, requestOptions);
-
-              case 4:
-                req = _context3.sent;
-                _context3.next = 7;
-                return req.json();
-
-              case 7:
-                rep = _context3.sent;
-
-              case 8:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function getStore(_x) {
-        return _getStore.apply(this, arguments);
-      }
-
-      return getStore;
-    }(),
-
-    /**
-     * Function to get comments with paginate on a store
-     */
-    getStoreComments: function () {
-      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(storeId) {
-        var nbPage,
-            requestOptions,
-            url,
-            req,
-            rep,
-            _args4 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                nbPage = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : null;
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId, "/comments"));
-                url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
-                  page: nbPage
-                }));
-                _context4.next = 6;
-                return fetch(url, requestOptions);
-
-              case 6:
-                req = _context4.sent;
-                _context4.next = 9;
-                return req.json();
-
-              case 9:
-                rep = _context4.sent;
-
-              case 10:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function getStoreComments(_x2) {
-        return _getStoreComments.apply(this, arguments);
-      }
-
-      return getStoreComments;
-    }(),
-    autoComplete: function () {
-      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var requestOptions, url, reqCities, data, reqStores, dataStores;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
-
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("https://geo.api.gouv.fr/communes");
-                url.search = new URLSearchParams(_objectSpread({}, {
-                  nom: this.querySearch,
-                  format: "geojson",
-                  fields: "code,departement",
-                  boost: "population",
-                  limit: this.limitAutoCompletion
-                }));
-                _context5.next = 6;
-                return fetch(url, requestOptions);
-
-              case 6:
-                reqCities = _context5.sent;
-                _context5.next = 9;
-                return reqCities.json();
-
-              case 9:
-                data = _context5.sent;
-                this.resultsQueryCity = data.features;
-                this.resultsQueryStore = [];
-                _context5.next = 14;
-                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
-                requestOptions);
-
-              case 14:
-                reqStores = _context5.sent;
-                _context5.next = 17;
-                return reqStores.json();
-
-              case 17:
-                dataStores = _context5.sent;
-                this.resultsQueryStore = dataStores.data;
-
-              case 19:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-
-      function autoComplete() {
-        return _autoComplete.apply(this, arguments);
-      }
-
-      return autoComplete;
-    }(),
-    setViewMap: function setViewMap(lat, lon) {
-      this.map.setView([lat, lon], 14);
-    },
-    consolelog: function consolelog(message) {
-      console.log(message);
-    }
-  },
-  mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-      var _this = this;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
-        while (1) {
-          switch (_context7.prev = _context7.next) {
-            case 0:
-              // setting up map
-              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
-              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context7.next = 4;
-              return this.getStoresOnMap();
-
-            case 4:
-              _context7.next = 6;
-              return this.map.addLayer(this.markers);
-
-            case 6:
-              // add eventListener on the map movment
-              this.map.on("moveend", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
-                  while (1) {
-                    switch (_context6.prev = _context6.next) {
-                      case 0:
-                        _this.map.removeLayer(_this.markers);
-
-                        _context6.next = 3;
-                        return _this.getStoresOnMap();
-
-                      case 3:
-                        _context6.next = 5;
-                        return _this.map.addLayer(_this.markers);
-
-                      case 5:
-                      case "end":
-                        return _context6.stop();
-                    }
-                  }
-                }, _callee6);
-              })));
-
-            case 7:
-            case "end":
-              return _context7.stop();
-          }
-        }
-      }, _callee7, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
-  computed: {
-    computedResultsQueryCity: function computedResultsQueryCity() {
-      return this.limitAutoCompletion ? this.resultsQueryCity.slice(0, this.limitAutoCompletion) : this.resultsQueryCity;
-    },
-    computedResultsQueryStore: function computedResultsQueryStore() {
-      return this.limitAutoCompletion ? this.resultsQueryStore.slice(0, this.limitAutoCompletion) : this.resultsQueryStore;
-    }
-  }
-});
-})();
-
+/******/ 	// startup
+/******/ 	// Load entry module
+/******/ 	__webpack_require__("./resources/js/mapScript.js");
+/******/ 	// This entry module used 'exports' so it can't be inlined
 /******/ })()
 ;

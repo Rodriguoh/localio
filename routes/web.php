@@ -51,13 +51,13 @@ Route::get('/account/myStores', 'StoreController@userStore')->name('myStores'); 
 
 Route::get('/account/listStores', 'StoreController@index')->name('listStores'); //ok
 
-Route::get('/account/createStore', 'StoreController@create')->name('createStore'); //ok
+Route::get('/account/createStore', [StoreController::class, 'formStore'])->name('createStore'); //ok
 
 Route::get('/account/editStore', 'StoreController@edit')->name('editStore');
 
 Route::get('/account/settingsAccount', 'UserController@settings')->name('settingsAccount');
 
-Route::get('/store/form/{idStore?}', [StoreController::class, 'formStore'])->name('formStore');
+// Route::get('/store/form/{idStore?}', [StoreController::class, 'formStore'])->name('formStore');
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
 
 
@@ -76,7 +76,7 @@ Route::get('/account/editFavorite', 'FavoriteController@edit')->name('editFavori
 Route::get('/account/createFavorite', 'FavoriteController@create')->name('addFavorite');
 
 
-// Log out : 
+// Log out :
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
