@@ -118,8 +118,8 @@ var app = new Vue({
                   redirect: "follow"
                 };
                 url = new URL("".concat(this.baseUrl, "/api/stores/map"));
-                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, typeof categorySelected == "string" && {
-                  category: ""
+                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, this.categorySelected.length > 0 && {
+                  category: this.categorySelected
                 }), {}, {
                   lat_ne: this.map.getBounds()._northEast.lat,
                   lng_ne: this.map.getBounds()._northEast.lng,
@@ -142,36 +142,44 @@ var app = new Vue({
 
               case 12:
                 if (!(i < rep.length)) {
-                  _context2.next = 35;
+                  _context2.next = 39;
                   break;
                 }
 
                 icone_img = "";
                 _context2.t0 = rep[i].category_id;
-                _context2.next = _context2.t0 === 1 ? 17 : _context2.t0 === 71 ? 19 : _context2.t0 === 141 ? 21 : _context2.t0 === 191 ? 23 : _context2.t0 === 251 ? 25 : 27;
+                _context2.next = _context2.t0 === 1 ? 17 : _context2.t0 === 71 ? 19 : _context2.t0 === 141 ? 21 : _context2.t0 === 191 ? 23 : _context2.t0 === 251 ? 25 : _context2.t0 === 311 ? 27 : 29;
                 break;
 
               case 17:
                 icone_img = "img/markers/restauration.png";
-                return _context2.abrupt("break", 27);
+                return _context2.abrupt("break", 31);
 
               case 19:
                 icone_img = "img/markers/alimentaire.png";
-                return _context2.abrupt("break", 27);
+                return _context2.abrupt("break", 31);
 
               case 21:
                 icone_img = "img/markers/bio.png";
-                return _context2.abrupt("break", 27);
+                return _context2.abrupt("break", 31);
 
               case 23:
                 icone_img = "img/markers/sante.png";
-                return _context2.abrupt("break", 27);
+                return _context2.abrupt("break", 31);
 
               case 25:
                 icone_img = "img/markers/culture.png";
-                return _context2.abrupt("break", 27);
+                return _context2.abrupt("break", 31);
 
               case 27:
+                icone_img = "img/markers/habillement.png";
+                return _context2.abrupt("break", 31);
+
+              case 29:
+                icone_img = "img/markers/default.png";
+                return _context2.abrupt("break", 31);
+
+              case 31:
                 icone = L.icon({
                   iconUrl: icone_img,
                   shadowUrl: "img/markers/shadow.png",
@@ -186,15 +194,15 @@ var app = new Vue({
                 });
                 allMarkers.push(marker);
 
-              case 32:
+              case 36:
                 i++;
                 _context2.next = 12;
                 break;
 
-              case 35:
+              case 39:
                 this.markers = L.layerGroup(allMarkers);
 
-              case 36:
+              case 40:
               case "end":
                 return _context2.stop();
             }
