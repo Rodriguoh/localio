@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-Moderer les stores
+Liste des utilisateurs
 @endsection
