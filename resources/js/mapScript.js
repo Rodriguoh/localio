@@ -18,9 +18,13 @@ var app = new Vue({
         mapZoom: 13,
         baseUrl: "https://localio-app.herokuapp.com", // http://localhost/localio/public mettre l'url sur laquelle on travail
         categorySelected: "",
+        prevCatSelected: "",
+        categoryFilter: "",
         querySearch: "",
         resultsQueryCity: [],
         resultsQueryStore: [],
+        mainCat: [],
+        subCat: {},
         limitAutoCompletion: 5,
         storeSelected: {},
     },
@@ -45,10 +49,16 @@ var app = new Vue({
          * Function to get all store to display on map
          */
         getStoresOnMap: async function () {
+
+            if (this.prevCatSelected != this.categorySelected){
+                this.categoryFilter = "";
+            }
             let requestOptions = {
                 method: "GET",
                 redirect: "follow",
             };
+            //if(this.categoryFilter != ""){this.categorySelected = this.categoryFilter};
+            console.log(this.categoryFilter);
             let url = new URL(`${this.baseUrl}/api/stores/map`);
             url.search = new URLSearchParams({
                 ...(this.categorySelected.length > 0 && {
@@ -102,7 +112,6 @@ var app = new Vue({
                 let lon = rep[i].latnlg.lng;
                 let marker = L.marker([lat, lon], { icon: icone });
 
-                console.log(marker)
                  marker.on("click", async () => {
 
                    await this.getStore(rep[i].id); 
@@ -113,6 +122,13 @@ var app = new Vue({
                 allMarkers.push(marker);
             }
 
+                    let lat = rep[i].latnlg.lat;
+                    let lon = rep[i].latnlg.lng;
+                    let marker = L.marker([lat, lon], { icon: icone });
+                    allMarkers.push(marker);
+
+            }
+            this.prevCatSelected = this.categorySelected;
             this.markers = L.layerGroup(allMarkers);
         },
         /**
@@ -180,9 +196,37 @@ var app = new Vue({
         setViewMap: function (lat, lon) {
             this.map.setView([lat, lon], 14);
         },
-        consolelog(message) {
-            console.log(message);
+        refreshMapView: async function(){
+            await this.map.removeLayer(this.markers);
+            await this.getStoresOnMap();
+            await this.map.addLayer(this.markers);
+          
+            localStorage.setItem("centerMap", [
+                this.map.getCenter().lat,
+                this.map.getCenter().lng,
+            ]);
+            localStorage.setItem("zoomMap",this.map.getZoom()); // Insert les données de la map en localstorage
         },
+        categoriesFilter: async function (){
+            let requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+            let url = new URL(`${this.baseUrl}/api/categories`);
+            let req = await fetch(url, requestOptions);
+            let rep = await req.json();
+            let mainCats = rep.data;
+            let subCats = new Object();
+
+            for (let i = 0; i < mainCats.length; i++){
+                let subCat = [];
+                mainCats[i].child.forEach(element => subCat.push(element.label));
+                subCats[mainCats[i].label] = subCat;
+            }
+
+            this.mainCat = await mainCats;
+            this.subCat = await subCats;
+        }
     },
     mounted: async function () {
 
@@ -201,21 +245,13 @@ var app = new Vue({
 
         await this.getStoresOnMap();
         await this.map.addLayer(this.markers);
+        await this.categoriesFilter();
 
         // add eventListener on the map movment
-        this.map.on("moveend", async () => {
-            this.map.removeLayer(this.markers);
-            await this.getStoresOnMap();
-            await this.map.addLayer(this.markers);
+        this.map.on("moveend", this.refreshMapView);
 
-            //update Localstorage
-            localStorage.setItem("centerMap", [
-                this.map.getCenter().lat,
-                this.map.getCenter().lng,
-            ]);
-            localStorage.setItem("zoomMap",this.map.getZoom()); // Insert les données de la map en localstorage
-        });
     },
+
     computed: {
         computedResultsQueryCity() {
             return this.limitAutoCompletion

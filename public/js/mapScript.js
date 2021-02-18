@@ -54,9 +54,13 @@ var app = new Vue({
     baseUrl: "https://localio-app.herokuapp.com",
     // http://localhost/localio/public mettre l'url sur laquelle on travail
     categorySelected: "",
+    prevCatSelected: "",
+    categoryFilter: "",
     querySearch: "",
     resultsQueryCity: [],
     resultsQueryStore: [],
+    mainCat: [],
+    subCat: {},
     limitAutoCompletion: 5,
     storeSelected: {}
   },
@@ -117,10 +121,16 @@ var app = new Vue({
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                if (this.prevCatSelected != this.categorySelected) {
+                  this.categoryFilter = "";
+                }
+
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
-                };
+                }; //if(this.categoryFilter != ""){this.categorySelected = this.categoryFilter};
+
+                console.log(this.categoryFilter);
                 url = new URL("".concat(this.baseUrl, "/api/stores/map"));
                 url.search = new URLSearchParams(_objectSpread(_objectSpread({}, this.categorySelected.length > 0 && {
                   category: this.categorySelected
@@ -130,87 +140,6 @@ var app = new Vue({
                   lat_sw: this.map.getBounds()._southWest.lat,
                   lng_sw: this.map.getBounds()._southWest.lng
                 }));
-                _context3.next = 5;
-                return fetch(url, requestOptions);
-
-              case 5:
-                req = _context3.sent;
-                _context3.next = 8;
-                return req.json();
-
-              case 8:
-                rep = _context3.sent;
-                rep = rep.data;
-                allMarkers = [];
-
-                _loop = function _loop(i) {
-                  var icone_img = "";
-
-                  switch (rep[i].category_id) {
-                    case 1:
-                      icone_img = "img/markers/restauration.png";
-                      break;
-
-                    case 71:
-                      icone_img = "img/markers/alimentaire.png";
-                      break;
-
-                    case 141:
-                      icone_img = "img/markers/bio.png";
-                      break;
-
-                    case 191:
-                      icone_img = "img/markers/sante.png";
-                      break;
-
-                    case 251:
-                      icone_img = "img/markers/culture.png";
-                      break;
-                  }
-
-                  var icone = L.icon({
-                    iconUrl: icone_img,
-                    shadowUrl: "img/markers/shadow.png",
-                    iconSize: [30, 42.5],
-                    shadowSize: [40, 40],
-                    shadowAnchor: [15, 19]
-                  });
-                  var lat = rep[i].latnlg.lat;
-                  var lon = rep[i].latnlg.lng;
-                  var marker = L.marker([lat, lon], {
-                    icon: icone
-                  });
-                  console.log(marker);
-                  marker.on("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-                      while (1) {
-                        switch (_context2.prev = _context2.next) {
-                          case 0:
-                            _context2.next = 2;
-                            return _this.getStore(rep[i].id);
-
-                          case 2:
-                            _context2.next = 4;
-                            return halfmoon.toggleModal("modal-store");
-
-                          case 4:
-                          case "end":
-                            return _context2.stop();
-                        }
-                      }
-                    }, _callee2);
-                  })));
-                  allMarkers.push(marker);
-                };
-
-                for (i = 0; i < rep.length; i++) {
-                  _loop(i);
-                }
-
-                this.markers = L.layerGroup(allMarkers);
-
-              case 14:
-                
               case "end":
                 return _context3.stop();
             }
@@ -379,14 +308,100 @@ var app = new Vue({
     setViewMap: function setViewMap(lat, lon) {
       this.map.setView([lat, lon], 14);
     },
-    consolelog: function consolelog(message) {
-      console.log(message);
-    }
+    refreshMapView: function () {
+      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                this.map.removeLayer(this.markers);
+                _context6.next = 3;
+                return this.getStoresOnMap();
+
+              case 3:
+                _context6.next = 5;
+                return this.map.addLayer(this.markers);
+
+              case 5:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function refreshMapView() {
+        return _refreshMapView.apply(this, arguments);
+      }
+
+      return refreshMapView;
+    }(),
+    categoriesFilter: function () {
+      var _categoriesFilter = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var requestOptions, url, req, rep, mainCats, subCats, _loop, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/categories"));
+                _context7.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context7.sent;
+                _context7.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context7.sent;
+                mainCats = rep.data;
+                subCats = new Object();
+
+                _loop = function _loop(i) {
+                  var subCat = [];
+                  mainCats[i].child.forEach(function (element) {
+                    return subCat.push(element.label);
+                  });
+                  subCats[mainCats[i].label] = subCat;
+                };
+
+                for (i = 0; i < mainCats.length; i++) {
+                  _loop(i);
+                }
+
+                _context7.next = 14;
+                return mainCats;
+
+              case 14:
+                this.mainCat = _context7.sent;
+                _context7.next = 17;
+                return subCats;
+
+              case 17:
+                this.subCat = _context7.sent;
+
+              case 18:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function categoriesFilter() {
+        return _categoriesFilter.apply(this, arguments);
+      }
+
+      return categoriesFilter;
+    }()
   },
   mounted: function () {
     var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-      var _this2 = this;
-
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
@@ -398,42 +413,6 @@ var app = new Vue({
 
               this.map = L.map("map").setView(this.centerMap, this.zoomMap);
               L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context8.next = 6;
-              return this.getStoresOnMap();
-
-            case 6:
-              _context8.next = 8;
-              return this.map.addLayer(this.markers);
-
-            case 8:
-              // add eventListener on the map movment
-              this.map.on("moveend", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
-                  while (1) {
-                    switch (_context7.prev = _context7.next) {
-                      case 0:
-                        _this2.map.removeLayer(_this2.markers);
-
-                        _context7.next = 3;
-                        return _this2.getStoresOnMap();
-
-                      case 3:
-                        _context7.next = 5;
-                        return _this2.map.addLayer(_this2.markers);
-
-                      case 5:
-                        //update Localstorage
-                        localStorage.setItem("centerMap", [_this2.map.getCenter().lat, _this2.map.getCenter().lng]);
-                        localStorage.setItem("zoomMap", _this2.map.getZoom()); // Insert les données de la map en localstorage
-
-                      case 7:
-                      case "end":
-                        return _context7.stop();
-                    }
-                  }
-                }, _callee7);
-              })));
-
             case 9:
             case "end":
               return _context8.stop();
