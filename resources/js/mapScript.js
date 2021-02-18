@@ -50,7 +50,9 @@ var app = new Vue({
             };
             let url = new URL(`${this.baseUrl}/api/stores/map`);
             url.search = new URLSearchParams({
-                ...(typeof categorySelected == "string" && { category: "" }),
+                ...(this.categorySelected.length > 0 && {
+                    category: this.categorySelected,
+                }),
                 lat_ne: this.map.getBounds()._northEast.lat,
                 lng_ne: this.map.getBounds()._northEast.lng,
                 lat_sw: this.map.getBounds()._southWest.lat,
@@ -79,6 +81,12 @@ var app = new Vue({
                         break;
                     case 251:
                         icone_img = "img/markers/culture.png";
+                        break;
+                    case 311:
+                        icone_img = "img/markers/habillement.png";
+                        break;
+                    default:
+                        icone_img = "img/markers/default.png";
                         break;
                 }
                 let icone = L.icon({

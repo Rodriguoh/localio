@@ -8,14 +8,18 @@ use App\Models\User;
 
 class HomeAccountController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $user = User::findOrFail(Auth::id());
 
-        return view('pages/account/home',[
+        return view('pages/account/home', [
             'user' => $user,
         ]);
-       
     }
-
 }
