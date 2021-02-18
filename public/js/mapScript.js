@@ -54,9 +54,13 @@ var app = new Vue({
     baseUrl: "https://localio-app.herokuapp.com",
     // http://localhost/localio/public mettre l'url sur laquelle on travail
     categorySelected: "",
+    prevCatSelected: "",
+    categoryFilter: "",
     querySearch: "",
     resultsQueryCity: [],
     resultsQueryStore: [],
+    mainCat: [],
+    subCat: {},
     limitAutoCompletion: 5
   },
   methods: {
@@ -113,65 +117,74 @@ var app = new Vue({
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                if (this.prevCatSelected != this.categorySelected) {
+                  this.categoryFilter = "";
+                }
+
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
-                };
+                }; //if(this.categoryFilter != ""){this.categorySelected = this.categoryFilter};
+
+                console.log(this.categoryFilter);
                 url = new URL("".concat(this.baseUrl, "/api/stores/map"));
-                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, typeof categorySelected == "string" && {
-                  category: ""
+                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, this.categorySelected.length > 0 && {
+                  category: this.categorySelected
                 }), {}, {
                   lat_ne: this.map.getBounds()._northEast.lat,
                   lng_ne: this.map.getBounds()._northEast.lng,
                   lat_sw: this.map.getBounds()._southWest.lat,
                   lng_sw: this.map.getBounds()._southWest.lng
                 }));
-                _context2.next = 5;
+                _context2.next = 7;
                 return fetch(url, requestOptions);
 
-              case 5:
+              case 7:
                 req = _context2.sent;
-                _context2.next = 8;
+                _context2.next = 10;
                 return req.json();
 
-              case 8:
+              case 10:
                 rep = _context2.sent;
                 rep = rep.data;
                 allMarkers = [];
                 i = 0;
 
-              case 12:
+              case 14:
                 if (!(i < rep.length)) {
-                  _context2.next = 35;
+                  _context2.next = 38;
                   break;
                 }
 
                 icone_img = "";
                 _context2.t0 = rep[i].category_id;
-                _context2.next = _context2.t0 === 1 ? 17 : _context2.t0 === 71 ? 19 : _context2.t0 === 141 ? 21 : _context2.t0 === 191 ? 23 : _context2.t0 === 251 ? 25 : 27;
+                _context2.next = _context2.t0 === 1 ? 19 : _context2.t0 === 71 ? 21 : _context2.t0 === 141 ? 23 : _context2.t0 === 191 ? 25 : _context2.t0 === 251 ? 27 : 29;
                 break;
 
-              case 17:
-                icone_img = "img/markers/restauration.png";
-                return _context2.abrupt("break", 27);
-
               case 19:
-                icone_img = "img/markers/alimentaire.png";
-                return _context2.abrupt("break", 27);
+                icone_img = "img/markers/restauration.png";
+                return _context2.abrupt("break", 30);
 
               case 21:
-                icone_img = "img/markers/bio.png";
-                return _context2.abrupt("break", 27);
+                icone_img = "img/markers/alimentaire.png";
+                return _context2.abrupt("break", 30);
 
               case 23:
-                icone_img = "img/markers/sante.png";
-                return _context2.abrupt("break", 27);
+                icone_img = "img/markers/bio.png";
+                return _context2.abrupt("break", 30);
 
               case 25:
-                icone_img = "img/markers/culture.png";
-                return _context2.abrupt("break", 27);
+                icone_img = "img/markers/sante.png";
+                return _context2.abrupt("break", 30);
 
               case 27:
+                icone_img = "img/markers/culture.png";
+                return _context2.abrupt("break", 30);
+
+              case 29:
+                icone_img = "img/markers/culture.png";
+
+              case 30:
                 icone = L.icon({
                   iconUrl: icone_img,
                   shadowUrl: "img/markers/shadow.png",
@@ -186,15 +199,16 @@ var app = new Vue({
                 });
                 allMarkers.push(marker);
 
-              case 32:
+              case 35:
                 i++;
-                _context2.next = 12;
+                _context2.next = 14;
                 break;
 
-              case 35:
+              case 38:
+                this.prevCatSelected = this.categorySelected;
                 this.markers = L.layerGroup(allMarkers);
 
-              case 36:
+              case 40:
               case "end":
                 return _context2.stop();
             }
@@ -362,62 +376,128 @@ var app = new Vue({
     setViewMap: function setViewMap(lat, lon) {
       this.map.setView([lat, lon], 14);
     },
-    consolelog: function consolelog(message) {
-      console.log(message);
-    }
+    refreshMapView: function () {
+      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                this.map.removeLayer(this.markers);
+                _context6.next = 3;
+                return this.getStoresOnMap();
+
+              case 3:
+                _context6.next = 5;
+                return this.map.addLayer(this.markers);
+
+              case 5:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function refreshMapView() {
+        return _refreshMapView.apply(this, arguments);
+      }
+
+      return refreshMapView;
+    }(),
+    categoriesFilter: function () {
+      var _categoriesFilter = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var requestOptions, url, req, rep, mainCats, subCats, _loop, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/categories"));
+                _context7.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context7.sent;
+                _context7.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context7.sent;
+                mainCats = rep.data;
+                subCats = new Object();
+
+                _loop = function _loop(i) {
+                  var subCat = [];
+                  mainCats[i].child.forEach(function (element) {
+                    return subCat.push(element.label);
+                  });
+                  subCats[mainCats[i].label] = subCat;
+                };
+
+                for (i = 0; i < mainCats.length; i++) {
+                  _loop(i);
+                }
+
+                _context7.next = 14;
+                return mainCats;
+
+              case 14:
+                this.mainCat = _context7.sent;
+                _context7.next = 17;
+                return subCats;
+
+              case 17:
+                this.subCat = _context7.sent;
+
+              case 18:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function categoriesFilter() {
+        return _categoriesFilter.apply(this, arguments);
+      }
+
+      return categoriesFilter;
+    }()
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-      var _this = this;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               // setting up map
               this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
               L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context7.next = 4;
+              _context8.next = 4;
               return this.getStoresOnMap();
 
             case 4:
-              _context7.next = 6;
+              _context8.next = 6;
               return this.map.addLayer(this.markers);
 
             case 6:
+              _context8.next = 8;
+              return this.categoriesFilter();
+
+            case 8:
               // add eventListener on the map movment
-              this.map.on("moveend", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
-                  while (1) {
-                    switch (_context6.prev = _context6.next) {
-                      case 0:
-                        _this.map.removeLayer(_this.markers);
+              this.map.on("moveend", this.refreshMapView);
 
-                        _context6.next = 3;
-                        return _this.getStoresOnMap();
-
-                      case 3:
-                        _context6.next = 5;
-                        return _this.map.addLayer(_this.markers);
-
-                      case 5:
-                      case "end":
-                        return _context6.stop();
-                    }
-                  }
-                }, _callee6);
-<<<<<<< HEAD
-              }))); //inputCity.addEventListener('input', debounce(this.showCitiesInDatalist, 300));
-=======
-              })));
->>>>>>> main
-
-            case 7:
+            case 9:
             case "end":
-              return _context7.stop();
+              return _context8.stop();
           }
         }
-      }, _callee7, this);
+      }, _callee8, this);
     }));
 
     function mounted() {
