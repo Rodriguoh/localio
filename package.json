@@ -9,7 +9,8 @@
         "prod": "npm run production",
         "production": "mix --production",
         "heroku-postbuild": "npm run prod",
-        "build": "npm run prod"
+        "build": "npm run prod",
+        "postinstall": "npm run prod"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.2.1",
