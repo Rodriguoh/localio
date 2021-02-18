@@ -22,7 +22,7 @@
 </head>
 <body class="">
     @include('layouts.home.navigation')
-    <div class="text-center d-flex align-items-center justify-content-center">
+    <div class="text-center d-flex align-items-center justify-content-center" style="height:100%">
         <div style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;">
             @yield('content')
         </div>

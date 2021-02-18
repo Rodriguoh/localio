@@ -12,13 +12,13 @@
 
             <!-- Email Address -->
             <div class="auth-input">
-                <x-input id="email" class="form-control form-control-lg" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0;" />
+                <x-input id="email" class="form-control form-control-lg" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0" />
             </div>
 
             <!-- Password -->
             <div class="auth-input">
 
-                <x-input id="password" class="form-control form-control-lg" type="password" name="password" placeholder="Mot de passe" required autocomplete="current-password" style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;" />
+                <x-input id="password" class="form-control form-control-lg" type="password" name="password" placeholder="Mot de passe" required autocomplete="current-password" style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;outline:none" />
             </div>
 
             <!-- Remember Me -->
