@@ -12,428 +12,6 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
-/***/ "./resources/js/mapScript.js":
-/*!***********************************!*\
-  !*** ./resources/js/mapScript.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-// import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
-// var _ = require("lodash"); Import lodash en cas de besoin
-
-var app = new Vue({
-  el: "#app",
-  data: {
-    map: undefined,
-    markers: undefined,
-    mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-      attribution: "",
-      minNativeZoom: 4,
-      minZoom: 4
-    }],
-    mapCenter: [44.5667, 6.0833],
-    mapZoom: 13,
-    baseUrl: "https://localio-app.herokuapp.com",
-    // http://localhost/localio/public mettre l'url sur laquelle on travail
-    categorySelected: "",
-    querySearch: "",
-    resultsQueryCity: [],
-    resultsQueryStore: [],
-    limitAutoCompletion: 5
-  },
-  methods: {
-    /**
-     * Function for search stores by name in autocomplete
-     */
-    getStoresByName: function () {
-      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var requestOptions, reqStores, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                _context.next = 3;
-                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
-                requestOptions);
-
-              case 3:
-                reqStores = _context.sent;
-                _context.next = 6;
-                return reqStores.json();
-
-              case 6:
-                data = _context.sent;
-                console.log(data);
-                return _context.abrupt("return", data.data);
-
-              case 9:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getStoresByName() {
-        return _getStoresByName.apply(this, arguments);
-      }
-
-      return getStoresByName;
-    }(),
-
-    /**
-     * Function to get all store to display on map
-     */
-    getStoresOnMap: function () {
-      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var requestOptions, url, req, rep, allMarkers, i, icone_img, icone, lat, lon, marker;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/stores/map"));
-                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, typeof categorySelected == "string" && {
-                  category: ""
-                }), {}, {
-                  lat_ne: this.map.getBounds()._northEast.lat,
-                  lng_ne: this.map.getBounds()._northEast.lng,
-                  lat_sw: this.map.getBounds()._southWest.lat,
-                  lng_sw: this.map.getBounds()._southWest.lng
-                }));
-                _context2.next = 5;
-                return fetch(url, requestOptions);
-
-              case 5:
-                req = _context2.sent;
-                _context2.next = 8;
-                return req.json();
-
-              case 8:
-                rep = _context2.sent;
-                rep = rep.data;
-                allMarkers = [];
-                i = 0;
-
-              case 12:
-                if (!(i < rep.length)) {
-                  _context2.next = 35;
-                  break;
-                }
-
-                icone_img = "";
-                _context2.t0 = rep[i].category_id;
-                _context2.next = _context2.t0 === 1 ? 17 : _context2.t0 === 71 ? 19 : _context2.t0 === 141 ? 21 : _context2.t0 === 191 ? 23 : _context2.t0 === 251 ? 25 : 27;
-                break;
-
-              case 17:
-                icone_img = "img/markers/restauration.png";
-                return _context2.abrupt("break", 27);
-
-              case 19:
-                icone_img = "img/markers/alimentaire.png";
-                return _context2.abrupt("break", 27);
-
-              case 21:
-                icone_img = "img/markers/bio.png";
-                return _context2.abrupt("break", 27);
-
-              case 23:
-                icone_img = "img/markers/sante.png";
-                return _context2.abrupt("break", 27);
-
-              case 25:
-                icone_img = "img/markers/culture.png";
-                return _context2.abrupt("break", 27);
-
-              case 27:
-                icone = L.icon({
-                  iconUrl: icone_img,
-                  shadowUrl: "img/markers/shadow.png",
-                  iconSize: [30, 42.5],
-                  shadowSize: [40, 40],
-                  shadowAnchor: [15, 19]
-                });
-                lat = rep[i].latnlg.lat;
-                lon = rep[i].latnlg.lng;
-                marker = L.marker([lat, lon], {
-                  icon: icone
-                });
-                allMarkers.push(marker);
-
-              case 32:
-                i++;
-                _context2.next = 12;
-                break;
-
-              case 35:
-                this.markers = L.layerGroup(allMarkers);
-
-              case 36:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function getStoresOnMap() {
-        return _getStoresOnMap.apply(this, arguments);
-      }
-
-      return getStoresOnMap;
-    }(),
-
-    /**
-     * Function to get all details on a store
-     */
-    getStore: function () {
-      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(storeId) {
-        var requestOptions, url, req, rep;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
-                _context3.next = 4;
-                return fetch(url, requestOptions);
-
-              case 4:
-                req = _context3.sent;
-                _context3.next = 7;
-                return req.json();
-
-              case 7:
-                rep = _context3.sent;
-
-              case 8:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function getStore(_x) {
-        return _getStore.apply(this, arguments);
-      }
-
-      return getStore;
-    }(),
-
-    /**
-     * Function to get comments with paginate on a store
-     */
-    getStoreComments: function () {
-      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(storeId) {
-        var nbPage,
-            requestOptions,
-            url,
-            req,
-            rep,
-            _args4 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                nbPage = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : null;
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId, "/comments"));
-                url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
-                  page: nbPage
-                }));
-                _context4.next = 6;
-                return fetch(url, requestOptions);
-
-              case 6:
-                req = _context4.sent;
-                _context4.next = 9;
-                return req.json();
-
-              case 9:
-                rep = _context4.sent;
-
-              case 10:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function getStoreComments(_x2) {
-        return _getStoreComments.apply(this, arguments);
-      }
-
-      return getStoreComments;
-    }(),
-    autoComplete: function () {
-      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var requestOptions, url, reqCities, data, reqStores, dataStores;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
-
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("https://geo.api.gouv.fr/communes");
-                url.search = new URLSearchParams(_objectSpread({}, {
-                  nom: this.querySearch,
-                  format: "geojson",
-                  fields: "code,departement",
-                  boost: "population",
-                  limit: this.limitAutoCompletion
-                }));
-                _context5.next = 6;
-                return fetch(url, requestOptions);
-
-              case 6:
-                reqCities = _context5.sent;
-                _context5.next = 9;
-                return reqCities.json();
-
-              case 9:
-                data = _context5.sent;
-                this.resultsQueryCity = data.features;
-                this.resultsQueryStore = [];
-                _context5.next = 14;
-                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
-                requestOptions);
-
-              case 14:
-                reqStores = _context5.sent;
-                _context5.next = 17;
-                return reqStores.json();
-
-              case 17:
-                dataStores = _context5.sent;
-                this.resultsQueryStore = dataStores.data;
-
-              case 19:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-
-      function autoComplete() {
-        return _autoComplete.apply(this, arguments);
-      }
-
-      return autoComplete;
-    }(),
-    setViewMap: function setViewMap(lat, lon) {
-      this.map.setView([lat, lon], 14);
-    },
-    consolelog: function consolelog(message) {
-      console.log(message);
-    }
-  },
-  mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-      var _this = this;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
-        while (1) {
-          switch (_context7.prev = _context7.next) {
-            case 0:
-              // setting up map
-              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
-              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context7.next = 4;
-              return this.getStoresOnMap();
-
-            case 4:
-              _context7.next = 6;
-              return this.map.addLayer(this.markers);
-
-            case 6:
-              // add eventListener on the map movment
-              this.map.on("moveend", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
-                  while (1) {
-                    switch (_context6.prev = _context6.next) {
-                      case 0:
-                        _this.map.removeLayer(_this.markers);
-
-                        _context6.next = 3;
-                        return _this.getStoresOnMap();
-
-                      case 3:
-                        _context6.next = 5;
-                        return _this.map.addLayer(_this.markers);
-
-                      case 5:
-                      case "end":
-                        return _context6.stop();
-                    }
-                  }
-                }, _callee6);
-              })));
-
-            case 7:
-            case "end":
-              return _context7.stop();
-          }
-        }
-      }, _callee7, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
-  computed: {
-    computedResultsQueryCity: function computedResultsQueryCity() {
-      return this.limitAutoCompletion ? this.resultsQueryCity.slice(0, this.limitAutoCompletion) : this.resultsQueryCity;
-    },
-    computedResultsQueryStore: function computedResultsQueryStore() {
-      return this.limitAutoCompletion ? this.resultsQueryStore.slice(0, this.limitAutoCompletion) : this.resultsQueryStore;
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/lodash/_Symbol.js":
 /*!****************************************!*\
   !*** ./node_modules/lodash/_Symbol.js ***!
@@ -1827,8 +1405,8 @@ try {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
 /******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
@@ -1860,7 +1438,7 @@ try {
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
@@ -1875,9 +1453,426 @@ try {
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	// startup
-/******/ 	// Load entry module
-/******/ 	__webpack_require__("./resources/js/mapScript.js");
-/******/ 	// This entry module used 'exports' so it can't be inlined
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!***********************************!*\
+  !*** ./resources/js/mapScript.js ***!
+  \***********************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+// import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
+// var _ = require("lodash"); Import lodash en cas de besoin
+
+var app = new Vue({
+  el: "#app",
+  data: {
+    map: undefined,
+    markers: undefined,
+    mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+      attribution: "",
+      minNativeZoom: 4,
+      minZoom: 4
+    }],
+    mapCenter: [44.5667, 6.0833],
+    mapZoom: 13,
+    baseUrl: "https://localio-app.herokuapp.com",
+    // http://localhost/localio/public mettre l'url sur laquelle on travail
+    categorySelected: "",
+    querySearch: "",
+    resultsQueryCity: [],
+    resultsQueryStore: [],
+    limitAutoCompletion: 5
+  },
+  methods: {
+    /**
+     * Function for search stores by name in autocomplete
+     */
+    getStoresByName: function () {
+      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var requestOptions, reqStores, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                _context.next = 3;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
+
+              case 3:
+                reqStores = _context.sent;
+                _context.next = 6;
+                return reqStores.json();
+
+              case 6:
+                data = _context.sent;
+                console.log(data);
+                return _context.abrupt("return", data.data);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getStoresByName() {
+        return _getStoresByName.apply(this, arguments);
+      }
+
+      return getStoresByName;
+    }(),
+
+    /**
+     * Function to get all store to display on map
+     */
+    getStoresOnMap: function () {
+      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var requestOptions, url, req, rep, allMarkers, i, icone_img, icone, lat, lon, marker;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/stores/map"));
+                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, typeof categorySelected == "string" && {
+                  category: ""
+                }), {}, {
+                  lat_ne: this.map.getBounds()._northEast.lat,
+                  lng_ne: this.map.getBounds()._northEast.lng,
+                  lat_sw: this.map.getBounds()._southWest.lat,
+                  lng_sw: this.map.getBounds()._southWest.lng
+                }));
+                _context2.next = 5;
+                return fetch(url, requestOptions);
+
+              case 5:
+                req = _context2.sent;
+                _context2.next = 8;
+                return req.json();
+
+              case 8:
+                rep = _context2.sent;
+                rep = rep.data;
+                allMarkers = [];
+                i = 0;
+
+              case 12:
+                if (!(i < rep.length)) {
+                  _context2.next = 35;
+                  break;
+                }
+
+                icone_img = "";
+                _context2.t0 = rep[i].category_id;
+                _context2.next = _context2.t0 === 1 ? 17 : _context2.t0 === 71 ? 19 : _context2.t0 === 141 ? 21 : _context2.t0 === 191 ? 23 : _context2.t0 === 251 ? 25 : 27;
+                break;
+
+              case 17:
+                icone_img = "img/markers/restauration.png";
+                return _context2.abrupt("break", 27);
+
+              case 19:
+                icone_img = "img/markers/alimentaire.png";
+                return _context2.abrupt("break", 27);
+
+              case 21:
+                icone_img = "img/markers/bio.png";
+                return _context2.abrupt("break", 27);
+
+              case 23:
+                icone_img = "img/markers/sante.png";
+                return _context2.abrupt("break", 27);
+
+              case 25:
+                icone_img = "img/markers/culture.png";
+                return _context2.abrupt("break", 27);
+
+              case 27:
+                icone = L.icon({
+                  iconUrl: icone_img,
+                  shadowUrl: "img/markers/shadow.png",
+                  iconSize: [30, 42.5],
+                  shadowSize: [40, 40],
+                  shadowAnchor: [15, 19]
+                });
+                lat = rep[i].latnlg.lat;
+                lon = rep[i].latnlg.lng;
+                marker = L.marker([lat, lon], {
+                  icon: icone
+                });
+                allMarkers.push(marker);
+
+              case 32:
+                i++;
+                _context2.next = 12;
+                break;
+
+              case 35:
+                this.markers = L.layerGroup(allMarkers);
+
+              case 36:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getStoresOnMap() {
+        return _getStoresOnMap.apply(this, arguments);
+      }
+
+      return getStoresOnMap;
+    }(),
+
+    /**
+     * Function to get all details on a store
+     */
+    getStore: function () {
+      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(storeId) {
+        var requestOptions, url, req, rep;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
+                _context3.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context3.sent;
+                _context3.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context3.sent;
+
+              case 8:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function getStore(_x) {
+        return _getStore.apply(this, arguments);
+      }
+
+      return getStore;
+    }(),
+
+    /**
+     * Function to get comments with paginate on a store
+     */
+    getStoreComments: function () {
+      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(storeId) {
+        var nbPage,
+            requestOptions,
+            url,
+            req,
+            rep,
+            _args4 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                nbPage = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : null;
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId, "/comments"));
+                url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
+                  page: nbPage
+                }));
+                _context4.next = 6;
+                return fetch(url, requestOptions);
+
+              case 6:
+                req = _context4.sent;
+                _context4.next = 9;
+                return req.json();
+
+              case 9:
+                rep = _context4.sent;
+
+              case 10:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function getStoreComments(_x2) {
+        return _getStoreComments.apply(this, arguments);
+      }
+
+      return getStoreComments;
+    }(),
+    autoComplete: function () {
+      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var requestOptions, url, reqCities, data, reqStores, dataStores;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
+
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("https://geo.api.gouv.fr/communes");
+                url.search = new URLSearchParams(_objectSpread({}, {
+                  nom: this.querySearch,
+                  format: "geojson",
+                  fields: "code,departement",
+                  boost: "population",
+                  limit: this.limitAutoCompletion
+                }));
+                _context5.next = 6;
+                return fetch(url, requestOptions);
+
+              case 6:
+                reqCities = _context5.sent;
+                _context5.next = 9;
+                return reqCities.json();
+
+              case 9:
+                data = _context5.sent;
+                this.resultsQueryCity = data.features;
+                this.resultsQueryStore = [];
+                _context5.next = 14;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
+
+              case 14:
+                reqStores = _context5.sent;
+                _context5.next = 17;
+                return reqStores.json();
+
+              case 17:
+                dataStores = _context5.sent;
+                this.resultsQueryStore = dataStores.data;
+
+              case 19:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function autoComplete() {
+        return _autoComplete.apply(this, arguments);
+      }
+
+      return autoComplete;
+    }(),
+    setViewMap: function setViewMap(lat, lon) {
+      this.map.setView([lat, lon], 14);
+    },
+    consolelog: function consolelog(message) {
+      console.log(message);
+    }
+  },
+  mounted: function () {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+      var _this = this;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              // setting up map
+              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+              _context7.next = 4;
+              return this.getStoresOnMap();
+
+            case 4:
+              _context7.next = 6;
+              return this.map.addLayer(this.markers);
+
+            case 6:
+              // add eventListener on the map movment
+              this.map.on("moveend", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+                  while (1) {
+                    switch (_context6.prev = _context6.next) {
+                      case 0:
+                        _this.map.removeLayer(_this.markers);
+
+                        _context6.next = 3;
+                        return _this.getStoresOnMap();
+
+                      case 3:
+                        _context6.next = 5;
+                        return _this.map.addLayer(_this.markers);
+
+                      case 5:
+                      case "end":
+                        return _context6.stop();
+                    }
+                  }
+                }, _callee6);
+              })));
+
+            case 7:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7, this);
+    }));
+
+    function mounted() {
+      return _mounted.apply(this, arguments);
+    }
+
+    return mounted;
+  }(),
+  computed: {
+    computedResultsQueryCity: function computedResultsQueryCity() {
+      return this.limitAutoCompletion ? this.resultsQueryCity.slice(0, this.limitAutoCompletion) : this.resultsQueryCity;
+    },
+    computedResultsQueryStore: function computedResultsQueryStore() {
+      return this.limitAutoCompletion ? this.resultsQueryStore.slice(0, this.limitAutoCompletion) : this.resultsQueryStore;
+    }
+  }
+});
+})();
+
 /******/ })()
 ;

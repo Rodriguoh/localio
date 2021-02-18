@@ -36,12 +36,15 @@ Route::resource('Ckeditor', 'CkeditorController');
 Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.upload');
 
 
-Route::get('/homeAccount','HomeAccountController@index')->name('homeAccount'); 
 
+
+//Administrations routes
+Route::get('/account/home', 'HomeAccountController@index')->name('homeAccount');
+//-- Users
+Route::get('/account/editUser', 'UserController@edit')->name('editUser');
+Route::get('/account/createUser', 'UserController@create')->name('createUser');
 
 // Log out : 
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->middleware('auth')
-                ->name('logout');
-
-
+    ->middleware('auth')
+    ->name('logout');
