@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,12 +37,7 @@ Route::resource('Ckeditor', 'CkeditorController');
 Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.upload');
 
 
-Route::get('/homeAccount','HomeAccountController@index')->name('homeAccount'); 
-
-
-// Log out : 
-Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->middleware('auth')
-                ->name('logout');
-
+Route::get('/homeAccount', 'HomeAccountController@index')->name('homeAccount');
+Route::get('/store/form/{idStore?}', [StoreController::class, 'formStore'])->name('formStore');
+Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
 

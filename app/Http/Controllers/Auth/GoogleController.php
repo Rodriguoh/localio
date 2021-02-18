@@ -40,7 +40,7 @@ class GoogleController extends Controller
 
                 Auth::login($finduser);
 
-                return redirect('/');
+                return redirect()->route('homeAccount');
             } else {
                 $newUser = new User;
                 $newUser->firstname = explode(' ', $user->name)[0];
@@ -52,7 +52,7 @@ class GoogleController extends Controller
 
                 Auth::login($newUser);
 
-                return redirect('/');
+                return redirect()->route('homeAccount');
             }
         } catch (Exception $e) {
             dd($e->getMessage());

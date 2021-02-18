@@ -122,8 +122,8 @@ var app = new Vue({
                   redirect: "follow"
                 };
                 url = new URL("".concat(this.baseUrl, "/api/stores/map"));
-                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, typeof categorySelected == "string" && {
-                  category: ""
+                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, this.categorySelected.length > 0 && {
+                  category: this.categorySelected
                 }), {}, {
                   lat_ne: this.map.getBounds()._northEast.lat,
                   lng_ne: this.map.getBounds()._northEast.lng,
@@ -210,6 +210,7 @@ var app = new Vue({
                 this.markers = L.layerGroup(allMarkers);
 
               case 14:
+                
               case "end":
                 return _context3.stop();
             }
