@@ -30,12 +30,7 @@ class CategorySeeder extends Seeder
                 "poissonerie",
                 "boucherie - charcuterie",
                 "fromagerie",
-            ],
-            "bio" => [
-                "epicerie",
-                "marché paysan",
-                "fromagerie",
-                "boucherie - charcuterie",
+                "bio",
             ],
             "non alimentaire" => [
                 "fleuriste",
