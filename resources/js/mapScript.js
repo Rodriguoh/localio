@@ -52,16 +52,16 @@ var app = new Vue({
             if (this.prevCatSelected != this.categorySelected) {
                 this.categoryFilter = "";
             }
+            let catFilter;
             let requestOptions = {
                 method: "GET",
                 redirect: "follow",
             };
-            //if(this.categoryFilter != ""){this.categorySelected = this.categoryFilter};
-            console.log(this.categoryFilter);
+            this.categoryFilter === "" ? catFilter = this.categorySelected : catFilter =  this.categoryFilter;
             let url = new URL(`${this.baseUrl}/api/stores/map`);
             url.search = new URLSearchParams({
-                ...(this.categorySelected.length > 0 && {
-                    category: this.categorySelected,
+                ...(catFilter.length > 0 && {
+                    category: catFilter,
                 }),
                 lat_ne: this.map.getBounds()._northEast.lat,
                 lng_ne: this.map.getBounds()._northEast.lng,
