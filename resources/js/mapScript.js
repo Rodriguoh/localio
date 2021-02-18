@@ -153,6 +153,9 @@ var app = new Vue({
         },
         autoComplete: async function () {
             this.resultsQueryCity = [];
+            this.resultsQueryStore = [];
+            if (this.querySearch.length < 1) return;
+
             //Récupération des noms de villes en fonction de l'entrée utilisateur
             let requestOptions = {
                 method: "GET",
@@ -171,8 +174,6 @@ var app = new Vue({
             let reqCities = await fetch(url, requestOptions);
             let data = await reqCities.json();
             this.resultsQueryCity = data.features;
-
-            this.resultsQueryStore = [];
 
             let urlStore = new URL(
                 `${this.baseUrl}/api/stores/${this.querySearch}`
