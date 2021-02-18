@@ -1,3 +1,4 @@
+@include('layouts.app')
 <div class="auth-card">
     <h1>Connection</h1>
         <!-- Session Status -->

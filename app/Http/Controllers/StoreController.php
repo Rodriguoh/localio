@@ -17,6 +17,37 @@ class StoreController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $stores = Store::all();
+        return view('pages/account/stores/listStores', [
+            'stores' => $stores,
+        ]);
+    }
+
+    public function create()
+    {
+        return view('pages/account/stores/addStore');
+    }
+    public function edit()
+    {
+    }
+    public function requests()
+    {
+        $stores = Store::where('state_id', 1);
+        return view('pages/account/stores/moderateRequestsStore');
+    }
+    public function reports()
+    {
+    }
+    public function userStore()
+    {
+        $stores = Store::where('user_id', Auth::user()->id);
+        return view('pages/account/stores/myStores', [
+            'stores' => $stores
+        ]);
+    }
+
     public function formStore($idStore = null)
     {
         $store = Store::find($idStore);

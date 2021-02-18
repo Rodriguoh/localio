@@ -37,7 +37,46 @@ Route::resource('Ckeditor', 'CkeditorController');
 Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.upload');
 
 
-Route::get('/homeAccount', 'HomeAccountController@index')->name('homeAccount');
+
+
+//Administrations routes
+Route::get('/account/home', 'HomeAccountController@index')->name('homeAccount');
+//-- Users
+Route::get('/account/listUsers', 'UserController@index')->name('listUsers'); //ok
+
+Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser');
+
+//-- Store
+Route::get('/account/myStores', 'StoreController@userStore')->name('myStores'); //ok
+
+Route::get('/account/listStores', 'StoreController@index')->name('listStores'); //ok
+
+Route::get('/account/createStore', 'StoreController@create')->name('createStore'); //ok
+
+Route::get('/account/editStore', 'StoreController@edit')->name('editStore');
+
+Route::get('/account/settingsAccount', 'UserController@settings')->name('settingsAccount');
+
 Route::get('/store/form/{idStore?}', [StoreController::class, 'formStore'])->name('formStore');
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
 
+
+
+Route::get('/account/requestsStores', 'StoreController@requests')->name('requestsStores');
+Route::get('/account/reportsStores', 'StoreController@reports')->name('reportStores');
+
+//-- Notice
+Route::get('/account/myComments', 'CommentController@comments')->name('myComments');
+Route::get('/account/editComment', 'CommentController@edit')->name('editComments');
+Route::get('/account/createComment', 'CommentController@create')->name('addComments');
+
+//-- Favorite
+Route::get('/account/myFavorites', 'FavoriteController@edit')->name('editFavorite');
+Route::get('/account/editFavorite', 'FavoriteController@edit')->name('editFavorite');
+Route::get('/account/createFavorite', 'FavoriteController@create')->name('addFavorite');
+
+
+// Log out : 
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
