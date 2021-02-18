@@ -35,7 +35,7 @@
 
         <h5 class="sidebar-title">Modérer les commerces</h5>
         <div class="sidebar-divider"></div>
-               <a href="{{ URL::route('listStores')}}" class="sidebar-link sidebar-link-with-icon">
+        <a href="{{ URL::route('listStores')}}" class="sidebar-link sidebar-link-with-icon">
             <span class="sidebar-icon">
                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
             </span>
@@ -81,6 +81,10 @@
                 <i class="fa fa-lock" aria-hidden="true"></i>
             </span>
             Parametre du compte
+        </a>
+        <div class="sidebar-divider"></div>
+        <a href="{{ URL::route('logout')}}" class="sidebar-link sidebar-link-with-icon" style="color:red">
+            Se deconnecter
         </a>
     </div>
 </div>
