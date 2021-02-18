@@ -11,6 +11,12 @@ class City extends Model
     use HasFactory;
     use QueryScopesTraits;
 
+    protected $fillable = [
+        'name',
+        'INSEE',
+        'ZIPcode',
+    ];
+
     /**
      * Get all store in the city
      */
