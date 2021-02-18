@@ -24,16 +24,42 @@ class StoreController extends Controller
      * @param string $name
      * @return \Illuminate\Http\Response
      */
-    public function getStoresByName(string $name)
+    public function getStoresByName(string $name, Request $request)
     {
-        return StoreSimpleResource::collection(
-            Store::where('name', 'LIKE', '%' . $name . '%')
-                ->where('state_id', State::select('id')
-                    ->where('label', '=', 'approved')
-                    ->first()->id)
-                ->limit(5)
-                ->get()
-        );
+        if (isset($request->category)) {
+            $category_id = Category::where('label', 'like', '%' . $request->category . '%')->first()->id;
+            return StoreSimpleResource::collection(
+                Store::where('name', 'LIKE', '%' . $name . '%')
+                    ->where('state_id', State::select('id')
+                        ->where('label', '=', 'approved')
+                        ->first()->id)
+                    ->whereIn('category_id', array_merge( // check for category
+                        [
+                            $category_id
+                        ],
+                        array_map( // get all category's childs
+                            function ($cat) {
+                                return $cat['id'];
+                            },
+                            Category::select('id')
+                                ->where('category_id', '=', $category_id)
+                                ->get()
+                                ->toArray()
+                        )
+                    ))
+                    ->limit(5)
+                    ->get()
+            );
+        } else {
+            return StoreSimpleResource::collection(
+                Store::where('name', 'LIKE', '%' . $name . '%')
+                    ->where('state_id', State::select('id')
+                        ->where('label', '=', 'approved')
+                        ->first()->id)
+                    ->limit(5)
+                    ->get()
+            );
+        }
     }
 
     /**

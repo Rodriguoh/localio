@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Resources\CategoryParentRessource;
 
 class Category extends Model
 {
@@ -45,5 +46,14 @@ class Category extends Model
     public function categoriesChild()
     {
         return $this->hasMany(self::class);
+    }
+
+    public static function getCategoriesWithChild()
+    {
+        $categories = Category::where('category_id', '=', null)->get();
+        foreach ($categories as $category) {
+            $category->child = Category::where('category_id', '=', $category->id)->get();
+        }
+        return $categories;
     }
 }

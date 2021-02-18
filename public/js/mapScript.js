@@ -61,7 +61,8 @@ var app = new Vue({
     resultsQueryStore: [],
     mainCat: [],
     subCat: {},
-    limitAutoCompletion: 5
+    limitAutoCompletion: 5,
+    storeSelected: {}
   },
   methods: {
     /**
@@ -111,11 +112,14 @@ var app = new Vue({
      * Function to get all store to display on map
      */
     getStoresOnMap: function () {
-      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var requestOptions, url, req, rep, allMarkers, i, icone_img, icone, lat, lon, marker;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var _this = this;
+
+        var requestOptions, url, req, rep, allMarkers, _loop, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 if (this.prevCatSelected != this.categorySelected) {
                   this.categoryFilter = "";
@@ -136,84 +140,11 @@ var app = new Vue({
                   lat_sw: this.map.getBounds()._southWest.lat,
                   lng_sw: this.map.getBounds()._southWest.lng
                 }));
-                _context2.next = 7;
-                return fetch(url, requestOptions);
-
-              case 7:
-                req = _context2.sent;
-                _context2.next = 10;
-                return req.json();
-
-              case 10:
-                rep = _context2.sent;
-                rep = rep.data;
-                allMarkers = [];
-                i = 0;
-
-              case 14:
-                if (!(i < rep.length)) {
-                  _context2.next = 38;
-                  break;
-                }
-
-                icone_img = "";
-                _context2.t0 = rep[i].category_id;
-                _context2.next = _context2.t0 === 1 ? 19 : _context2.t0 === 71 ? 21 : _context2.t0 === 141 ? 23 : _context2.t0 === 191 ? 25 : _context2.t0 === 251 ? 27 : 29;
-                break;
-
-              case 19:
-                icone_img = "img/markers/restauration.png";
-                return _context2.abrupt("break", 30);
-
-              case 21:
-                icone_img = "img/markers/alimentaire.png";
-                return _context2.abrupt("break", 30);
-
-              case 23:
-                icone_img = "img/markers/bio.png";
-                return _context2.abrupt("break", 30);
-
-              case 25:
-                icone_img = "img/markers/sante.png";
-                return _context2.abrupt("break", 30);
-
-              case 27:
-                icone_img = "img/markers/culture.png";
-                return _context2.abrupt("break", 30);
-
-              case 29:
-                icone_img = "img/markers/culture.png";
-
-              case 30:
-                icone = L.icon({
-                  iconUrl: icone_img,
-                  shadowUrl: "img/markers/shadow.png",
-                  iconSize: [30, 42.5],
-                  shadowSize: [40, 40],
-                  shadowAnchor: [15, 19]
-                });
-                lat = rep[i].latnlg.lat;
-                lon = rep[i].latnlg.lng;
-                marker = L.marker([lat, lon], {
-                  icon: icone
-                });
-                allMarkers.push(marker);
-
-              case 35:
-                i++;
-                _context2.next = 14;
-                break;
-
-              case 38:
-                this.prevCatSelected = this.categorySelected;
-                this.markers = L.layerGroup(allMarkers);
-
-              case 40:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function getStoresOnMap() {
@@ -227,34 +158,35 @@ var app = new Vue({
      * Function to get all details on a store
      */
     getStore: function () {
-      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(storeId) {
+      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(storeId) {
         var requestOptions, url, req, rep;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
                 };
                 url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
-                _context3.next = 4;
+                _context4.next = 4;
                 return fetch(url, requestOptions);
 
               case 4:
-                req = _context3.sent;
-                _context3.next = 7;
+                req = _context4.sent;
+                _context4.next = 7;
                 return req.json();
 
               case 7:
-                rep = _context3.sent;
+                rep = _context4.sent;
+                this.storeSelected = rep.data;
 
-              case 8:
+              case 9:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee4, this);
       }));
 
       function getStore(_x) {
@@ -268,18 +200,18 @@ var app = new Vue({
      * Function to get comments with paginate on a store
      */
     getStoreComments: function () {
-      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(storeId) {
+      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(storeId) {
         var nbPage,
             requestOptions,
             url,
             req,
             rep,
-            _args4 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+            _args5 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                nbPage = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : null;
+                nbPage = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : null;
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
@@ -288,23 +220,23 @@ var app = new Vue({
                 url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
                   page: nbPage
                 }));
-                _context4.next = 6;
+                _context5.next = 6;
                 return fetch(url, requestOptions);
 
               case 6:
-                req = _context4.sent;
-                _context4.next = 9;
+                req = _context5.sent;
+                _context5.next = 9;
                 return req.json();
 
               case 9:
-                rep = _context4.sent;
+                rep = _context5.sent;
 
               case 10:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee5, this);
       }));
 
       function getStoreComments(_x2) {
@@ -314,11 +246,11 @@ var app = new Vue({
       return getStoreComments;
     }(),
     autoComplete: function () {
-      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
         var requestOptions, url, reqCities, data, reqStores, dataStores;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
                 this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
 
@@ -334,37 +266,37 @@ var app = new Vue({
                   boost: "population",
                   limit: this.limitAutoCompletion
                 }));
-                _context5.next = 6;
+                _context6.next = 6;
                 return fetch(url, requestOptions);
 
               case 6:
-                reqCities = _context5.sent;
-                _context5.next = 9;
+                reqCities = _context6.sent;
+                _context6.next = 9;
                 return reqCities.json();
 
               case 9:
-                data = _context5.sent;
+                data = _context6.sent;
                 this.resultsQueryCity = data.features;
                 this.resultsQueryStore = [];
-                _context5.next = 14;
+                _context6.next = 14;
                 return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
                 requestOptions);
 
               case 14:
-                reqStores = _context5.sent;
-                _context5.next = 17;
+                reqStores = _context6.sent;
+                _context6.next = 17;
                 return reqStores.json();
 
               case 17:
-                dataStores = _context5.sent;
+                dataStores = _context6.sent;
                 this.resultsQueryStore = dataStores.data;
 
               case 19:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee6, this);
       }));
 
       function autoComplete() {
@@ -474,24 +406,13 @@ var app = new Vue({
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              // setting up map
-              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+              // get last map position from localStorage
+              localStorage.getItem("centerMap") && (this.centerMap = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
+
+              localStorage.getItem("zoomMap") && (this.zoomMap = localStorage.getItem("zoomMap")); // setting up map
+
+              this.map = L.map("map").setView(this.centerMap, this.zoomMap);
               L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context8.next = 4;
-              return this.getStoresOnMap();
-
-            case 4:
-              _context8.next = 6;
-              return this.map.addLayer(this.markers);
-
-            case 6:
-              _context8.next = 8;
-              return this.categoriesFilter();
-
-            case 8:
-              // add eventListener on the map movment
-              this.map.on("moveend", this.refreshMapView);
-
             case 9:
             case "end":
               return _context8.stop();

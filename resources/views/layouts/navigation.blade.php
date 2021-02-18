@@ -1,4 +1,3 @@
-
 <header>
     <nav class="navbar" id="top">
         <a href="{{route('home')}}" class="site-logo">
@@ -38,12 +37,6 @@
                 <li>Connexion</li>
             </a>
             @endif
-            <!--
-            <a href="#">
-                <li>S'inscrire</li>
-            </a>
-            -->
         </ul>
     </nav>
 </header>
-
