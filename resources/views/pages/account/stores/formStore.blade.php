@@ -8,10 +8,10 @@
     <h2 class="card-title">
         Information du commerce
       </h2>
-<form action="{{route('postStore')}}" method="POST" class="w-400 mw-full">
+<form action="{{route('postStore')}}" method="POST" class="mw-full">
     @csrf
     <input type="hidden" name="id" value="{{$store->id}}">
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="name" class="required">Nom du commerce</label>
         @if($errors->has('name'))
                 <div class="invalid-feedback">
@@ -20,7 +20,7 @@
                 @endif
         <input type="text" class="form-control" id="name" placeholder="Nom entier" name="name">
     </div>
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="phone" class="required">Numéro de téléphone</label>
         @if($errors->has('phone'))
                 <div class="invalid-feedback">
@@ -29,7 +29,7 @@
                 @endif
         <input type="text" class="form-control" id="phone" placeholder="Numéro" name="phone">
     </div>
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="mail" class="required">Adresse Mail</label>
         @if($errors->has('mail'))
                 <div class="invalid-feedback">
@@ -38,7 +38,7 @@
                 @endif
         <input type="text" class="form-control" id="mail" placeholder="Mail" name="mail">
     </div>
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="SIRET" class="required">Numéro de SIRET</label>
         @if($errors->has('SIRET'))
                 <div class="invalid-feedback">
@@ -47,12 +47,12 @@
                 @endif
         <input type="text" class="form-control" id="SIRET" placeholder="SIRET" name="SIRET">
     </div>
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="url">URL de votre site internet</label>
         <input type="text" class="form-control" id="url" placeholder="L'url" name="url">
     </div>
 
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="category" class="required">Categorie</label>
         <select class="form-control" id="category" required name="category_id">
             <option value="" selected="selected" disabled="disabled">Choisir une catégorie</option>
@@ -65,13 +65,16 @@
         </select>
     </div>
 
-    <textarea name="editor" id="editor"></textarea>
+    <div class="form-group">
+        <textarea name="editor" id="editor"></textarea>
+    </div>
+
 
     <h3 class="card-title">
         Localisation
     </h3>
 
-    <div>
+    <div class="w-400 mw-full">
         <label for="number" class="required">Adresse</label>
         <div class="form-row row-eq-spacing">
         <div class="col">
@@ -84,38 +87,41 @@
     </div>
 
     <h4>Provisoire</h4>
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="city">Ville</label>
         <input type="text" class="form-control" id="city" placeholder="Le nom de la ville" name="city">
     </div>
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="INSEE">INSEE</label>
         <input type="text" class="form-control" id="INSEE" placeholder="Numéro INSEE" name="INSEE">
     </div>
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="ZIPCode">Code Postal</label>
         <input type="text" class="form-control" id="ZIPCode" placeholder="Code postal" name="ZIPCode">
     </div>
 
     <H3>Localisation Provisoire</H3>
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="lng">Longitude</label>
         <input type="text" class="form-control" id="lng" name="lng">
     </div>
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="lat">Latitude</label>
         <input type="text" class="form-control" id="lat" name="lat">
     </div>
 
     <h3 class="card-title">
         Livraison
-        </h3>
-    <div class="custom-switch">
-        <input type="checkbox" id="delivery" value="true" name="delivery">
-        <label for="delivery">Propose la livraison</label>
+    </h3>
+
+    <div class="form-group w-400 mw-full">
+        <div class="custom-switch">
+            <input type="checkbox" id="delivery" value="true" name="delivery">
+            <label for="delivery">Propose la livraison</label>
+        </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group w-400 mw-full">
         <label for="conditionDelivery">Condition de livraison</label>
         <textarea class="form-control" id="conditionDelivery" name="conditionDelivery" placeholder="Condition de livraison"></textarea>
     </div>
@@ -131,7 +137,7 @@
             filebrowserUploadUrl: "{{route('ckeditor.upload',['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form',
             uiColor: '#ADD8E6',
-            width:'85%',
+            width:'100%',
             height:500
         } );
     </script>
