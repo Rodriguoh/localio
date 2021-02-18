@@ -29,6 +29,10 @@
         #inputCity:focus + .auto-comp {
             display: block !important;
         }
+
+        .auto-comp:hover {
+            display: block !important;
+        }
     </style>
 </head>
 
