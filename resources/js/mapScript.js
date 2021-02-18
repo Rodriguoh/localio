@@ -120,9 +120,6 @@ var app = new Vue({
             let rep = await req.json();
 
             this.storeSelected =  rep.data;
-
-            console.log(this.storeSelected)
-            console.log(typeof (this.storeSelected.openingHours))
             
         },
         /**
@@ -180,8 +177,18 @@ var app = new Vue({
         },
     },
     mounted: async function () {
+
+        // get last map position from localStorage
+        localStorage.getItem("centerMap") &&
+            (this.centerMap = localStorage.getItem("centerMap").split(","));
+
+        // get last map zoom from localStorage
+        localStorage.getItem("zoomMap") &&
+            (this.zoomMap = localStorage.getItem("zoomMap"));    
+
         // setting up map
-        this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+        this.map = L.map("map").setView(this.centerMap, this.zoomMap);
+
         L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
 
         await this.getStoresOnMap();
@@ -192,6 +199,13 @@ var app = new Vue({
             this.map.removeLayer(this.markers);
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
+
+            //update Localstorage
+            localStorage.setItem("centerMap", [
+                this.map.getCenter().lat,
+                this.map.getCenter().lng,
+            ]);
+            localStorage.setItem("zoomMap",this.map.getZoom()); // Insert les données de la map en localstorage
         });
     },
     computed: {

@@ -26,8 +26,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -252,10 +250,8 @@ var app = new Vue({
               case 7:
                 rep = _context4.sent;
                 this.storeSelected = rep.data;
-                console.log(this.storeSelected);
-                console.log(_typeof(this.storeSelected.openingHours));
 
-              case 11:
+              case 9:
               case "end":
                 return _context4.stop();
             }
@@ -394,17 +390,21 @@ var app = new Vue({
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              // setting up map
-              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+              // get last map position from localStorage
+              localStorage.getItem("centerMap") && (this.centerMap = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
+
+              localStorage.getItem("zoomMap") && (this.zoomMap = localStorage.getItem("zoomMap")); // setting up map
+
+              this.map = L.map("map").setView(this.centerMap, this.zoomMap);
               L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context8.next = 4;
+              _context8.next = 6;
               return this.getStoresOnMap();
 
-            case 4:
-              _context8.next = 6;
+            case 6:
+              _context8.next = 8;
               return this.map.addLayer(this.markers);
 
-            case 6:
+            case 8:
               // add eventListener on the map movment
               this.map.on("moveend", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
                 return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
@@ -421,6 +421,11 @@ var app = new Vue({
                         return _this2.map.addLayer(_this2.markers);
 
                       case 5:
+                        //update Localstorage
+                        localStorage.setItem("centerMap", [_this2.map.getCenter().lat, _this2.map.getCenter().lng]);
+                        localStorage.setItem("zoomMap", _this2.map.getZoom()); // Insert les données de la map en localstorage
+
+                      case 7:
                       case "end":
                         return _context7.stop();
                     }
@@ -428,7 +433,7 @@ var app = new Vue({
                 }, _callee7);
               })));
 
-            case 7:
+            case 9:
             case "end":
               return _context8.stop();
           }

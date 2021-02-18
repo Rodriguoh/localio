@@ -28,8 +28,10 @@
 </head>
 
 <body>
-    @include('layouts.navigation')
-    <div id="app" class="page-wrapper">
+    
+    @include('layouts.app')
+    
+    <div id="app">
         <div class="">
             <input v-model="querySearch" v-on:keyup="autoComplete" type="text" id="inputCity" name="inputCity" placeholder="Rechercher par le nom d'une ville" style="min-width: 300px;height: 40px;">
             <template v-if="resultsQueryCity.length > 0 || resultsQueryStore.length > 0">
@@ -108,9 +110,7 @@
 
     </div>
 
-
-
-    @include('layouts.footer')
+    
 
     {{-- Import VueJS via CDN pour la phase de dev --}}
     <!-- Halfmoon JS -->
@@ -122,6 +122,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="js/mapScript.js"></script>
+
+    @include('layouts.footer')
 </body>
 
 </html>
