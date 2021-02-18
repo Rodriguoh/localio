@@ -18,10 +18,15 @@ var app = new Vue({
         mapZoom: 13,
         baseUrl: "https://localio-app.herokuapp.com", // http://localhost/localio/public mettre l'url sur laquelle on travail
         categorySelected: "",
+        prevCatSelected: "",
+        categoryFilter: "",
         querySearch: "",
         resultsQueryCity: [],
         resultsQueryStore: [],
+        mainCat: [],
+        subCat: {},
         limitAutoCompletion: 5,
+        storeSelected: {},
     },
     methods: {
         /**
@@ -44,13 +49,21 @@ var app = new Vue({
          * Function to get all store to display on map
          */
         getStoresOnMap: async function () {
+
+            if (this.prevCatSelected != this.categorySelected){
+                this.categoryFilter = "";
+            }
             let requestOptions = {
                 method: "GET",
                 redirect: "follow",
             };
+            //if(this.categoryFilter != ""){this.categorySelected = this.categoryFilter};
+            console.log(this.categoryFilter);
             let url = new URL(`${this.baseUrl}/api/stores/map`);
             url.search = new URLSearchParams({
-                ...(typeof categorySelected == "string" && { category: "" }),
+                ...(this.categorySelected.length > 0 && {
+                    category: this.categorySelected,
+                }),
                 lat_ne: this.map.getBounds()._northEast.lat,
                 lng_ne: this.map.getBounds()._northEast.lng,
                 lat_sw: this.map.getBounds()._southWest.lat,
@@ -80,6 +93,12 @@ var app = new Vue({
                     case 251:
                         icone_img = "img/markers/culture.png";
                         break;
+                    case 311:
+                        icone_img = "img/markers/habillement.png";
+                        break;
+                    default:
+                        icone_img = "img/markers/default.png";
+                        break;
                 }
                 let icone = L.icon({
                     iconUrl: icone_img,
@@ -92,9 +111,24 @@ var app = new Vue({
                 let lat = rep[i].latnlg.lat;
                 let lon = rep[i].latnlg.lng;
                 let marker = L.marker([lat, lon], { icon: icone });
+
+                 marker.on("click", async () => {
+
+                   await this.getStore(rep[i].id); 
+                   await halfmoon.toggleModal("modal-store");
+                
+                });
+
                 allMarkers.push(marker);
             }
 
+                    let lat = rep[i].latnlg.lat;
+                    let lon = rep[i].latnlg.lng;
+                    let marker = L.marker([lat, lon], { icon: icone });
+                    allMarkers.push(marker);
+
+            }
+            this.prevCatSelected = this.categorySelected;
             this.markers = L.layerGroup(allMarkers);
         },
         /**
@@ -108,6 +142,9 @@ var app = new Vue({
             let url = new URL(`${this.baseUrl}/api/store/${storeId}`);
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
+
+            this.storeSelected =  rep.data;
+            
         },
         /**
          * Function to get comments with paginate on a store
@@ -159,25 +196,62 @@ var app = new Vue({
         setViewMap: function (lat, lon) {
             this.map.setView([lat, lon], 14);
         },
-        consolelog(message) {
-            console.log(message);
+        refreshMapView: async function(){
+            await this.map.removeLayer(this.markers);
+            await this.getStoresOnMap();
+            await this.map.addLayer(this.markers);
+          
+            localStorage.setItem("centerMap", [
+                this.map.getCenter().lat,
+                this.map.getCenter().lng,
+            ]);
+            localStorage.setItem("zoomMap",this.map.getZoom()); // Insert les données de la map en localstorage
         },
+        categoriesFilter: async function (){
+            let requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+            let url = new URL(`${this.baseUrl}/api/categories`);
+            let req = await fetch(url, requestOptions);
+            let rep = await req.json();
+            let mainCats = rep.data;
+            let subCats = new Object();
+
+            for (let i = 0; i < mainCats.length; i++){
+                let subCat = [];
+                mainCats[i].child.forEach(element => subCat.push(element.label));
+                subCats[mainCats[i].label] = subCat;
+            }
+
+            this.mainCat = await mainCats;
+            this.subCat = await subCats;
+        }
     },
     mounted: async function () {
+
+        // get last map position from localStorage
+        localStorage.getItem("centerMap") &&
+            (this.centerMap = localStorage.getItem("centerMap").split(","));
+
+        // get last map zoom from localStorage
+        localStorage.getItem("zoomMap") &&
+            (this.zoomMap = localStorage.getItem("zoomMap"));    
+
         // setting up map
-        this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+        this.map = L.map("map").setView(this.centerMap, this.zoomMap);
+
         L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
 
         await this.getStoresOnMap();
         await this.map.addLayer(this.markers);
+        await this.categoriesFilter();
 
         // add eventListener on the map movment
-        this.map.on("moveend", async () => {
-            this.map.removeLayer(this.markers);
-            await this.getStoresOnMap();
-            await this.map.addLayer(this.markers);
-        });
+        this.map.on("moveend", this.refreshMapView);
+
     },
+
     computed: {
         computedResultsQueryCity() {
             return this.limitAutoCompletion

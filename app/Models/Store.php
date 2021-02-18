@@ -10,6 +10,13 @@ class Store extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'name',
+        'phone',
+        'mail',
+        'SIRET',
+    ];
+
     /**
      * Get store's state
      */

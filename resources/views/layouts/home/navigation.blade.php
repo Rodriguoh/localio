@@ -37,11 +37,6 @@
                 <li>Connexion</li>
             </a>
             @endif
-            <!--
-            <a href="#">
-                <li>S'inscrire</li>
-            </a>
-            -->
         </ul>
     </nav>
 </header>

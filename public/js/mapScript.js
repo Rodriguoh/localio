@@ -42,8 +42,54 @@ var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol
 var nullTag = '[object Null]',
     undefinedTag = '[object Undefined]';
 
+<<<<<<< HEAD
 /** Built-in value references. */
 var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+=======
+var app = new Vue({
+  el: "#app",
+  data: {
+    map: undefined,
+    markers: undefined,
+    mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+      attribution: "",
+      minNativeZoom: 4,
+      minZoom: 4
+    }],
+    mapCenter: [44.5667, 6.0833],
+    mapZoom: 13,
+    baseUrl: "https://localio-app.herokuapp.com",
+    // http://localhost/localio/public mettre l'url sur laquelle on travail
+    categorySelected: "",
+    prevCatSelected: "",
+    categoryFilter: "",
+    querySearch: "",
+    resultsQueryCity: [],
+    resultsQueryStore: [],
+    mainCat: [],
+    subCat: {},
+    limitAutoCompletion: 5,
+    storeSelected: {}
+  },
+  methods: {
+    /**
+     * Function for search stores by name in autocomplete
+     */
+    getStoresByName: function () {
+      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var requestOptions, reqStores, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                _context.next = 3;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
+>>>>>>> main
 
 /**
  * The base implementation of `getTag` without fallbacks for buggy environments.
@@ -72,6 +118,7 @@ module.exports = baseGetTag;
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+<<<<<<< HEAD
 /** Detect free variable `global` from Node.js. */
 var freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;
 
@@ -132,10 +179,51 @@ function getRawTag(value) {
 }
 
 module.exports = getRawTag;
+=======
+    /**
+     * Function to get all store to display on map
+     */
+    getStoresOnMap: function () {
+      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var _this = this;
+
+        var requestOptions, url, req, rep, allMarkers, _loop, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (this.prevCatSelected != this.categorySelected) {
+                  this.categoryFilter = "";
+                }
+
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                }; //if(this.categoryFilter != ""){this.categorySelected = this.categoryFilter};
+
+                console.log(this.categoryFilter);
+                url = new URL("".concat(this.baseUrl, "/api/stores/map"));
+                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, this.categorySelected.length > 0 && {
+                  category: this.categorySelected
+                }), {}, {
+                  lat_ne: this.map.getBounds()._northEast.lat,
+                  lng_ne: this.map.getBounds()._northEast.lng,
+                  lat_sw: this.map.getBounds()._southWest.lat,
+                  lng_sw: this.map.getBounds()._southWest.lng
+                }));
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+>>>>>>> main
 
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/lodash/_objectToString.js":
 /*!************************************************!*\
   !*** ./node_modules/lodash/_objectToString.js ***!
@@ -162,10 +250,47 @@ var nativeObjectToString = objectProto.toString;
 function objectToString(value) {
   return nativeObjectToString.call(value);
 }
+=======
+    /**
+     * Function to get all details on a store
+     */
+    getStore: function () {
+      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(storeId) {
+        var requestOptions, url, req, rep;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
+                _context4.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context4.sent;
+                _context4.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context4.sent;
+                this.storeSelected = rep.data;
+
+              case 9:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+>>>>>>> main
 
 module.exports = objectToString;
 
 
+<<<<<<< HEAD
 /***/ }),
 
 /***/ "./node_modules/lodash/_root.js":
@@ -178,10 +303,55 @@ var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+=======
+    /**
+     * Function to get comments with paginate on a store
+     */
+    getStoreComments: function () {
+      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(storeId) {
+        var nbPage,
+            requestOptions,
+            url,
+            req,
+            rep,
+            _args5 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                nbPage = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : null;
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId, "/comments"));
+                url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
+                  page: nbPage
+                }));
+                _context5.next = 6;
+                return fetch(url, requestOptions);
+
+              case 6:
+                req = _context5.sent;
+                _context5.next = 9;
+                return req.json();
+
+              case 9:
+                rep = _context5.sent;
+
+              case 10:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+>>>>>>> main
 
 /** Used as a reference to the global object. */
 var root = freeGlobal || freeSelf || Function('return this')();
 
+<<<<<<< HEAD
 module.exports = root;
 
 
@@ -203,6 +373,63 @@ var FUNC_ERROR_TEXT = 'Expected a function';
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max,
     nativeMin = Math.min;
+=======
+      return getStoreComments;
+    }(),
+    autoComplete: function () {
+      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var requestOptions, url, reqCities, data, reqStores, dataStores;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
+
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("https://geo.api.gouv.fr/communes");
+                url.search = new URLSearchParams(_objectSpread({}, {
+                  nom: this.querySearch,
+                  format: "geojson",
+                  fields: "code,departement",
+                  boost: "population",
+                  limit: this.limitAutoCompletion
+                }));
+                _context6.next = 6;
+                return fetch(url, requestOptions);
+
+              case 6:
+                reqCities = _context6.sent;
+                _context6.next = 9;
+                return reqCities.json();
+
+              case 9:
+                data = _context6.sent;
+                this.resultsQueryCity = data.features;
+                this.resultsQueryStore = [];
+                _context6.next = 14;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
+
+              case 14:
+                reqStores = _context6.sent;
+                _context6.next = 17;
+                return reqStores.json();
+
+              case 17:
+                dataStores = _context6.sent;
+                this.resultsQueryStore = dataStores.data;
+
+              case 19:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+>>>>>>> main
 
 /**
  * Creates a debounced function that delays invoking `func` until after `wait`
@@ -270,6 +497,7 @@ function debounce(func, wait, options) {
       maxing = false,
       trailing = true;
 
+<<<<<<< HEAD
   if (typeof func != 'function') {
     throw new TypeError(FUNC_ERROR_TEXT);
   }
@@ -320,6 +548,125 @@ function debounce(func, wait, options) {
     return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
       (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
   }
+=======
+      return autoComplete;
+    }(),
+    setViewMap: function setViewMap(lat, lon) {
+      this.map.setView([lat, lon], 14);
+    },
+    refreshMapView: function () {
+      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                this.map.removeLayer(this.markers);
+                _context6.next = 3;
+                return this.getStoresOnMap();
+
+              case 3:
+                _context6.next = 5;
+                return this.map.addLayer(this.markers);
+
+              case 5:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function refreshMapView() {
+        return _refreshMapView.apply(this, arguments);
+      }
+
+      return refreshMapView;
+    }(),
+    categoriesFilter: function () {
+      var _categoriesFilter = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var requestOptions, url, req, rep, mainCats, subCats, _loop, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/categories"));
+                _context7.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context7.sent;
+                _context7.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context7.sent;
+                mainCats = rep.data;
+                subCats = new Object();
+
+                _loop = function _loop(i) {
+                  var subCat = [];
+                  mainCats[i].child.forEach(function (element) {
+                    return subCat.push(element.label);
+                  });
+                  subCats[mainCats[i].label] = subCat;
+                };
+
+                for (i = 0; i < mainCats.length; i++) {
+                  _loop(i);
+                }
+
+                _context7.next = 14;
+                return mainCats;
+
+              case 14:
+                this.mainCat = _context7.sent;
+                _context7.next = 17;
+                return subCats;
+
+              case 17:
+                this.subCat = _context7.sent;
+
+              case 18:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function categoriesFilter() {
+        return _categoriesFilter.apply(this, arguments);
+      }
+
+      return categoriesFilter;
+    }()
+  },
+  mounted: function () {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              // get last map position from localStorage
+              localStorage.getItem("centerMap") && (this.centerMap = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
+
+              localStorage.getItem("zoomMap") && (this.zoomMap = localStorage.getItem("zoomMap")); // setting up map
+
+              this.map = L.map("map").setView(this.centerMap, this.zoomMap);
+              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+            case 9:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8, this);
+    }));
+>>>>>>> main
 
   function timerExpired() {
     var time = now();

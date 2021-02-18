@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,10 @@ Route::get('/account/createStore', 'StoreController@create')->name('createStore'
 Route::get('/account/editStore', 'StoreController@edit')->name('editStore');
 
 Route::get('/account/settingsAccount', 'UserController@settings')->name('settingsAccount');
+
+Route::get('/store/form/{idStore?}', [StoreController::class, 'formStore'])->name('formStore');
+Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
+
 
 
 Route::get('/account/requestsStores', 'StoreController@requests')->name('requestsStores');
