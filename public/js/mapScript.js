@@ -115,7 +115,7 @@ var app = new Vue({
       var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var _this = this;
 
-        var requestOptions, url, req, rep, allMarkers, _loop, i;
+        var catFilter, requestOptions, url, req, rep, allMarkers, _loop, i;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
@@ -128,12 +128,11 @@ var app = new Vue({
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
-                }; //if(this.categoryFilter != ""){this.categorySelected = this.categoryFilter};
-
-                console.log(this.categoryFilter);
+                };
+                this.categoryFilter === "" ? catFilter = this.categorySelected : catFilter = this.categoryFilter;
                 url = new URL("".concat(this.baseUrl, "/api/stores/map"));
-                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, this.categorySelected.length > 0 && {
-                  category: this.categorySelected
+                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, catFilter.length > 0 && {
+                  category: catFilter
                 }), {}, {
                   lat_ne: this.map.getBounds()._northEast.lat,
                   lng_ne: this.map.getBounds()._northEast.lng,

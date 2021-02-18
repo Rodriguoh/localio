@@ -22,7 +22,7 @@ class StoreController extends Controller
      * Get a list of store by her name
      *
      * @param string $name
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function getStoresByName(string $name, Request $request)
     {
