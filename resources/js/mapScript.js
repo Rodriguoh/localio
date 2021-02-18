@@ -22,6 +22,7 @@ var app = new Vue({
         resultsQueryCity: [],
         resultsQueryStore: [],
         limitAutoCompletion: 5,
+        storeSelected: {},
     },
     methods: {
         /**
@@ -92,6 +93,15 @@ var app = new Vue({
                 let lat = rep[i].latnlg.lat;
                 let lon = rep[i].latnlg.lng;
                 let marker = L.marker([lat, lon], { icon: icone });
+
+                console.log(marker)
+                 marker.on("click", async () => {
+
+                   await this.getStore(rep[i].id); 
+                   await halfmoon.toggleModal("modal-store");
+                
+                });
+
                 allMarkers.push(marker);
             }
 
@@ -108,6 +118,12 @@ var app = new Vue({
             let url = new URL(`${this.baseUrl}/api/store/${storeId}`);
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
+
+            this.storeSelected =  rep.data;
+
+            console.log(this.storeSelected)
+            console.log(typeof (this.storeSelected.openingHours))
+            
         },
         /**
          * Function to get comments with paginate on a store
