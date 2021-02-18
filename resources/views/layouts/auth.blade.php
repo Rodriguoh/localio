@@ -20,10 +20,15 @@
     Learn more: https://www.gethalfmoon.com/docs/customize/#notes-on-browser-compatibility
   -->
 </head>
-<body class="text-center d-flex align-items-center justify-content-center">
-    <div style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;">
-        @yield('content')
+<body class="">
+    @include('layouts.home.navigation')
+    <div class="text-center d-flex align-items-center justify-content-center">
+        <div style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;">
+            @yield('content')
+        </div>
     </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
 </body>
