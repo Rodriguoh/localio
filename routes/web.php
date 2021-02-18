@@ -40,3 +40,4 @@ Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.uplo
 Route::get('/homeAccount', 'HomeAccountController@index')->name('homeAccount');
 Route::get('/store/form/{idStore?}', [StoreController::class, 'formStore'])->name('formStore');
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
+

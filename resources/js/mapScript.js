@@ -22,6 +22,7 @@ var app = new Vue({
         resultsQueryCity: [],
         resultsQueryStore: [],
         limitAutoCompletion: 5,
+        storeSelected: {},
     },
     methods: {
         /**
@@ -100,6 +101,15 @@ var app = new Vue({
                 let lat = rep[i].latnlg.lat;
                 let lon = rep[i].latnlg.lng;
                 let marker = L.marker([lat, lon], { icon: icone });
+
+                console.log(marker)
+                 marker.on("click", async () => {
+
+                   await this.getStore(rep[i].id); 
+                   await halfmoon.toggleModal("modal-store");
+                
+                });
+
                 allMarkers.push(marker);
             }
 
@@ -116,6 +126,9 @@ var app = new Vue({
             let url = new URL(`${this.baseUrl}/api/store/${storeId}`);
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
+
+            this.storeSelected =  rep.data;
+            
         },
         /**
          * Function to get comments with paginate on a store
@@ -172,8 +185,18 @@ var app = new Vue({
         },
     },
     mounted: async function () {
+
+        // get last map position from localStorage
+        localStorage.getItem("centerMap") &&
+            (this.centerMap = localStorage.getItem("centerMap").split(","));
+
+        // get last map zoom from localStorage
+        localStorage.getItem("zoomMap") &&
+            (this.zoomMap = localStorage.getItem("zoomMap"));    
+
         // setting up map
-        this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+        this.map = L.map("map").setView(this.centerMap, this.zoomMap);
+
         L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
 
         await this.getStoresOnMap();
@@ -184,6 +207,13 @@ var app = new Vue({
             this.map.removeLayer(this.markers);
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
+
+            //update Localstorage
+            localStorage.setItem("centerMap", [
+                this.map.getCenter().lat,
+                this.map.getCenter().lng,
+            ]);
+            localStorage.setItem("zoomMap",this.map.getZoom()); // Insert les données de la map en localstorage
         });
     },
     computed: {

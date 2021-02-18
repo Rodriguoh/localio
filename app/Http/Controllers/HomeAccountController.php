@@ -18,8 +18,10 @@ class HomeAccountController extends Controller
     {
         $user = User::findOrFail(Auth::id());
 
-        return view('pages/account/home', [
+        return view('pages/account/home',[
             'user' => $user,
         ]);
+       
     }
+
 }
