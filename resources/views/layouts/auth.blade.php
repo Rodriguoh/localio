@@ -20,18 +20,11 @@
     Learn more: https://www.gethalfmoon.com/docs/customize/#notes-on-browser-compatibility
   -->
 </head>
-<body class="with-custom-webkit-scrollbars with-custom-css-scrollbars container-sm" data-dm-shortcut-enabled="true" data-set-preferred-mode-onload="true">
-    <!-- Modals go here -->
-    <!-- Reference: https://www.gethalfmoon.com/docs/modal -->
-
-    <!-- Page wrapper start -->
-    <div class="with-navbar">
-
-    
+<body class="text-center d-flex align-items-center justify-content-center">
+    <div style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;">
+        @yield('content')
     </div>
-    <!-- Page wrapper end -->
 
-    <!-- Halfmoon JS -->
     <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
 </body>
 </html>
