@@ -380,9 +380,11 @@ var app = new Vue({
                 data = _context6.sent;
                 this.resultsQueryCity = data.features;
                 urlStore = new URL("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch));
-                urlStore.search = new URLSearchParams(_objectSpread({}, this.categorySelected.length > 0 && {
+                urlStore.search = new URLSearchParams(_objectSpread({}, this.categorySelected.length > 0 ? this.categoryFilter.length > 0 ? {
+                  category: this.categoryFilter
+                } : {
                   category: this.categorySelected
-                }));
+                } : {}));
                 _context6.next = 18;
                 return fetch(urlStore, // modifier la variable search
                 requestOptions);
@@ -538,7 +540,8 @@ var app = new Vue({
               //await ;
               // add eventListener on the map movment
               this.map.on("moveend", function () {
-                _this2.refreshMapView;
+                _this2.refreshMapView();
+
                 localStorage.setItem("centerMap", [_this2.map.getCenter().lat, _this2.map.getCenter().lng]);
                 localStorage.setItem("zoomMap", _this2.map.getZoom()); // Insert les données de la map en localstorage
               });

@@ -184,9 +184,15 @@ var app = new Vue({
                 `${this.baseUrl}/api/stores/${this.querySearch}`
             );
             urlStore.search = new URLSearchParams({
-                ...(this.categorySelected.length > 0 && {
-                    category: this.categorySelected,
-                }),
+                ...(this.categorySelected.length > 0
+                    ? this.categoryFilter.length > 0
+                        ? {
+                              category: this.categoryFilter,
+                          }
+                        : {
+                              category: this.categorySelected,
+                          }
+                    : {}),
             });
             let reqStores = await fetch(
                 urlStore, // modifier la variable search
@@ -251,7 +257,7 @@ var app = new Vue({
 
         // add eventListener on the map movment
         this.map.on("moveend", () => {
-            this.refreshMapView;
+            this.refreshMapView();
             localStorage.setItem("centerMap", [
                 this.map.getCenter().lat,
                 this.map.getCenter().lng,
