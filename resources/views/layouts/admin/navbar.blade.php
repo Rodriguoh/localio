@@ -4,7 +4,7 @@
                 <i class="fa fa-bars" aria-hidden="true"></i>
                 <span class="sr-only">Toggle sidebar</span> <!-- sr-only = show only on screen readers -->
             </button>
-            <a href="">
+            <a href="{{URL::route('home')}}">
             <img src="{{asset('img/logos/logo-sombre.png')}}" alt="logo-localio" style="height:35px">
             </a>
              

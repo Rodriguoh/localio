@@ -344,8 +344,18 @@ var app = new Vue({
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                this.resultsQueryCity = []; //Récupération des noms de villes en fonction de l'entrée utilisateur
+                this.resultsQueryCity = [];
+                this.resultsQueryStore = [];
 
+                if (!(this.querySearch.length < 1)) {
+                  _context6.next = 4;
+                  break;
+                }
+
+                return _context6.abrupt("return");
+
+              case 4:
+                //Récupération des noms de villes en fonction de l'entrée utilisateur
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
@@ -358,36 +368,35 @@ var app = new Vue({
                   boost: "population",
                   limit: this.limitAutoCompletion
                 }));
-                _context6.next = 6;
+                _context6.next = 9;
                 return fetch(url, requestOptions);
 
-              case 6:
+              case 9:
                 reqCities = _context6.sent;
-                _context6.next = 9;
+                _context6.next = 12;
                 return reqCities.json();
 
-              case 9:
+              case 12:
                 data = _context6.sent;
                 this.resultsQueryCity = data.features;
-                this.resultsQueryStore = [];
                 urlStore = new URL("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch));
                 urlStore.search = new URLSearchParams(_objectSpread({}, this.categorySelected.length > 0 && {
                   category: this.categorySelected
                 }));
-                _context6.next = 16;
+                _context6.next = 18;
                 return fetch(urlStore, // modifier la variable search
                 requestOptions);
 
-              case 16:
+              case 18:
                 reqStores = _context6.sent;
-                _context6.next = 19;
+                _context6.next = 21;
                 return reqStores.json();
 
-              case 19:
+              case 21:
                 dataStores = _context6.sent;
                 this.resultsQueryStore = dataStores.data;
 
-              case 21:
+              case 23:
               case "end":
                 return _context6.stop();
             }
