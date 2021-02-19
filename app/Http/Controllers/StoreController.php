@@ -51,7 +51,7 @@ class StoreController extends Controller
     public function formStore($idStore = null)
     {
         $store = Store::find($idStore);
-        return view('pages/account/formStore', [
+        return view('pages/account/stores/formStore', [
             'store' => isset($store) ? $store : new Store(),
             'categories' => Category::getCategoriesWithChild(),
         ]);
