@@ -49,7 +49,6 @@ var app = new Vue({
          * Function to get all store to display on map
          */
         getStoresOnMap: async function () {
-
             if (this.prevCatSelected != this.categorySelected) {
                 this.categoryFilter = "";
             }
@@ -58,9 +57,11 @@ var app = new Vue({
                 method: "GET",
                 redirect: "follow",
             };
-            this.categoryFilter === "" ? catFilter = this.categorySelected : catFilter =  this.categoryFilter;
-            if(document.getElementById('tout').checked == true){
-                catFilter = '';
+            this.categoryFilter === ""
+                ? (catFilter = this.categorySelected)
+                : (catFilter = this.categoryFilter);
+            if (document.getElementById("tout").checked == true) {
+                catFilter = "";
             }
             let url = new URL(`${this.baseUrl}/api/stores/map`);
             url.search = new URLSearchParams({
@@ -183,9 +184,15 @@ var app = new Vue({
                 `${this.baseUrl}/api/stores/${this.querySearch}`
             );
             urlStore.search = new URLSearchParams({
-                ...(this.categorySelected.length > 0 && {
-                    category: this.categorySelected,
-                }),
+                ...(this.categorySelected.length > 0
+                    ? this.categoryFilter.length > 0
+                        ? {
+                              category: this.categoryFilter,
+                          }
+                        : {
+                              category: this.categorySelected,
+                          }
+                    : {}),
             });
             let reqStores = await fetch(
                 urlStore, // modifier la variable search
@@ -224,9 +231,12 @@ var app = new Vue({
 
             this.mainCat = await mainCats;
             this.subCat = await subCats;
+            console.log(this.subCat);
         },
     },
-    mounted: async function () {
+    created() {
+        this.categoriesFilter();
+
         // get last map position from localStorage
         localStorage.getItem("centerMap") &&
             (this.mapCenter = localStorage.getItem("centerMap").split(","));
@@ -234,7 +244,8 @@ var app = new Vue({
         // get last map zoom from localStorage
         localStorage.getItem("zoomMap") &&
             (this.mapZoom = localStorage.getItem("zoomMap"));
-
+    },
+    mounted: async function () {
         //setting up map
         this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
 
@@ -242,11 +253,11 @@ var app = new Vue({
 
         await this.getStoresOnMap();
         await this.map.addLayer(this.markers);
-        await this.categoriesFilter();
+        //await ;
 
         // add eventListener on the map movment
         this.map.on("moveend", () => {
-            this.refreshMapView;
+            this.refreshMapView();
             localStorage.setItem("centerMap", [
                 this.map.getCenter().lat,
                 this.map.getCenter().lng,
