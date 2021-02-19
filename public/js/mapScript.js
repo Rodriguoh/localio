@@ -131,8 +131,8 @@ var app = new Vue({
                 };
                 this.categoryFilter === "" ? catFilter = this.categorySelected : catFilter = this.categoryFilter;
 
-                if (document.getElementById('tout').checked == true) {
-                  catFilter = '';
+                if (document.getElementById("tout").checked == true) {
+                  catFilter = "";
                 }
 
                 url = new URL("".concat(this.baseUrl, "/api/stores/map"));
@@ -492,8 +492,9 @@ var app = new Vue({
 
               case 17:
                 this.subCat = _context8.sent;
+                console.log(this.subCat);
 
-              case 18:
+              case 19:
               case "end":
                 return _context8.stop();
             }
@@ -508,6 +509,13 @@ var app = new Vue({
       return categoriesFilter;
     }()
   },
+  created: function created() {
+    this.categoriesFilter(); // get last map position from localStorage
+
+    localStorage.getItem("centerMap") && (this.mapCenter = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
+
+    localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap"));
+  },
   mounted: function () {
     var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
       var _this2 = this;
@@ -516,25 +524,18 @@ var app = new Vue({
         while (1) {
           switch (_context9.prev = _context9.next) {
             case 0:
-              // get last map position from localStorage
-              localStorage.getItem("centerMap") && (this.mapCenter = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
-
-              localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap")); //setting up map
-
+              //setting up map
               this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
               L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context9.next = 6;
+              _context9.next = 4;
               return this.getStoresOnMap();
 
-            case 6:
-              _context9.next = 8;
+            case 4:
+              _context9.next = 6;
               return this.map.addLayer(this.markers);
 
-            case 8:
-              _context9.next = 10;
-              return this.categoriesFilter();
-
-            case 10:
+            case 6:
+              //await ;
               // add eventListener on the map movment
               this.map.on("moveend", function () {
                 _this2.refreshMapView;
@@ -542,7 +543,7 @@ var app = new Vue({
                 localStorage.setItem("zoomMap", _this2.map.getZoom()); // Insert les données de la map en localstorage
               });
 
-            case 11:
+            case 7:
             case "end":
               return _context9.stop();
           }
