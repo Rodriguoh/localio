@@ -34,8 +34,9 @@ class StoreController extends Controller
     }
     public function requests()
     {
-        $stores = Store::where('state_id', 1);
-        return view('pages/account/stores/moderateRequestsStore');
+        $stores = Store::where('state_id',1)->join('users', 'users.id', '=', 'stores.user_id')->select('lastname','firstname','stores.description', 'stores.name', 'stores.created_at', 'stores.state_id')->paginate(5);
+        //dd($stores);
+        return view('pages/account/stores/moderateRequestsStore', ['stores' => $stores]);
     }
     public function reports()
     {

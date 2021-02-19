@@ -28,7 +28,7 @@
         <!-- Reference: https://www.gethalfmoon.com/docs/sticky-alerts-toasts -->
         <div class="sticky-alerts"></div>
 
-      @include('layouts.admin.navbar')
+        @include('layouts.admin.navbar')
 
         <!-- Sidebar overlay -->
         <div class="sidebar-overlay"></div>
@@ -36,7 +36,7 @@
         @include('layouts.admin.sidebar')
 
         <!-- Content wrapper start -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="padding: 20px">
             @yield('content')
         </div>
         <!-- Content wrapper end -->

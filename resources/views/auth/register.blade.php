@@ -35,7 +35,7 @@
             Vous avez déjà un compte ?
         </a>
 
-        
+
         <button type="submit" class="btn btn-primary m-10">S'inscrire</button>
     </div>
 </form>
