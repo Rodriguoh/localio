@@ -130,6 +130,11 @@ var app = new Vue({
                   redirect: "follow"
                 };
                 this.categoryFilter === "" ? catFilter = this.categorySelected : catFilter = this.categoryFilter;
+
+                if (document.getElementById('tout').checked == true) {
+                  catFilter = '';
+                }
+
                 url = new URL("".concat(this.baseUrl, "/api/stores/map"));
                 url.search = new URLSearchParams(_objectSpread(_objectSpread({}, catFilter.length > 0 && {
                   category: catFilter
@@ -139,15 +144,15 @@ var app = new Vue({
                   lat_sw: this.map.getBounds()._southWest.lat,
                   lng_sw: this.map.getBounds()._southWest.lng
                 }));
-                _context3.next = 7;
+                _context3.next = 8;
                 return fetch(url, requestOptions);
 
-              case 7:
+              case 8:
                 req = _context3.sent;
-                _context3.next = 10;
+                _context3.next = 11;
                 return req.json();
 
-              case 10:
+              case 11:
                 rep = _context3.sent;
                 rep = rep.data;
                 allMarkers = [];
@@ -226,7 +231,7 @@ var app = new Vue({
                 this.prevCatSelected = this.categorySelected;
                 this.markers = L.layerGroup(allMarkers);
 
-              case 17:
+              case 18:
               case "end":
                 return _context3.stop();
             }

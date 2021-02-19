@@ -10,7 +10,6 @@ function cl(x){return console.log(x)};
 
 
 //Accueil
-
 function scrollChange(){
 
     let scroll = this;

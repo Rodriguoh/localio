@@ -110,7 +110,6 @@
     </div>
 
 
-
     {{-- Import VueJS via CDN pour la phase de dev --}}
     <!-- Halfmoon JS -->
     <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>

@@ -49,6 +49,7 @@ var app = new Vue({
          * Function to get all store to display on map
          */
         getStoresOnMap: async function () {
+
             if (this.prevCatSelected != this.categorySelected) {
                 this.categoryFilter = "";
             }
@@ -58,6 +59,9 @@ var app = new Vue({
                 redirect: "follow",
             };
             this.categoryFilter === "" ? catFilter = this.categorySelected : catFilter =  this.categoryFilter;
+            if(document.getElementById('tout').checked == true){
+                catFilter = '';
+            }
             let url = new URL(`${this.baseUrl}/api/stores/map`);
             url.search = new URLSearchParams({
                 ...(catFilter.length > 0 && {
