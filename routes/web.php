@@ -51,7 +51,9 @@ Route::get('/account/myStores', [StoreController::class, 'userStore'])->name('my
 
 Route::get('/account/listStores', [StoreController::class, 'index'])->name('listStores'); //ok
 
-Route::get('/account/createStore', [StoreController::class, 'formStore'])->name('createStore'); //ok
+Route::get('/account/statsStore/{idStore}', [StoreController::class, 'statsStore'])->name('statsStore'); //ok
+
+Route::get('/account/formStore/{idStore?}', [StoreController::class, 'formStore'])->name('createStore'); //ok
 
 Route::get('/account/editStore', 'StoreController@edit')->name('editStore');
 

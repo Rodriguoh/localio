@@ -48,13 +48,27 @@ class StoreController extends Controller
         ]);
     }
 
+    public function statsStore($idStore)
+    {
+        return view('pages/account/stores/statsStore', [
+            'store' => Store::find($idStore)
+        ]);
+    }
+
     public function formStore($idStore = null)
     {
         $store = Store::find($idStore);
-        return view('pages/account/stores/formStore', [
-            'store' => isset($store) ? $store : new Store(),
-            'categories' => Category::getCategoriesWithChild(),
-        ]);
+        if (isset($store)) {
+            return view('pages/account/stores/editStoreForm', [
+                'store' => $store,
+                'categories' => Category::getCategoriesWithChild(),
+            ]);
+        } else {
+            return view('pages/account/stores/addStoreForm', [
+                'store' => new Store(),
+                'categories' => Category::getCategoriesWithChild(),
+            ]);
+        }
     }
 
     public function postStore(Request $request)
@@ -72,12 +86,11 @@ class StoreController extends Controller
             'city' => 'required',
         ]);
 
-        $store = new Store([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'mail' => $request->mail,
-            'SIRET' => $request->SIRET,
-        ]);
+        $store = new Store();
+        $store->name = $request->name;
+        $store->phone = $request->phone;
+        $store->mail = $request->mail;
+        $store->SIRET = $request->SIRET;
 
         $store->codeComment = Str::random(10);
         $store->category_id = $request->category_id;

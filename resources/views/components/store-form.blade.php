@@ -1,13 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
-
-<!-- Commerçant -->
-{{--  --}}
-<div class="card">
-    <h2 class="card-title">
-        Information du commerce
-      </h2>
 <form action="{{route('postStore')}}" method="POST" class="mw-full">
     @csrf
     <input type="hidden" name="id" value="{{$store->id}}">
@@ -16,7 +6,7 @@
         @if($errors->has('name'))
                 <div class="invalid-feedback">
                     {{$errors->first('name')}}
-                  </div>
+                </div>
                 @endif
         <input type="text" class="form-control" id="name" placeholder="Nom entier" name="name">
     </div>
@@ -25,7 +15,7 @@
         @if($errors->has('phone'))
                 <div class="invalid-feedback">
                     {{$errors->first('phone')}}
-                  </div>
+                </div>
                 @endif
         <input type="text" class="form-control" id="phone" placeholder="Numéro" name="phone">
     </div>
@@ -34,7 +24,7 @@
         @if($errors->has('mail'))
                 <div class="invalid-feedback">
                     {{$errors->first('mail')}}
-                  </div>
+                </div>
                 @endif
         <input type="text" class="form-control" id="mail" placeholder="Mail" name="mail">
     </div>
@@ -43,7 +33,7 @@
         @if($errors->has('SIRET'))
                 <div class="invalid-feedback">
                     {{$errors->first('SIRET')}}
-                  </div>
+                </div>
                 @endif
         <input type="text" class="form-control" id="SIRET" placeholder="SIRET" name="SIRET">
     </div>
@@ -126,11 +116,8 @@
         <textarea class="form-control" id="conditionDelivery" name="conditionDelivery" placeholder="Condition de livraison"></textarea>
     </div>
 
-
-
-
     <input class="btn btn-success" type="submit" value="Valider">
-</div>
+
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script>
         var editor = CKEDITOR.replace( 'editor', {
@@ -141,6 +128,4 @@
             height:500
         } );
     </script>
-
-
-@endsection
+</form>
