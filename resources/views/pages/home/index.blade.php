@@ -21,6 +21,7 @@
 
     <style>
         #map {
+            position: fixed;
             width: 100%;
             height: 100%;
             z-index: 1;
@@ -43,7 +44,7 @@
         <div class="content-wrapper">
             <div class="">
                 <div class="form-group position-relative w-400 mw-full">
-                    <input v-model="querySearch" v-on:keyup="autoComplete" type="text" id="inputCity" class="form-control" name="inputCity" placeholder="Rechercher par le nom d'une ville" style="min-width: 300px;height: 40px;"  autocomplete="new-password">
+                    <input v-model="querySearch" v-on:keyup="autoComplete" v-on:focus="autoComplete" type="text" id="inputCity" class="form-control" name="inputCity" placeholder="Rechercher par le nom d'une ville" style="min-width: 300px;height: 40px;"  autocomplete="new-password">
                     <template v-if="resultsQueryCity.length > 0 || resultsQueryStore.length > 0">
                         <ul class="position-absolute z-10 text-dark-lm text-light-dm bg-dark-dm bg-light-lm w-full d-none auto-comp">
 

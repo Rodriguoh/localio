@@ -19,7 +19,7 @@ class StoreController extends Controller
 
     public function index()
     {
-        $stores = Store::all();
+        $stores = Store::orderBy('name')->paginate(8);
         return view('pages/account/stores/listStores', [
             'stores' => $stores,
         ]);
@@ -43,7 +43,7 @@ class StoreController extends Controller
     }
     public function userStore()
     {
-        $stores = Store::where('user_id', Auth::user()->id);
+        $stores = Store::where('user_id', Auth::user()->id)->orderBy('name')->paginate(8);
         return view('pages/account/stores/myStores', [
             'stores' => $stores
         ]);

@@ -47,9 +47,9 @@ Route::get('/account/listUsers', 'UserController@index')->name('listUsers'); //o
 Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser');
 
 //-- Store
-Route::get('/account/myStores', 'StoreController@userStore')->name('myStores'); //ok
+Route::get('/account/myStores', [StoreController::class, 'userStore'])->name('myStores'); //ok
 
-Route::get('/account/listStores', 'StoreController@index')->name('listStores'); //ok
+Route::get('/account/listStores', [StoreController::class, 'index'])->name('listStores'); //ok
 
 Route::get('/account/createStore', [StoreController::class, 'formStore'])->name('createStore'); //ok
 
@@ -74,9 +74,3 @@ Route::get('/account/createComment', 'CommentController@create')->name('addComme
 Route::get('/account/myFavorites', 'FavoriteController@edit')->name('editFavorite');
 Route::get('/account/editFavorite', 'FavoriteController@edit')->name('editFavorite');
 Route::get('/account/createFavorite', 'FavoriteController@create')->name('addFavorite');
-
-
-// Log out :
-Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');

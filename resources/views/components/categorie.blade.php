@@ -8,7 +8,7 @@
         </div>
     </div>
     <div>
-        <input type="radio" value="tout" id="tout" name="categorie" v-model="categorySelected">
+        <input type="radio" value="" id="tout" name="categorie" v-model="categorySelected">
         <label for="tout">Voir tout</label>
     </div>
 </form>
