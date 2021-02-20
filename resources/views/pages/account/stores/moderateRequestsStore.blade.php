@@ -27,7 +27,7 @@
                 <td class="col-sm-2">
                     <a href="{{ URL::route('showStore', ['idStore' => $store->id]) }}" class="btn btn-secondary btn-square m-2" type="button"><i class="fa fa-eye" style="color:white" aria-hidden="true"></i></a>
                     <a href="#modal-confirmationApprove" class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></a>
-                    <a class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
+                    <a href="#modal-confirmationRefuse" class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
                 </td>
             </tr>
             @endforeach
@@ -58,7 +58,26 @@
             <div class="text-right mt-20">
                 <!-- text-right = text-align: right, mt-20 = margin-top: 2rem (20px) -->
                 <a href="#" class="btn btn-danger mr-5" role="button">Annuler</a>
-                <a href="{{URL::route('approveStore', ['idStore' => $store->id, 'idUser' => $user->id])}}" class="btn btn-success" role="button">Confirmer</a>
+                <a href="{{URL::route('approveStore', ['idStore' => $store->id, 'idUser' => $user->id])}}" class="btn btn-success" role="button">Approuver</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal confirmation refuse -->
+<div class="modal" id="modal-confirmationRefuse" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" role="button" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </a>
+            <h5 class="modal-title">Êtes-vous sûr de vouloir supprimer ce commerce ? </h5>
+            <p>
+                Si vous confirmer le commerce {{$store->name}} sera supprimé.
+            </p>
+            <div class="text-right mt-20">
+                <!-- text-right = text-align: right, mt-20 = margin-top: 2rem (20px) -->
+                <a href="#" class="btn btn-danger mr-5" role="button">Annuler</a>
+                <a href="{{URL::route('refuseStore', ['idStore' => $store->id, 'idUser' => $user->id])}}" class="btn btn-success" role="button">Supprimer</a>
             </div>
         </div>
     </div>

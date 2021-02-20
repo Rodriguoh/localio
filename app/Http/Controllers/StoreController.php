@@ -49,22 +49,20 @@ class StoreController extends Controller
         return view('pages/account/stores/showStore', ['store' => $store])->with('openingHours', json_decode($store->openingHours, true));
         
     }
-    public function approveStore($idStore, $idUser){
+    public function approve($idStore, $idUser){
         $store = Store::find($idStore);
         $store->state_id = 2;
         $store->save();
-        Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => $idUser, 'action' => 'approved']);
-
-        $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
-            ->join('states', 'states.id', '=', 'stores.state_id')
-            ->select('lastname', 'firstname', 'stores.id','stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label')
-            ->where('states.label', '=', 'pending')
-            ->orderBy('name')
-            ->paginate(5);
-        $user = Auth::user();
+        Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => $idUser, 'action' => 'approve']);
         return redirect()->route('requestsStores');
-        //return view('pages/account/stores/moderateRequestsStore', ['stores' => $stores, 'user' => $user]);
-
+    }
+    
+    public function refuse($idStore,$idUser){
+        $store = Store::find($idStore);
+        $store->state_id = 3;
+        $store->save();
+        Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => $idUser, 'action' => 'refuse']);
+        return redirect()->route('requestsStores');
     }
 
     public function requests()
