@@ -23,7 +23,7 @@
                 <td class="col-sm-2">{{$store->created_at}}</td>
                 <td class="col-sm-1">{{$store->state_label}}</td>
                 <td class="col-sm-2">
-                    <a href=""><button class="btn btn-secondary btn-square m-2" type="button"><i class="fa fa-eye" style="color:white" aria-hidden="true"></i></button></a>
+                    <a href='{{ URL::route('showStore', ['idStore' => $store->id]) }}'><button class="btn btn-secondary btn-square m-2" type="button"><i class="fa fa-eye" style="color:white" aria-hidden="true"></i></button></a>
                     <a href=""><button class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></button></a>
                     <a href=""><button class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></button></a>
                     

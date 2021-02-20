@@ -51,7 +51,7 @@ class StoreController extends Controller
     {
         $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
             ->join('states', 'states.id', '=', 'stores.state_id')
-            ->select('lastname', 'firstname', 'stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label')
+            ->select('lastname', 'firstname', 'stores.id','stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label')
             ->where('states.label', '=', 'pending')
             ->orderBy('name')
             ->paginate(5);
