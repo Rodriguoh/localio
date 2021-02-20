@@ -4,7 +4,7 @@
 <!-- Validation Errors -->
 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-<form method="POST" action="{{ route('register') }}" style="width:100%">
+<form method="POST" action="{{ route('register') }}" class="w-full">
     @csrf
 
     {{-- <!-- Name -->
