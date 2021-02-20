@@ -6,9 +6,11 @@ use App\Models\Category;
 use App\Models\State;
 use App\Models\Store;
 use App\Models\City;
+use App\Models\Moderation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 
 class StoreController extends Controller
 {
@@ -47,6 +49,23 @@ class StoreController extends Controller
         return view('pages/account/stores/showStore', ['store' => $store])->with('openingHours', json_decode($store->openingHours, true));
         
     }
+    public function approveStore($idStore, $idUser){
+        $store = Store::find($idStore);
+        $store->state_id = 2;
+        $store->save();
+        Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => $idUser, 'action' => 'approved']);
+
+        $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
+            ->join('states', 'states.id', '=', 'stores.state_id')
+            ->select('lastname', 'firstname', 'stores.id','stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label')
+            ->where('states.label', '=', 'pending')
+            ->orderBy('name')
+            ->paginate(5);
+        $user = Auth::user();
+        return view('pages/account/stores/moderateRequestsStore', ['stores' => $stores, 'user' => $user]);
+
+    }
+
     public function requests()
     {
         $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
@@ -55,7 +74,8 @@ class StoreController extends Controller
             ->where('states.label', '=', 'pending')
             ->orderBy('name')
             ->paginate(5);
-        return view('pages/account/stores/moderateRequestsStore', ['stores' => $stores]);
+        $user = Auth::user();
+        return view('pages/account/stores/moderateRequestsStore', ['stores' => $stores, 'user' => $user]);
     }
     public function reports()
     {
