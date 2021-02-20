@@ -62,7 +62,8 @@ class StoreController extends Controller
             ->orderBy('name')
             ->paginate(5);
         $user = Auth::user();
-        return view('pages/account/stores/moderateRequestsStore', ['stores' => $stores, 'user' => $user]);
+        return redirect()->route('requestsStores');
+        //return view('pages/account/stores/moderateRequestsStore', ['stores' => $stores, 'user' => $user]);
 
     }
 

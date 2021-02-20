@@ -28,7 +28,6 @@
                     <a href="{{ URL::route('showStore', ['idStore' => $store->id]) }}" class="btn btn-secondary btn-square m-2" type="button"><i class="fa fa-eye" style="color:white" aria-hidden="true"></i></a>
                     <a href="#modal-confirmationApprove" class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></a>
                     <a class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
-
                 </td>
             </tr>
             @endforeach
