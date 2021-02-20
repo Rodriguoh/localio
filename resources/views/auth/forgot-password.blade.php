@@ -1,4 +1,4 @@
-@include('layouts.app')
+@include('layouts.auth')
 <div class="auth-card">
     <h1>Mots de passe oubliés ?</h1>
         <div class="mb-4 text-sm text-gray-600">

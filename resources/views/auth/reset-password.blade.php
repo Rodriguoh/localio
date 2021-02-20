@@ -1,4 +1,4 @@
-@include('layouts.app')
+@include('layouts.auth')
 <div class="auth-card">
     <h1>Inscription</h1>
         <!-- Validation Errors -->
