@@ -32,14 +32,29 @@ class StoreController extends Controller
     public function edit()
     {
     }
+    public function showStore($idStore)
+    {
+        $store = Store::where('stores.id', $idStore)
+            ->join('users', 'users.id', '=', 'stores.user_id')
+            ->join('states', 'states.id', '=', 'stores.state_id')
+            ->join('cities', 'cities.insee', '=', 'stores.city_insee')
+            ->join('categories', 'categories.id','=','stores.category_id')
+            ->select('users.lastname', 'users.firstname',
+                     'stores.description', 'stores.number', 'stores.street', 'stores.name as store_name', 'stores.created_at','stores.state_id','stores.siret','stores.phone','stores.codeComment','stores.mail','stores.url','stores.lat', 'stores.lng', 'stores.delivery','stores.conditionDelivery','stores.openingHours',
+                     'city_insee', 'cities.name as city_name', 
+                     'categories.label as category_name',
+                     'states.label as state_label')->first();
+        return view('pages/account/stores/showStore', ['store' => $store])->with('openingHours', json_decode($store->openingHours, true));
+        
+    }
     public function requests()
     {
         $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
-        ->join('states', 'states.id', '=', 'stores.state_id')
-        ->select('lastname','firstname','stores.description', 'stores.name', 'stores.created_at', 'stores.state_id','states.label as state_label')
-        ->where('states.label','=','pending')
-        ->paginate(5);
-        //dd($stores);
+            ->join('states', 'states.id', '=', 'stores.state_id')
+            ->select('lastname', 'firstname', 'stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label')
+            ->where('states.label', '=', 'pending')
+            ->orderBy('name')
+            ->paginate(5);
         return view('pages/account/stores/moderateRequestsStore', ['stores' => $stores]);
     }
     public function reports()

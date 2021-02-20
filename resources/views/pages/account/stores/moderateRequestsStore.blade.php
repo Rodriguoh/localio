@@ -23,25 +23,18 @@
                 <td class="col-sm-2">{{$store->created_at}}</td>
                 <td class="col-sm-1">{{$store->state_label}}</td>
                 <td class="col-sm-2">
-                    <button class="btn btn-secondary btn-square m-2" type="button"><i class="fa fa-eye" style="color:white" aria-hidden="true"></i></button>
-                    <button class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></button>
-                    <button class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></button>
+                    <a href=""><button class="btn btn-secondary btn-square m-2" type="button"><i class="fa fa-eye" style="color:white" aria-hidden="true"></i></button></a>
+                    <a href=""><button class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></button></a>
+                    <a href=""><button class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></button></a>
+                    
                 </td>
             </tr>
 
             @endforeach
         </tbody>
     </table>
-    <div class="text-center">{{ $stores->links() }}</div>
+    <div class="text-center m-5">{{ $stores->links() }}</div>
 </div>
 
-<table class="table">
-    <thead>
 
-    </thead>
-    <tbody>
-
-    </tbody>
-</table>
-{{ $stores->links() }}
 @endsection

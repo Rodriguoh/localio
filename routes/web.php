@@ -42,20 +42,18 @@ Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.uplo
 //Administrations routes
 Route::get('/account/home', 'HomeAccountController@index')->name('homeAccount');
 //-- Users
-Route::get('/account/listUsers', 'UserController@index')->name('listUsers'); //ok
+Route::get('/account/listUsers', 'UserController@index')->name('listUsers'); 
 
 Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser');
 
 //-- Store
-Route::get('/account/myStores', [StoreController::class, 'userStore'])->name('myStores'); //ok
-
-Route::get('/account/listStores', [StoreController::class, 'index'])->name('listStores'); //ok
-
-Route::get('/account/createStore', [StoreController::class, 'formStore'])->name('createStore'); //ok
-
+Route::get('/account/myStores', [StoreController::class, 'userStore'])->name('myStores'); 
+Route::get('/account/listStores', [StoreController::class, 'index'])->name('listStores'); 
+Route::get('/account/createStore', [StoreController::class, 'formStore'])->name('createStore'); 
 Route::get('/account/editStore', 'StoreController@edit')->name('editStore');
-
 Route::get('/account/settingsAccount', 'UserController@settings')->name('settingsAccount');
+
+Route::get('account/showStore/{idStore}', 'StoreController@showStore')->name('showStore');
 
 // Route::get('/store/form/{idStore?}', [StoreController::class, 'formStore'])->name('formStore');
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
