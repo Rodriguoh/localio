@@ -49,19 +49,19 @@ class StoreController extends Controller
         return view('pages/account/stores/showStore', ['store' => $store])->with('openingHours', json_decode($store->openingHours, true));
         
     }
-    public function approve($idStore, $idUser){
+    public function approve($idStore){
         $store = Store::find($idStore);
-        $store->state_id = 2;
+        $store->state_id = State::where('label','=','approved')->first()->id;
         $store->save();
-        Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => $idUser, 'action' => 'approve']);
+        Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => Auth::user()->id, 'action' => 'approve']);
         return redirect()->route('requestsStores');
     }
     
-    public function refuse($idStore,$idUser){
+    public function refuse($idStore){
         $store = Store::find($idStore);
-        $store->state_id = 3;
+        $store->state_id = State::where('label','=','refused')->first()->id;
         $store->save();
-        Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => $idUser, 'action' => 'refuse']);
+        Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => Auth::user()->id, 'action' => 'refuse']);
         return redirect()->route('requestsStores');
     }
 
