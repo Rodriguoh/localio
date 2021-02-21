@@ -51,7 +51,7 @@ class StoreController extends Controller
     }
     public function approve($idStore, $idUser){
         $store = Store::find($idStore);
-        $store->state_id = 2;
+        $store->state_id = State::where('label','=','approved')->first()->id;
         $store->save();
         Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => $idUser, 'action' => 'approve']);
         return redirect()->route('requestsStores');
@@ -59,7 +59,7 @@ class StoreController extends Controller
     
     public function refuse($idStore,$idUser){
         $store = Store::find($idStore);
-        $store->state_id = 3;
+        $store->state_id = State::where('label','=','refused')->first()->id;
         $store->save();
         Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => $idUser, 'action' => 'refuse']);
         return redirect()->route('requestsStores');
