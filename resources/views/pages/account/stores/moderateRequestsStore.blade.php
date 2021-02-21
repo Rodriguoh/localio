@@ -70,14 +70,14 @@
             <a href="#" class="close" role="button" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </a>
-            <h5 class="modal-title">Êtes-vous sûr de vouloir supprimer ce commerce ? </h5>
+            <h5 class="modal-title">Êtes-vous sûr de vouloir refuser ce commerce ? </h5>
             <p>
-                Si vous confirmer le commerce {{$store->name}} sera supprimé.
+                Si vous confirmer le commerce {{$store->name}} sera refusé.
             </p>
             <div class="text-right mt-20">
                 <!-- text-right = text-align: right, mt-20 = margin-top: 2rem (20px) -->
                 <a href="#" class="btn btn-danger mr-5" role="button">Annuler</a>
-                <a href="{{URL::route('refuseStore', ['idStore' => $store->id, 'idUser' => $user->id])}}" class="btn btn-success" role="button">Supprimer</a>
+                <a href="{{URL::route('refuseStore', ['idStore' => $store->id, 'idUser' => $user->id])}}" class="btn btn-success" role="button">Refuser</a>
             </div>
         </div>
     </div>

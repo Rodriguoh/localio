@@ -64,8 +64,8 @@ Route::get('/account/editStore', 'StoreController@edit')->name('editStore');
 Route::get('/account/settingsAccount', 'UserController@settings')->name('settingsAccount');
 
 Route::get('/account/showStore/{idStore}', 'StoreController@showStore')->name('showStore');
-Route::get('/account/approveStore/{idStore}/{idUser}', 'StoreController@approve')->name('approveStore');
-Route::get('/account/refuseStore/{idStore}/{idUser}', 'StoreController@refuse')->name('refuseStore');
+Route::get('/account/approveStore/{idStore}', 'StoreController@approve')->name('approveStore');
+Route::get('/account/refuseStore/{idStore}', 'StoreController@refuse')->name('refuseStore');
 
 // Route::get('/store/form/{idStore?}', [StoreController::class, 'formStore'])->name('formStore');
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
