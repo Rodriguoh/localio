@@ -55,12 +55,13 @@ Route::get('/account/statsStore/{idStore}', [StoreController::class, 'statsStore
 
 Route::get('/account/formStore/{idStore?}', [StoreController::class, 'formStore'])->name('createStore'); //ok
 
-Route::get('/account/editStore', 'StoreController@edit')->name('editStore');
+//Route::get('/account/editStore', 'StoreController@edit')->name('editStore');
 
 Route::get('/account/settingsAccount', 'UserController@settings')->name('settingsAccount');
 
-// Route::get('/store/form/{idStore?}', [StoreController::class, 'formStore'])->name('formStore');
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
+
+Route::post('/store/delete', [StoreController::class, 'deleteStore'])->name('deleteStore');
 
 
 

@@ -76,6 +76,7 @@ class StoreController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
+            'short_description' => 'required|max:255',
             'phone' => 'required|digits:10',
             'mail' => 'required|email',
             'SIRET' => 'required|digits:14',
@@ -86,8 +87,9 @@ class StoreController extends Controller
             'city' => 'required',
         ]);
 
-        $store = new Store();
+        $store = isset($request->id) ? Store::find($request->id) : new Store();
         $store->name = $request->name;
+        $store->short_description = $request->short_description;
         $store->phone = $request->phone;
         $store->mail = $request->mail;
         $store->SIRET = $request->SIRET;
@@ -95,11 +97,11 @@ class StoreController extends Controller
         $store->codeComment = Str::random(10);
         $store->category_id = $request->category_id;
         $store->url = $request->url;
-        $store->description = $request->editor;
+        $store->description = $request->description;
         $store->delivery = isset($request->delivery);
         $store->conditionDelivery = $store->delivery ? $request->conditionDelivery : null;
         $store->user_id = Auth::id();
-        $store->state_id = State::select('id')->where('label', '=', 'approved')->first()->id;
+        $store->state_id = State::select('id')->where('label', '=', 'pending')->first()->id;
 
         // adresse
         $store->number = $request->number;
@@ -125,6 +127,26 @@ class StoreController extends Controller
 
         $store->save();
 
-        return redirect()->route('homeAccount');
+        if (isset($request->id)) {
+            return redirect()->back()->with('success', 'Modification réussite un modérateur doit la valider');
+        } else {
+            return redirect()->route('myStores');
+        }
+    }
+
+    public function deleteStore(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|exists:stores,id',
+            'confirmEmail' => 'required|exists:users,email'
+        ]);
+
+        $store = Store::find($request->id);
+
+        if (Auth::id() != $store->user_id || Auth::user()->email != $request->confirmEmail) return redirect()->back();
+
+        $store->delete();
+
+        return redirect()->route('myStores')->with('successDelete', 'Votre commerce a bien été supprimé');
     }
 }

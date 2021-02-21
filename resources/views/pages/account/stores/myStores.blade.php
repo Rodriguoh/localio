@@ -3,6 +3,14 @@
 @section('content')
 <div class="card">
     <h1 class="card-title">Mes commerces</h1>
+    @if (session('successDelete'))
+        <div class="alert alert-success" role="alert">
+            <button class="close" data-dismiss="alert" type="button" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">{{session('successDelete')}}</h4>
+        </div>
+    @endif
     <table class="table table-striped">
         <thead>
             <tr>
@@ -17,7 +25,7 @@
             <tr>
                 <td>{{$store->name}}</td>
                 <td class="d-none d-sm-table-cell">{{$store->city->name}}</td>
-                <td class="d-none d-sm-table-cell">{{$store->state->label}}</td>
+                <td class="d-none d-sm-table-cell">{{$store->state->description}}</td>
                 <td class="text-right"><a href="{{ route('statsStore', ['idStore' => $store->id])}}" class="btn">Consulter</a></td>
             </tr>
         @endForeach

@@ -16,8 +16,8 @@
             @foreach($stores as $store)
           <tr>
             <td>{{$store->name}}</td>
-            <td>{{$store->city->name}}</td>
-            <td>{{$store->state->label}}</td>
+            <td class="d-none d-sm-table-cell">{{$store->city->name}}</td>
+            <td class="d-none d-sm-table-cell">{{$store->state->description}}</td>
             <td class="text-right"><a href="" class="btn">Consulter</a></td>
           </tr>
           @endForeach
