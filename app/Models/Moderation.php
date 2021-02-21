@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Moderation extends Model
 {
     use HasFactory;
+    protected $fillable = ['date','store_id','user_id','action'];
 
     /**
      * Get on wich store this moderation has been done

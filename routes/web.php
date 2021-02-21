@@ -6,6 +6,13 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\StoreController;
 
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +39,9 @@ Route::get('/test', [TestController::class, 'index']);
 
 require __DIR__ . '/auth.php';
 
+//Mot de passe oublié
+
+
 // route test ckEditor
 Route::resource('Ckeditor', 'CkeditorController');
 Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.upload');
@@ -42,7 +52,7 @@ Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.uplo
 //Administrations routes
 Route::get('/account/home', 'HomeAccountController@index')->name('homeAccount');
 //-- Users
-Route::get('/account/listUsers', 'UserController@index')->name('listUsers'); //ok
+Route::get('/account/listUsers', 'UserController@index')->name('listUsers');
 
 Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser');
 
@@ -55,9 +65,11 @@ Route::get('/account/statsStore/{idStore}', [StoreController::class, 'statsStore
 
 Route::get('/account/formStore/{idStore?}', [StoreController::class, 'formStore'])->name('createStore'); //ok
 
-//Route::get('/account/editStore', 'StoreController@edit')->name('editStore');
-
 Route::get('/account/settingsAccount', 'UserController@settings')->name('settingsAccount');
+
+Route::get('/account/showStore/{idStore}', 'StoreController@showStore')->name('showStore');
+Route::get('/account/approveStore/{idStore}', 'StoreController@approve')->name('approveStore');
+Route::get('/account/refuseStore/{idStore}', 'StoreController@refuse')->name('refuseStore');
 
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
 
