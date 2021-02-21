@@ -71,7 +71,6 @@ Route::get('/account/refuseStore/{idStore}', 'StoreController@refuse')->name('re
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
 
 
-
 Route::get('/account/requestsStores', 'StoreController@requests')->name('requestsStores');
 Route::get('/account/reportsStores', 'StoreController@reports')->name('reportStores');
 

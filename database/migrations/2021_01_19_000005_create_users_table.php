@@ -29,8 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('firstname', 32)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone', 20)->nullable();
-
             $table->string('google_id')->nullable();
+            $table->string('fb_id')->nullable();
 
             $table->foreignId('role_id')->default(1)->constrained(); //Par défaut l'user est utilisateur
 

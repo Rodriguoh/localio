@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\FacebookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -66,3 +67,6 @@ Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
 
 Route::get('/redirect', [GoogleController::class, 'redirectToProvider'])->name('google-auth');
 Route::get('/callback', [GoogleController::class, 'handleProviderCallback']);
+
+Route::get('auth/facebook', [FacebookController::class, 'facebookRedirect'])->name('facebook-auth');
+Route::get('callback/facebook', [FacebookController::class, 'loginWithFacebook']);

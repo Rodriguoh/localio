@@ -1,7 +1,7 @@
  <a href="{{ route('google-auth') }}" class="d-flex align-items-center">
      Se connecter avec
-     <div class="p-10">
-         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     <div class="pt-10 pb-5">
+         <svg width="20" height="20" viewBox="0 0 20 20" class="ml-5" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
              <path d="M0 0H20V20H0V0Z" fill="url(#pattern0)" />
              <defs>
                  <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
