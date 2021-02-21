@@ -36,7 +36,7 @@
         @include('layouts.admin.sidebar')
 
         <!-- Content wrapper start -->
-        <div class="content-wrapper" style="padding: 20px">
+        <div class="content-wrapper p-20">
             @yield('content')
         </div>
         <!-- Content wrapper end -->
