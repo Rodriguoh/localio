@@ -15,6 +15,8 @@ use App\Models\Store;
 use App\Models\State;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
@@ -137,5 +139,13 @@ class StoreController extends Controller
                 ->get();
         }
         return StoreThumbResource::collection($stores);
+    }
+
+
+    public function setFavorites(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->favoritesStores()->sync($request->favorites);
+        return $request->favorites;
     }
 }
