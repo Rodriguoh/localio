@@ -26,6 +26,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
 
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -51,8 +63,8 @@ var app = new Vue({
     }],
     mapCenter: [44.5667, 6.0833],
     mapZoom: 13,
-    baseUrl: "https://localio-app.herokuapp.com",
-    // http://localhost/localio/public mettre l'url sur laquelle on travail
+    baseUrl: "http://localhost/localio/public",
+    // https://localio-app.herokuapp.com mettre l'url sur laquelle on travail
     categorySelected: "",
     prevCatSelected: "",
     categoryFilter: "",
@@ -62,7 +74,8 @@ var app = new Vue({
     mainCat: [],
     subCat: {},
     limitAutoCompletion: 5,
-    storeSelected: {}
+    storeSelected: {},
+    myFavorites: []
   },
   methods: {
     /**
@@ -445,113 +458,87 @@ var app = new Vue({
       }
 
       return refreshMapView;
-    }(),
-    categoriesFilter: function () {
-      var _categoriesFilter = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        var requestOptions, url, req, rep, mainCats, subCats, _loop2, i;
+    }() // categoriesFilter: async function () {
+    //     let requestOptions = {
+    //         method: "GET",
+    //         redirect: "follow",
+    //     };
+    //     let url = new URL(`${this.baseUrl}/api/categories`);
+    //     let req = await fetch(url, requestOptions);
+    //     let rep = await req.json();
+    //     let mainCats = rep.data;
+    //     let subCats = new Object();
+    //     for (let i = 0; i < mainCats.length; i++) {
+    //         let subCat = [];
+    //         mainCats[i].child.forEach((element) =>
+    //             subCat.push(element.label)
+    //         );
+    //         subCats[mainCats[i].label] = subCat;
+    //     }
+    //     this.mainCat = await mainCats;
+    //     this.subCat = await subCats;
+    //     console.log(this.subCat);
+    // },
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/categories"));
-                _context8.next = 4;
-                return fetch(url, requestOptions);
-
-              case 4:
-                req = _context8.sent;
-                _context8.next = 7;
-                return req.json();
-
-              case 7:
-                rep = _context8.sent;
-                mainCats = rep.data;
-                subCats = new Object();
-
-                _loop2 = function _loop2(i) {
-                  var subCat = [];
-                  mainCats[i].child.forEach(function (element) {
-                    return subCat.push(element.label);
-                  });
-                  subCats[mainCats[i].label] = subCat;
-                };
-
-                for (i = 0; i < mainCats.length; i++) {
-                  _loop2(i);
-                }
-
-                _context8.next = 14;
-                return mainCats;
-
-              case 14:
-                this.mainCat = _context8.sent;
-                _context8.next = 17;
-                return subCats;
-
-              case 17:
-                this.subCat = _context8.sent;
-                console.log(this.subCat);
-
-              case 19:
-              case "end":
-                return _context8.stop();
-            }
-          }
-        }, _callee8, this);
-      }));
-
-      function categoriesFilter() {
-        return _categoriesFilter.apply(this, arguments);
-      }
-
-      return categoriesFilter;
-    }()
   },
   created: function created() {
-    this.categoriesFilter(); // get last map position from localStorage
+    var _JSON$parse,
+        _this2 = this;
+
+    //this.categoriesFilter();
+    this.mainCat = categories; // get last map position from localStorage
 
     localStorage.getItem("centerMap") && (this.mapCenter = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
 
-    localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap"));
+    localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap")); // mix favorite in bdd and localstorage
+
+    this.myFavorites = _toConsumableArray(new Set([].concat(_toConsumableArray(myFavorites), _toConsumableArray((_JSON$parse = JSON.parse(localStorage.getItem("myFavorites"))) !== null && _JSON$parse !== void 0 ? _JSON$parse : [])))); // save favorite in localstorage and try to save them in bdd on page leave
+
+    window.onunload = function () {
+      localStorage.setItem("myFavorites", JSON.stringify(_this2.myFavorites));
+      if (idUser == null || !navigator.sendBeacon) return;
+      navigator.sendBeacon("".concat(_this2.baseUrl, "/api/stores/setFavorites"), new Blob([JSON.stringify({
+        id: idUser,
+        favorites: _this2.myFavorites
+      })], {
+        type: "application/json"
+      }));
+    };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-      var _this2 = this;
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+      var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context9.prev = _context9.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               //setting up map
               this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
               L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context9.next = 4;
+              _context8.next = 4;
               return this.getStoresOnMap();
 
             case 4:
-              _context9.next = 6;
+              _context8.next = 6;
               return this.map.addLayer(this.markers);
 
             case 6:
               //await ;
               // add eventListener on the map movment
               this.map.on("moveend", function () {
-                _this2.refreshMapView();
+                _this3.refreshMapView();
 
-                localStorage.setItem("centerMap", [_this2.map.getCenter().lat, _this2.map.getCenter().lng]);
-                localStorage.setItem("zoomMap", _this2.map.getZoom()); // Insert les données de la map en localstorage
+                localStorage.setItem("centerMap", [_this3.map.getCenter().lat, _this3.map.getCenter().lng]);
+                localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
               });
 
             case 7:
             case "end":
-              return _context9.stop();
+              return _context8.stop();
           }
         }
-      }, _callee9, this);
+      }, _callee8, this);
     }));
 
     function mounted() {
