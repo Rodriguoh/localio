@@ -54,7 +54,7 @@
                     <button class="btn w-150 w-sm-200 px-0 btn-success overflow-hidden" data-toggle="dropdown" type="button" id="dropdown-toggle-btn-1" aria-haspopup="true" aria-expanded="false">
                         @{{categoryFilter || categorySelected || 'Catégories'}}<i class="fa fa-angle-down ml-5" aria-hidden="true"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-center w-350 w-sm-400" aria-labelledby="dropdown-toggle-btn-1">
+                    <div class="dropdown-menu w-350 w-sm-400" aria-labelledby="dropdown-toggle-btn-1">
                         @include('components.categorie')
                     </div>
                 </div>
