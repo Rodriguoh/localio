@@ -26,6 +26,15 @@ class Store extends Model
     }
 
     /**
+     * Get owner's store
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    /**
      * Get the store's city
      */
     public function city()
@@ -62,7 +71,7 @@ class Store extends Model
      */
     public function favoritesUsers()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_store', 'store_id', 'user_id');
     }
 
     /**

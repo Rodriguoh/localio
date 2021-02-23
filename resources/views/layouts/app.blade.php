@@ -12,7 +12,7 @@
     <!-- Halfmoon CSS -->
     <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
     <!-- Halfmoon JS -->
-    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js" defer></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
@@ -66,8 +66,5 @@
 
     </div>
     <!-- Page wrapper end -->
-
-    <!-- Halfmoon JS -->
-    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
 </body>
 </html>

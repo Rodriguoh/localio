@@ -18,12 +18,35 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
   \****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+<<<<<<< HEAD
 var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+=======
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+>>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 
 /** Built-in value references. */
 var Symbol = root.Symbol;
 
+<<<<<<< HEAD
 module.exports = Symbol;
+=======
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+>>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 
 
 /***/ }),
@@ -38,12 +61,62 @@ var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol
     getRawTag = __webpack_require__(/*! ./_getRawTag */ "./node_modules/lodash/_getRawTag.js"),
     objectToString = __webpack_require__(/*! ./_objectToString */ "./node_modules/lodash/_objectToString.js");
 
+<<<<<<< HEAD
 /** `Object#toString` result references. */
 var nullTag = '[object Null]',
     undefinedTag = '[object Undefined]';
 
 /** Built-in value references. */
 var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+=======
+// import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
+// var _ = require("lodash"); Import lodash en cas de besoin
+// import debounce from "lodash/debounce";
+var app = new Vue({
+  el: "#app",
+  data: {
+    map: undefined,
+    markers: undefined,
+    mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+      attribution: "",
+      minNativeZoom: 4,
+      minZoom: 4
+    }],
+    mapCenter: [44.5667, 6.0833],
+    mapZoom: 13,
+    baseUrl: "https://localio-app.herokuapp.com",
+    // http://localhost/localio/public mettre l'url sur laquelle on travail
+    categorySelected: "",
+    prevCatSelected: "",
+    categoryFilter: "",
+    querySearch: "",
+    resultsQueryCity: [],
+    resultsQueryStore: [],
+    mainCat: [],
+    subCat: {},
+    limitAutoCompletion: 5,
+    storeSelected: {},
+    myFavorites: []
+  },
+  methods: {
+    /**
+     * Function for search stores by name in autocomplete
+     */
+    getStoresByName: function () {
+      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var requestOptions, reqStores, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                _context.next = 3;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
+>>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 
 /**
  * The base implementation of `getTag` without fallbacks for buggy environments.
@@ -358,6 +431,7 @@ function debounce(func, wait, options) {
     var time = now(),
         isInvoking = shouldInvoke(time);
 
+<<<<<<< HEAD
     lastArgs = arguments;
     lastThis = this;
     lastCallTime = time;
@@ -501,12 +575,98 @@ function isSymbol(value) {
   return typeof value == 'symbol' ||
     (isObjectLike(value) && baseGetTag(value) == symbolTag);
 }
+=======
+      return refreshMapView;
+    }() // categoriesFilter: async function () {
+    //     let requestOptions = {
+    //         method: "GET",
+    //         redirect: "follow",
+    //     };
+    //     let url = new URL(`${this.baseUrl}/api/categories`);
+    //     let req = await fetch(url, requestOptions);
+    //     let rep = await req.json();
+    //     let mainCats = rep.data;
+    //     let subCats = new Object();
+    //     for (let i = 0; i < mainCats.length; i++) {
+    //         let subCat = [];
+    //         mainCats[i].child.forEach((element) =>
+    //             subCat.push(element.label)
+    //         );
+    //         subCats[mainCats[i].label] = subCat;
+    //     }
+    //     this.mainCat = await mainCats;
+    //     this.subCat = await subCats;
+    //     console.log(this.subCat);
+    // },
+
+  },
+  created: function created() {
+    var _JSON$parse,
+        _this2 = this;
+
+    //this.categoriesFilter();
+    this.mainCat = categories; // get last map position from localStorage
+
+    localStorage.getItem("centerMap") && (this.mapCenter = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
+
+    localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap")); // mix favorite in bdd and localstorage
+
+    this.myFavorites = _toConsumableArray(new Set([].concat(_toConsumableArray(myFavorites), _toConsumableArray((_JSON$parse = JSON.parse(localStorage.getItem("myFavorites"))) !== null && _JSON$parse !== void 0 ? _JSON$parse : [])))); // save favorite in localstorage and try to save them in bdd on page leave
+
+    window.onunload = function () {
+      localStorage.setItem("myFavorites", JSON.stringify(_this2.myFavorites));
+      if (idUser == null || !navigator.sendBeacon) return;
+      navigator.sendBeacon("".concat(_this2.baseUrl, "/api/stores/setFavorites"), new Blob([JSON.stringify({
+        id: idUser,
+        favorites: _this2.myFavorites
+      })], {
+        type: "application/json"
+      }));
+    };
+  },
+  mounted: function () {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+      var _this3 = this;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              //setting up map
+              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+              _context8.next = 4;
+              return this.getStoresOnMap();
+
+            case 4:
+              _context8.next = 6;
+              return this.map.addLayer(this.markers);
+
+            case 6:
+              //await ;
+              // add eventListener on the map movment
+              this.map.on("moveend", function () {
+                _this3.refreshMapView();
+
+                localStorage.setItem("centerMap", [_this3.map.getCenter().lat, _this3.map.getCenter().lng]);
+                localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
+              });
+
+            case 7:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8, this);
+    }));
+>>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 
 module.exports = isSymbol;
 
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/lodash/now.js":
 /*!************************************!*\
   !*** ./node_modules/lodash/now.js ***!
@@ -616,11 +776,14 @@ module.exports = toNumber;
 
 /***/ }),
 
+=======
+>>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 /***/ "./node_modules/regenerator-runtime/runtime.js":
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
 /***/ ((module) => {
+<<<<<<< HEAD
 
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -1187,6 +1350,8 @@ var runtime = (function (exports) {
       if (this.done) {
         throw exception;
       }
+=======
+>>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 
       var context = this;
       function handle(loc, caught) {
@@ -2012,5 +2177,79 @@ var app = new Vue({
 });
 })();
 
+<<<<<<< HEAD
+=======
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		if(__webpack_module_cache__[moduleId]) {
+/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => module['default'] :
+/******/ 				() => module;
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	// startup
+/******/ 	// Load entry module
+/******/ 	__webpack_require__("./resources/js/mapScript.js");
+/******/ 	// This entry module used 'exports' so it can't be inlined
+>>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 /******/ })()
 ;

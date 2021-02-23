@@ -17,12 +17,14 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <link rel="shortcut icon" href="#">
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin="" defer></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    <script src="{{ asset('js/mapScript.js')}}" defer></script>
     <style>
         #map {
-            position: fixed;
-            width: 100%;
             height: 100%;
             z-index: 1;
         }
@@ -34,17 +36,30 @@
         .auto-comp:hover {
             display: block !important;
         }
+
+        .cat-btn {
+            height: var(--large-button-height);
+        }
     </style>
 </head>
 
 <body data-set-preferred-mode-onload="true">
+    {{-- @{{(categoryFilter || categorySelected || 'Catégories').substring(0,16)}} --}}
 
     <div id="app" class="page-wrapper with-navbar">
         @include('layouts.home.navigation')
-        <div class="content-wrapper">
-            <div class="">
-                <div class="form-group position-relative w-400 mw-full">
-                    <input v-model="querySearch" v-on:keyup="autoComplete" v-on:focus="autoComplete" type="text" id="inputCity" class="form-control" name="inputCity" placeholder="Rechercher par le nom d'une ville" style="min-width: 300px;height: 40px;"  autocomplete="new-password">
+        <div class="content-wrapper d-flex flex-column pb-10">
+            <div class="input-group justify-content-center input-group-lg mt-10">
+                <div class="input-group-prepend dropdown cat-btn">
+                    <button class="btn w-150 w-sm-200 px-0 btn-success overflow-hidden" data-toggle="dropdown" type="button" id="dropdown-toggle-btn-1" aria-haspopup="true" aria-expanded="false">
+                        @{{categoryFilter || categorySelected || 'Catégories'}}<i class="fa fa-angle-down ml-5" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-center w-350 w-sm-400" aria-labelledby="dropdown-toggle-btn-1">
+                        @include('components.categorie')
+                    </div>
+                </div>
+                <div class="form-group position-relative w-200 w-sm-350 mw-full">
+                    <input v-model="querySearch" v-on:keyup="autoComplete" v-on:focus="autoComplete" type="text" id="inputCity" class="form-control form-control-lg rounded-0 rounded-right p-0 px-sm-5" name="inputCity" placeholder="Rechercher dans Localio" autocomplete="new-password">
                     <template v-if="resultsQueryCity.length > 0 || resultsQueryStore.length > 0">
                         <ul class="position-absolute z-10 text-dark-lm text-light-dm bg-dark-dm bg-light-lm w-full d-none auto-comp">
 
@@ -59,9 +74,8 @@
                         </ul>
                     </template>
                 </div>
-                @include('components.categorie')
             </div>
-            <div id="map">
+            <div id="map" class="mx-5 mx-sm-10">
             </div>
         </div>
 
@@ -75,6 +89,10 @@
                     </a>
                     <div class="container">
                         <h2 class="content-title">@{{storeSelected.name}}</h2>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" id="checkbox-favoris" :value="storeSelected.id" v-model="myFavorites">
+                            <label for="checkbox-favoris">Favoris</label>
+                          </div>
                         <div class="m-auto text-justify">
                             <div class="my-10">
                                 <p><span class="font-weight-medium">Mail :</span> @{{storeSelected?.mail}}</p>
@@ -109,20 +127,12 @@
             </div>
         </div>
     </div>
+    <script>
+        var categories = @json($categories);
+        var myFavorites = @json($favorites);
+        var idUser = @json($id_user);
+    </script>
 
-
-    {{-- Import VueJS via CDN pour la phase de dev --}}
-    <!-- Halfmoon JS -->
-    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
-
-    <!-- Optional. Required for modals to be dismissible by clicking on overlays, or pressing the [esc] key. -->
-    <!-- <script src="path/to/halfmoon.js"></script> -->
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="js/mapScript.js"></script>
-
-    {{-- @include('layouts.footer') --}}
 </body>
 
 </html>
