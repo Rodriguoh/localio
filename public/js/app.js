@@ -3791,6 +3791,8 @@ module.exports = {
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+var _id2;
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js"); // Librairie
@@ -3800,49 +3802,42 @@ function _id(x) {
   return document.getElementById(x);
 }
 
-;
-
 function _class(x) {
   return document.getElementsByClassName(x);
 }
-
-;
 
 function _tag(x) {
   return document.getElementsByTagName(x);
 }
 
-;
-
 function cl(x) {
   return console.log(x);
-}
+} //Accueil
 
-; //Accueil
 
 function scrollChange() {
   var scroll = this;
   var arrow = scroll.firstChild;
-  var url = this.href.substring(this.href.lastIndexOf('/') + 1);
+  var url = this.href.substring(this.href.lastIndexOf("/") + 1);
 
-  if (url == '#top') {
-    arrow.style.transform = 'rotate(90deg)';
+  if (url == "#top") {
+    arrow.style.transform = "rotate(90deg)";
   } else {
-    arrow.style.transform = 'rotate(-90deg)';
+    arrow.style.transform = "rotate(-90deg)";
   }
 
   setTimeout(function () {
-    if (url == '#top') {
-      scroll.href = '#bottom';
-      arrow.style.transform = 'rotate(90deg)';
+    if (url == "#top") {
+      scroll.href = "#bottom";
+      arrow.style.transform = "rotate(90deg)";
     } else {
-      scroll.href = '#top';
-      arrow.style.transform = 'rotate(-90deg)';
+      scroll.href = "#top";
+      arrow.style.transform = "rotate(-90deg)";
     }
   }, 50);
 }
 
-_id('scroll').addEventListener('click', scrollChange);
+(_id2 = _id("scroll")) === null || _id2 === void 0 ? void 0 : _id2.addEventListener("click", scrollChange);
 
 /***/ }),
 

@@ -72,9 +72,12 @@ Route::get('/account/approveStore/{idStore}', 'StoreController@approve')->name('
 Route::get('/account/refuseStore/{idStore}', 'StoreController@refuse')->name('refuseStore');
 
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
-
 Route::post('/store/delete', [StoreController::class, 'deleteStore'])->name('deleteStore');
 
+//--Favoris
+Route::get('/account/favorites', [StoreController::class, 'myFavorites'])->name('myFavorites');
+Route::get('/account/editFavorite/{idStore}', [StoreController::class, 'editFavorite'])->name('editFavorite');
+Route::post('/account/deleteFavorite', [StoreController::class, 'deleteFavorite'])->name('deleteFavorite');
 
 
 Route::get('/account/requestsStores', 'StoreController@requests')->name('requestsStores');
@@ -84,8 +87,3 @@ Route::get('/account/reportsStores', 'StoreController@reports')->name('reportSto
 Route::get('/account/myComments', 'CommentController@comments')->name('myComments');
 Route::get('/account/editComment', 'CommentController@edit')->name('editComments');
 Route::get('/account/createComment', 'CommentController@create')->name('addComments');
-
-//-- Favorite
-Route::get('/account/myFavorites', 'FavoriteController@edit')->name('editFavorite');
-Route::get('/account/editFavorite', 'FavoriteController@edit')->name('editFavorite');
-Route::get('/account/createFavorite', 'FavoriteController@create')->name('addFavorite');

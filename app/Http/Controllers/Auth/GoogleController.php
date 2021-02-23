@@ -34,13 +34,13 @@ class GoogleController extends Controller
 
             $user = Socialite::driver('google')->user();
 
-            $finduser = User::where('google_id', $user->id)->first();
+            $finduser = User::where('email', $user->email)->first();
 
             if ($finduser) {
 
                 Auth::login($finduser);
 
-                return redirect()->route('homeAccount');
+                return redirect()->route('home');
             } else {
                 $newUser = new User;
                 $newUser->firstname = explode(' ', $user->name)[0];
@@ -52,7 +52,7 @@ class GoogleController extends Controller
 
                 Auth::login($newUser);
 
-                return redirect()->route('homeAccount');
+                return redirect()->route('home');
             }
         } catch (Exception $e) {
             dd($e->getMessage());

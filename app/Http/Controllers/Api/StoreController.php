@@ -10,11 +10,13 @@ use App\Http\Resources\StoreResource;
 use App\Http\Resources\CommentsCollection;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Store;
 use App\Models\State;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\User;
 use App\Models\Consultation;
 
 class StoreController extends Controller
@@ -142,5 +144,13 @@ class StoreController extends Controller
                 ->get();
         }
         return StoreThumbResource::collection($stores);
+    }
+
+
+    public function setFavorites(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->favoritesStores()->sync($request->favorites);
+        return $request->favorites;
     }
 }

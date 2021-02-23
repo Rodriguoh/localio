@@ -26,6 +26,8 @@ Route::get('/stores/{name}', [StoreController::class, 'getStoresByName']);
 Route::get('/store/{id}', [StoreController::class, 'getStore']);
 Route::get('/store/{id}/comments', [StoreController::class, 'getStoreComments']);
 
+Route::post('stores/setFavorites', [StoreController::class, 'setFavorites']);
+
 Route::get('/cities/{name}', [CityController::class, 'getCitiesByName']); // useless
 
 Route::get('/categories', [CategoryController::class, 'getCategories']);
