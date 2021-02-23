@@ -1,6 +1,6 @@
 // import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
 // var _ = require("lodash"); Import lodash en cas de besoin
-import debounce from "lodash/debounce";
+// import debounce from "lodash/debounce";
 var app = new Vue({
     el: `#app`,
     data: {
@@ -16,7 +16,7 @@ var app = new Vue({
         ],
         mapCenter: [44.5667, 6.0833],
         mapZoom: 13,
-        baseUrl: "http://localhost/localio/public", // https://localio-app.herokuapp.com mettre l'url sur laquelle on travail
+        baseUrl: "https://localio-app.herokuapp.com", // http://localhost/localio/public mettre l'url sur laquelle on travail
         categorySelected: "",
         prevCatSelected: "",
         categoryFilter: "",
