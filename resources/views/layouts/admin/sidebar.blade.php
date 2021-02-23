@@ -47,7 +47,7 @@
             </span>
             Traiter les demandes
         </a>
-        <!-- 
+        <!--
         <a href="#" class="sidebar-link sidebar-link-with-icon" disabled>
             <span class="sidebar-icon">
                 <i class="fa fa-exclamation" aria-hidden="true"></i>
@@ -67,7 +67,7 @@
         </br>
         <h5 class="sidebar-title">Gérer ses favoris</h5>
         <div class="sidebar-divider"></div>
-        <a href="#" class="sidebar-link sidebar-link-with-icon">
+        <a href="{{ route('myFavorites') }}" class="sidebar-link sidebar-link-with-icon">
             <span class="sidebar-icon">
                 <i class="fa fa-heart" aria-hidden="true"></i>
             </span>
