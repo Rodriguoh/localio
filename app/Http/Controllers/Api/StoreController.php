@@ -10,13 +10,14 @@ use App\Http\Resources\StoreResource;
 use App\Http\Resources\CommentsCollection;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Store;
 use App\Models\State;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Consultation;
 
 class StoreController extends Controller
 {
@@ -72,6 +73,10 @@ class StoreController extends Controller
      */
     public function getStore(string $id)
     {
+        $consultation = new Consultation();
+        $consultation->store_id = $id;
+        $consultation->date = now();
+        $consultation->save();
         return new StoreResource(Store::find($id));
     }
 

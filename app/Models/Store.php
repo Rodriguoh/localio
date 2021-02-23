@@ -26,6 +26,15 @@ class Store extends Model
     }
 
     /**
+     * Get owner's store
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    /**
      * Get the store's city
      */
     public function city()

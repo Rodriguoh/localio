@@ -9,6 +9,8 @@ class Consultation extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     /**
      * Get the store who get this visit
      */
