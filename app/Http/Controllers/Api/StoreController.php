@@ -15,6 +15,7 @@ use App\Models\Store;
 use App\Models\State;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Consultation;
 
 class StoreController extends Controller
 {
@@ -70,6 +71,10 @@ class StoreController extends Controller
      */
     public function getStore(string $id)
     {
+        $consultation = new Consultation();
+        $consultation->store_id = $id;
+        $consultation->date = now();
+        $consultation->save();
         return new StoreResource(Store::find($id));
     }
 
