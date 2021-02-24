@@ -86,3 +86,6 @@ Route::get('/account/reportsStores', 'StoreController@reports')->name('reportSto
 Route::get('/account/myComments', 'CommentController@comments')->name('myComments');
 Route::get('/account/editComment', 'CommentController@edit')->name('editComments');
 Route::get('/account/createComment', 'CommentController@create')->name('addComments');
+
+//--About
+Route::get('/legalNotices', 'AboutController@legalNotices')->name('legalNotices');
