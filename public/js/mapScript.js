@@ -62,7 +62,8 @@ var app = new Vue({
     mainCat: [],
     subCat: {},
     limitAutoCompletion: 5,
-    storeSelected: {}
+    storeSelected: {},
+    allStoreOnMap: undefined
   },
   methods: {
     /**
@@ -230,8 +231,11 @@ var app = new Vue({
 
                 this.prevCatSelected = this.categorySelected;
                 this.markers = L.layerGroup(allMarkers);
+                console.log(rep);
+                this.allStoreOnMap = rep;
+                console.log(this.allStoreOnMap);
 
-              case 18:
+              case 21:
               case "end":
                 return _context3.stop();
             }

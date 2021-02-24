@@ -34,6 +34,16 @@
         .auto-comp:hover {
             display: block !important;
         }
+
+        #store-list {
+            z-index:500;
+            margin-top:80px;
+        }
+
+        #store-list>li {
+            list-style: none;
+        }
+
     </style>
 </head>
 
@@ -62,7 +72,17 @@
                 @include('components.categorie')
             </div>
             <div id="map">
+            
             </div>
+            <!-- Paneau gauche avec les différents commerces -->
+            <div  id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-100 w-sm-300 h-400 position-absolute ml-10 d-inline-block">
+                    <li class="d-flex flex-column" v-for="store in allStoreOnMap">
+                        <div class="bg-white rounded p-sm-4 p-md-10">
+                            <p class="text-center"><span class="font-weight-bold">@{{store.name}}</span></p>
+                            <p class="text-center">@{{store.category}}</p>
+                        </div>
+                    </li>
+                </div>
         </div>
 
 
@@ -108,6 +128,8 @@
                 </div>
             </div>
         </div>
+       
+        
     </div>
 
 

@@ -27,6 +27,7 @@ var app = new Vue({
         subCat: {},
         limitAutoCompletion: 5,
         storeSelected: {},
+        allStoreOnMap: undefined,
     },
     methods: {
         /**
@@ -125,6 +126,11 @@ var app = new Vue({
             }
             this.prevCatSelected = this.categorySelected;
             this.markers = L.layerGroup(allMarkers);
+            
+            console.log(rep)
+            this.allStoreOnMap = rep;
+            console.log(this.allStoreOnMap)
+            
         },
         /**
          * Function to get all details on a store
@@ -233,6 +239,8 @@ var app = new Vue({
             this.subCat = await subCats;
             console.log(this.subCat);
         },
+
+
     },
     created() {
         this.categoriesFilter();
