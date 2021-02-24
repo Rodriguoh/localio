@@ -239,13 +239,12 @@ var app = new Vue({
                       while (1) {
                         switch (_context3.prev = _context3.next) {
                           case 0:
-                            console.log(rep[i].id);
                             store = document.getElementById("list-store-" + rep[i].id);
-                            console.log(store);
-                            store.style.backgroundColor = "red!important";
-                            console.log(store.style);
+                            store.classList.add("bg-dark");
+                            store.style.opacity = "70%";
+                            store.style.color = "white";
 
-                          case 5:
+                          case 4:
                           case "end":
                             return _context3.stop();
                         }
@@ -259,9 +258,11 @@ var app = new Vue({
                         switch (_context4.prev = _context4.next) {
                           case 0:
                             store = document.getElementById("list-store-" + rep[i].id);
+                            store.classList.remove("bg-dark");
                             store.style.color = "black";
+                            store.style.opacity = "100%";
 
-                          case 2:
+                          case 4:
                           case "end":
                             return _context4.stop();
                         }

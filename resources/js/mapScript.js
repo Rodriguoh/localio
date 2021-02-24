@@ -124,16 +124,17 @@ var app = new Vue({
                 });
 
                 marker.on("mouseover", async () => {
-                    console.log(rep[i].id);
                     let store = document.getElementById("list-store-"+rep[i].id);
-                    console.log(store)
-                    store.style.backgroundColor = "red!important"
-                    console.log(store.style)
+                    store.classList.add("bg-dark");
+                    store.style.opacity = "70%";
+                    store.style.color = "white"
                 });
 
                 marker.on("mouseout", async () => {
                     let store = document.getElementById("list-store-"+rep[i].id);
-                    store.style.color = "black"
+                    store.classList.remove("bg-dark");
+                    store.style.color= "black";
+                    store.style.opacity = "100%";
                 });
 
                 allMarkers.push(marker);
