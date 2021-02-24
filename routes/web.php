@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\StoreController;
-
+use App\Http\Controllers\UserController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -55,6 +55,8 @@ Route::get('/account/home', 'HomeAccountController@index')->name('homeAccount');
 Route::get('/account/listUsers', 'UserController@index')->name('listUsers');
 
 Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser');
+
+Route::post('/account/editUserInformations', [UserController::class, 'editUsersInformations'])->name('editUsersInformations');
 
 //-- Store
 Route::get('/account/myStores', [StoreController::class, 'userStore'])->name('myStores'); //ok

@@ -209,8 +209,14 @@ class StoreController extends Controller
 
     public function myFavorites()
     {
+
         return view('pages/account/favorites/viewFavorites', [
-            'favorites' => Auth::user()->favoritesStores()->paginate(6),
+            'favorites' => Auth::user()
+                ->favoritesStores()
+                ->where('state_id', State::select('id')
+                    ->where('label', '=', 'approved')
+                    ->first()->id)
+                ->paginate(6),
         ]);
     }
 
