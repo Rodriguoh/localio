@@ -35,15 +35,7 @@ class StoreFactory extends Factory
             "lng" => $this->faker->longitude(-0.442661, 5.139075),
             "delivery" => $this->faker->boolean,
             "conditionDelivery" => $this->faker->sentence($nbWords = 5, $variableNbWords = true),
-            "openingHours" => '{
-                    "Monday" : [08:30, 16:30]
-                    "Tuesday" : [08:30, 16:30]
-                    "Wednesday" : [08:30, 12:30]
-                    "Thursday" : [08:30, 16:30]
-                    "Friday" :  [08:30, 16:30]
-                    "Saturday" : [08:30, 16:30]
-                    "Sunday" :  [08:30, 12:30]
-                }',
+            "openingHours" => '{"Monday":[08:30, 16:30],"Tuesday":[08:30, 16:30],"Wednesday":[08:30, 12:30],"Thursday":[08:30,16:30],"Friday":[08:30,16:30],"Saturday":[08:30,16:30],"Sunday":[08:30,12:30]}',
             "user_id" => \App\Models\User::all()->where('role_id', \App\Models\Role::where('name', 'owner')->first()->id)->random(1)[0]->id,
             "city_INSEE" => \App\Models\City::all()->random(1)[0]->INSEE,
             "category_id" => \App\Models\Category::all()->random(1)[0]->id,

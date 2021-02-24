@@ -26,8 +26,8 @@
                 </button>
               </div>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">Conditions d'utilisation</a>
-              <a href="#" class="dropdown-item">Mentions légales</a>
+              <a href="" class="dropdown-item">Conditions d'utilisation</a>
+              <a href="{{route('legalNotices')}}" class="dropdown-item">Mentions légales</a>
             </div>
           </li>
         </ul>

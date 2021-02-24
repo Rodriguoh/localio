@@ -1,6 +1,6 @@
 // import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
 // var _ = require("lodash"); Import lodash en cas de besoin
-import debounce from "lodash/debounce";
+// import debounce from "lodash/debounce";
 var app = new Vue({
     el: `#app`,
     data: {
@@ -28,6 +28,7 @@ var app = new Vue({
         limitAutoCompletion: 5,
         storeSelected: {},
         allStoreOnMap: undefined,
+        myFavorites: [],
     },
     methods: {
         /**
@@ -216,34 +217,35 @@ var app = new Vue({
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
         },
-        categoriesFilter: async function () {
-            let requestOptions = {
-                method: "GET",
-                redirect: "follow",
-            };
-            let url = new URL(`${this.baseUrl}/api/categories`);
-            let req = await fetch(url, requestOptions);
-            let rep = await req.json();
-            let mainCats = rep.data;
-            let subCats = new Object();
+        // categoriesFilter: async function () {
+        //     let requestOptions = {
+        //         method: "GET",
+        //         redirect: "follow",
+        //     };
+        //     let url = new URL(`${this.baseUrl}/api/categories`);
+        //     let req = await fetch(url, requestOptions);
+        //     let rep = await req.json();
+        //     let mainCats = rep.data;
+        //     let subCats = new Object();
 
-            for (let i = 0; i < mainCats.length; i++) {
-                let subCat = [];
-                mainCats[i].child.forEach((element) =>
-                    subCat.push(element.label)
-                );
-                subCats[mainCats[i].label] = subCat;
-            }
-
-            this.mainCat = await mainCats;
-            this.subCat = await subCats;
-            console.log(this.subCat);
-        },
+        //     for (let i = 0; i < mainCats.length; i++) {
+        //         let subCat = [];
+        //         mainCats[i].child.forEach((element) =>
+        //             subCat.push(element.label)
+        //         );
+        //         subCats[mainCats[i].label] = subCat;
+        //     }
 
 
+        //     this.mainCat = await mainCats;
+        //     this.subCat = await subCats;
+        //     console.log(this.subCat);
+        // },
     },
     created() {
-        this.categoriesFilter();
+        //this.categoriesFilter();
+
+        this.mainCat = categories;
 
         // get last map position from localStorage
         localStorage.getItem("centerMap") &&
@@ -252,6 +254,36 @@ var app = new Vue({
         // get last map zoom from localStorage
         localStorage.getItem("zoomMap") &&
             (this.mapZoom = localStorage.getItem("zoomMap"));
+
+        // mix favorite in bdd and localstorage
+        this.myFavorites = [
+            ...new Set([
+                ...myFavorites,
+                ...(JSON.parse(localStorage.getItem("myFavorites")) ?? []),
+            ]),
+        ];
+
+        // save favorite in localstorage and try to save them in bdd on page leave
+        window.onunload = () => {
+            localStorage.setItem(
+                "myFavorites",
+                JSON.stringify(this.myFavorites)
+            );
+            if (idUser == null || !navigator.sendBeacon) return;
+
+            navigator.sendBeacon(
+                `${this.baseUrl}/api/stores/setFavorites`,
+                new Blob(
+                    [
+                        JSON.stringify({
+                            id: idUser,
+                            favorites: this.myFavorites,
+                        }),
+                    ],
+                    { type: "application/json" }
+                )
+            );
+        };
     },
     mounted: async function () {
         //setting up map

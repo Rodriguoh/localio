@@ -6,7 +6,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class User extends Authenticatable
 {
@@ -55,7 +58,7 @@ class User extends Authenticatable
      */
     public function favoritesStores()
     {
-        return $this->belongsToMany(Store::class);
+        return $this->belongsToMany(Store::class, 'user_store', 'user_id', 'store_id');
     }
 
     /**

@@ -12,7 +12,7 @@
     <!-- Halfmoon CSS -->
     <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
     <!-- Halfmoon JS -->
-    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js" defer></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
@@ -28,7 +28,7 @@
         <!-- Reference: https://www.gethalfmoon.com/docs/sticky-alerts-toasts -->
         <div class="sticky-alerts"></div>
 
-      @include('layouts.admin.navbar')
+        @include('layouts.admin.navbar')
 
         <!-- Sidebar overlay -->
         <div class="sidebar-overlay"></div>
@@ -36,15 +36,12 @@
         @include('layouts.admin.sidebar')
 
         <!-- Content wrapper start -->
-        <div class="content-wrapper">
+        <div class="content-wrapper p-20">
             @yield('content')
         </div>
         <!-- Content wrapper end -->
 
     </div>
     <!-- Page wrapper end -->
-
-    <!-- Halfmoon JS -->
-    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
 </body>
 </html>
