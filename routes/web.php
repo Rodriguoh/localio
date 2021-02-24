@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
 use Illuminate\Auth\Events\PasswordReset;
@@ -89,3 +90,4 @@ Route::get('/account/reportsStores', 'StoreController@reports')->name('reportSto
 Route::get('/account/myComments', 'CommentController@comments')->name('myComments');
 Route::get('/account/editComment', 'CommentController@edit')->name('editComments');
 Route::get('/account/createComment', 'CommentController@create')->name('addComments');
+Route::post('/comment/form', [CommentController::class, 'postComment'])->name('postComment');
