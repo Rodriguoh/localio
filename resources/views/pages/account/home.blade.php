@@ -2,8 +2,6 @@
 
 @section('content')
 
-<!-- Commerçant -->
-
 <div class="card">
     <h1>Mes informations</h1>
     @if (session('successEdit'))

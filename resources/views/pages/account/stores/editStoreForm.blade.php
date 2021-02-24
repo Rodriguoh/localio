@@ -20,7 +20,7 @@
         </div>
         @endif
         @include('components.store-form')
-
+        <div class="sidebar-divider"></div>
         <h3>Supprimer le commerce</h3>
         <p>En supprimant acceptant de supprimer votre commerce, nous supprimerons toutes les informations relatives à celui-ci.</p>
         <div class="dropdown dropright with-arrow">

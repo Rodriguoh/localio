@@ -84,6 +84,9 @@
         </a>
         <div class="sidebar-divider"></div>
         <a href="{{ URL::route('logout')}}" class="sidebar-link sidebar-link-with-icon text-danger">
+            <span class="sidebar-icon">
+                <i class="fa fa-sign-out text-danger" aria-hidden="true"></i>
+            </span>
             Se deconnecter
         </a>
     </div>

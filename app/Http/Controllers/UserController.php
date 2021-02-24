@@ -34,7 +34,7 @@ class UserController extends Controller
         $user->role_id = $request->isCommercant ? Role::where('name', 'owner')->first()->id : $user->role_id;
         $user->save();
 
-        return redirect()->back()->with('successEdit', 'Les modifications ont bien été prises en compte');
+        return redirect()->back()->with($user->wasChanged() ? 'successEdit' : '', 'Les modifications ont bien été prises en compte');
     }
     public function delete()
     {
