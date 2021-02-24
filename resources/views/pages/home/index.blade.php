@@ -38,7 +38,7 @@
         }
 
         #store-list {
-            z-index:500;
+            z-index:81;
             margin-top:150px;
         }
 
@@ -47,7 +47,9 @@
         }
 
         .info-store-list:hover {
-            background-color: red;
+            background-color:var(--gray-color-light)!important;
+            opacity: 80%;
+            cursor:pointer;
         }
 
                 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -107,7 +109,7 @@
             <!-- Paneau gauche avec les différents commerces -->
             <div  id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-150 w-sm-300 h-400 position-absolute ml-20 d-inline-block">
                     <li class="d-flex flex-column" v-for="store in allStoreOnMap">
-                        <div class="info-store-list bg-white rounded p-sm-4 p-md-10">
+                        <div :id="'list-store-'+store.id" class="info-store-list bg-white rounded p-sm-4 p-md-10">
                             <p class="text-center"><span class="font-weight-bold">@{{store.name}}</span></p>
                             <p class="text-center">@{{store.category}}</p>
                         </div>

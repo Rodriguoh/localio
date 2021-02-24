@@ -123,6 +123,19 @@ var app = new Vue({
                     await halfmoon.toggleModal("modal-store");
                 });
 
+                marker.on("mouseover", async () => {
+                    console.log(rep[i].id);
+                    let store = document.getElementById("list-store-"+rep[i].id);
+                    console.log(store)
+                    store.style.backgroundColor = "red!important"
+                    console.log(store.style)
+                });
+
+                marker.on("mouseout", async () => {
+                    let store = document.getElementById("list-store-"+rep[i].id);
+                    store.style.color = "black"
+                });
+
                 allMarkers.push(marker);
             }
             this.prevCatSelected = this.categorySelected;
