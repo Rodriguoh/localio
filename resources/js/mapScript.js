@@ -118,16 +118,19 @@ var app = new Vue({
                 let lon = rep[i].latnlg.lng;
                 let marker = L.marker([lat, lon], { icon: icone });
 
+
                 marker.on("click", async () => {
                     await this.getStore(rep[i].id);
                     await halfmoon.toggleModal("modal-store");
                 });
+
 
                 marker.on("mouseover", async () => {
                     let store = document.getElementById("list-store-"+rep[i].id);
                     store.classList.add("bg-dark");
                     store.style.opacity = "70%";
                     store.style.color = "white"
+                    store.scrollIntoView();
                 });
 
                 marker.on("mouseout", async () => {
@@ -142,9 +145,7 @@ var app = new Vue({
             this.prevCatSelected = this.categorySelected;
             this.markers = L.layerGroup(allMarkers);
             
-            console.log(rep)
             this.allStoreOnMap = rep;
-            console.log(this.allStoreOnMap)
             
         },
         /**

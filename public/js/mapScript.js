@@ -243,8 +243,9 @@ var app = new Vue({
                             store.classList.add("bg-dark");
                             store.style.opacity = "70%";
                             store.style.color = "white";
+                            store.scrollIntoView();
 
-                          case 4:
+                          case 5:
                           case "end":
                             return _context3.stop();
                         }
@@ -278,11 +279,9 @@ var app = new Vue({
 
                 this.prevCatSelected = this.categorySelected;
                 this.markers = L.layerGroup(allMarkers);
-                console.log(rep);
                 this.allStoreOnMap = rep;
-                console.log(this.allStoreOnMap);
 
-              case 21:
+              case 19:
               case "end":
                 return _context5.stop();
             }
