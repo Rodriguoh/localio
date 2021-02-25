@@ -70,6 +70,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all user's stores
+     */
+    public function stores()
+    {
+        return $this->hasMany(Store::class);
+    }
+
+    /**
      * Get all avis posted by the user
      */
     public function comments()

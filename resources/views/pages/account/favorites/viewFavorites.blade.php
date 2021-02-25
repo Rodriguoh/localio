@@ -17,7 +17,7 @@
         <div class="row row-eq-spacing-md">
         @endif
             <div class="col-md-6">
-                <div class="card m-0">
+                <div class="card m-0 bg-dark-light-dm">
                 <h2 class="card-title mb-5">
                     {{$favorite->name}}
 

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card">
-    <h1 class="card-title">Mes commerces</h1>
+<div class="card m-0 p-0">
+    <h1 class="card-title px-15 mt-15">Mes commerces</h1>
     @if (session('successDelete'))
         <div class="alert alert-success" role="alert">
             <button class="close" data-dismiss="alert" type="button" aria-label="Close">
@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th>Nom</th>
-                <th class="d-none d-sm-table-cell">Ville</th>
+                <th class="d-none d-md-table-cell">Ville</th>
                 <th class="d-none d-sm-table-cell">Etat</th>
                 <th class="text-right">Action</th>
             </tr>
@@ -24,7 +24,7 @@
         @foreach($stores as $store)
             <tr>
                 <td>{{$store->name}}</td>
-                <td class="d-none d-sm-table-cell">{{$store->city->name}}</td>
+                <td class="d-none d-md-table-cell">{{$store->city->name}}</td>
                 <td class="d-none d-sm-table-cell">{{$store->state->description}}</td>
                 <td class="text-right"><a href="{{ route('statsStore', ['idStore' => $store->id])}}" class="btn">Consulter</a></td>
             </tr>

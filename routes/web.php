@@ -3,14 +3,10 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StoreController;
-
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\FavoriteController;
 
 
 /*
@@ -56,6 +52,8 @@ Route::get('/account/listUsers', 'UserController@index')->name('listUsers');
 
 Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser');
 
+Route::post('/account/editUserInformations', [UserController::class, 'editUsersInformations'])->name('editUsersInformations');
+
 //-- Store
 Route::get('/account/myStores', [StoreController::class, 'userStore'])->name('myStores'); //ok
 
@@ -75,18 +73,19 @@ Route::post('/store/form', [StoreController::class, 'postStore'])->name('postSto
 Route::post('/store/delete', [StoreController::class, 'deleteStore'])->name('deleteStore');
 
 //--Favoris
-Route::get('/account/favorites', [StoreController::class, 'myFavorites'])->name('myFavorites');
-Route::get('/account/editFavorite/{idStore}', [StoreController::class, 'editFavorite'])->name('editFavorite');
-Route::post('/account/deleteFavorite', [StoreController::class, 'deleteFavorite'])->name('deleteFavorite');
+Route::get('/account/favorites', [FavoriteController::class, 'myFavorites'])->name('myFavorites');
+Route::get('/account/editFavorite/{idStore}', [FavoriteController::class, 'editFavorite'])->name('editFavorite');
+Route::post('/account/deleteFavorite', [FavoriteController::class, 'deleteFavorite'])->name('deleteFavorite');
 
 
 Route::get('/account/requestsStores', 'StoreController@requests')->name('requestsStores');
 Route::get('/account/reportsStores', 'StoreController@reports')->name('reportStores');
 
 //-- Notice
-Route::get('/account/myComments', 'CommentController@comments')->name('myComments');
-Route::get('/account/editComment', 'CommentController@edit')->name('editComments');
-Route::get('/account/createComment', 'CommentController@create')->name('addComments');
+Route::get('/account/myComments', [CommentController::class, 'comments'])->name('myComments');
+Route::post('/account/editComment', [CommentController::class, 'edit'])->name('editComment');
+Route::get('/account/createComment', [CommentController::class, 'create'])->name('addComments');
+Route::post('/comment/form', [CommentController::class, 'postComment'])->name('postComment');
+Route::post('/comment/delete', [CommentController::class, 'delete'])->name('deleteComment');
 
-//--About
 Route::get('/legalNotices', 'AboutController@legalNotices')->name('legalNotices');
