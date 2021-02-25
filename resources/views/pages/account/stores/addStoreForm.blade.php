@@ -4,7 +4,7 @@
 
 <!-- Commerçant -->
 {{--  --}}
-<div class="card">
+<div class="card m-0">
     <h2 class="card-title">
         Création d'un commerce
     </h2>

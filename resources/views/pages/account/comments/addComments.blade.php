@@ -31,7 +31,7 @@
                     <label for="3"><i class="fa fa-star"></i></label>
                     <input class="d-none" type="radio" name="note" value="2" id="2">
                     <label for="2"><i class="fa fa-star"></i></label>
-                    <input class="d-none" type="radio" name="note" value="1" id="1">
+                    <input class="d-none" type="radio" name="note" value="1" id="1" checked>
                     <label for="1"><i class="fa fa-star"></i></label>
                 </div>
             </div>

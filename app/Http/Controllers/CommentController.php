@@ -9,19 +9,36 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function edit()
+    public function edit(Request $request)
     {
+        $this->validate($request, [
+            'id' => 'required|exists:comments,id',
+            'note' => 'required',
+            'comment' => 'required|max:255',
+        ]);
+        $comment = Comment::findOrFail($request->id);
+        $comment->note = $request->note;
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        return redirect()->back()->with($comment->wasChanged() ? 'successEdit' : '', 'Le commentaire a bien été modifié.');
     }
     public function create()
     {
         return view('pages/account/comments/addComments');
     }
-    public function delete()
+    public function delete(Request $request)
     {
+        $comment = Comment::findOrFail($request->id);
+        if ($comment->user_id != Auth::id()) abort(403);
+        $comment->delete();
+
+        return redirect()->back()->with('successDelete', 'Votre commentaire a été supprimé avec succés.');
     }
+
     public function comments()
     {
-        $comments = Auth::user()->comments()->paginate(8);
+        $comments = Auth::user()->comments()->with('store')->paginate(8);
         return view('pages/account/comments/myComments', [
             'comments' => $comments
         ]);

@@ -2,8 +2,8 @@
 
 @section('content')
 
-<div class="card">
-    <h1>Mes informations</h1>
+<div class="card m-0">
+    <h1 class="card-title">Mes informations</h1>
     @if (session('successEdit'))
     <div class="alert alert-success mb-10" role="alert">
         <button class="close" data-dismiss="alert" type="button" aria-label="Close">
