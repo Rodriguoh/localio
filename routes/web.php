@@ -87,3 +87,5 @@ Route::post('/account/editComment', [CommentController::class, 'edit'])->name('e
 Route::get('/account/createComment', [CommentController::class, 'create'])->name('addComments');
 Route::post('/comment/form', [CommentController::class, 'postComment'])->name('postComment');
 Route::post('/comment/delete', [CommentController::class, 'delete'])->name('deleteComment');
+
+Route::get('/legalNotices', 'AboutController@legalNotices')->name('legalNotices');
