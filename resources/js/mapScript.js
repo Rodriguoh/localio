@@ -27,6 +27,7 @@ var app = new Vue({
         subCat: {},
         limitAutoCompletion: 5,
         storeSelected: {},
+        allStoreOnMap: undefined,
         myFavorites: [],
     },
     methods: {
@@ -117,15 +118,37 @@ var app = new Vue({
                 let lon = rep[i].latnlg.lng;
                 let marker = L.marker([lat, lon], { icon: icone });
 
+                // Affiche la modal lors du clic sur le marqueur
                 marker.on("click", async () => {
                     await this.getStore(rep[i].id);
                     await halfmoon.toggleModal("modal-store");
                 });
 
+                // Change la couleur de fond de la div du commerce lors du hover de son marqueur
+                marker.on("mouseover", async () => {
+                    let store = document.getElementById("list-store-"+rep[i].id);
+                    store.classList.add("bg-dark");
+                    store.style.opacity = "70%";
+                    store.style.color = "white"
+                    store.scrollIntoView();
+                });
+
+                // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
+                marker.on("mouseout", async () => {
+                    let store = document.getElementById("list-store-"+rep[i].id);
+                    store.classList.remove("bg-dark");
+                    store.style.color= "black";
+                    store.style.opacity = "100%";
+                });
+                
                 allMarkers.push(marker);
             }
+
             this.prevCatSelected = this.categorySelected;
             this.markers = L.layerGroup(allMarkers);
+            
+            this.allStoreOnMap = rep;
+            
         },
         /**
          * Function to get all details on a store
@@ -229,6 +252,7 @@ var app = new Vue({
         //         );
         //         subCats[mainCats[i].label] = subCat;
         //     }
+
 
         //     this.mainCat = await mainCats;
         //     this.subCat = await subCats;

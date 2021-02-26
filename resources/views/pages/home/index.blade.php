@@ -37,9 +37,42 @@
             display: block !important;
         }
 
+        #store-list {
+            z-index:81;
+            margin-top:150px;
+        }
+
+        #store-list>li {
+            list-style: none;
+        }
+
+        .info-store-list:hover {
+            background-color:var(--dark-color-light)!important;
+            opacity: 80%;
+            cursor:pointer;
+        }
+
+        .dark-mode .info-store-list:hover {
+            background-color:var(--dark-color)!important;
+            opacity:80%;
+            cursor:pointer;
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        #store-list::-webkit-scrollbar {
+        display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        #store-list {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        }
+
         .cat-btn {
             height: var(--large-button-height);
         }
+
     </style>
 </head>
 
@@ -75,7 +108,18 @@
                     </template>
                 </div>
             </div>
+
             <div id="map" class="mx-5 mx-sm-10">
+
+            </div>
+            <!-- Paneau gauche avec les différents commerces -->
+            <div  id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-150 w-sm-300 h-400 position-absolute ml-20 d-none d-sm-block">
+                    <li class="d-flex flex-column" v-for="store in allStoreOnMap">
+                        <div :id="'list-store-'+store.id" class="info-store-list bg-light-lm bg-dark-dm rounded p-sm-4 p-md-10">
+                            <p class="text-center text-dark-lm text-white-dm"><span class="font-weight-bold">@{{store.name}}</span></p>
+                            <p class="text-center text-dark-lm text-white-dm">@{{store.category}}</p>
+                        </div>
+                    </li>
             </div>
         </div>
 
@@ -126,6 +170,8 @@
                 </div>
             </div>
         </div>
+       
+        
     </div>
     <script>
         var categories = @json($categories);
