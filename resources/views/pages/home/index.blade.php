@@ -47,8 +47,14 @@
         }
 
         .info-store-list:hover {
-            background-color:var(--gray-color-light)!important;
+            background-color:var(--dark-color-light)!important;
             opacity: 80%;
+            cursor:pointer;
+        }
+
+        .dark-mode .info-store-list:hover {
+            background-color:var(--dark-color)!important;
+            opacity:80%;
             cursor:pointer;
         }
 
