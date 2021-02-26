@@ -213,7 +213,8 @@ var app = new Vue({
                   var lon = rep[i].latnlg.lng;
                   var marker = L.marker([lat, lon], {
                     icon: icone
-                  });
+                  }); // Affiche la modal lors du clic sur le marqueur
+
                   marker.on("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
                       while (1) {
@@ -232,7 +233,8 @@ var app = new Vue({
                         }
                       }
                     }, _callee2);
-                  })));
+                  }))); // Change la couleur de fond de la div du commerce lors du hover de son marqueur
+
                   marker.on("mouseover", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
                     var store;
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
@@ -251,7 +253,8 @@ var app = new Vue({
                         }
                       }
                     }, _callee3);
-                  })));
+                  }))); // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
+
                   marker.on("mouseout", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
                     var store;
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
