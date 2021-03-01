@@ -158,7 +158,7 @@
                             </div>
 
                             <div class="my-10">
-                                <p><span class="font-weight-medium"> Livraison :</span> @{{storeSelected?.isDelivering ? 'Oui' : 'Non' }} </p>
+                                <p><span class="font-weight-medium"> Livraison :</span> @{{storeSelected?.isDelivering ? 'Non' : 'Oui' }} </p>
                                 <p><span class="font-weight-medium"> Condition de livraison :</span> @{{storeSelected?.conditionDelivery}}</p>
                             </div>
 
