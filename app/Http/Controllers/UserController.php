@@ -11,11 +11,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(8);
+        $roles = Role::all();
         return view('pages/account/users/listUsers', [
             'users' => $users,
+            'roles' => $roles,
         ]);
     }
+
     public function editUsersInformations(Request $request)
     {
         $this->validate($request, [
@@ -36,6 +39,21 @@ class UserController extends Controller
 
         return redirect()->back()->with($user->wasChanged() ? 'successEdit' : '', 'Les modifications ont bien été prises en compte.');
     }
+
+    public function editRoleUser(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required',
+            'role' => 'required',
+        ]);
+
+        $user = User::findOrFail($request->id);
+        $user->role_id = $request->role;
+        $user->save();
+        
+        return redirect()->back()->with($user->wasChanged() ? 'successEdit' : '', 'Le rôle a bien été modifié');
+    }
+
     public function delete()
     {
     }
