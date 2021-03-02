@@ -7,6 +7,7 @@ use App\Models\State;
 use App\Models\Store;
 use App\Models\City;
 use App\Models\Moderation;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -130,10 +131,10 @@ class StoreController extends Controller
 
     public function postStore(Request $request)
     {
-
         $this->validate($request, [
             'name' => 'required',
             'short_description' => 'required|max:255',
+            'photo' => isset($request->id) ? '' : 'required|image',
             'phone' => 'required|digits:10',
             'mail' => 'required|email',
             'SIRET' => 'required|digits:14',
@@ -142,6 +143,7 @@ class StoreController extends Controller
             'number' => 'required',
             'street' => 'required',
             'city' => 'required',
+            'lat' => 'required'
         ]);
 
         $store = isset($request->id) ? Store::find($request->id) : new Store();
@@ -164,8 +166,8 @@ class StoreController extends Controller
         $store->number = $request->number;
         $store->street = $request->street;
 
-        if (City::where('name', '=', $request->city)->exists()) {
-            $store->city_INSEE = City::where('name', '=', $request->city)->first()->INSEE;
+        if (City::where('INSEE', '=', $request->INSEE)->exists()) {
+            $store->city_INSEE = City::where('INSEE', '=', $request->INSEE)->first()->INSEE;
         } else {
             $city = new City([
                 'name' => $request->city,
@@ -177,12 +179,28 @@ class StoreController extends Controller
             $store->city_INSEE = $city->INSEE;
         }
 
-
         //localisation provisoire
         $store->lng = $request->lng;
         $store->lat = $request->lat;
 
         $store->save();
+
+        $photo = isset($request->id) ? Photo::where('store_id', $request->id)->first() : new Photo();
+        if ($request->hasFile('photo')) {
+            $originName = $request->file('photo')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+
+            $request->file('photo')->move(public_path('images/store_minia/'), $fileName);
+
+            $url = asset('images/store_minia/' . $fileName);
+
+            $photo->url = $url;
+            $photo->alt = 'Photo de ' . $store->name;
+            $photo->store_id = $store->id;
+            $photo->save();
+        }
 
         if (isset($request->id)) {
             return redirect()->back()->with('success', 'Modification réussite un modérateur doit la valider');

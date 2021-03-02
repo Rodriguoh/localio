@@ -21,6 +21,9 @@ var app = new Vue({
         prevCatSelected: "",
         categoryFilter: "",
         querySearch: "",
+        comments: {},
+        commentLimit: 1,
+        commentPages: 0,
         resultsQueryCity: [],
         resultsQueryStore: [],
         mainCat: [],
@@ -121,34 +124,39 @@ var app = new Vue({
                 // Affiche la modal lors du clic sur le marqueur
                 marker.on("click", async () => {
                     await this.getStore(rep[i].id);
+                    await this.getStoreComments(rep[i].id);
                     await halfmoon.toggleModal("modal-store");
+                    this.commentLimit = 1;
                 });
 
                 // Change la couleur de fond de la div du commerce lors du hover de son marqueur
                 marker.on("mouseover", async () => {
-                    let store = document.getElementById("list-store-"+rep[i].id);
+                    let store = document.getElementById(
+                        "list-store-" + rep[i].id
+                    );
                     store.classList.add("bg-dark");
                     store.style.opacity = "70%";
-                    store.style.color = "white"
+                    store.style.color = "white";
                     store.scrollIntoView();
                 });
 
                 // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
                 marker.on("mouseout", async () => {
-                    let store = document.getElementById("list-store-"+rep[i].id);
+                    let store = document.getElementById(
+                        "list-store-" + rep[i].id
+                    );
                     store.classList.remove("bg-dark");
-                    store.style.color= "black";
+                    store.style.color = "black";
                     store.style.opacity = "100%";
                 });
-                
+
                 allMarkers.push(marker);
             }
 
             this.prevCatSelected = this.categorySelected;
             this.markers = L.layerGroup(allMarkers);
-            
+
             this.allStoreOnMap = rep;
-            
         },
         /**
          * Function to get all details on a store
@@ -179,6 +187,16 @@ var app = new Vue({
 
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
+            this.commentPages = rep.pagination.total_pages;
+            let comments = new Array();
+
+            for (let i = 0; i < rep.data.length; i++) {
+                if (typeof rep.data == "object") {
+                    comments.push(rep.data[i]);
+                }
+            }
+
+            this.comments = await comments;
         },
         autoComplete: async function () {
             this.resultsQueryCity = [];
@@ -253,7 +271,6 @@ var app = new Vue({
         //         subCats[mainCats[i].label] = subCat;
         //     }
 
-
         //     this.mainCat = await mainCats;
         //     this.subCat = await subCats;
         //     console.log(this.subCat);
@@ -310,7 +327,6 @@ var app = new Vue({
 
         await this.getStoresOnMap();
         await this.map.addLayer(this.markers);
-        //await ;
 
         // add eventListener on the map movment
         this.map.on("moveend", () => {

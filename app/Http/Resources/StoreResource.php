@@ -23,7 +23,7 @@ class StoreResource extends JsonResource
             'phone' => $this->phone,
             'mail' => $this->mail,
             'SIRET' => $this->SIRET,
-            'thumbnails' => '',
+            'thumbnails' => $this->photos()->first()->url ?? '',
             'adresse' => [
                 'number' => $this->number,
                 'street' => $this->street,
