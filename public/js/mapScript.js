@@ -12,778 +12,11 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
-/***/ "./node_modules/lodash/_Symbol.js":
-/*!****************************************!*\
-  !*** ./node_modules/lodash/_Symbol.js ***!
-  \****************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-<<<<<<< HEAD
-var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
-=======
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
->>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
-
-/** Built-in value references. */
-var Symbol = root.Symbol;
-
-<<<<<<< HEAD
-module.exports = Symbol;
-=======
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
->>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_baseGetTag.js":
-/*!********************************************!*\
-  !*** ./node_modules/lodash/_baseGetTag.js ***!
-  \********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
-    getRawTag = __webpack_require__(/*! ./_getRawTag */ "./node_modules/lodash/_getRawTag.js"),
-    objectToString = __webpack_require__(/*! ./_objectToString */ "./node_modules/lodash/_objectToString.js");
-
-<<<<<<< HEAD
-/** `Object#toString` result references. */
-var nullTag = '[object Null]',
-    undefinedTag = '[object Undefined]';
-
-/** Built-in value references. */
-var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
-=======
-// import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
-// var _ = require("lodash"); Import lodash en cas de besoin
-// import debounce from "lodash/debounce";
-var app = new Vue({
-  el: "#app",
-  data: {
-    map: undefined,
-    markers: undefined,
-    mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-      attribution: "",
-      minNativeZoom: 4,
-      minZoom: 4
-    }],
-    mapCenter: [44.5667, 6.0833],
-    mapZoom: 13,
-    baseUrl: "https://localio-app.herokuapp.com",
-    // http://localhost/localio/public mettre l'url sur laquelle on travail
-    categorySelected: "",
-    prevCatSelected: "",
-    categoryFilter: "",
-    querySearch: "",
-    resultsQueryCity: [],
-    resultsQueryStore: [],
-    mainCat: [],
-    subCat: {},
-    limitAutoCompletion: 5,
-    storeSelected: {},
-    myFavorites: []
-  },
-  methods: {
-    /**
-     * Function for search stores by name in autocomplete
-     */
-    getStoresByName: function () {
-      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var requestOptions, reqStores, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                _context.next = 3;
-                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
-                requestOptions);
->>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
-
-/**
- * The base implementation of `getTag` without fallbacks for buggy environments.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
- */
-function baseGetTag(value) {
-  if (value == null) {
-    return value === undefined ? undefinedTag : nullTag;
-  }
-  return (symToStringTag && symToStringTag in Object(value))
-    ? getRawTag(value)
-    : objectToString(value);
-}
-
-module.exports = baseGetTag;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_freeGlobal.js":
-/*!********************************************!*\
-  !*** ./node_modules/lodash/_freeGlobal.js ***!
-  \********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-/** Detect free variable `global` from Node.js. */
-var freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;
-
-module.exports = freeGlobal;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_getRawTag.js":
-/*!*******************************************!*\
-  !*** ./node_modules/lodash/_getRawTag.js ***!
-  \*******************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js");
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var nativeObjectToString = objectProto.toString;
-
-/** Built-in value references. */
-var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
-
-/**
- * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the raw `toStringTag`.
- */
-function getRawTag(value) {
-  var isOwn = hasOwnProperty.call(value, symToStringTag),
-      tag = value[symToStringTag];
-
-  try {
-    value[symToStringTag] = undefined;
-    var unmasked = true;
-  } catch (e) {}
-
-  var result = nativeObjectToString.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag] = tag;
-    } else {
-      delete value[symToStringTag];
-    }
-  }
-  return result;
-}
-
-module.exports = getRawTag;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_objectToString.js":
-/*!************************************************!*\
-  !*** ./node_modules/lodash/_objectToString.js ***!
-  \************************************************/
-/***/ ((module) => {
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var nativeObjectToString = objectProto.toString;
-
-/**
- * Converts `value` to a string using `Object.prototype.toString`.
- *
- * @private
- * @param {*} value The value to convert.
- * @returns {string} Returns the converted string.
- */
-function objectToString(value) {
-  return nativeObjectToString.call(value);
-}
-
-module.exports = objectToString;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_root.js":
-/*!**************************************!*\
-  !*** ./node_modules/lodash/_root.js ***!
-  \**************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash/_freeGlobal.js");
-
-/** Detect free variable `self`. */
-var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-
-/** Used as a reference to the global object. */
-var root = freeGlobal || freeSelf || Function('return this')();
-
-module.exports = root;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/debounce.js":
-/*!*****************************************!*\
-  !*** ./node_modules/lodash/debounce.js ***!
-  \*****************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
-    now = __webpack_require__(/*! ./now */ "./node_modules/lodash/now.js"),
-    toNumber = __webpack_require__(/*! ./toNumber */ "./node_modules/lodash/toNumber.js");
-
-/** Error message constants. */
-var FUNC_ERROR_TEXT = 'Expected a function';
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeMax = Math.max,
-    nativeMin = Math.min;
-
-/**
- * Creates a debounced function that delays invoking `func` until after `wait`
- * milliseconds have elapsed since the last time the debounced function was
- * invoked. The debounced function comes with a `cancel` method to cancel
- * delayed `func` invocations and a `flush` method to immediately invoke them.
- * Provide `options` to indicate whether `func` should be invoked on the
- * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
- * with the last arguments provided to the debounced function. Subsequent
- * calls to the debounced function return the result of the last `func`
- * invocation.
- *
- * **Note:** If `leading` and `trailing` options are `true`, `func` is
- * invoked on the trailing edge of the timeout only if the debounced function
- * is invoked more than once during the `wait` timeout.
- *
- * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
- * until to the next tick, similar to `setTimeout` with a timeout of `0`.
- *
- * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
- * for details over the differences between `_.debounce` and `_.throttle`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to debounce.
- * @param {number} [wait=0] The number of milliseconds to delay.
- * @param {Object} [options={}] The options object.
- * @param {boolean} [options.leading=false]
- *  Specify invoking on the leading edge of the timeout.
- * @param {number} [options.maxWait]
- *  The maximum time `func` is allowed to be delayed before it's invoked.
- * @param {boolean} [options.trailing=true]
- *  Specify invoking on the trailing edge of the timeout.
- * @returns {Function} Returns the new debounced function.
- * @example
- *
- * // Avoid costly calculations while the window size is in flux.
- * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
- *
- * // Invoke `sendMail` when clicked, debouncing subsequent calls.
- * jQuery(element).on('click', _.debounce(sendMail, 300, {
- *   'leading': true,
- *   'trailing': false
- * }));
- *
- * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
- * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
- * var source = new EventSource('/stream');
- * jQuery(source).on('message', debounced);
- *
- * // Cancel the trailing debounced invocation.
- * jQuery(window).on('popstate', debounced.cancel);
- */
-function debounce(func, wait, options) {
-  var lastArgs,
-      lastThis,
-      maxWait,
-      result,
-      timerId,
-      lastCallTime,
-      lastInvokeTime = 0,
-      leading = false,
-      maxing = false,
-      trailing = true;
-
-  if (typeof func != 'function') {
-    throw new TypeError(FUNC_ERROR_TEXT);
-  }
-  wait = toNumber(wait) || 0;
-  if (isObject(options)) {
-    leading = !!options.leading;
-    maxing = 'maxWait' in options;
-    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
-    trailing = 'trailing' in options ? !!options.trailing : trailing;
-  }
-
-  function invokeFunc(time) {
-    var args = lastArgs,
-        thisArg = lastThis;
-
-    lastArgs = lastThis = undefined;
-    lastInvokeTime = time;
-    result = func.apply(thisArg, args);
-    return result;
-  }
-
-  function leadingEdge(time) {
-    // Reset any `maxWait` timer.
-    lastInvokeTime = time;
-    // Start the timer for the trailing edge.
-    timerId = setTimeout(timerExpired, wait);
-    // Invoke the leading edge.
-    return leading ? invokeFunc(time) : result;
-  }
-
-  function remainingWait(time) {
-    var timeSinceLastCall = time - lastCallTime,
-        timeSinceLastInvoke = time - lastInvokeTime,
-        timeWaiting = wait - timeSinceLastCall;
-
-    return maxing
-      ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke)
-      : timeWaiting;
-  }
-
-  function shouldInvoke(time) {
-    var timeSinceLastCall = time - lastCallTime,
-        timeSinceLastInvoke = time - lastInvokeTime;
-
-    // Either this is the first call, activity has stopped and we're at the
-    // trailing edge, the system time has gone backwards and we're treating
-    // it as the trailing edge, or we've hit the `maxWait` limit.
-    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
-      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
-  }
-
-  function timerExpired() {
-    var time = now();
-    if (shouldInvoke(time)) {
-      return trailingEdge(time);
-    }
-    // Restart the timer.
-    timerId = setTimeout(timerExpired, remainingWait(time));
-  }
-
-  function trailingEdge(time) {
-    timerId = undefined;
-
-    // Only invoke if we have `lastArgs` which means `func` has been
-    // debounced at least once.
-    if (trailing && lastArgs) {
-      return invokeFunc(time);
-    }
-    lastArgs = lastThis = undefined;
-    return result;
-  }
-
-  function cancel() {
-    if (timerId !== undefined) {
-      clearTimeout(timerId);
-    }
-    lastInvokeTime = 0;
-    lastArgs = lastCallTime = lastThis = timerId = undefined;
-  }
-
-  function flush() {
-    return timerId === undefined ? result : trailingEdge(now());
-  }
-
-  function debounced() {
-    var time = now(),
-        isInvoking = shouldInvoke(time);
-
-<<<<<<< HEAD
-    lastArgs = arguments;
-    lastThis = this;
-    lastCallTime = time;
-
-    if (isInvoking) {
-      if (timerId === undefined) {
-        return leadingEdge(lastCallTime);
-      }
-      if (maxing) {
-        // Handle invocations in a tight loop.
-        clearTimeout(timerId);
-        timerId = setTimeout(timerExpired, wait);
-        return invokeFunc(lastCallTime);
-      }
-    }
-    if (timerId === undefined) {
-      timerId = setTimeout(timerExpired, wait);
-    }
-    return result;
-  }
-  debounced.cancel = cancel;
-  debounced.flush = flush;
-  return debounced;
-}
-
-module.exports = debounce;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/isObject.js":
-/*!*****************************************!*\
-  !*** ./node_modules/lodash/isObject.js ***!
-  \*****************************************/
-/***/ ((module) => {
-
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */
-function isObject(value) {
-  var type = typeof value;
-  return value != null && (type == 'object' || type == 'function');
-}
-
-module.exports = isObject;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/isObjectLike.js":
-/*!*********************************************!*\
-  !*** ./node_modules/lodash/isObjectLike.js ***!
-  \*********************************************/
-/***/ ((module) => {
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return value != null && typeof value == 'object';
-}
-
-module.exports = isObjectLike;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/isSymbol.js":
-/*!*****************************************!*\
-  !*** ./node_modules/lodash/isSymbol.js ***!
-  \*****************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
-    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
-
-/** `Object#toString` result references. */
-var symbolTag = '[object Symbol]';
-
-/**
- * Checks if `value` is classified as a `Symbol` primitive or object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
- * @example
- *
- * _.isSymbol(Symbol.iterator);
- * // => true
- *
- * _.isSymbol('abc');
- * // => false
- */
-function isSymbol(value) {
-  return typeof value == 'symbol' ||
-    (isObjectLike(value) && baseGetTag(value) == symbolTag);
-}
-=======
-      return refreshMapView;
-    }() // categoriesFilter: async function () {
-    //     let requestOptions = {
-    //         method: "GET",
-    //         redirect: "follow",
-    //     };
-    //     let url = new URL(`${this.baseUrl}/api/categories`);
-    //     let req = await fetch(url, requestOptions);
-    //     let rep = await req.json();
-    //     let mainCats = rep.data;
-    //     let subCats = new Object();
-    //     for (let i = 0; i < mainCats.length; i++) {
-    //         let subCat = [];
-    //         mainCats[i].child.forEach((element) =>
-    //             subCat.push(element.label)
-    //         );
-    //         subCats[mainCats[i].label] = subCat;
-    //     }
-    //     this.mainCat = await mainCats;
-    //     this.subCat = await subCats;
-    //     console.log(this.subCat);
-    // },
-
-  },
-  created: function created() {
-    var _JSON$parse,
-        _this2 = this;
-
-    //this.categoriesFilter();
-    this.mainCat = categories; // get last map position from localStorage
-
-    localStorage.getItem("centerMap") && (this.mapCenter = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
-
-    localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap")); // mix favorite in bdd and localstorage
-
-    this.myFavorites = _toConsumableArray(new Set([].concat(_toConsumableArray(myFavorites), _toConsumableArray((_JSON$parse = JSON.parse(localStorage.getItem("myFavorites"))) !== null && _JSON$parse !== void 0 ? _JSON$parse : [])))); // save favorite in localstorage and try to save them in bdd on page leave
-
-    window.onunload = function () {
-      localStorage.setItem("myFavorites", JSON.stringify(_this2.myFavorites));
-      if (idUser == null || !navigator.sendBeacon) return;
-      navigator.sendBeacon("".concat(_this2.baseUrl, "/api/stores/setFavorites"), new Blob([JSON.stringify({
-        id: idUser,
-        favorites: _this2.myFavorites
-      })], {
-        type: "application/json"
-      }));
-    };
-  },
-  mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-      var _this3 = this;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-        while (1) {
-          switch (_context8.prev = _context8.next) {
-            case 0:
-              //setting up map
-              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
-              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context8.next = 4;
-              return this.getStoresOnMap();
-
-            case 4:
-              _context8.next = 6;
-              return this.map.addLayer(this.markers);
-
-            case 6:
-              //await ;
-              // add eventListener on the map movment
-              this.map.on("moveend", function () {
-                _this3.refreshMapView();
-
-                localStorage.setItem("centerMap", [_this3.map.getCenter().lat, _this3.map.getCenter().lng]);
-                localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
-              });
-
-            case 7:
-            case "end":
-              return _context8.stop();
-          }
-        }
-      }, _callee8, this);
-    }));
->>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
-
-module.exports = isSymbol;
-
-
-/***/ }),
-
-<<<<<<< HEAD
-/***/ "./node_modules/lodash/now.js":
-/*!************************************!*\
-  !*** ./node_modules/lodash/now.js ***!
-  \************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
-
-/**
- * Gets the timestamp of the number of milliseconds that have elapsed since
- * the Unix epoch (1 January 1970 00:00:00 UTC).
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Date
- * @returns {number} Returns the timestamp.
- * @example
- *
- * _.defer(function(stamp) {
- *   console.log(_.now() - stamp);
- * }, _.now());
- * // => Logs the number of milliseconds it took for the deferred invocation.
- */
-var now = function() {
-  return root.Date.now();
-};
-
-module.exports = now;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/toNumber.js":
-/*!*****************************************!*\
-  !*** ./node_modules/lodash/toNumber.js ***!
-  \*****************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
-    isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
-
-/** Used as references for various `Number` constants. */
-var NAN = 0 / 0;
-
-/** Used to match leading and trailing whitespace. */
-var reTrim = /^\s+|\s+$/g;
-
-/** Used to detect bad signed hexadecimal string values. */
-var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-
-/** Used to detect binary string values. */
-var reIsBinary = /^0b[01]+$/i;
-
-/** Used to detect octal string values. */
-var reIsOctal = /^0o[0-7]+$/i;
-
-/** Built-in method references without a dependency on `root`. */
-var freeParseInt = parseInt;
-
-/**
- * Converts `value` to a number.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to process.
- * @returns {number} Returns the number.
- * @example
- *
- * _.toNumber(3.2);
- * // => 3.2
- *
- * _.toNumber(Number.MIN_VALUE);
- * // => 5e-324
- *
- * _.toNumber(Infinity);
- * // => Infinity
- *
- * _.toNumber('3.2');
- * // => 3.2
- */
-function toNumber(value) {
-  if (typeof value == 'number') {
-    return value;
-  }
-  if (isSymbol(value)) {
-    return NAN;
-  }
-  if (isObject(value)) {
-    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
-    value = isObject(other) ? (other + '') : other;
-  }
-  if (typeof value != 'string') {
-    return value === 0 ? value : +value;
-  }
-  value = value.replace(reTrim, '');
-  var isBinary = reIsBinary.test(value);
-  return (isBinary || reIsOctal.test(value))
-    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
-    : (reIsBadHex.test(value) ? NAN : +value);
-}
-
-module.exports = toNumber;
-
-
-/***/ }),
-
-=======
->>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 /***/ "./node_modules/regenerator-runtime/runtime.js":
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
 /***/ ((module) => {
-<<<<<<< HEAD
 
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -1350,8 +583,6 @@ var runtime = (function (exports) {
       if (this.done) {
         throw exception;
       }
-=======
->>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 
       var context = this;
       function handle(loc, caught) {
@@ -1589,18 +820,6 @@ try {
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -1628,9 +847,19 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
 
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -1644,7 +873,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 // import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
 // var _ = require("lodash"); Import lodash en cas de besoin
-
+// import debounce from "lodash/debounce";
 var app = new Vue({
   el: "#app",
   data: {
@@ -1668,7 +897,9 @@ var app = new Vue({
     mainCat: [],
     subCat: {},
     limitAutoCompletion: 5,
-    storeSelected: {}
+    storeSelected: {},
+    allStoreOnMap: undefined,
+    myFavorites: []
   },
   methods: {
     /**
@@ -1718,14 +949,14 @@ var app = new Vue({
      * Function to get all store to display on map
      */
     getStoresOnMap: function () {
-      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
         var _this = this;
 
         var catFilter, requestOptions, url, req, rep, allMarkers, _loop, i;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 if (this.prevCatSelected != this.categorySelected) {
                   this.categoryFilter = "";
@@ -1750,16 +981,16 @@ var app = new Vue({
                   lat_sw: this.map.getBounds()._southWest.lat,
                   lng_sw: this.map.getBounds()._southWest.lng
                 }));
-                _context3.next = 8;
+                _context5.next = 8;
                 return fetch(url, requestOptions);
 
               case 8:
-                req = _context3.sent;
-                _context3.next = 11;
+                req = _context5.sent;
+                _context5.next = 11;
                 return req.json();
 
               case 11:
-                rep = _context3.sent;
+                rep = _context5.sent;
                 rep = rep.data;
                 allMarkers = [];
 
@@ -1807,7 +1038,8 @@ var app = new Vue({
                   var lon = rep[i].latnlg.lng;
                   var marker = L.marker([lat, lon], {
                     icon: icone
-                  });
+                  }); // Affiche la modal lors du clic sur le marqueur
+
                   marker.on("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
                       while (1) {
@@ -1826,6 +1058,45 @@ var app = new Vue({
                         }
                       }
                     }, _callee2);
+                  }))); // Change la couleur de fond de la div du commerce lors du hover de son marqueur
+
+                  marker.on("mouseover", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+                    var store;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+                      while (1) {
+                        switch (_context3.prev = _context3.next) {
+                          case 0:
+                            store = document.getElementById("list-store-" + rep[i].id);
+                            store.classList.add("bg-dark");
+                            store.style.opacity = "70%";
+                            store.style.color = "white";
+                            store.scrollIntoView();
+
+                          case 5:
+                          case "end":
+                            return _context3.stop();
+                        }
+                      }
+                    }, _callee3);
+                  }))); // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
+
+                  marker.on("mouseout", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+                    var store;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+                      while (1) {
+                        switch (_context4.prev = _context4.next) {
+                          case 0:
+                            store = document.getElementById("list-store-" + rep[i].id);
+                            store.classList.remove("bg-dark");
+                            store.style.color = "black";
+                            store.style.opacity = "100%";
+
+                          case 4:
+                          case "end":
+                            return _context4.stop();
+                        }
+                      }
+                    }, _callee4);
                   })));
                   allMarkers.push(marker);
                 };
@@ -1836,13 +1107,14 @@ var app = new Vue({
 
                 this.prevCatSelected = this.categorySelected;
                 this.markers = L.layerGroup(allMarkers);
+                this.allStoreOnMap = rep;
 
-              case 18:
+              case 19:
               case "end":
-                return _context3.stop();
+                return _context5.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee5, this);
       }));
 
       function getStoresOnMap() {
@@ -1856,35 +1128,35 @@ var app = new Vue({
      * Function to get all details on a store
      */
     getStore: function () {
-      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(storeId) {
+      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(storeId) {
         var requestOptions, url, req, rep;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
                 };
                 url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
-                _context4.next = 4;
+                _context6.next = 4;
                 return fetch(url, requestOptions);
 
               case 4:
-                req = _context4.sent;
-                _context4.next = 7;
+                req = _context6.sent;
+                _context6.next = 7;
                 return req.json();
 
               case 7:
-                rep = _context4.sent;
+                rep = _context6.sent;
                 this.storeSelected = rep.data;
 
               case 9:
               case "end":
-                return _context4.stop();
+                return _context6.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee6, this);
       }));
 
       function getStore(_x) {
@@ -1898,18 +1170,18 @@ var app = new Vue({
      * Function to get comments with paginate on a store
      */
     getStoreComments: function () {
-      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(storeId) {
+      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(storeId) {
         var nbPage,
             requestOptions,
             url,
             req,
             rep,
-            _args5 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+            _args7 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
-                nbPage = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : null;
+                nbPage = _args7.length > 1 && _args7[1] !== undefined ? _args7[1] : null;
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
@@ -1918,23 +1190,23 @@ var app = new Vue({
                 url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
                   page: nbPage
                 }));
-                _context5.next = 6;
+                _context7.next = 6;
                 return fetch(url, requestOptions);
 
               case 6:
-                req = _context5.sent;
-                _context5.next = 9;
+                req = _context7.sent;
+                _context7.next = 9;
                 return req.json();
 
               case 9:
-                rep = _context5.sent;
+                rep = _context7.sent;
 
               case 10:
               case "end":
-                return _context5.stop();
+                return _context7.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee7, this);
       }));
 
       function getStoreComments(_x2) {
@@ -1944,21 +1216,21 @@ var app = new Vue({
       return getStoreComments;
     }(),
     autoComplete: function () {
-      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
         var requestOptions, url, reqCities, data, urlStore, reqStores, dataStores;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context8.prev = _context8.next) {
               case 0:
                 this.resultsQueryCity = [];
                 this.resultsQueryStore = [];
 
                 if (!(this.querySearch.length < 1)) {
-                  _context6.next = 4;
+                  _context8.next = 4;
                   break;
                 }
 
-                return _context6.abrupt("return");
+                return _context8.abrupt("return");
 
               case 4:
                 //Récupération des noms de villes en fonction de l'entrée utilisateur
@@ -1974,16 +1246,16 @@ var app = new Vue({
                   boost: "population",
                   limit: this.limitAutoCompletion
                 }));
-                _context6.next = 9;
+                _context8.next = 9;
                 return fetch(url, requestOptions);
 
               case 9:
-                reqCities = _context6.sent;
-                _context6.next = 12;
+                reqCities = _context8.sent;
+                _context8.next = 12;
                 return reqCities.json();
 
               case 12:
-                data = _context6.sent;
+                data = _context8.sent;
                 this.resultsQueryCity = data.features;
                 urlStore = new URL("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch));
                 urlStore.search = new URLSearchParams(_objectSpread({}, this.categorySelected.length > 0 ? this.categoryFilter.length > 0 ? {
@@ -1991,25 +1263,25 @@ var app = new Vue({
                 } : {
                   category: this.categorySelected
                 } : {}));
-                _context6.next = 18;
+                _context8.next = 18;
                 return fetch(urlStore, // modifier la variable search
                 requestOptions);
 
               case 18:
-                reqStores = _context6.sent;
-                _context6.next = 21;
+                reqStores = _context8.sent;
+                _context8.next = 21;
                 return reqStores.json();
 
               case 21:
-                dataStores = _context6.sent;
+                dataStores = _context8.sent;
                 this.resultsQueryStore = dataStores.data;
 
               case 23:
               case "end":
-                return _context6.stop();
+                return _context8.stop();
             }
           }
-        }, _callee6, this);
+        }, _callee8, this);
       }));
 
       function autoComplete() {
@@ -2022,28 +1294,28 @@ var app = new Vue({
       this.map.setView([lat, lon], 14);
     },
     refreshMapView: function () {
-      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context9.prev = _context9.next) {
               case 0:
-                _context7.next = 2;
+                _context9.next = 2;
                 return this.map.removeLayer(this.markers);
 
               case 2:
-                _context7.next = 4;
+                _context9.next = 4;
                 return this.getStoresOnMap();
 
               case 4:
-                _context7.next = 6;
+                _context9.next = 6;
                 return this.map.addLayer(this.markers);
 
               case 6:
               case "end":
-                return _context7.stop();
+                return _context9.stop();
             }
           }
-        }, _callee7, this);
+        }, _callee9, this);
       }));
 
       function refreshMapView() {
@@ -2051,113 +1323,87 @@ var app = new Vue({
       }
 
       return refreshMapView;
-    }(),
-    categoriesFilter: function () {
-      var _categoriesFilter = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        var requestOptions, url, req, rep, mainCats, subCats, _loop2, i;
+    }() // categoriesFilter: async function () {
+    //     let requestOptions = {
+    //         method: "GET",
+    //         redirect: "follow",
+    //     };
+    //     let url = new URL(`${this.baseUrl}/api/categories`);
+    //     let req = await fetch(url, requestOptions);
+    //     let rep = await req.json();
+    //     let mainCats = rep.data;
+    //     let subCats = new Object();
+    //     for (let i = 0; i < mainCats.length; i++) {
+    //         let subCat = [];
+    //         mainCats[i].child.forEach((element) =>
+    //             subCat.push(element.label)
+    //         );
+    //         subCats[mainCats[i].label] = subCat;
+    //     }
+    //     this.mainCat = await mainCats;
+    //     this.subCat = await subCats;
+    //     console.log(this.subCat);
+    // },
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("".concat(this.baseUrl, "/api/categories"));
-                _context8.next = 4;
-                return fetch(url, requestOptions);
-
-              case 4:
-                req = _context8.sent;
-                _context8.next = 7;
-                return req.json();
-
-              case 7:
-                rep = _context8.sent;
-                mainCats = rep.data;
-                subCats = new Object();
-
-                _loop2 = function _loop2(i) {
-                  var subCat = [];
-                  mainCats[i].child.forEach(function (element) {
-                    return subCat.push(element.label);
-                  });
-                  subCats[mainCats[i].label] = subCat;
-                };
-
-                for (i = 0; i < mainCats.length; i++) {
-                  _loop2(i);
-                }
-
-                _context8.next = 14;
-                return mainCats;
-
-              case 14:
-                this.mainCat = _context8.sent;
-                _context8.next = 17;
-                return subCats;
-
-              case 17:
-                this.subCat = _context8.sent;
-                console.log(this.subCat);
-
-              case 19:
-              case "end":
-                return _context8.stop();
-            }
-          }
-        }, _callee8, this);
-      }));
-
-      function categoriesFilter() {
-        return _categoriesFilter.apply(this, arguments);
-      }
-
-      return categoriesFilter;
-    }()
   },
   created: function created() {
-    this.categoriesFilter(); // get last map position from localStorage
+    var _JSON$parse,
+        _this2 = this;
+
+    //this.categoriesFilter();
+    this.mainCat = categories; // get last map position from localStorage
 
     localStorage.getItem("centerMap") && (this.mapCenter = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
 
-    localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap"));
+    localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap")); // mix favorite in bdd and localstorage
+
+    this.myFavorites = _toConsumableArray(new Set([].concat(_toConsumableArray(myFavorites), _toConsumableArray((_JSON$parse = JSON.parse(localStorage.getItem("myFavorites"))) !== null && _JSON$parse !== void 0 ? _JSON$parse : [])))); // save favorite in localstorage and try to save them in bdd on page leave
+
+    window.onunload = function () {
+      localStorage.setItem("myFavorites", JSON.stringify(_this2.myFavorites));
+      if (idUser == null || !navigator.sendBeacon) return;
+      navigator.sendBeacon("".concat(_this2.baseUrl, "/api/stores/setFavorites"), new Blob([JSON.stringify({
+        id: idUser,
+        favorites: _this2.myFavorites
+      })], {
+        type: "application/json"
+      }));
+    };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-      var _this2 = this;
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+      var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
         while (1) {
-          switch (_context9.prev = _context9.next) {
+          switch (_context10.prev = _context10.next) {
             case 0:
               //setting up map
               this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
               L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context9.next = 4;
+              _context10.next = 4;
               return this.getStoresOnMap();
 
             case 4:
-              _context9.next = 6;
+              _context10.next = 6;
               return this.map.addLayer(this.markers);
 
             case 6:
               //await ;
               // add eventListener on the map movment
               this.map.on("moveend", function () {
-                _this2.refreshMapView();
+                _this3.refreshMapView();
 
-                localStorage.setItem("centerMap", [_this2.map.getCenter().lat, _this2.map.getCenter().lng]);
-                localStorage.setItem("zoomMap", _this2.map.getZoom()); // Insert les données de la map en localstorage
+                localStorage.setItem("centerMap", [_this3.map.getCenter().lat, _this3.map.getCenter().lng]);
+                localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
               });
 
             case 7:
             case "end":
-              return _context9.stop();
+              return _context10.stop();
           }
         }
-      }, _callee9, this);
+      }, _callee10, this);
     }));
 
     function mounted() {
@@ -2177,79 +1423,5 @@ var app = new Vue({
 });
 })();
 
-<<<<<<< HEAD
-=======
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		if(__webpack_module_cache__[moduleId]) {
-/******/ 			return __webpack_module_cache__[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-/******/ 	// startup
-/******/ 	// Load entry module
-/******/ 	__webpack_require__("./resources/js/mapScript.js");
-/******/ 	// This entry module used 'exports' so it can't be inlined
->>>>>>> 7b99363c4f2526a9a4f202942bd14701f157d77f
 /******/ })()
 ;

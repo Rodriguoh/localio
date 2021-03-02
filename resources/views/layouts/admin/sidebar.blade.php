@@ -1,7 +1,7 @@
 <div class="sidebar">
     <div class="sidebar-menu">
         <!-- Sidebar brand -->
-        <a href="#" class="sidebar-brand">
+        <a href="{{ route('homeAccount') }}" class="sidebar-brand">
             Administration
         </a>
         <!-- Sidebar content with the search box -->
@@ -76,14 +76,17 @@
         </br>
         <h5 class="sidebar-title">Gérer son compte</h5>
         <div class="sidebar-divider"></div>
-        <a href="{{ URL::route('settingsAccount')}}" class="sidebar-link sidebar-link-with-icon">
+        <a href="{{ URL::route('homeAccount')}}" class="sidebar-link sidebar-link-with-icon">
             <span class="sidebar-icon">
                 <i class="fa fa-lock" aria-hidden="true"></i>
             </span>
             Parametre du compte
         </a>
         <div class="sidebar-divider"></div>
-        <a href="{{ URL::route('logout')}}" class="sidebar-link sidebar-link-with-icon" style="color:red">
+        <a href="{{ URL::route('logout')}}" class="sidebar-link sidebar-link-with-icon text-danger">
+            <span class="sidebar-icon">
+                <i class="fa fa-sign-out text-danger" aria-hidden="true"></i>
+            </span>
             Se deconnecter
         </a>
     </div>

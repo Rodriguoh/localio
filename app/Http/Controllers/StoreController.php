@@ -21,7 +21,7 @@ class StoreController extends Controller
 
     public function index()
     {
-        $stores = Store::orderBy('name')->paginate(8);
+        $stores = Store::orderBy('name')->with('city', 'state')->paginate(8);
         return view('pages/account/stores/listStores', [
             'stores' => $stores,
         ]);
@@ -99,7 +99,7 @@ class StoreController extends Controller
     }
     public function userStore()
     {
-        $stores = Store::where('user_id', Auth::user()->id)->orderBy('name')->paginate(8);
+        $stores = Auth::user()->stores()->with('state', 'city')->orderBy('name')->paginate(8);
         return view('pages/account/stores/myStores', [
             'stores' => $stores
         ]);
@@ -205,23 +205,5 @@ class StoreController extends Controller
         $store->delete();
 
         return redirect()->route('myStores')->with('successDelete', 'Votre commerce a bien été supprimé');
-    }
-
-    public function myFavorites()
-    {
-        return view('pages/account/favorites/viewFavorites', [
-            'favorites' => Auth::user()->favoritesStores()->paginate(6),
-        ]);
-    }
-
-    public function editFavorite($idStore)
-    {
-        return view('pages/account/favorites/editFavorite', ['store' => Store::find($idStore)]);
-    }
-
-    public function deleteFavorite(Request $request)
-    {
-        Auth::user()->favoritesStores()->detach($request->id);
-        return redirect()->route('myFavorites')->with(['successDelete' => 'Favorie supprimé']);
     }
 }

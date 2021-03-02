@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="card p-0">
+<div class="card p-0 m-0">
     <div class="d-flex text-center">
         <a href="{{ route('statsStore', ['idStore' => $store->id])}}" class="font-size-22 w-half btn py-5 rounded-0 shadow-none h-auto">Statistique</a>
         <h2 class="font-size-22 w-half py-5 m-0">
@@ -20,10 +20,10 @@
         </div>
         @endif
         @include('components.store-form')
-
+        <div class="sidebar-divider"></div>
         <h3>Supprimer le commerce</h3>
         <p>En supprimant acceptant de supprimer votre commerce, nous supprimerons toutes les informations relatives à celui-ci.</p>
-        <div class="dropdown dropright with-arrow">
+        <div class="dropdown dropup with-arrow">
             <button class="btn btn-danger" data-toggle="dropdown" type="button" id="sign-in-dropdown-toggle-btn" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-trash"></i> Supprimer
             </button>
