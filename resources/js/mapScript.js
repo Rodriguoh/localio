@@ -185,7 +185,6 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
             this.commentPages = rep.pagination.total_pages;
-            console.log(this.commentPages);
             let comments = new Array();
 
             for(let i=0; i < rep.data.length; i++){
