@@ -63,7 +63,7 @@ class Store extends Model
      */
     public function photos()
     {
-        return $this->belongsToMany(Photo::class);
+        return $this->hasMany(Photo::class);
     }
 
     /**

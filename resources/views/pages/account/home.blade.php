@@ -18,9 +18,9 @@
         <div class="form-group">
             <label for="lastname">Nom</label>
             @if($errors->has('lastname'))
-            <div class="invalid-feedback">
-                {{$errors->first('lastname')}}
-            </div>
+                <div class="invalid-feedback">
+                    Le nom est obligatoire.
+                </div>
             @endif
             <input type="text" class="form-control" id="lastname" name="lastname" value="{{$user->lastname}}" disabled>
         </div>
@@ -28,7 +28,7 @@
         <div class="form-group">
             @if($errors->has('firstname'))
             <div class="invalid-feedback">
-                {{$errors->first('firstname')}}
+                Le prénom est obligatoire.
             </div>
             @endif
             <label for="firstname">Prénom</label>
@@ -39,7 +39,7 @@
             <label for="email" class="required">Adresse Email</label>
             @if($errors->has('email'))
             <div class="invalid-feedback">
-                {{$errors->first('email')}}
+                L'adresse email est obligatoire.
             </div>
             @endif
             <input type="text" class="form-control" id="email" name="email" value="{{$user->email}}" disabled>
@@ -49,7 +49,7 @@
             <label for="phone">Numéro de téléphone</label>
             @if($errors->has('phone'))
             <div class="invalid-feedback">
-                {{$errors->first('phone')}}
+                Le numéro de téléphone est obligatoire.
             </div>
             @endif
             <input type="text" class="form-control" id="phone" name="phone" value="{{$user->phone}}" disabled>
@@ -60,7 +60,7 @@
             <input type="checkbox" id="switch-commercant" value="true" name="isCommercant" disabled="disabled">
             <label for="switch-commercant">Je suis un commercant</label>
             <p class="text-muted">Pour être commercant vous devez renseigné votre nom, prénom ainsi que numéro de téléphone.</p>
-          </div>
+        </div>
         @endif
 
         <div class="d-flex justify-content-between">
