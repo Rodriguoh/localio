@@ -93,7 +93,6 @@
         //Change the text to the correct name
         let textNode = document.querySelector('#modal-confirmationApprove .modal-dialog .modal-content p');
         textNode.innerHTML = `Si vous confirmer le commerce ${nameStore} sera approuvé.`;
-        console.log(nameStore);
     }
 
     function editModalOnRefuse(idStore, nameStore) {
@@ -105,7 +104,6 @@
         //Change the text to the correct name
         let textNode = document.querySelector('#modal-confirmationRefuse .modal-dialog .modal-content p');
         textNode.innerHTML = `Si vous confirmer le commerce ${nameStore} sera refusé.`;
-        console.log(nameStore);
     }
 
 </script>
