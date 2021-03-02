@@ -36,6 +36,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -67,6 +69,9 @@ var app = new Vue({
     prevCatSelected: "",
     categoryFilter: "",
     querySearch: "",
+    comments: {},
+    commentLimit: 1,
+    commentPages: 0,
     resultsQueryCity: [],
     resultsQueryStore: [],
     mainCat: [],
@@ -225,9 +230,16 @@ var app = new Vue({
 
                           case 2:
                             _context2.next = 4;
-                            return halfmoon.toggleModal("modal-store");
+                            return _this.getStoreComments(rep[i].id);
 
                           case 4:
+                            _context2.next = 6;
+                            return halfmoon.toggleModal("modal-store");
+
+                          case 6:
+                            _this.commentLimit = 1;
+
+                          case 7:
                           case "end":
                             return _context2.stop();
                         }
@@ -351,6 +363,8 @@ var app = new Vue({
             url,
             req,
             rep,
+            comments,
+            i,
             _args7 = arguments;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
           while (1) {
@@ -375,8 +389,25 @@ var app = new Vue({
 
               case 9:
                 rep = _context7.sent;
+                this.commentPages = rep.pagination.total_pages;
+                console.log(this.commentPages);
+                comments = new Array();
 
-              case 10:
+                for (i = 0; i < rep.data.length; i++) {
+                  if (_typeof(rep.data) == "object") {
+                    comments.push(rep.data[i]);
+                  }
+
+                  ;
+                }
+
+                _context7.next = 16;
+                return comments;
+
+              case 16:
+                this.comments = _context7.sent;
+
+              case 17:
               case "end":
                 return _context7.stop();
             }

@@ -21,6 +21,9 @@ var app = new Vue({
         prevCatSelected: "",
         categoryFilter: "",
         querySearch: "",
+        comments:{},
+        commentLimit: 1,
+        commentPages: 0,
         resultsQueryCity: [],
         resultsQueryStore: [],
         mainCat: [],
@@ -121,7 +124,9 @@ var app = new Vue({
                 // Affiche la modal lors du clic sur le marqueur
                 marker.on("click", async () => {
                     await this.getStore(rep[i].id);
+                    await this.getStoreComments(rep[i].id);
                     await halfmoon.toggleModal("modal-store");
+                    this.commentLimit = 1;
                 });
 
                 // Change la couleur de fond de la div du commerce lors du hover de son marqueur
@@ -140,15 +145,15 @@ var app = new Vue({
                     store.style.color= "black";
                     store.style.opacity = "100%";
                 });
-                
+
                 allMarkers.push(marker);
             }
 
             this.prevCatSelected = this.categorySelected;
             this.markers = L.layerGroup(allMarkers);
-            
+
             this.allStoreOnMap = rep;
-            
+
         },
         /**
          * Function to get all details on a store
@@ -179,6 +184,15 @@ var app = new Vue({
 
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
+            this.commentPages = rep.pagination.total_pages;
+            console.log(this.commentPages);
+            let comments = new Array();
+
+            for(let i=0; i < rep.data.length; i++){
+                if (typeof rep.data == "object"){comments.push(rep.data[i])};
+            }
+
+            this.comments = await comments;
         },
         autoComplete: async function () {
             this.resultsQueryCity = [];

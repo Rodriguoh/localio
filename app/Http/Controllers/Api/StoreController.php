@@ -89,7 +89,7 @@ class StoreController extends Controller
      */
     public function getStoreComments(string $id)
     {
-        return new CommentsCollection(Comment::where('store_id', '=', $id)->paginate(2));
+        return new CommentsCollection(Comment::where('store_id', '=', $id)->paginate(5));
     }
 
 
@@ -154,3 +154,4 @@ class StoreController extends Controller
         return $request->favorites;
     }
 }
+
