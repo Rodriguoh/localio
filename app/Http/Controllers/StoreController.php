@@ -113,7 +113,7 @@ class StoreController extends Controller
 
         $consultationsByMonth = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
 
-
+        // get count consultation group by month for the last 12 month
         $consultations = $store->consultations()
             ->where("date", ">", Carbon::now()->subMonths(12))
             ->orderBy('date')
@@ -126,16 +126,14 @@ class StoreController extends Controller
 
         $consultationsResult = [];
 
-        array_map(function ($month) {
+        // fill consultations with 0 by empty month
+        foreach ($consultationsByMonth as $month) {
             $consultationsResult[$month] = $consultations[$month] ?? 0;
-        }, $consultationsByMonth);
-
-        dd($consultationsResult, $consultations, $consultationsByMonth);
-
+        }
 
         return view('pages/account/stores/statsStore', [
             'store' => $store,
-            'consultations' => $consultations
+            'consultations' => $consultationsResult
         ]);
     }
 

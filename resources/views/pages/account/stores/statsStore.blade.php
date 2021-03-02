@@ -37,14 +37,13 @@
                 </div>
             </div>
         </div>
-        <canvas id="myChart" width="300" height="200"></canvas>
+        <canvas id="myChart" width="300" height="150"></canvas>
     </div>
     <script>
         var consultations = @json($consultations);
         var months = ["January","February","March","April","June", "July", "August", "September", "October", "November", "December"];
         var currentMonth = new Date().getMonth();
         var orderedMonth = months.slice(currentMonth-10).concat(months.slice(0,currentMonth+1));
-        console.log(Object.values(consultations).map((month) => {return month;}));
         new Chart(document.getElementById('myChart'),
             {
                 "type": "line",
@@ -52,8 +51,8 @@
                     "labels": orderedMonth,
                     "datasets": [
                         {
-                            "label": "My First Dataset",
-                            "data": Object.values(consultations),
+                            "label": "Nombre de visite",
+                            "data": orderedMonth.map((month)=> {return consultations?.[month]}),
                             "fill": false,
                             "borderColor": "rgb(75, 192, 192)",
                             "lineTension": 0.1
