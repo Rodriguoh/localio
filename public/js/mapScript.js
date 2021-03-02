@@ -17,27 +17,132 @@
             /*!***********************************!*\
   !*** ./resources/js/mapScript.js ***!
   \***********************************/
-            /***/ (
-                __unused_webpack_module,
-                __webpack_exports__,
-                __webpack_require__
-            ) => {
-                "use strict";
-                __webpack_require__.r(__webpack_exports__);
-                /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-                    /*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"
-                );
-                /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/ __webpack_require__.n(
-                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__
-                );
 
-                function _toConsumableArray(arr) {
-                    return (
-                        _arrayWithoutHoles(arr) ||
-                        _iterableToArray(arr) ||
-                        _unsupportedIterableToArray(arr) ||
-                        _nonIterableSpread()
-                    );
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+// import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
+// var _ = require("lodash"); Import lodash en cas de besoin
+// import debounce from "lodash/debounce";
+var app = new Vue({
+  el: "#app",
+  data: {
+    map: undefined,
+    markers: undefined,
+    mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+      attribution: "",
+      minNativeZoom: 4,
+      minZoom: 4
+    }],
+    mapCenter: [44.5667, 6.0833],
+    mapZoom: 13,
+    baseUrl: "https://localio-app.herokuapp.com",
+    // http://localhost/localio/public mettre l'url sur laquelle on travail
+    categorySelected: "",
+    prevCatSelected: "",
+    categoryFilter: "",
+    querySearch: "",
+    comments: {},
+    commentLimit: 1,
+    commentPages: 0,
+    resultsQueryCity: [],
+    resultsQueryStore: [],
+    mainCat: [],
+    subCat: {},
+    limitAutoCompletion: 5,
+    storeSelected: {},
+    allStoreOnMap: undefined,
+    myFavorites: []
+  },
+  methods: {
+    /**
+     * Function for search stores by name in autocomplete
+     */
+    getStoresByName: function () {
+      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var requestOptions, reqStores, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                _context.next = 3;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
+
+              case 3:
+                reqStores = _context.sent;
+                _context.next = 6;
+                return reqStores.json();
+
+              case 6:
+                data = _context.sent;
+                console.log(data);
+                return _context.abrupt("return", data.data);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getStoresByName() {
+        return _getStoresByName.apply(this, arguments);
+      }
+
+      return getStoresByName;
+    }(),
+
+    /**
+     * Function to get all store to display on map
+     */
+    getStoresOnMap: function () {
+      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var _this = this;
+
+        var catFilter, requestOptions, url, req, rep, allMarkers, _loop, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                if (this.prevCatSelected != this.categorySelected) {
+                  this.categoryFilter = "";
+
                 }
 
                 function _nonIterableSpread() {
@@ -60,104 +165,147 @@
                         return _arrayLikeToArray(o, minLen);
                 }
 
-                function _iterableToArray(iter) {
-                    if (
-                        typeof Symbol !== "undefined" &&
-                        Symbol.iterator in Object(iter)
-                    )
-                        return Array.from(iter);
+
+
+              case 19:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function getStoresOnMap() {
+        return _getStoresOnMap.apply(this, arguments);
+      }
+
+      return getStoresOnMap;
+    }(),
+
+    /**
+     * Function to get all details on a store
+     */
+    getStore: function () {
+      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(storeId) {
+        var requestOptions, url, req, rep;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
+                _context6.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context6.sent;
+                _context6.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context6.sent;
+                this.storeSelected = rep.data;
+
+              case 9:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function getStore(_x) {
+        return _getStore.apply(this, arguments);
+      }
+
+      return getStore;
+    }(),
+
+    /**
+     * Function to get comments with paginate on a store
+     */
+    getStoreComments: function () {
+      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(storeId) {
+        var nbPage,
+            requestOptions,
+            url,
+            req,
+            rep,
+            comments,
+            i,
+            _args7 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                nbPage = _args7.length > 1 && _args7[1] !== undefined ? _args7[1] : null;
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId, "/comments"));
+                url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
+                  page: nbPage
+                }));
+                _context7.next = 6;
+                return fetch(url, requestOptions);
+
+              case 6:
+                req = _context7.sent;
+                _context7.next = 9;
+                return req.json();
+
+              case 9:
+                rep = _context7.sent;
+                this.commentPages = rep.pagination.total_pages;
+                console.log(this.commentPages);
+                comments = new Array();
+
+                for (i = 0; i < rep.data.length; i++) {
+                  if (_typeof(rep.data) == "object") {
+                    comments.push(rep.data[i]);
+                  }
+
+                  ;
                 }
 
-                function _arrayWithoutHoles(arr) {
-                    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-                }
+                _context7.next = 16;
+                return comments;
 
-                function _arrayLikeToArray(arr, len) {
-                    if (len == null || len > arr.length) len = arr.length;
-                    for (var i = 0, arr2 = new Array(len); i < len; i++) {
-                        arr2[i] = arr[i];
-                    }
-                    return arr2;
-                }
+              case 16:
+                this.comments = _context7.sent;
 
-                function ownKeys(object, enumerableOnly) {
-                    var keys = Object.keys(object);
-                    if (Object.getOwnPropertySymbols) {
-                        var symbols = Object.getOwnPropertySymbols(object);
-                        if (enumerableOnly)
-                            symbols = symbols.filter(function (sym) {
-                                return Object.getOwnPropertyDescriptor(
-                                    object,
-                                    sym
-                                ).enumerable;
-                            });
-                        keys.push.apply(keys, symbols);
-                    }
-                    return keys;
-                }
+              case 17:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
 
-                function _objectSpread(target) {
-                    for (var i = 1; i < arguments.length; i++) {
-                        var source = arguments[i] != null ? arguments[i] : {};
-                        if (i % 2) {
-                            ownKeys(Object(source), true).forEach(function (
-                                key
-                            ) {
-                                _defineProperty(target, key, source[key]);
-                            });
-                        } else if (Object.getOwnPropertyDescriptors) {
-                            Object.defineProperties(
-                                target,
-                                Object.getOwnPropertyDescriptors(source)
-                            );
-                        } else {
-                            ownKeys(Object(source)).forEach(function (key) {
-                                Object.defineProperty(
-                                    target,
-                                    key,
-                                    Object.getOwnPropertyDescriptor(source, key)
-                                );
-                            });
-                        }
-                    }
-                    return target;
-                }
+      function getStoreComments(_x2) {
+        return _getStoreComments.apply(this, arguments);
+      }
 
-                function _defineProperty(obj, key, value) {
-                    if (key in obj) {
-                        Object.defineProperty(obj, key, {
-                            value: value,
-                            enumerable: true,
-                            configurable: true,
-                            writable: true,
-                        });
-                    } else {
-                        obj[key] = value;
-                    }
-                    return obj;
-                }
+      return getStoreComments;
+    }(),
+    autoComplete: function () {
+      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var requestOptions, url, reqCities, data, urlStore, reqStores, dataStores;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                this.resultsQueryCity = [];
+                this.resultsQueryStore = [];
 
-                function asyncGeneratorStep(
-                    gen,
-                    resolve,
-                    reject,
-                    _next,
-                    _throw,
-                    key,
-                    arg
-                ) {
-                    try {
-                        var info = gen[key](arg);
-                        var value = info.value;
-                    } catch (error) {
-                        reject(error);
-                        return;
-                    }
-                    if (info.done) {
-                        resolve(value);
-                    } else {
-                        Promise.resolve(value).then(_next, _throw);
-                    }
+                if (!(this.querySearch.length < 1)) {
+                  _context8.next = 4;
+                  break;
+
                 }
 
                 function _asyncToGenerator(fn) {
