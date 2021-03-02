@@ -4,9 +4,9 @@
 
 <div class="card p-0 m-0 m-sm-10">
     <div class="d-flex text-center">
-        <a href="{{ route('myComments') }}" class="font-size-22 w-half btn py-5 rounded-0 shadow-none h-auto">Mes Avis</a>
+        <a href="{{ route('myComments') }}" class="font-size-22 w-half btn py-5 rounded-0 shadow-none h-auto flex-shrink-1">Mes Avis</a>
 
-        <h2 class="font-size-22 w-half py-5 m-0">
+        <h2 class="font-size-22 w-full py-5 m-0">
             Ajouter un avis
         </h2>
     </div>

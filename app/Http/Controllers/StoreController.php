@@ -166,8 +166,8 @@ class StoreController extends Controller
         $store->number = $request->number;
         $store->street = $request->street;
 
-        if (City::where('INSEE', '=', $request->city_INSEE)->exists()) {
-            $store->city_INSEE = City::where('INSEE', '=', $request->city_INSEE)->first()->INSEE;
+        if (City::where('INSEE', '=', $request->INSEE)->exists()) {
+            $store->city_INSEE = City::where('INSEE', '=', $request->INSEE)->first()->INSEE;
         } else {
             $city = new City([
                 'name' => $request->city,
