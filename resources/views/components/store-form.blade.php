@@ -112,7 +112,7 @@
         <label for="city" class="required">Ville</label>
         @if($errors->has('INSEE'))
             <div class="invalid-feedback">
-                {{$errors->first('INSEE')}}
+                Vous devez sélectionner une ville dans la liste.
             </div>
         @endif
         <input type="text" class="form-control" id="city" placeholder="Le nom de la ville" name="city" value="{{old('city', $store->city->name ?? '')}}" autocomplete="new-password">
