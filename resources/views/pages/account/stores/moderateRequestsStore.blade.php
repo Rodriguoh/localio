@@ -26,15 +26,15 @@
                 <td class="col-sm-1">{{$store->state_label}}</td>
                 <td class="col-sm-2">
                     <a href="{{ route('showStore', ['idStore' => $store->id]) }}" class="btn btn-secondary btn-square m-2" type="button"><i class="fa fa-eye" style="color:white" aria-hidden="true"></i></a>
-                    <a href="#modal-confirmationApprove" onclick="editModalOnApproved({{$store->id}}, '{{$store->name}}')" class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></a>
-                    <a href="#modal-confirmationRefuse" class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
+                    <a href="#modal-confirmationApprove" onclick="editModalOnApprove({{$store->id}}, '{{$store->name}}')" class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></a>
+                    <a href="#modal-confirmationRefuse" onclick="editModalOnRefuse({{$store->id}}, '{{$store->name}}')" class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
     @else
-        <p>Il n'y a actuellement aucune demande de mise en ligne de stores</p>
+    <p>Il n'y a actuellement aucune demande de mise en ligne de stores</p>
     @endif
 
     @if(isset($stores) && $stores->count() > 0)
@@ -83,17 +83,30 @@
     </div>
 </div>
 @endif
-    <script>
-        function editModalOnApproved(idStore, nameStore){
-            //Change the approve link to the correct id
-            let nodeLink = document.querySelector('#modal-confirmationApprove .modal-dialog .modal-content div .btn-success');
-            let newLink = document.location.origin+document.location.pathname.slice(0, -14)+`approveStore/${idStore}`;
-            nodeLink.setAttribute('href', newLink);
+<script>
+    function editModalOnApprove(idStore, nameStore) {
+        //Change the approve link to the correct id
+        let nodeLink = document.querySelector('#modal-confirmationApprove .modal-dialog .modal-content div .btn-success');
+        let newLink = document.location.origin + document.location.pathname.slice(0, -14) + `approveStore/${idStore}`;
+        nodeLink.setAttribute('href', newLink);
 
-            //Change the text to the correct name
-            let textNode = document.querySelector('#modal-confirmationApprove .modal-dialog .modal-content p');
-            textNode.innerHTML = `Si vous confirmer le commerce ${nameStore} sera approuvé.`;
-            console.log(nameStore);
-        }
-    </script>
+        //Change the text to the correct name
+        let textNode = document.querySelector('#modal-confirmationApprove .modal-dialog .modal-content p');
+        textNode.innerHTML = `Si vous confirmer le commerce ${nameStore} sera approuvé.`;
+        console.log(nameStore);
+    }
+
+    function editModalOnRefuse(idStore, nameStore) {
+        //Change the approve link to the correct id
+        let nodeLink = document.querySelector('#modal-confirmationRefuse .modal-dialog .modal-content div .btn-success');
+        let newLink = document.location.origin + document.location.pathname.slice(0, -14) + `refuseStore/${idStore}`;
+        nodeLink.setAttribute('href', newLink);
+
+        //Change the text to the correct name
+        let textNode = document.querySelector('#modal-confirmationRefuse .modal-dialog .modal-content p');
+        textNode.innerHTML = `Si vous confirmer le commerce ${nameStore} sera refusé.`;
+        console.log(nameStore);
+    }
+
+</script>
 @endsection
