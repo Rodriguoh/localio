@@ -42,6 +42,12 @@
             margin-top:150px;
         }
 
+        @media screen and (min-width:992px){
+            #store-list {
+                margin-top:180px;
+            }
+        }
+
         #store-list>li {
             list-style: none;
         }
@@ -125,7 +131,7 @@
 
             </div>
             <!-- Paneau gauche avec les différents commerces -->
-            <div  id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-150 w-sm-300 h-400 position-absolute ml-20 d-none d-sm-block">
+            <div  id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-150 w-sm-250 h-400 position-absolute ml-20 d-none d-sm-block">
                     <li class="d-flex flex-column" v-for="store in allStoreOnMap">
                         <div :id="'list-store-'+store.id" class="info-store-list bg-light-lm bg-dark-dm rounded p-sm-4 p-md-10">
                             <p class="text-center text-dark-lm text-white-dm"><span class="font-weight-bold">@{{store.name}}</span></p>
@@ -152,6 +158,7 @@
                                     @include('components.comment')
                                 </div>
                             </div>
+
                             <div class="col-7">
                                 <h2 class="content-title">@{{storeSelected.name}}</h2>
                                 <div class="custom-checkbox">
@@ -178,7 +185,7 @@
                                     </div>
 
                                     <div class="my-10">
-                                        <p><span class="font-weight-medium"> Livraison :</span> @{{storeSelected?.isDelivering ? 'Oui' : 'Non' }} </p>
+                                        <p><span class="font-weight-medium"> Livraison :</span> @{{storeSelected?.isDelivering ? 'Non' : 'Oui' }} </p>
                                         <p><span class="font-weight-medium"> Condition de livraison :</span> @{{storeSelected?.conditionDelivery}}</p>
                                     </div>
 
