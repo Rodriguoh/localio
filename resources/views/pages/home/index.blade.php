@@ -78,11 +78,23 @@
         .cat-btn {
             height: var(--large-button-height);
         }
+        .card{
+            margin-left: 0 !important;
+            margin-right: 20px !important;
+        }
+        .comments{
+            width: 90%;
+            height: 300px;
+        }
+        .leaflet-left{
+            left: 95% !important;
+            top: 35px !important;
+        }
 
     </style>
 </head>
 
-<body data-set-preferred-mode-onload="true">
+<body data-set-preferred-mode-onload="true" class="with-custom-webkit-scrollbars with-custom-css-scrollbars">
     {{-- @{{(categoryFilter || categorySelected || 'Catégories').substring(0,16)}} --}}
 
     <div id="app" class="page-wrapper with-navbar">
@@ -138,46 +150,57 @@
                         <span aria-hidden="true">&times;</span>
                     </a>
                     <div class="container">
-                        <h2 class="content-title">@{{storeSelected.name}}</h2>
-                        <div class="custom-checkbox">
-                            <input type="checkbox" id="checkbox-favoris" :value="storeSelected.id" v-model="myFavorites">
-                            <label for="checkbox-favoris">Favoris</label>
-                          </div>
-                        <div class="m-auto text-justify">
-                            <div class="my-10">
-                                <p><span class="font-weight-medium">Mail :</span> @{{storeSelected?.mail}}</p>
-                                <p><span class="font-weight-medium">Téléphone :</span>  @{{storeSelected?.phone}}</p>
-                                <p><span class="font-weight-medium">Site internet :</span>  @{{storeSelected?.url}}</p>
-                            </div>
-                            <div class="my-10">
-                                <p><span class="font-weight-medium">Adresse :</span> @{{storeSelected?.adresse?.number}}, @{{storeSelected?.adresse?.street}}, @{{storeSelected?.adresse?.city}}, @{{storeSelected?.adresse?.ZIPCode}}    </p>
-                            </div>
-                            <div class="my-10">
-                                <p><span class="font-weight-medium">Catégorie :</span> @{{storeSelected?.category}}</p>
-                            </div>
-                            <div class="my-10">
-                                <!-- <p><span class="font-weight-medium">Horraires :</span> @{{storeSelected?.openingHours}}</p>  -->
+                        <div class="row">
+                            <div class="col-5">
+                                <div style="height: 350px; width: 90%; background-color: grey"></div>
+                                <h2>Commentaires</h2>
+                                <div class="overflow-auto comments">
+                                    @include('components.comment')
+                                </div>
                             </div>
 
-                            <div class="my-10">
-                                <p> <span class="font-weight-medium">Description :</span> @{{storeSelected.description}}</p>
-                            </div>
+                            <div class="col-7">
+                                <h2 class="content-title">@{{storeSelected.name}}</h2>
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox-favoris" :value="storeSelected.id" v-model="myFavorites">
+                                    <label for="checkbox-favoris">Favoris</label>
+                                </div>
+                                <div class="m-auto text-justify">
+                                    <div class="my-10">
+                                        <p><span class="font-weight-medium">Mail :</span> @{{storeSelected?.mail}}</p>
+                                        <p><span class="font-weight-medium">Téléphone :</span>  @{{storeSelected?.phone}}</p>
+                                        <p><span class="font-weight-medium">Site internet :</span>  @{{storeSelected?.url}}</p>
+                                    </div>
+                                    <div class="my-10">
+                                        <p><span class="font-weight-medium">Adresse :</span> @{{storeSelected?.adresse?.number}}, @{{storeSelected?.adresse?.street}}, @{{storeSelected?.adresse?.city}}, @{{storeSelected?.adresse?.ZIPCode}}    </p>
+                                    </div>
+                                    <div class="my-10">
+                                        <p><span class="font-weight-medium">Catégorie :</span> @{{storeSelected?.category}}</p>
+                                    </div>
+                                    <div class="my-10">
+                                        <!-- <p><span class="font-weight-medium">Horraires :</span> @{{storeSelected?.openingHours}}</p>  -->
+                                    </div>
+                                    <div class="my-10">
+                                        <p> <span class="font-weight-medium">Description :</span> @{{storeSelected.description}}</p>
+                                    </div>
 
-                            <div class="my-10">
-                                <p><span class="font-weight-medium"> Livraison :</span> @{{storeSelected?.isDelivering ? 'Non' : 'Oui' }} </p>
-                                <p><span class="font-weight-medium"> Condition de livraison :</span> @{{storeSelected?.conditionDelivery}}</p>
-                            </div>
+                                    <div class="my-10">
+                                        <p><span class="font-weight-medium"> Livraison :</span> @{{storeSelected?.isDelivering ? 'Non' : 'Oui' }} </p>
+                                        <p><span class="font-weight-medium"> Condition de livraison :</span> @{{storeSelected?.conditionDelivery}}</p>
+                                    </div>
 
-                            <div class="my-10">
-                                <p><span class="font-weight-medium"> N° Siret :</span> @{{storeSelected?.SIRET}}</p>
+                                    <div class="my-10">
+                                        <p><span class="font-weight-medium"> N° Siret :</span> @{{storeSelected?.SIRET}}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-       
-        
+
+
     </div>
     <script>
         var categories = @json($categories);
