@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 
+
 class StoreController extends Controller
 {
     public function __construct()
@@ -108,8 +109,33 @@ class StoreController extends Controller
 
     public function statsStore($idStore)
     {
+        $store = Store::find($idStore);
+
+        $consultationsByMonth = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
+
+
+        $consultations = $store->consultations()
+            ->where("date", ">", Carbon::now()->subMonths(12))
+            ->orderBy('date')
+            ->get()
+            ->groupBy(function ($d) {
+                return Carbon::parse($d->date)->format('F');
+            })
+            ->map
+            ->count();
+
+        $consultationsResult = [];
+
+        array_map(function ($month) {
+            $consultationsResult[$month] = $consultations[$month] ?? 0;
+        }, $consultationsByMonth);
+
+        dd($consultationsResult, $consultations, $consultationsByMonth);
+
+
         return view('pages/account/stores/statsStore', [
-            'store' => Store::find($idStore)
+            'store' => $store,
+            'consultations' => $consultations
         ]);
     }
 
