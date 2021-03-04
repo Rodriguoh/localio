@@ -133,13 +133,15 @@
             <!-- Paneau gauche avec les différents commerces -->
             <div  id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-150 w-sm-250 h-400 position-absolute ml-20 d-none d-sm-block">
                     <li class="d-flex flex-column" v-for="store in allStoreOnMap">
-                        <div :id="'list-store-'+store.id" class="info-store-list bg-light-lm bg-dark-dm rounded p-sm-4 p-md-10">
-                            <div class="row">
-                                <p class="text-dark-lm text-white-dm col-6"><span class="font-weight-bold">@{{store.name}}</span></p>
+                        <div :id="'list-store-'+store.id" class="row info-store-list bg-light-lm bg-dark-dm rounded p-sm-4 p-md-10">
+                            <div class="row col-6">
                                 <div v-if="store.thumbnails"><img :src="store.thumbnails" class="img-fluid rounded w-sm-100 h-sm-100 col-6" alt=""></div>
                             </div>
-                            <p v-if="store.avg_note" class="text-center text-dark-lm text-white-dm">Note : @{{store.avg_note.substring(0,3)}} / 5</p>
-                            <p class="text-center text-dark-lm text-white-dm">@{{store.category}}</p>
+                            <div class="d-flex flex-column col-6">
+                                <p class="text-left text-dark-lm text-white-dm"><span class="font-weight-bold">@{{store.name}}</span></p>
+                                <p v-if="store.avg_note" class="text-lefttext-dark-lm text-white-dm">Note : @{{store.avg_note.substring(0,3)}} / 5</p>
+                                <p class="text-left text-dark-lm text-white-dm">@{{store.category}}</p>
+                            </div>
                         </div>
                     </li>
             </div>
@@ -157,7 +159,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div style="height: 350px; width: 90%; background-color: grey"></div>
-                                <h2>Commentaires</h2>
+                                <h2 class="content-title">Commentaires</h2>
                                 <div class="overflow-auto comments">
                                     @include('components.comment')
                                 </div>
