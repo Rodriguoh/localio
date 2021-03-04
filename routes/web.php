@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
@@ -92,3 +93,9 @@ Route::post('/comment/form', [CommentController::class, 'postComment'])->name('p
 Route::post('/comment/delete', [CommentController::class, 'delete'])->name('deleteComment');
 
 Route::get('/legalNotices', 'AboutController@legalNotices')->name('legalNotices');
+
+// Categories
+Route::get('account/categories/{category_id?}', [CategoryController::class, 'index'])->name('categories');
+Route::post('account/category/add', [CategoryController::class, 'add'])->name('addCategory');
+Route::post('account/category/edit', [CategoryController::class, 'edit'])->name('editCategory');
+Route::post('account/category/delete', [CategoryController::class, 'delete'])->name('deleteCategory');
