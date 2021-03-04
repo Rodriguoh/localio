@@ -36,6 +36,7 @@ class StoreController extends Controller
 
     public function showStore($idStore)
     {
+        /*
         $store = Store::where('stores.id', $idStore)
             ->join('users', 'users.id', '=', 'stores.user_id')
             ->join('states', 'states.id', '=', 'stores.state_id')
@@ -44,6 +45,7 @@ class StoreController extends Controller
             ->select(
                 'users.lastname',
                 'users.firstname',
+                'stores.id',
                 'stores.description',
                 'stores.number',
                 'stores.street',
@@ -65,7 +67,11 @@ class StoreController extends Controller
                 'categories.label as category_name',
                 'states.label as state_label'
             )->first();
-        return view('pages/account/stores/showStore', ['store' => $store])->with('openingHours', json_decode($store->openingHours, true));
+            */
+
+            $store = Store::find($idStore);
+
+        return view('pages/account/stores/showStore', ['store' =>  $store])->with('openingHours', json_decode($store->openingHours, true));
     }
     public function approve($idStore)
     {
@@ -88,8 +94,10 @@ class StoreController extends Controller
     public function requests()
     {
         $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
+            
             ->join('states', 'states.id', '=', 'stores.state_id')
-            ->select('lastname', 'firstname', 'stores.id', 'stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label')
+            ->join('cities', 'cities.INSEE', '=', 'stores.city_INSEE')
+            ->select('lastname', 'firstname', 'stores.id', 'stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label', 'cities.name as city_name')
             ->where('states.label', '=', 'pending')
             ->orderBy('name')
             ->paginate(5);
