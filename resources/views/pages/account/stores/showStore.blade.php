@@ -7,10 +7,19 @@
     </a>
     <h1 class="card-title">Store: {{$store->store_name}}</h1>
     <x-infos-store :store="$store" />
-    
+
     <div class="content pt-10">
+        @if($store->state_label == "pending")
         <a href="{{URL::route('approveStore', ['idStore' => $store->id])}}" class="btn btn-primary" type="button">Approuver</a>
+        @elseif($store->state_label == "refused")
+        <a href="{{URL::route('approveStore', ['idStore' => $store->id])}}" class="btn btn-primary" type="button">Approuver</a>
+        @endif
+        @if($store->state_label == "pending")
         <a href="{{URL::route('refuseStore', ['idStore' => $store->id])}}" class="btn btn-danger" type="button">Refuser</a>
+        @elseif($store->state_label == "approved")
+        <a href="{{URL::route('refuseStore', ['idStore' => $store->id])}}" class="btn btn-danger" type="button">Suspendre</a>
+        @endif
+
     </div>
 </div>
 
