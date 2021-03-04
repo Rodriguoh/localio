@@ -46,6 +46,14 @@ class CommentController extends Controller
         ]);
     }
 
+    public function flaggedComments()
+    {
+        $comments = Comment::where('flagged', 1)->paginate(8);
+        return view('pages/account/comments/flagComments', [
+            'comments' => $comments
+        ]);
+    }
+
     public function postComment(Request $request)
     {
         $this->validate($request, [

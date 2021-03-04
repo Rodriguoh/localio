@@ -83,9 +83,9 @@ Route::get('/account/reportsStores', 'StoreController@reports')->name('reportSto
 
 //-- Notice
 Route::get('/account/myComments', [CommentController::class, 'comments'])->name('myComments');
+Route::get('/account/flagComments', [CommentController::class, 'flaggedComments'])->name('flagComments');
 Route::post('/account/editComment', [CommentController::class, 'edit'])->name('editComment');
 Route::get('/account/createComment', [CommentController::class, 'create'])->name('addComments');
 Route::post('/comment/form', [CommentController::class, 'postComment'])->name('postComment');
 Route::post('/comment/delete', [CommentController::class, 'delete'])->name('deleteComment');
-
 Route::get('/legalNotices', 'AboutController@legalNotices')->name('legalNotices');
