@@ -23,6 +23,8 @@ class CommentController extends Controller
 
         return redirect()->back()->with($comment->wasChanged() ? 'successEdit' : '', 'Le commentaire a bien été modifié.');
     }
+
+
     public function create()
     {
         return view('pages/account/comments/addComments');

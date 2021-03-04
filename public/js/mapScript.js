@@ -64,7 +64,7 @@ var app = new Vue({
     mapCenter: [44.5667, 6.0833],
     mapZoom: 13,
     baseUrl: "https://localio-app.herokuapp.com",
-    // http://localhost/localio/public mettre l'url sur laquelle on travail
+    //'http://localhost/PHP/Projet_tutore/localio/public',
     categorySelected: "",
     prevCatSelected: "",
     categoryFilter: "",
@@ -390,7 +390,6 @@ var app = new Vue({
               case 9:
                 rep = _context7.sent;
                 this.commentPages = rep.pagination.total_pages;
-                console.log(this.commentPages);
                 comments = new Array();
 
                 for (i = 0; i < rep.data.length; i++) {
@@ -401,13 +400,13 @@ var app = new Vue({
                   ;
                 }
 
-                _context7.next = 16;
+                _context7.next = 15;
                 return comments;
 
-              case 16:
+              case 15:
                 this.comments = _context7.sent;
 
-              case 17:
+              case 16:
               case "end":
                 return _context7.stop();
             }
@@ -529,34 +528,41 @@ var app = new Vue({
       }
 
       return refreshMapView;
-    }() // categoriesFilter: async function () {
-    //     let requestOptions = {
-    //         method: "GET",
-    //         redirect: "follow",
-    //     };
-    //     let url = new URL(`${this.baseUrl}/api/categories`);
-    //     let req = await fetch(url, requestOptions);
-    //     let rep = await req.json();
-    //     let mainCats = rep.data;
-    //     let subCats = new Object();
-    //     for (let i = 0; i < mainCats.length; i++) {
-    //         let subCat = [];
-    //         mainCats[i].child.forEach((element) =>
-    //             subCat.push(element.label)
-    //         );
-    //         subCats[mainCats[i].label] = subCat;
-    //     }
-    //     this.mainCat = await mainCats;
-    //     this.subCat = await subCats;
-    //     console.log(this.subCat);
-    // },
+    }(),
+    reportComment: function () {
+      var _reportComment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(id) {
+        var urlComment, req;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                urlComment = new URL("".concat(this.baseUrl, "/api/comment/") + id);
+                _context10.next = 3;
+                return fetch(urlComment);
 
+              case 3:
+                req = _context10.sent;
+                document.getElementById('reportButton' + id).innerHTML = "Avis signalé";
+
+              case 5:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, this);
+      }));
+
+      function reportComment(_x3) {
+        return _reportComment.apply(this, arguments);
+      }
+
+      return reportComment;
+    }()
   },
   created: function created() {
     var _JSON$parse,
         _this2 = this;
 
-    //this.categoriesFilter();
     this.mainCat = categories; // get last map position from localStorage
 
     localStorage.getItem("centerMap") && (this.mapCenter = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
@@ -577,21 +583,21 @@ var app = new Vue({
     };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
       var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
         while (1) {
-          switch (_context10.prev = _context10.next) {
+          switch (_context11.prev = _context11.next) {
             case 0:
               //setting up map
               this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
               L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context10.next = 4;
+              _context11.next = 4;
               return this.getStoresOnMap();
 
             case 4:
-              _context10.next = 6;
+              _context11.next = 6;
               return this.map.addLayer(this.markers);
 
             case 6:
@@ -606,10 +612,10 @@ var app = new Vue({
 
             case 7:
             case "end":
-              return _context10.stop();
+              return _context11.stop();
           }
         }
-      }, _callee10, this);
+      }, _callee11, this);
     }));
 
     function mounted() {

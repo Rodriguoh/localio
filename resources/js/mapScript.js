@@ -16,7 +16,7 @@ var app = new Vue({
         ],
         mapCenter: [44.5667, 6.0833],
         mapZoom: 13,
-        baseUrl: "https://localio-app.herokuapp.com", // http://localhost/localio/public mettre l'url sur laquelle on travail
+        baseUrl: "https://localio-app.herokuapp.com", //'http://localhost/PHP/Projet_tutore/localio/public',
         categorySelected: "",
         prevCatSelected: "",
         categoryFilter: "",
@@ -247,33 +247,21 @@ var app = new Vue({
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
         },
-        // categoriesFilter: async function () {
-        //     let requestOptions = {
-        //         method: "GET",
-        //         redirect: "follow",
-        //     };
-        //     let url = new URL(`${this.baseUrl}/api/categories`);
-        //     let req = await fetch(url, requestOptions);
-        //     let rep = await req.json();
-        //     let mainCats = rep.data;
-        //     let subCats = new Object();
+        reportComment: async function(id){
 
-        //     for (let i = 0; i < mainCats.length; i++) {
-        //         let subCat = [];
-        //         mainCats[i].child.forEach((element) =>
-        //             subCat.push(element.label)
-        //         );
-        //         subCats[mainCats[i].label] = subCat;
-        //     }
+            let urlComment = new URL(
+                `${this.baseUrl}/api/comment/`+id
+            );
+            let req = await fetch(
+                urlComment
+            );
+            document.getElementById('reportButton'+id).innerHTML = "Avis signalé";
+
+        }
 
 
-        //     this.mainCat = await mainCats;
-        //     this.subCat = await subCats;
-        //     console.log(this.subCat);
-        // },
     },
     created() {
-        //this.categoriesFilter();
 
         this.mainCat = categories;
 
