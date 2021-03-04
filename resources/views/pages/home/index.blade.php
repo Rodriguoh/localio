@@ -130,6 +130,7 @@
             <div id="map" class="mx-5 mx-sm-10">
 
             </div>
+
             <!-- Paneau gauche avec les différents commerces -->
             <div  id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-150 w-sm-250 h-400 position-absolute ml-20 d-none d-sm-block">
                     <li class="d-flex flex-column" v-for="store in allStoreOnMap">
@@ -138,9 +139,9 @@
                                 <div v-if="store.thumbnails"><img :src="store.thumbnails" class="img-fluid rounded w-sm-100 h-sm-100 col-6" alt=""></div>
                             </div>
                             <div class="d-flex flex-column col-6">
-                                <p class="text-left text-dark-lm text-white-dm"><span class="font-weight-bold">@{{store.name}}</span></p>
-                                <p v-if="store.avg_note" class="text-lefttext-dark-lm text-white-dm">Note : @{{store.avg_note.substring(0,3)}} / 5</p>
-                                <p class="text-left text-dark-lm text-white-dm">@{{store.category}}</p>
+                                <p class="text-left text-dark-lm text-white-dm mt-0"><span class="font-weight-bold">@{{store.name}}</span></p>
+                                <p v-if="store.avg_note" class="text-lefttext-dark-lm text-white-dm mt-0">@{{ parseInt(store.avg_note)  }} / 5</p>
+                                <p class="text-left text-dark-lm text-white-dm mt-0">@{{store.category}}</p>
                             </div>
                         </div>
                     </li>
