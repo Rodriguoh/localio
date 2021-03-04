@@ -43,6 +43,7 @@ class StoreController extends Controller
             ->select(
                 'users.lastname',
                 'users.firstname',
+                'stores.id',
                 'stores.description',
                 'stores.number',
                 'stores.street',
