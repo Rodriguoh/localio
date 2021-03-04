@@ -134,7 +134,11 @@
             <div  id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-150 w-sm-250 h-400 position-absolute ml-20 d-none d-sm-block">
                     <li class="d-flex flex-column" v-for="store in allStoreOnMap">
                         <div :id="'list-store-'+store.id" class="info-store-list bg-light-lm bg-dark-dm rounded p-sm-4 p-md-10">
-                            <p class="text-center text-dark-lm text-white-dm"><span class="font-weight-bold">@{{store.name}}</span></p>
+                            <div class="row">
+                                <p class="text-dark-lm text-white-dm col-6"><span class="font-weight-bold">@{{store.name}}</span></p>
+                                <div v-if="store.thumbnails"><img :src="store.thumbnails" class="img-fluid rounded w-sm-100 h-sm-100 col-6" alt=""></div>
+                            </div>
+                            <p v-if="store.avg_note" class="text-center text-dark-lm text-white-dm">Note : @{{store.avg_note.substring(0,3)}} / 5</p>
                             <p class="text-center text-dark-lm text-white-dm">@{{store.category}}</p>
                         </div>
                     </li>
