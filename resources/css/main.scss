@@ -1,16 +1,15 @@
-@import "abstract/variables";
-@import "abstract/functions";
-@import "abstract/mixins";
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
 
 //@import 'vendors';
 
 @import "base/reset";
 @import "base/typography";
 
-@import "layout/navigation";
-@import "layout/header";
-@import "layout/footer";
-@import "layout/forms";
+@import "layouts/navigation";
+@import "layouts/header";
+@import "layouts/footer";
 
 //@import 'components';
 
@@ -21,3 +20,15 @@
 
 @import "pages/auth";
 
+.full-width {
+    width: 100%;
+}
+.margin-constraint {
+    @include flex-column-verticalHorizontalCenter;
+    width: $margin-constraint-width;
+    flex:1;
+}
+.useful-width {
+    width: 100%;
+    max-width: $useful-width;
+}

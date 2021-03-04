@@ -1,0 +1,54 @@
+@import '../abstracts/mixins';
+
+//Variables tailles
+$navbar_height: 60px;
+$margin-constraint-width: calc(100vw - 40px);
+$useful-width: map-get($breakpoints, "XL");
+$marginBottom-section: 40px;
+
+//Taille polices
+/* -- Desktop --*/
+$sizeTitle: 22px;
+$sizeSubTitle: 20px;
+$sizeTextCTA: 18px;
+$sizeText:16px;
+$sizeTextParagraph:15px;
+$sizeTextAdditionnal:13px;
+/* --Mobile--*/
+$sizeLienMenu--mobile: 22px;
+$sizeTitle--mobile: 22px;
+$sizeSubTitle--mobile: 18px;
+$sizeTextCTA--mobile: 15px;
+$sizeText--mobile:14px;
+$sizeTextAdditionnal--mobile:13px;
+/* --Epaisseur police --*/
+$thin: 100;
+$extra-ligth: 200;
+$ligth: 300;
+$regular: 400;
+$medium: 500;
+$semi-bold: 600;
+$bold: 700;
+$extra-bold: 800;
+$black: 900;
+
+$footer_height: 185px;
+
+
+
+//Margin
+$titre_marginBottom: 30px;
+//Animations
+/* Time function */
+$easeIn-2s: all .2s ease-in;
+
+
+//Variables couleurs
+$CG_Grey1: #363636; //Titre important
+$CG_Grey2: #707070; //Sous titre
+$CG_WhiteIvoire: #fbfbfd; //Background
+$grey: #363636; //Texte
+$CG_White: #fcfcfc; //Fond de description
+$CG_RougePrincipal: #c12c3e;
+$CG_RougePrincipalLight: #d93e51; //hover menu
+$CG_VioletLight: #E6E3F4;

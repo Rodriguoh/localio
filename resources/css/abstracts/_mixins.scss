@@ -1,0 +1,129 @@
+//Définition des breakpoints via une MAP
+$breakpoints: (
+    "XS": 480px,  //Téléphone small
+    "S": 576px,   //Téléphone large
+    "M": 768px,   //Tablette
+    "L": 960px,   //Desktop normal
+    "XL": 1200px  //Desktop large
+);
+
+//Mixin qui permet d'utiliser facilement les mediaQueries
+@mixin respond-to($breakpoint) {
+    // Recuperer la valeur depuis la clé
+    $value: map-get($breakpoints, $breakpoint);
+
+    //Si la clé existe dans la MAP
+    @if $value != null {
+        //Retourner le media queries avec la valeur correspondant à la clé
+        @media (min-width: $value) {
+            @content;
+        }
+    }
+
+    //Si le media n'existe pas dans la map
+    @else {
+        @warn "Problème `#{$breakpoint}`. "
+            + "Vérifier que  `$breakpoints` est définit dans la map.";
+    }
+}
+@mixin flex-column{
+    display: flex;
+    flex-direction: column;
+}
+@mixin flex-column-verticalBetween{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+@mixin flex-column-verticalEvenly{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+@mixin flex-column-HorizontalLeft{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+@mixin flex-column-verticalCenter{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+@mixin flex-column-verticalEvenly{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+@mixin flex-column-horizontalCenter{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+@mixin flex-column-verticalHorizontalCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@mixin flex-row-horizontalCenter{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+@mixin flex-row-verticalCenter{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+@mixin flex-row-HorizontalBetween{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+//FITLERS MIXINS:
+@mixin filter-greyscale{
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+}
+
+@mixin filter-greyscale_blurLight{
+    filter: grayscale(0.7) blur(0.5px);
+    -webkit-filter: grayscale(0.7);
+}
+
+@mixin filter-sepia{
+    filter: sepia(100%);
+    -webkit-filter: sepia(1);
+    -ms-filter: sepia(100%);
+}
+
+@mixin filter-blur{
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+}
+
+@mixin filter-saturate{
+    filter: saturate(2);
+    -webkit-filter: saturate(2);
+}
+
+@mixin filter-hue{
+    filter: hue-rotate(140deg);
+    -webkit-filter: hue-rotate(140deg);
+}
+
+@mixin filter-invert{
+    filter: invert(0.8);
+    -webkit-filter: invert(0.8);
+}
+
+@mixin filter-darken{
+    filter: brightness(0.5);
+    -webkit-filter: brightness(0.5);
+}
+
+@mixin filter-contrast{
+    filter: contrast(2);
+    -webkit-filter: contrast(2);
+}
