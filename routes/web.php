@@ -99,3 +99,6 @@ Route::get('account/categories/{category_id?}', [CategoryController::class, 'ind
 Route::post('account/category/add', [CategoryController::class, 'add'])->name('addCategory');
 Route::post('account/category/edit', [CategoryController::class, 'edit'])->name('editCategory');
 Route::post('account/category/delete', [CategoryController::class, 'delete'])->name('deleteCategory');
+
+// Statistique
+Route::get('account/statistiques', [StoreController::class, 'stats'])->name('statistiques');

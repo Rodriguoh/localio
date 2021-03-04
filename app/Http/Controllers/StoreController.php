@@ -6,6 +6,9 @@ use App\Models\Category;
 use App\Models\State;
 use App\Models\Store;
 use App\Models\City;
+use App\Models\User;
+use App\Models\Comment;
+use App\Models\Consultation;
 use App\Models\Moderation;
 use App\Models\Photo;
 use Illuminate\Http\Request;
@@ -247,5 +250,34 @@ class StoreController extends Controller
         $store->delete();
 
         return redirect()->route('myStores')->with('successDelete', 'Votre commerce a bien été supprimé');
+    }
+
+    public function stats()
+    {
+        $consultationsByMonth = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
+
+        // get count consultation group by month for the last 12 month
+        $consultations = Consultation::where("date", ">", Carbon::now()->subMonths(12))
+            ->orderBy('date')
+            ->get()
+            ->groupBy(function ($d) {
+                return Carbon::parse($d->date)->format('F');
+            })
+            ->map
+            ->count();
+
+        $consultationsResult = [];
+
+        // fill consultations with 0 by empty month
+        foreach ($consultationsByMonth as $month) {
+            $consultationsResult[$month] = $consultations[$month] ?? 0;
+        }
+
+        return view('pages/account/stats', [
+            'nbCommentaire' => Comment::count(),
+            'nbUtilisateurs' => User::count(),
+            'nbConsultations' => Consultation::count(),
+            'consultations' => $consultationsResult
+        ]);
     }
 }

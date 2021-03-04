@@ -82,6 +82,12 @@
             </span>
             Gérer les catégories
         </a>
+        <a href="{{ route('statistiques') }}" class="sidebar-link sidebar-link-with-icon">
+            <span class="sidebar-icon">
+                <i class="fa fa-line-chart" aria-hidden="true"></i>
+            </span>
+            Statistiques
+        </a>
         </br>
         <h5 class="sidebar-title">Gérer son compte</h5>
         <div class="sidebar-divider"></div>
