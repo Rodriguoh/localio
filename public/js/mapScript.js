@@ -391,6 +391,7 @@ var app = new Vue({
                 rep = _context7.sent;
                 this.commentPages = rep.pagination.total_pages;
                 comments = new Array();
+                console.log(rep.data);
 
                 for (i = 0; i < rep.data.length; i++) {
                   if (_typeof(rep.data) == "object") {
@@ -400,13 +401,13 @@ var app = new Vue({
                   ;
                 }
 
-                _context7.next = 15;
+                _context7.next = 16;
                 return comments;
 
-              case 15:
+              case 16:
                 this.comments = _context7.sent;
 
-              case 16:
+              case 17:
               case "end":
                 return _context7.stop();
             }

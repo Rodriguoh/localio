@@ -187,6 +187,7 @@ var app = new Vue({
             this.commentPages = rep.pagination.total_pages;
             let comments = new Array();
 
+            console.log(rep.data);
             for(let i=0; i < rep.data.length; i++){
                 if (typeof rep.data == "object"){comments.push(rep.data[i])};
             }

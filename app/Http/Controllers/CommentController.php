@@ -54,6 +54,20 @@ class CommentController extends Controller
         ]);
     }
 
+    public function approve($idComment)
+    {
+        $comment = Comment::find($idComment);
+        $comment->flagged = 2;
+        $comment->save();
+        return view('pages/account/comments/flagComments');
+    }
+
+    public function refuse($idComment)
+    {
+        Comment::find($idComment)->delete();
+        return view('pages/account/comments/flagComments');
+    }
+
     public function postComment(Request $request)
     {
         $this->validate($request, [

@@ -69,6 +69,9 @@ Route::get('/account/showStore/{idStore}', 'StoreController@showStore')->name('s
 Route::get('/account/approveStore/{idStore}', 'StoreController@approve')->name('approveStore');
 Route::get('/account/refuseStore/{idStore}', 'StoreController@refuse')->name('refuseStore');
 
+Route::get('/account/approveComment/{idComment}', 'CommentController@approve')->name('approveComment');
+Route::get('/account/refuseComment/{idComment}', 'CommentController@refuse')->name('refuseComment');
+
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
 Route::post('/store/delete', [StoreController::class, 'deleteStore'])->name('deleteStore');
 

@@ -26,8 +26,8 @@
                         <td class="col-sm-2">{{$comment->updated_at}}</td>
                         <td class="col-sm-1">{{$comment->user->firstname}} {{$comment->user->lastname}}</td>
                         <td class="col-sm-2">
-                            <a href="" class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></a>
-                            <a href="" class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
+                            <a href="{{route('approveComment', ['idComment' => $comment->id])}}" class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></a>
+                            <a href="{{route('refuseComment', ['idComment' => $comment->id])}}" class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                 @endforeach
