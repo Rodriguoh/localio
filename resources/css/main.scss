@@ -29,6 +29,7 @@
     @include flex-column-verticalHorizontalCenter;
     width: $margin-constraint-width;
     flex:1;
+    margin: 0 auto;
 }
 .useful-width {
     width: 100%;

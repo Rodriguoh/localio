@@ -107,7 +107,7 @@
         <div class="hamburger">
             <div class="line"></div>
             <div class="line"></div>
-            <div class="line"></div>          
+            <div class="line"></div>
         </div>
         <ul class="nav-links">
             <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
@@ -118,18 +118,23 @@
 
     <div class="margin-constraint">
         <div class="useful-width">
-            <div>
+            <div class="home-col-1">
                 <div class="illustration_home">
                     <img src="{{asset('img/illustrations/home_car.svg')}}">
                 </div>
 
             </div>
-            <div>
+            <div class="home-col-2">
                 <h1>Avec Localio le click and drive n’a jamais été aussi simple.</h1>
                 <p>Recherchez des magasins de proximité proposant le Click and Collect facilement avec Localio. Consultez et commandez vos produits en ligne pour ensuite retirer les articles à l’heure que vous souhaitez.</p>
 
                 <div class="research">
-                    <input type="text" value="Exemplio">
+                    <div class="input-group-search">
+                        <button class="button-input-filter"><img class="icon-menu-filter" src="{{asset('img/icons/input-menu-filter.svg')}}"></button>
+                        <input type="text" value="Exemplio">
+                        <button class="button-input-search"><img class="icon-search" src="{{asset('img/icons/input-search.svg')}}"></button>
+                    </div>
+
                     <div class="research-filter">
                         <div class="filter">
                             <div class="research-filter-category">
@@ -154,9 +159,14 @@
                         <button class="button-action">Appliquer</button>
                     </div>
                 </div>
-                <div class="map-list">
-                    <div id="map">
+               
+            </div>
+        </div>
+    </div>
 
+     <div class="map-and-list">
+                    <div id="map">
+                        map
                     </div>
                     <div class="stores-list">
                         <div class="element-list element-list-active">
@@ -191,9 +201,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
     <footer>
     </footer>
 
@@ -212,9 +219,11 @@
                 menuClose = !menuClose;
             } else {
                 navLinks.classList.toggle('open');
-                setTimeout(function(){ hamburger.classList.toggle('open') }, 700);
+                setTimeout(function() {
+                    hamburger.classList.toggle('open')
+                }, 700);
                 menuClose = !menuClose;
-            } 
+            }
 
             links.forEach(link => {
                 link.classList.toggle("fade");

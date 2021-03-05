@@ -43,11 +43,11 @@ body {
     outline: none !important;
 }
 
-h2{
+h2 {
     display: block;
     width: 100%;
     text-align: center;
-    color: #CB7731;
+    color: #cb7731;
 }
 
 hr {
@@ -225,11 +225,11 @@ label {
 
 button {
     border-radius: 0;
+    outline: none;
 }
 
 button:focus {
-    outline: 1px dotted;
-    outline: 5px auto -webkit-focus-ring-color;
+    outline: none;
 }
 
 input,
