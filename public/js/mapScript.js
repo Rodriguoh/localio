@@ -1,3 +1,4 @@
+
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -397,17 +398,15 @@ var app = new Vue({
                   if (_typeof(rep.data) == "object") {
                     comments.push(rep.data[i]);
                   }
-
-                  ;
                 }
 
-                _context7.next = 16;
+                _context7.next = 15;
                 return comments;
 
-              case 16:
+              case 15:
                 this.comments = _context7.sent;
 
-              case 17:
+              case 16:
               case "end":
                 return _context7.stop();
             }
@@ -602,7 +601,6 @@ var app = new Vue({
               return this.map.addLayer(this.markers);
 
             case 6:
-              //await ;
               // add eventListener on the map movment
               this.map.on("moveend", function () {
                 _this3.refreshMapView();

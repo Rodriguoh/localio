@@ -54,6 +54,9 @@ Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser'
 
 Route::post('/account/editUserInformations', [UserController::class, 'editUsersInformations'])->name('editUsersInformations');
 
+//Modif rôle user
+Route::post('/account/editRoleUser', [UserController::class, 'editRoleUser'])->name('editRoleUser');
+
 //-- Store
 Route::get('/account/myStores', [StoreController::class, 'userStore'])->name('myStores'); //ok
 
