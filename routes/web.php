@@ -72,6 +72,9 @@ Route::get('/account/showStore/{idStore}', 'StoreController@showStore')->name('s
 Route::get('/account/approveStore/{idStore}', 'StoreController@approve')->name('approveStore');
 Route::get('/account/refuseStore/{idStore}', 'StoreController@refuse')->name('refuseStore');
 
+Route::get('/account/approveComment/{idComment}', 'CommentController@approve')->name('approveComment');
+Route::get('/account/refuseComment/{idComment}', 'CommentController@refuse')->name('refuseComment');
+
 Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
 Route::post('/store/delete', [StoreController::class, 'deleteStore'])->name('deleteStore');
 
@@ -86,9 +89,9 @@ Route::get('/account/reportsStores', 'StoreController@reports')->name('reportSto
 
 //-- Notice
 Route::get('/account/myComments', [CommentController::class, 'comments'])->name('myComments');
+Route::get('/account/flagComments', [CommentController::class, 'flaggedComments'])->name('flagComments');
 Route::post('/account/editComment', [CommentController::class, 'edit'])->name('editComment');
 Route::get('/account/createComment', [CommentController::class, 'create'])->name('addComments');
 Route::post('/comment/form', [CommentController::class, 'postComment'])->name('postComment');
 Route::post('/comment/delete', [CommentController::class, 'delete'])->name('deleteComment');
-
 Route::get('/legalNotices', 'AboutController@legalNotices')->name('legalNotices');

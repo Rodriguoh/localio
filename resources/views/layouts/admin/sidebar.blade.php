@@ -56,13 +56,19 @@
         </a>
         -->
         </br>
-        <h5 class="sidebar-title">Gérer ses avis</h5>
+        <h5 class="sidebar-title">Gérer les avis</h5>
         <div class="sidebar-divider"></div>
         <a href="{{ URL::route('myComments')}}" class="sidebar-link sidebar-link-with-icon">
             <span class="sidebar-icon">
                 <i class="fa fa-comment" aria-hidden="true"></i>
             </span>
             Gérer ses avis
+        </a>
+        <a href="{{ URL::route('flagComments')}}" class="sidebar-link sidebar-link-with-icon">
+            <span class="sidebar-icon">
+                <i class="fa fa-comment" aria-hidden="true"></i>
+            </span>
+            Modérer les avis
         </a>
         </br>
         <h5 class="sidebar-title">Gérer ses favoris</h5>

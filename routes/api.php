@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\StoreController;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ Route::get('/stores/{name}', [StoreController::class, 'getStoresByName']);
 Route::get('/store/{id}', [StoreController::class, 'getStore']);
 Route::get('/store/{id}/comments', [StoreController::class, 'getStoreComments']);
 
+Route::get('/comment/{id}', [CommentController::class, 'report']);
 Route::post('stores/setFavorites', [StoreController::class, 'setFavorites']);
 
 Route::get('/cities/{name}', [CityController::class, 'getCitiesByName']); // useless
