@@ -11,6 +11,8 @@ class Photo extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public $timestamps = false;
+
     /**
      * Get the store corresponding to this photo
      */

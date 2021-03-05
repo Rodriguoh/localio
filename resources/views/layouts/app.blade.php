@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js" defer></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+
 </head>
 
 <body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true" data-set-preferred-mode-onload="true">
@@ -43,5 +45,16 @@
 
     </div>
     <!-- Page wrapper end -->
+
+    <script>
+    // Test the device
+    let isMobile = window.matchMedia("only screen and (max-width: 768px)").matches;
+      if(isMobile){
+        // if device < 768px
+        // add attribute ("data-sidebar-hidden", "hidden") to hide the sidebar
+        let pageWrapper = document.getElementsByClassName("page-wrapper")[0];
+        pageWrapper.setAttribute("data-sidebar-hidden", "hidden");
+      }
+    </script>
 </body>
 </html>

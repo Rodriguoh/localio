@@ -29,7 +29,7 @@
             z-index: 1;
         }
 
-        #inputCity:focus + .auto-comp {
+        #inputCity:focus+.auto-comp {
             display: block !important;
         }
 
@@ -38,8 +38,22 @@
         }
 
         #store-list {
-            z-index:81;
-            margin-top:150px;
+            z-index: 81;
+            margin-top: 150px;
+        }
+
+        @media screen and (min-width:992px) {
+            #store-list {
+                margin-top: 180px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .leaflet-left {
+                display: none;
+            }
+
         }
 
         #store-list>li {
@@ -47,40 +61,45 @@
         }
 
         .info-store-list:hover {
-            background-color:var(--dark-color-light)!important;
+            background-color: var(--dark-color-light) !important;
             opacity: 80%;
-            cursor:pointer;
+            cursor: pointer;
         }
 
         .dark-mode .info-store-list:hover {
-            background-color:var(--dark-color)!important;
-            opacity:80%;
-            cursor:pointer;
+            background-color: var(--dark-color) !important;
+            opacity: 80%;
+            cursor: pointer;
         }
 
         /* Hide scrollbar for Chrome, Safari and Opera */
         #store-list::-webkit-scrollbar {
-        display: none;
+            display: none;
         }
 
         /* Hide scrollbar for IE, Edge and Firefox */
         #store-list {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
         }
 
         .cat-btn {
             height: var(--large-button-height);
         }
-        .card{
+
+        .card {
             margin-left: 0 !important;
             margin-right: 20px !important;
         }
-        .comments{
+
+        .comments {
             width: 90%;
             height: 300px;
         }
-        .leaflet-left{
+
+        .leaflet-left {
             left: 95% !important;
             top: 35px !important;
         }
@@ -91,8 +110,6 @@
             }
 
         }
-
-
     </style>
 </head>
 
@@ -132,14 +149,23 @@
             <div id="map" class="mx-5 mx-sm-10">
 
             </div>
+
             <!-- Paneau gauche avec les différents commerces -->
-            <div  id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-150 w-sm-300 h-400 position-absolute ml-20 d-none d-sm-block">
-                    <li class="d-flex flex-column" v-for="store in allStoreOnMap">
-                        <div :id="'list-store-'+store.id" class="info-store-list bg-light-lm bg-dark-dm rounded p-sm-4 p-md-10">
-                            <p class="text-center text-dark-lm text-white-dm"><span class="font-weight-bold">@{{store.name}}</span></p>
-                            <p class="text-center text-dark-lm text-white-dm">@{{store.category}}</p>
+            <div id="store-list" class="bg-transparent verflow-x-hidden overflow-y-scroll w-150 w-sm-250 h-400 position-absolute ml-20 d-none d-sm-block">
+                <li class="d-flex flex-column" v-for="store in allStoreOnMap">
+                    <div :id="'list-store-'+store.id" class="row info-store-list bg-light-lm bg-dark-dm rounded p-sm-4 p-md-10">
+                        <div class="row col-6">
+                            <div v-if="store.thumbnails">
+                                <img :src="store.thumbnails" class="img-fluid rounded w-sm-100 h-sm-100 col-6" alt="">
+                            </div>
                         </div>
-                    </li>
+                        <div class="d-flex flex-column col-6">
+                            <p class="text-left text-dark-lm text-white-dm mt-0"><span class="font-weight-bold">@{{store.name}}</span></p>
+                            <p v-if="store.avg_note" class="text-lefttext-dark-lm text-white-dm mt-0">@{{ parseInt(store.avg_note)  }} / 5</p>
+                            <p class="text-left text-dark-lm text-white-dm mt-0">@{{store.category}}</p>
+                        </div>
+                    </div>
+                </li>
             </div>
         </div>
 
@@ -151,16 +177,18 @@
                     <a href="#" class="close" role="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </a>
-                    <div class="container">
+                    <div class="container-sm d-flex flex-column">
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-md-5">
                                 <div style="height: 350px; width: 90%; background-color: grey"></div>
-                                <h2>Commentaires</h2>
-                                <div class="overflow-auto comments">
-                                    @include('components.comment')
-                                </div>
+                                <template v-if="comments?.length > 0">
+                                    <h2 class="content-title">Commentaires :</h2>
+                                    <div class="overflow-auto comments">
+                                        @include('components.comment')
+                                    </div>
+                                </template>
                             </div>
-                            <div class="col-7">
+                            <div class="col-md-7 order-first">
                                 <h2 class="content-title">@{{storeSelected.name}}</h2>
                                 <div class="custom-checkbox">
                                     <input type="checkbox" id="checkbox-favoris" :value="storeSelected.id" v-model="myFavorites">
@@ -169,11 +197,11 @@
                                 <div class="m-auto text-justify">
                                     <div class="my-10">
                                         <p><span class="font-weight-medium">Mail :</span> @{{storeSelected?.mail}}</p>
-                                        <p><span class="font-weight-medium">Téléphone :</span>  @{{storeSelected?.phone}}</p>
-                                        <p><span class="font-weight-medium">Site internet :</span>  @{{storeSelected?.url}}</p>
+                                        <p><span class="font-weight-medium">Téléphone :</span> @{{storeSelected?.phone}}</p>
+                                        <p><span class="font-weight-medium">Site internet :</span> @{{storeSelected?.url}}</p>
                                     </div>
                                     <div class="my-10">
-                                        <p><span class="font-weight-medium">Adresse :</span> @{{storeSelected?.adresse?.number}}, @{{storeSelected?.adresse?.street}}, @{{storeSelected?.adresse?.city}}, @{{storeSelected?.adresse?.ZIPCode}}    </p>
+                                        <p><span class="font-weight-medium">Adresse :</span> @{{storeSelected?.adresse?.number}}, @{{storeSelected?.adresse?.street}}, @{{storeSelected?.adresse?.city}}, @{{storeSelected?.adresse?.ZIPCode}} </p>
                                     </div>
                                     <div class="my-10">
                                         <p><span class="font-weight-medium">Catégorie :</span> @{{storeSelected?.category}}</p>
@@ -186,7 +214,7 @@
                                     </div>
 
                                     <div class="my-10">
-                                        <p><span class="font-weight-medium"> Livraison :</span> @{{storeSelected?.isDelivering ? 'Oui' : 'Non' }} </p>
+                                        <p><span class="font-weight-medium"> Livraison :</span> @{{storeSelected?.isDelivering ? 'Non' : 'Oui' }} </p>
                                         <p><span class="font-weight-medium"> Condition de livraison :</span> @{{storeSelected?.conditionDelivery}}</p>
                                     </div>
 
