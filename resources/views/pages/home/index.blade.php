@@ -110,8 +110,9 @@
             <div class="line"></div>          
         </div>
         <ul class="nav-links close">
-            <li><a href="#0">Accueil</a></li>
-            <li><a href="#0">Se connecter</a></li>
+            <li><a href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
+            <li><a href="#0"><img src="{{asset('img/icons/fa-login.svg')}}">Se connecter</a></li>
+            <li><a href="#0"><img src="{{asset('img/icons/fa-phone.svg')}}">Contact</a></li>
             <li><a href="#0" class="btn-color btn-secondary btn-xs">Aide</a></li>
         </ul>
     </nav>
