@@ -95,30 +95,28 @@
         }
 
     </style>
+    <link rel="stylesheet" href="{{asset('css/main.css')}}">
 </head>
 
 <body class="full-with">
 
-    <header>
+    <nav>
         <div class="logo">
             <img src="{{asset('img/logo_inline-clair.svg')}}" alt="logo de click and collect">
         </div>
-        <input type="checkbox" id="dropdown" class="dropdown">
-        <label for="dropdown">
-            <span class="sr-only">Menu</span>
-            <span><img src="{{asset('img/icons/menu_hamburger.svg')}}" alt="icon du menu"></span>
-        </label>
-        <nav class="navigation">
-            <ul>
-                <li><a href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
-                <li><a href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Se connecter</a></li>
-                <li><a href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Mon compte</a></li>
-            </ul>
-        </nav>
-    </header>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>          
+        </div>
+        <ul class="nav-links close">
+            <li><a href="#0">Accueil</a></li>
+            <li><a href="#0">Se connecter</a></li>
+            <li><a href="#0" class="btn-color btn-secondary btn-xs">Aide</a></li>
+        </ul>
+    </nav>
 
     <div class="margin-constraint">
-
         <div class="useful-width">
             <div>
                 <div class="illustration_home">
@@ -156,7 +154,7 @@
                         <button class="button-action">Appliquer</button>
                     </div>
                 </div>
-                <div>
+                <div class="map-list">
                     <div id="map">
 
                     </div>
@@ -203,6 +201,25 @@
 
 
     <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+        const links = document.querySelectorAll(".nav-links li");
+        let menuClose = true;
+        hamburger.addEventListener("click", () => {
+            if (menuClose) {
+                navLinks.classList.replace("close", "open");
+                hamburger.classList.toggle('open');
+                menuClose = !menuClose;
+            } else {
+                navLinks.classList.replace("open", "close");
+                setTimeout(function(){ hamburger.classList.toggle('open') }, 700);
+                menuClose = !menuClose;
+            } 
+
+            links.forEach(link => {
+                link.classList.toggle("fade");
+            });
+        });
 
     </script>
 </body>

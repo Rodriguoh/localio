@@ -1,10 +1,15 @@
 @import '../abstracts/mixins';
 
+$redPrimary: #FD003A;
+$yellowSecondary: #FFCF39; //use
+$yellowSecondary-dark: #F8C320; //use
+$greyRed: #3F3543;
+
 //Variables tailles
-$navbar_height: 60px;
-$margin-constraint-width: calc(100vw - 40px);
-$useful-width: map-get($breakpoints, "XL");
-$marginBottom-section: 40px;
+$navbar_height: 60px; //use
+$margin-constraint-width: calc(100vw - 40px); //use
+$useful-width: map-get($breakpoints, "XL"); //use
+$marginBottom-section: 40px; 
 
 //Taille polices
 /* -- Desktop --*/

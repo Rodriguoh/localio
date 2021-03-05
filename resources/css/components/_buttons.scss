@@ -1,0 +1,23 @@
+//Types de button
+.btn-color {
+    display: inline-block;
+    background-color: red;
+    padding: 4px 12px;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+}
+//Déclinaisons de button
+.btn-secondary {
+    background-color: $yellowSecondary;
+    color: white;
+}
+.btn-secondary:hover{
+    background-color: $yellowSecondary-dark;
+    color: white;
+
+}
+//Taille de button
+.btn-xs {
+    font-size: 14px;
+}
