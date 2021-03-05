@@ -109,10 +109,9 @@
             <div class="line"></div>
             <div class="line"></div>          
         </div>
-        <ul class="nav-links close">
-            <li><a href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
-            <li><a href="#0"><img src="{{asset('img/icons/fa-login.svg')}}">Se connecter</a></li>
-            <li><a href="#0"><img src="{{asset('img/icons/fa-phone.svg')}}">Contact</a></li>
+        <ul class="nav-links">
+            <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
+            <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-login.svg')}}">Se connecter</a></li>
             <li><a href="#0" class="btn-color btn-secondary btn-xs">Aide</a></li>
         </ul>
     </nav>
@@ -208,11 +207,11 @@
         let menuClose = true;
         hamburger.addEventListener("click", () => {
             if (menuClose) {
-                navLinks.classList.replace("close", "open");
+                navLinks.classList.toggle('open');
                 hamburger.classList.toggle('open');
                 menuClose = !menuClose;
             } else {
-                navLinks.classList.replace("open", "close");
+                navLinks.classList.toggle('open');
                 setTimeout(function(){ hamburger.classList.toggle('open') }, 700);
                 menuClose = !menuClose;
             } 
