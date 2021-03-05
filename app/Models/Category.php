@@ -56,4 +56,13 @@ class Category extends Model
         }
         return $categories;
     }
+
+    public function isUse()
+    {
+        if ($this->stores()->count() > 0 || $this->categoriesChild()->count() > 0) return true;
+        foreach ($this->categoriesChild()->get() as $category) {
+            if ($category->stores()->count() > 0) return true;
+        }
+        return false;
+    }
 }
