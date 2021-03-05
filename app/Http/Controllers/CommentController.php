@@ -23,6 +23,8 @@ class CommentController extends Controller
 
         return redirect()->back()->with($comment->wasChanged() ? 'successEdit' : '', 'Le commentaire a bien été modifié.');
     }
+
+
     public function create()
     {
         return view('pages/account/comments/addComments');
@@ -42,6 +44,28 @@ class CommentController extends Controller
         return view('pages/account/comments/myComments', [
             'comments' => $comments
         ]);
+    }
+
+    public function flaggedComments()
+    {
+        $comments = Comment::where('flagged', 1)->paginate(8);
+        return view('pages/account/comments/flagComments', [
+            'comments' => $comments
+        ]);
+    }
+
+    public function approve($idComment)
+    {
+        $comment = Comment::find($idComment);
+        $comment->flagged = 2;
+        $comment->save();
+        return view('pages/account/comments/flagComments');
+    }
+
+    public function refuse($idComment)
+    {
+        Comment::find($idComment)->delete();
+        return view('pages/account/comments/flagComments');
     }
 
     public function postComment(Request $request)

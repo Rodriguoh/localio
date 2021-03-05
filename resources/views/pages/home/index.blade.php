@@ -90,6 +90,14 @@
             left: 95% !important;
             top: 35px !important;
         }
+        @media (max-width: 768px) {
+
+            .leaflet-left{
+                display: none;
+            }
+
+        }
+
 
     </style>
 </head>
