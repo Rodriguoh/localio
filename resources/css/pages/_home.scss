@@ -11,57 +11,81 @@
     }
 }
 
-.research{
+.research {
     //Groupe input search
-    .input-group-search{
-        display:flex;
+    .input-group-search {
+        position: relative;
+        display: flex;
         align-items: center;
         width: 100%;
         height: 45px;
         margin-bottom: 20px;
-        box-shadow: 0px 0px 14px 0px #455B6314;
+        box-shadow: 0px 0px 14px 0px #455b6314;
         border-radius: 12px;
-
+        z-index: 30;
         //Input texte
-        input[type="text"]{
+        input[type="text"] {
             border-radius: 12px;
             border: 0px;
             font-size: 16px;
             width: 100%;
             padding-left: 20px;
             height: 100%;
-            outline:none;
+            outline: none;
         }
-        button{
-            display:flex;
+        button {
+            display: flex;
             align-items: center;
             justify-content: center;
             height: inherit;
-            border:0px;
+            border: 0px;
             min-width: 45px;
             background-color: white;
-            .icon-menu-filter{
+            .icon-menu-filter {
                 width: 17px;
             }
-            .icon-search{
+            .icon-search {
                 width: 22px;
             }
         }
-        .button-input-filter{
+        .button-input-filter {
             padding-left: 5px;
             border-radius: 12px 0px 0px 12px;
         }
-        .button-input-search{
+        .button-input-search {
             border-radius: 0px 12px 12px 0px;
         }
     }
-    .research-filter{
-        display:none;
+    .research-filter {
+        display: block;
+        position: absolute;
+        margin-top: -50px;
+
+        left: 0%;
+        width: 100%;
+        background-color: white;
+        padding: 70px 20px 20px 35px;
+        z-index: 20;
+        border-radius: 0px 0px 30px 30px;
     }
-    
 }
 
-
+//Map style
+.map-and-list {
+    height: 100%;
+    width: 100%;
+    #map {
+        z-index: 10;
+        background: url("../img/bg-map.png");
+        width: 100%;
+        height: 100%;
+        margin-top: -$navbar_height;
+        background: linear-gradient(to top, transparent 80%, white 100%), url("../img/bg-map.png");
+    }
+    .stores-list {
+        display: none;
+    }
+}
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {

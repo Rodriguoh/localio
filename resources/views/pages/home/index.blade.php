@@ -159,48 +159,48 @@
                         <button class="button-action">Appliquer</button>
                     </div>
                 </div>
-               
+
             </div>
         </div>
     </div>
 
-     <div class="map-and-list">
-                    <div id="map">
-                        map
-                    </div>
-                    <div class="stores-list">
-                        <div class="element-list element-list-active">
-                            <div class="img-element-list">
-                                <img src="{{asset('img/photos/exemple-image-store.png')}}">
-                            </div>
-                            <div class="info-element-list">
-                                <p>Sushi Place</p>
-                                <div>
-                                    <span>petit texte</span>
-                                    <div class="note">
-                                        <span>5</span>
-                                        <span><img src="{{asset('img/icons/star.svg')}}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="element-list">
-                            <div class="img-element-list">
-                                <img src="{{asset('img/photos/exemple-image-store.png')}}">
-                            </div>
-                            <div class="info-element-list">
-                                <p>Sushi Place</p>
-                                <div>
-                                    <span>petit texte</span>
-                                    <div class="note">
-                                        <span>5</span>
-                                        <span><img src="{{asset('img/icons/star.svg')}}"></span>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="map-and-list">
+        <div id="map">
+
+        </div>
+        <div class="stores-list">
+            <div class="element-list element-list-active">
+                <div class="img-element-list">
+                    <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                </div>
+                <div class="info-element-list">
+                    <p>Sushi Place</p>
+                    <div>
+                        <span>petit texte</span>
+                        <div class="note">
+                            <span>5</span>
+                            <span><img src="{{asset('img/icons/star.svg')}}"></span>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="element-list">
+                <div class="img-element-list">
+                    <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                </div>
+                <div class="info-element-list">
+                    <p>Sushi Place</p>
+                    <div>
+                        <span>petit texte</span>
+                        <div class="note">
+                            <span>5</span>
+                            <span><img src="{{asset('img/icons/star.svg')}}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
     </footer>
 

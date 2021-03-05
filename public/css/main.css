@@ -567,13 +567,15 @@ footer {
 }
 
 .research .input-group-search {
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
   height: 45px;
   margin-bottom: 20px;
-  box-shadow: 0px 0px 14px 0px #455B6314;
+  box-shadow: 0px 0px 14px 0px #455b6314;
   border-radius: 12px;
+  z-index: 30;
 }
 .research .input-group-search input[type=text] {
   border-radius: 12px;
@@ -607,6 +609,30 @@ footer {
   border-radius: 0px 12px 12px 0px;
 }
 .research .research-filter {
+  display: block;
+  position: absolute;
+  margin-top: -50px;
+  left: 0%;
+  width: 100%;
+  background-color: white;
+  padding: 70px 20px 20px 35px;
+  z-index: 20;
+  border-radius: 0px 0px 30px 30px;
+}
+
+.map-and-list {
+  height: 100%;
+  width: 100%;
+}
+.map-and-list #map {
+  z-index: 10;
+  background: url("../img/bg-map.png");
+  width: 100%;
+  height: 100%;
+  margin-top: -60px;
+  background: linear-gradient(to top, transparent 80%, white 100%), url("../img/bg-map.png");
+}
+.map-and-list .stores-list {
   display: none;
 }
 
