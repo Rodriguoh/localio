@@ -44,7 +44,7 @@ class CommentController extends Controller
         return view('pages/account/comments/myComments', [
             'comments' => $comments
         ]);
-    }
+    }main
 
     public function flaggedComments()
     {
