@@ -136,27 +136,32 @@
                     </div>
 
                     <div class="research-filter">
-                        <div class="filter">
+                        <div class="filters">
                             <div class="research-filter-category">
-                                <p>Catégorie</p>
-                                <button class="button-fullwith button-color">Voir tout</button>
-                                <button class="button-color">Restaurant</button>
-                                <button class="button-white">Alimentaire</button>
-                                <button class="button-white">Culture</button>
-                                <button class="button-white">Habits</button>
+                                <p class="category">Catégorie</p>
+                                <div class="buttons">
+                                    <button class="btn btn-color btn-secondary btn-s btn-r8">Voir tout</button>
+                                    <button class="btn btn-white btn-s btn-r8">Restaurant</button>
+                                    <button class="btn btn-white btn-s  btn-r8">Alimentaire</button>
+                                    <button class="btn btn-white btn-s  btn-r8">Culture</button>
+                                    <button class="btn btn-white btn-s  btn-r8">Habits</button>
+                                </div>
+
                             </div>
                             <div class="research-filter-subcategory">
-                                <p>Sous catégories</p>
-                                <button class="button-color">Indien</button>
-                                <button class="button-white">Chinois</button>
-                                <button class="button-white">Italien</button>
-                                <button class="button-white">Pizza</button>
-                                <button class="button-white">Kebab</button>
+                                <p class="subcategory">Sous catégories</p>
+                                <div class="buttons">
+                                    <button class="btn btn-white btn-s  btn-r8">Indien</button>
+                                    <button class="btn btn-white btn-s  btn-r8">Chinois</button>
+                                    <button class="btn btn-white btn-s  btn-r8">Italien</button>
+                                    <button class="btn btn-white btn-s  btn-r8">Pizza</button>
+                                    <button class="btn btn-white btn-s  btn-r8">Kebab</button>
+                                </div>
                             </div>
                             <div>
                             </div>
                         </div>
-                        <button class="button-action">Appliquer</button>
+                        <button class="btn btn-s btn-action btn-r12">Appliquer</button>
                     </div>
                 </div>
 

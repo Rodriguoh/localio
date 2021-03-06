@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 html {
     font-family: sans-serif;
     line-height: 1.15;
@@ -343,4 +344,8 @@ template {
 
 [hidden] {
     display: none !important;
+}
+body{
+    font-family: 'Josefin Sans', sans-serif !important;
+    color: $greyRed;
 }

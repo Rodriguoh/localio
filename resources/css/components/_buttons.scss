@@ -1,23 +1,55 @@
+//Buttons
+.btn {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    margin-bottom:5px;
+}
 //Types de button
 .btn-color {
-    display: inline-block;
-    background-color: red;
-    padding: 4px 12px;
-    width: 100%;
-    height: 100%;
+    color: white;
     border-radius: 30px;
+    border: 0px;
+    outline:none;
+}
+.btn-white {
+    background-color: white;
+    color: $greyLight;
+
+    border: 1px solid #707070;
+}
+.btn-action{
+    background-color: #E50027;
+    color:white;
+    border: 0px;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    margin: 0 auto;
+
 }
 //Déclinaisons de button
 .btn-secondary {
     background-color: $yellowSecondary;
-    color: white;
+    color: white !important;
 }
-.btn-secondary:hover{
+.btn-secondary:hover {
     background-color: $yellowSecondary-dark;
     color: white;
-
 }
 //Taille de button
 .btn-xs {
     font-size: 14px;
+    padding: 4px 12px 1px 12px;
 }
+.btn-s {
+    font-size: 16px;
+    padding: 4px 12px 1px 12px;
+}
+//Radius des boutons
+.btn-r8 {
+    border-radius: 8px !important;
+}
+.btn-r12 {
+    border-radius: 12px !important;
+}
+//

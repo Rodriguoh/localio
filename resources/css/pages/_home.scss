@@ -60,13 +60,47 @@
         display: block;
         position: absolute;
         margin-top: -50px;
-
         left: 0%;
         width: 100%;
         background-color: white;
-        padding: 70px 20px 20px 35px;
+        padding: 50px 20px 20px 35px;
         z-index: 20;
         border-radius: 0px 0px 30px 30px;
+
+        .filters{
+            display:flex;
+            flex-direction: column;
+            p{
+                display:block;
+                margin-bottom: 5px;
+                margin-top:3px;
+            }
+            p.category{
+                font-size: 18px;
+            }
+            p.subcategory{
+                font-size: 16px;
+            }
+            .research-filter-category, .research-filter-subcategory{
+                margin-bottom: 15px;
+                .btn-white{
+                    opacity: 0.7;
+                }
+                .btn-white:hover{
+                    opacity: 1;
+                }
+            }
+            .buttons{
+                display:flex;
+                flex-wrap: wrap;
+            }
+            .btn-color{
+                text-shadow: 0px 3px 3px #00000029;
+            }
+        }
+        .button-action{
+            font-size: 16px;
+        }
     }
 }
 

@@ -27,6 +27,7 @@ nav {
     .hamburger.open {
         position: fixed;
         transform: rotate(180deg);
+        z-index:50;
     }
     .hamburger.open .line:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
@@ -60,6 +61,7 @@ nav {
         clip-path: circle(0px at 100%);
         -webkit-clip-path: circle(0px at 90% -10%);
         pointer-events: none;
+        z-index: 40;
         .btn-color {
             background-color: transparent;
         }
@@ -97,11 +99,14 @@ nav {
         clip-path: circle(1000px at 100%);
         -webkit-clip-path: circle(1000px at 100%);
         pointer-events: all;
+       
     }
 }
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
     nav {
+        position:relative;
+        z-index:50;
         .hamburger {
             display: none;
         }

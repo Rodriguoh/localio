@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap);
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
@@ -347,18 +348,43 @@ template {
   display: none !important;
 }
 
+body {
+  font-family: "Josefin Sans", sans-serif !important;
+  color: #3F3543;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
 .btn-color {
-  display: inline-block;
-  background-color: red;
-  padding: 4px 12px;
-  width: 100%;
-  height: 100%;
+  color: white;
   border-radius: 30px;
+  border: 0px;
+  outline: none;
+}
+
+.btn-white {
+  background-color: white;
+  color: #707070;
+  border: 1px solid #707070;
+}
+
+.btn-action {
+  background-color: #E50027;
+  color: white;
+  border: 0px;
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+  margin: 0 auto;
 }
 
 .btn-secondary {
   background-color: #FFCF39;
-  color: white;
+  color: white !important;
 }
 
 .btn-secondary:hover {
@@ -368,6 +394,20 @@ template {
 
 .btn-xs {
   font-size: 14px;
+  padding: 4px 12px 1px 12px;
+}
+
+.btn-s {
+  font-size: 16px;
+  padding: 4px 12px 1px 12px;
+}
+
+.btn-r8 {
+  border-radius: 8px !important;
+}
+
+.btn-r12 {
+  border-radius: 12px !important;
 }
 
 /* -- Desktop --*/
@@ -401,6 +441,7 @@ nav .hamburger .line {
 nav .hamburger.open {
   position: fixed;
   transform: rotate(180deg);
+  z-index: 50;
 }
 nav .hamburger.open .line:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
@@ -431,6 +472,7 @@ nav .nav-links {
   clip-path: circle(0px at 100%);
   -webkit-clip-path: circle(0px at 90% -10%);
   pointer-events: none;
+  z-index: 40;
 }
 nav .nav-links .btn-color {
   background-color: transparent;
@@ -471,6 +513,10 @@ nav .nav-links.open {
 }
 
 @media (min-width: 768px) {
+  nav {
+    position: relative;
+    z-index: 50;
+  }
   nav .hamburger {
     display: none;
   }
@@ -615,9 +661,43 @@ footer {
   left: 0%;
   width: 100%;
   background-color: white;
-  padding: 70px 20px 20px 35px;
+  padding: 50px 20px 20px 35px;
   z-index: 20;
   border-radius: 0px 0px 30px 30px;
+}
+.research .research-filter .filters {
+  display: flex;
+  flex-direction: column;
+}
+.research .research-filter .filters p {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 3px;
+}
+.research .research-filter .filters p.category {
+  font-size: 18px;
+}
+.research .research-filter .filters p.subcategory {
+  font-size: 16px;
+}
+.research .research-filter .filters .research-filter-category, .research .research-filter .filters .research-filter-subcategory {
+  margin-bottom: 15px;
+}
+.research .research-filter .filters .research-filter-category .btn-white, .research .research-filter .filters .research-filter-subcategory .btn-white {
+  opacity: 0.7;
+}
+.research .research-filter .filters .research-filter-category .btn-white:hover, .research .research-filter .filters .research-filter-subcategory .btn-white:hover {
+  opacity: 1;
+}
+.research .research-filter .filters .buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+.research .research-filter .filters .btn-color {
+  text-shadow: 0px 3px 3px #00000029;
+}
+.research .research-filter .button-action {
+  font-size: 16px;
 }
 
 .map-and-list {
