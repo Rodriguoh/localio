@@ -386,8 +386,7 @@ body {
   background-color: #E50027;
   color: white;
   border: 0px;
-  padding-left: 25px !important;
-  padding-right: 25px !important;
+  padding: 5px 25px !important;
   margin: 0 auto;
 }
 
@@ -668,7 +667,6 @@ footer {
   position: absolute;
   margin-top: -50px;
   left: 0%;
-  width: 100%;
   background-color: white;
   padding: 50px 20px 20px 35px;
   z-index: 20;
