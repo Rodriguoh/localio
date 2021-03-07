@@ -733,6 +733,7 @@ footer {
   bottom: 20px;
   flex-wrap: nowrap;
   overflow-x: auto;
+  align-items: flex-end;
 }
 .map-and-list .stores-list a {
   flex: 0 0 auto;
@@ -750,6 +751,9 @@ footer {
 .map-and-list .stores-list a .element-list .img-element-list img {
   border-radius: 12px 12px 0px 0px;
   box-shadow: 0px 2px 16px #0000002e;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .map-and-list .stores-list a .element-list .info-element-list {
   max-height: 60px;
@@ -776,6 +780,10 @@ footer {
 .map-and-list .stores-list a .element-list .info-element-list div .note span:nth-child(2) img {
   display: none;
 }
+.map-and-list .stores-list a .element-list.active .img-element-list img {
+  height: 120px;
+}
+
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/

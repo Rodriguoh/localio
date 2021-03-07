@@ -179,7 +179,7 @@
                 <div class="stores-list">
 
                     <a href="">
-                        <div class="element-list active">
+                        <div class="element-list">
                             <div class="img-element-list">
                                 <img src="{{asset('img/photos/exemple-image-store.png')}}">
                             </div>
@@ -213,7 +213,7 @@
                         </div>
                     </a>
                     <a href="">
-                        <div class="element-list active">
+                        <div class="element-list">
                             <div class="img-element-list">
                                 <img src="{{asset('img/photos/exemple-image-store.png')}}">
                             </div>
