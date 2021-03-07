@@ -99,141 +99,126 @@
 </head>
 
 <body class="full-with">
-
-    <nav>
-        <div class="logo">
-            <img src="{{asset('img/logo_inline-clair.svg')}}" alt="logo de click and collect">
-        </div>
-        <div class="hamburger">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-        <ul class="nav-links">
-            <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
-            <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-login.svg')}}">Se connecter</a></li>
-            <li><a href="#0" class="btn-color btn-secondary btn-xs">Aide</a></li>
-        </ul>
-    </nav>
-
-    <div class="margin-constraint">
-        <div class="useful-width">
-            <div class="home-col-1">
-                <div class="illustration_home">
-                    <img src="{{asset('img/illustrations/home_car.svg')}}">
-                </div>
-
+    <div id="app">
+        <nav>
+            <div class="logo">
+                <img src="{{asset('img/logo_inline-clair.svg')}}" alt="logo de click and collect">
             </div>
-            <div class="home-col-2">
-                <h1>Avec Localio le click and drive n’a jamais été aussi simple.</h1>
-                <p>Recherchez des magasins de proximité proposant le Click and Collect facilement avec Localio. Consultez et commandez vos produits en ligne pour ensuite retirer les articles à l’heure que vous souhaitez.</p>
+            <div v-on:click="mobileMenu" class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
+                <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-login.svg')}}">Se connecter</a></li>
+                <li><a href="#0" class="btn-color btn-secondary btn-xs">Aide</a></li>
+            </ul>
+        </nav>
 
-                <div class="research">
-                    <div class="input-group-search">
-                        <button class="button-input-filter"><img class="icon-menu-filter" src="{{asset('img/icons/input-menu-filter.svg')}}"></button>
-                        <input type="text" value="Exemplio">
-                        <button class="button-input-search"><img class="icon-search" src="{{asset('img/icons/input-search.svg')}}"></button>
+        <div class="margin-constraint">
+            <div class="useful-width">
+                <div class="home-col-1">
+                    <div class="illustration_home">
+                        <img src="{{asset('img/illustrations/home_car.svg')}}">
                     </div>
 
-                    <div class="research-filter">
-                        <div class="filters">
-                            <div class="research-filter-category">
-                                <p class="category">Catégorie</p>
-                                <div class="buttons">
-                                    <button class="btn btn-color btn-secondary btn-s btn-r8">Voir tout</button>
-                                    <button class="btn btn-white btn-s btn-r8">Restaurant</button>
-                                    <button class="btn btn-white btn-s  btn-r8">Alimentaire</button>
-                                    <button class="btn btn-white btn-s  btn-r8">Culture</button>
-                                    <button class="btn btn-white btn-s  btn-r8">Habits</button>
+                </div>
+                <div class="home-col-2">
+                    <h1>Avec Localio le click and drive n’a jamais été aussi simple.</h1>
+                    <p>Recherchez des magasins de proximité proposant le Click and Collect facilement avec Localio. Consultez et commandez vos produits en ligne pour ensuite retirer les articles à l’heure que vous souhaitez.</p>
+
+                    <div class="research">
+                        <div class="input-group-search">
+                            <button v-on:click="filters_isOpen = !filters_isOpen" class="button-input-filter"><img class="icon-menu-filter" src="{{asset('img/icons/input-menu-filter.svg')}}"></button>
+                            <input type="text" value="Exemplio">
+                            <button class="button-input-search"><img class="icon-search" src="{{asset('img/icons/input-search.svg')}}"></button>
+                        </div>
+                        <template v-if="filters_isOpen">
+                            <div class="research-filter">
+                                <div class="filters">
+                                    <div class="research-filter-category">
+                                        <p class="category">Quelle catégorie recherchez vous ?</p>
+                                        <div class="buttons">
+                                            <button class="btn btn-color btn-secondary btn-s btn-r8">Voir tout</button>
+                                            <button class="btn btn-white btn-s btn-r8">Restaurant</button>
+                                            <button class="btn btn-white btn-s  btn-r8">Alimentaire</button>
+                                            <button class="btn btn-white btn-s  btn-r8">Culture</button>
+                                            <button class="btn btn-white btn-s  btn-r8">Habits</button>
+                                        </div>
+
+                                    </div>
+                                    <div class="research-filter-subcategory">
+                                        <p class="subcategory">Besoin de plus de précision ?</p>
+                                        <div class="buttons">
+                                            <button class="btn btn-white btn-s  btn-r8">Indien</button>
+                                            <button class="btn btn-white btn-s  btn-r8">Chinois</button>
+                                            <button class="btn btn-white btn-s  btn-r8">Italien</button>
+                                            <button class="btn btn-white btn-s  btn-r8">Pizza</button>
+                                            <button class="btn btn-white btn-s  btn-r8">Kebab</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                    </div>
+                                    <button class="btn btn-s btn-action btn-r12">Appliquer</button>
                                 </div>
 
                             </div>
-                            <div class="research-filter-subcategory">
-                                <p class="subcategory">Sous catégories</p>
-                                <div class="buttons">
-                                    <button class="btn btn-white btn-s  btn-r8">Indien</button>
-                                    <button class="btn btn-white btn-s  btn-r8">Chinois</button>
-                                    <button class="btn btn-white btn-s  btn-r8">Italien</button>
-                                    <button class="btn btn-white btn-s  btn-r8">Pizza</button>
-                                    <button class="btn btn-white btn-s  btn-r8">Kebab</button>
-                                </div>
+                        </template>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="map-and-list">
+            <div id="map">
+
+            </div>
+            <div class="stores-list">
+                <div class="element-list element-list-active">
+                    <div class="img-element-list">
+                        <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                    </div>
+                    <div class="info-element-list">
+                        <p>Sushi Place</p>
+                        <div>
+                            <span>petit texte</span>
+                            <div class="note">
+                                <span>5</span>
+                                <span><img src="{{asset('img/icons/star.svg')}}"></span>
                             </div>
-                            <div>
+                        </div>
+                    </div>
+                </div>
+                <div class="element-list">
+                    <div class="img-element-list">
+                        <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                    </div>
+                    <div class="info-element-list">
+                        <p>Sushi Place</p>
+                        <div>
+                            <span>petit texte</span>
+                            <div class="note">
+                                <span>5</span>
+                                <span><img src="{{asset('img/icons/star.svg')}}"></span>
                             </div>
                         </div>
-                        <button class="btn btn-s btn-action btn-r12">Appliquer</button>
                     </div>
                 </div>
-
             </div>
         </div>
+        <footer>
+        </footer>
+
     </div>
-
-    <div class="map-and-list">
-        <div id="map">
-
-        </div>
-        <div class="stores-list">
-            <div class="element-list element-list-active">
-                <div class="img-element-list">
-                    <img src="{{asset('img/photos/exemple-image-store.png')}}">
-                </div>
-                <div class="info-element-list">
-                    <p>Sushi Place</p>
-                    <div>
-                        <span>petit texte</span>
-                        <div class="note">
-                            <span>5</span>
-                            <span><img src="{{asset('img/icons/star.svg')}}"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="element-list">
-                <div class="img-element-list">
-                    <img src="{{asset('img/photos/exemple-image-store.png')}}">
-                </div>
-                <div class="info-element-list">
-                    <p>Sushi Place</p>
-                    <div>
-                        <span>petit texte</span>
-                        <div class="note">
-                            <span>5</span>
-                            <span><img src="{{asset('img/icons/star.svg')}}"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer>
-    </footer>
 
 
 
 
     <script>
-        const hamburger = document.querySelector(".hamburger");
-        const navLinks = document.querySelector(".nav-links");
-        const links = document.querySelectorAll(".nav-links li");
-        let menuClose = true;
-        hamburger.addEventListener("click", () => {
-            if (menuClose) {
-                navLinks.classList.toggle('open');
-                hamburger.classList.toggle('open');
-                menuClose = !menuClose;
-            } else {
-                navLinks.classList.toggle('open');
-                setTimeout(function() {
-                    hamburger.classList.toggle('open')
-                }, 700);
-                menuClose = !menuClose;
-            }
-
-            links.forEach(link => {
-                link.classList.toggle("fade");
-            });
-        });
+     
 
     </script>
 </body>

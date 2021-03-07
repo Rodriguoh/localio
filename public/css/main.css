@@ -673,6 +673,7 @@ footer {
   display: block;
   margin-bottom: 5px;
   margin-top: 3px;
+  color: #3E3F68;
 }
 .research .research-filter .filters p.category {
   font-size: 18px;
@@ -680,13 +681,16 @@ footer {
 .research .research-filter .filters p.subcategory {
   font-size: 16px;
 }
-.research .research-filter .filters .research-filter-category, .research .research-filter .filters .research-filter-subcategory {
-  margin-bottom: 15px;
+.research .research-filter .filters .research-filter-category,
+.research .research-filter .filters .research-filter-subcategory {
+  margin-bottom: 20px;
 }
-.research .research-filter .filters .research-filter-category .btn-white, .research .research-filter .filters .research-filter-subcategory .btn-white {
+.research .research-filter .filters .research-filter-category .btn-white,
+.research .research-filter .filters .research-filter-subcategory .btn-white {
   opacity: 0.7;
 }
-.research .research-filter .filters .research-filter-category .btn-white:hover, .research .research-filter .filters .research-filter-subcategory .btn-white:hover {
+.research .research-filter .filters .research-filter-category .btn-white:hover,
+.research .research-filter .filters .research-filter-subcategory .btn-white:hover {
   opacity: 1;
 }
 .research .research-filter .filters .buttons {
@@ -764,4 +768,9 @@ footer {
 .useful-width {
   width: 100%;
   max-width: 1200px;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
 }

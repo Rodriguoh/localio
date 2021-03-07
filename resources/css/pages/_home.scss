@@ -67,38 +67,40 @@
         z-index: 20;
         border-radius: 0px 0px 30px 30px;
 
-        .filters{
-            display:flex;
+        .filters {
+            display: flex;
             flex-direction: column;
-            p{
-                display:block;
+            p {
+                display: block;
                 margin-bottom: 5px;
-                margin-top:3px;
+                margin-top: 3px;
+                color: $greyBlue;
             }
-            p.category{
+            p.category {
                 font-size: 18px;
             }
-            p.subcategory{
+            p.subcategory {
                 font-size: 16px;
             }
-            .research-filter-category, .research-filter-subcategory{
-                margin-bottom: 15px;
-                .btn-white{
+            .research-filter-category,
+            .research-filter-subcategory {
+                margin-bottom: 20px;
+                .btn-white {
                     opacity: 0.7;
                 }
-                .btn-white:hover{
+                .btn-white:hover {
                     opacity: 1;
                 }
             }
-            .buttons{
-                display:flex;
+            .buttons {
+                display: flex;
                 flex-wrap: wrap;
             }
-            .btn-color{
+            .btn-color {
                 text-shadow: 0px 3px 3px #00000029;
             }
         }
-        .button-action{
+        .button-action {
             font-size: 16px;
         }
     }
