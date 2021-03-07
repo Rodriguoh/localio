@@ -8,8 +8,7 @@
     <title>Document</title>
     {{-- <link rel="stylesheet" href="css/main.css"> --}}
 
-    <!-- Halfmoon CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 
@@ -176,38 +175,65 @@
             <div id="map">
 
             </div>
-            <div class="stores-list">
-                <div class="element-list element-list-active">
-                    <div class="img-element-list">
-                        <img src="{{asset('img/photos/exemple-image-store.png')}}">
-                    </div>
-                    <div class="info-element-list">
-                        <p>Sushi Place</p>
-                        <div>
-                            <span>petit texte</span>
-                            <div class="note">
-                                <span>5</span>
-                                <span><img src="{{asset('img/icons/star.svg')}}"></span>
+            <template>
+                <div class="stores-list">
+
+                    <a href="">
+                        <div class="element-list active">
+                            <div class="img-element-list">
+                                <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                            </div>
+                            <div class="info-element-list">
+                                <p>Sushi Place</p>
+                                <div>
+                                    <span class="description-veryshort">petit texte</span>
+                                    <div class="note">
+                                        <span>5</span>
+                                        <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="element-list">
-                    <div class="img-element-list">
-                        <img src="{{asset('img/photos/exemple-image-store.png')}}">
-                    </div>
-                    <div class="info-element-list">
-                        <p>Sushi Place</p>
-                        <div>
-                            <span>petit texte</span>
-                            <div class="note">
-                                <span>5</span>
-                                <span><img src="{{asset('img/icons/star.svg')}}"></span>
+                    </a>
+                    <a href="">
+                        <div class="element-list active">
+                            <div class="img-element-list">
+                                <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                            </div>
+                            <div class="info-element-list">
+                                <p>Sushi Place</p>
+                                <div>
+                                    <span class="description-veryshort">petit texte</span>
+                                    <div class="note">
+                                        <span>5</span>
+                                        <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
+                    <a href="">
+                        <div class="element-list active">
+                            <div class="img-element-list">
+                                <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                            </div>
+                            <div class="info-element-list">
+                                <p>Sushi Place</p>
+                                <div>
+                                    <span class="description-veryshort">petit texte</span>
+                                    <div class="note">
+                                        <span>5</span>
+                                        <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+
                 </div>
-            </div>
+            </template>
+
         </div>
         <footer>
         </footer>
@@ -218,7 +244,7 @@
 
 
     <script>
-     
+
 
     </script>
 </body>

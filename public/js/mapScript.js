@@ -859,6 +859,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var app = new Vue({
   el: "#app",
   data: {
+    allStoreOnMap: [],
     filters_isOpen: false,
     mobileMenu_isOpen: false
   },

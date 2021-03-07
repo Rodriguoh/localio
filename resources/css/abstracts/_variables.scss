@@ -3,14 +3,17 @@
 $redPrimary: #FD003A;
 $yellowSecondary: #FFCF39; //use
 $yellowSecondary-dark: #F8C320; //use
-$greyRed: #3F3543;
-$greyBlue: #3E3F68;
-$greyLight: #707070;
+$greyRed: #3F3543; //use
+$greyBlue: #3E3F68; //use
+$greyLight: #707070; //use
 
 //Variables tailles
 $navbar_height: 60px; //use
 $margin-constraint-width: calc(100vw - 40px); //use
 $useful-width: map-get($breakpoints, "XL"); //use
+$listStores-element-img: 200px;
+$listStores-element-info: 60px;
+$listStores_height: $listStores-element-img + $listStores-element-info;
 $marginBottom-section: 40px;
 
 //Taille polices

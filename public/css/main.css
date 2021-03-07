@@ -6,11 +6,12 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 html {
   font-family: sans-serif;
+  font-size: 62.5%;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -41,6 +42,14 @@ body {
   font-size: 1rem;
   font-weight: 400;
   text-align: left;
+  left: 0;
+  top: 0;
+}
+
+.page-wrapper, body, html {
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 [tabindex="-1"]:focus {
@@ -705,6 +714,7 @@ footer {
 }
 
 .map-and-list {
+  position: relative;
   height: 100%;
   width: 100%;
 }
@@ -712,14 +722,60 @@ footer {
   z-index: 10;
   background: url("../img/bg-map.png");
   width: 100%;
-  height: 100%;
+  height: 90vh;
   margin-top: -60px;
-  background: linear-gradient(to top, transparent 80%, white 100%), url("../img/bg-map.png");
+  background: linear-gradient(to top, transparent 80%, white 100%), linear-gradient(to bottom, transparent 80%, white 100%), url("../img/bg-map.png");
 }
 .map-and-list .stores-list {
+  position: absolute;
+  display: flex;
+  background: transparent;
+  bottom: 20px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.map-and-list .stores-list a {
+  flex: 0 0 auto;
+}
+.map-and-list .stores-list a .element-list {
+  display: flex;
+  flex-direction: column;
+  max-width: 140px;
+  margin-right: 15px;
+}
+.map-and-list .stores-list a .element-list .img-element-list {
+  width: 100%;
+  height: 80%;
+}
+.map-and-list .stores-list a .element-list .img-element-list img {
+  border-radius: 12px 12px 0px 0px;
+  box-shadow: 0px 2px 16px #0000002e;
+}
+.map-and-list .stores-list a .element-list .info-element-list {
+  max-height: 60px;
+  background-color: #FFCF39;
+  padding: 10px;
+  border-radius: 0px 0px 8px 8px;
+}
+.map-and-list .stores-list a .element-list .info-element-list p {
+  font-size: 14px;
+  color: white;
+}
+.map-and-list .stores-list a .element-list .info-element-list div .description-veryshort {
   display: none;
 }
-
+.map-and-list .stores-list a .element-list .info-element-list div .note {
+  display: flex;
+  color: white;
+  opacity: 0.5;
+  font-size: 12px;
+}
+.map-and-list .stores-list a .element-list .info-element-list div .note span:nth-child(2) {
+  width: 20px;
+}
+.map-and-list .stores-list a .element-list .info-element-list div .note span:nth-child(2) img {
+  display: none;
+}
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
