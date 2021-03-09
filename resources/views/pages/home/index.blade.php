@@ -202,7 +202,7 @@
                                 <!-- Bug Img sur Heroku -->
                                 <div v-if="storeSelected.thumbnails">
                                     <!-- Voir style img -->
-                                    <img :src="storeSelected.thumbnails" alt="">
+                                    <img class="img-fluid rounded w-200 w-sm-350" :src="storeSelected.thumbnails" alt="">
                                 </div>
                                 <template v-if="comments?.length > 0">
                                     <h2 class="content-title">Commentaires :</h2>
