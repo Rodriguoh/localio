@@ -23,6 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <script src="{{ asset('js/mapScript.js')}}" defer></script>
+
     <style>
         #map {
             height: 100%;
@@ -103,6 +104,25 @@
             left: 95% !important;
             top: 35px !important;
         }
+
+        #storeDescription h1 {
+            font-size:2rem;
+            font-weight: 500;
+            text-align:center;
+        }
+
+        #storeDescription h2 {
+            font-size:1.8rem;
+            font-weight: 500;
+            text-align:center;
+        }
+
+        #storeDescription h3 {
+            font-size:1.6rem;
+            font-weight: 500;
+            text-align:center;
+        }
+
     </style>
 </head>
 
@@ -172,8 +192,12 @@
                     </a>
                     <div class="container-sm d-flex flex-column">
                         <div class="row">
-                            <div class="col-md-5">
-                                <div style="height: 350px; width: 90%; background-color: grey"></div>
+                            <div class="col-md-5 ml-20">
+                                <!-- Bug Img sur Heroku -->
+                                <div v-if="storeSelected.thumbnails">
+                                    <!-- Voir style img -->
+                                    <img :src="storeSelected.thumbnails" alt="">
+                                </div>
                                 <template v-if="comments?.length > 0">
                                     <h2 class="content-title">Commentaires :</h2>
                                     <div class="overflow-auto comments">
@@ -181,7 +205,7 @@
                                     </div>
                                 </template>
                             </div>
-                            <div class="col-md-7 order-first">
+                            <div class="col-md-6 order-first">
                                 <h2 class="content-title">@{{storeSelected.name}}</h2>
                                 <div class="custom-checkbox">
                                     <input type="checkbox" id="checkbox-favoris" :value="storeSelected.id" v-model="myFavorites">
@@ -202,8 +226,10 @@
                                     <div class="my-10">
                                         <!-- <p><span class="font-weight-medium">Horraires :</span> @{{storeSelected?.openingHours}}</p>  -->
                                     </div>
+
                                     <div class="my-10">
-                                        <p> <span class="font-weight-medium">Description :</span> @{{storeSelected.description}}</p>
+                                        <span class="font-weight-medium">Description :</span>
+                                        <p id="storeDescription"></p> <!-- desciption add with getStore function --> 
                                     </div>
 
                                     <div class="my-10">

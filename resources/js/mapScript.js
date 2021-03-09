@@ -168,6 +168,10 @@ var app = new Vue({
             let rep = await req.json();
 
             this.storeSelected = rep.data;
+
+            // Ajoute la description au format HTML au modal lors du clic sur un marqueur
+            let descriptionZone = document.getElementById('storeDescription');
+            descriptionZone.innerHTML = this.storeSelected.description;
         },
         /**
          * Function to get comments with paginate on a store
