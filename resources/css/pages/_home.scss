@@ -59,7 +59,8 @@
         display: block;
         position: absolute;
         margin-top: -50px;
-        left: 0%;
+        left: 0px;
+        width: auto;
         background-color: white;
         padding: 50px 20px 20px 35px;
         z-index: 20;
@@ -113,7 +114,7 @@
         z-index: 10;
         background: url("../img/bg-map.png");
         width: 100%;
-        height: 90vh;
+        height: calc(90vh - 60px);
         margin-top: -$navbar_height;
         background: linear-gradient(to top, transparent 80%, white 100%),
             linear-gradient(to bottom, transparent 80%, white 100%), url("../img/bg-map.png");
@@ -139,7 +140,7 @@
                 .img-element-list {
                     width: 100%;
                     height: 80%;
-    
+
                     img {
                         border-radius: 12px 12px 0px 0px;
                         box-shadow: 0px 2px 16px #0000002e;
@@ -176,12 +177,11 @@
                 }
             }
             .element-list.active {
-                .img-element-list{
-                    img{
+                .img-element-list {
+                    img {
                         height: 120px;
                     }
                 }
-               
             }
         }
     }
@@ -191,4 +191,5 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
+  
 }
