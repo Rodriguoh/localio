@@ -11,13 +11,16 @@ $greyLight: #707070; //use
 $navbar_height: 60px; //use
 $margin-constraint-width: calc(100vw - 40px); //use
 $useful-width: map-get($breakpoints, "XL"); //use
+
 $listStores-element-img: 200px;
 $listStores-element-info: 60px;
 $listStores_height: $listStores-element-img + $listStores-element-info;
+
 $marginBottom-section: 40px;
 
 //Taille polices
 /* -- Desktop --*/
+$sizeTitlePage: 32px; //use
 $sizeTitle: 22px;
 $sizeSubTitle: 20px;
 $sizeTextCTA: 18px;
@@ -36,7 +39,7 @@ $thin: 100;
 $extra-ligth: 200;
 $ligth: 300;
 $regular: 400;
-$medium: 500;
+$medium: 500; //use
 $semi-bold: 600;
 $bold: 700;
 $extra-bold: 800;

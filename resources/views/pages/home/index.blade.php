@@ -43,57 +43,59 @@
 
         <div class="margin-constraint">
             <div class="useful-width">
-                <div class="home-col-1">
-                    <div class="illustration_home">
-                        <img src="{{asset('img/illustrations/home_car.svg')}}">
-                    </div>
-
-                </div>
-                <div class="home-col-2">
-                    <h1>Avec Localio le click and drive n’a jamais été aussi simple.</h1>
-                    <p>Recherchez des magasins de proximité proposant le Click and Collect facilement avec Localio. Consultez et commandez vos produits en ligne pour ensuite retirer les articles à l’heure que vous souhaitez.</p>
-
-                    <div class="research">
-                        <div class="input-group-search">
-                            <button v-on:click="filters_isOpen = !filters_isOpen" class="button-input-filter"><img class="icon-menu-filter" src="{{asset('img/icons/input-menu-filter.svg')}}"></button>
-                            <input type="text" value="Exemplio">
-                            <button class="button-input-search"><img class="icon-search" src="{{asset('img/icons/input-search.svg')}}"></button>
+                <div class="header">
+                    <div class="home-col-1">
+                        <div class="illustration_home">
+                            <img src="{{asset('img/illustrations/home_car.svg')}}">
                         </div>
-                        <template v-if="filters_isOpen">
-                            <div class="research-filter">
-                                <div class="filters">
-                                    <div class="research-filter-category">
-                                        <p class="category">Quelle catégorie recherchez vous ?</p>
-                                        <div class="buttons">
-                                            <button class="btn btn-color btn-secondary btn-s btn-r8">Voir tout</button>
-                                            <button class="btn btn-white btn-s btn-r8">Restaurant</button>
-                                            <button class="btn btn-white btn-s  btn-r8">Alimentaire</button>
-                                            <button class="btn btn-white btn-s  btn-r8">Culture</button>
-                                            <button class="btn btn-white btn-s  btn-r8">Habits</button>
-                                        </div>
+                    </div>
+                    <div class="home-col-2">
+                        <h1>Avec Localio le click and drive n’a jamais été aussi simple.</h1>
+                        <p>Recherchez des magasins de proximité proposant le Click and Collect facilement avec Localio. Consultez et commandez vos produits en ligne pour ensuite retirer les articles à l’heure que vous souhaitez.</p>
 
-                                    </div>
-                                    <div class="research-filter-subcategory">
-                                        <p class="subcategory">Besoin de plus de précision ?</p>
-                                        <div class="buttons">
-                                            <button class="btn btn-white btn-s  btn-r8">Indien</button>
-                                            <button class="btn btn-white btn-s  btn-r8">Chinois</button>
-                                            <button class="btn btn-white btn-s  btn-r8">Italien</button>
-                                            <button class="btn btn-white btn-s  btn-r8">Pizza</button>
-                                            <button class="btn btn-white btn-s  btn-r8">Kebab</button>
-                                        </div>
-                                    </div>
-                                    <div>
-                                    </div>
-                                    <button class="btn btn-s btn-action btn-r12">Appliquer</button>
-                                </div>
-
+                        <div class="research">
+                            <div class="input-group-search">
+                                <button v-on:click="filters_isOpen = !filters_isOpen" class="button-input-filter"><img class="icon-menu-filter" src="{{asset('img/icons/input-menu-filter.svg')}}"></button>
+                                <input type="text" value="Exemplio">
+                                <button class="button-input-search"><img class="icon-search" src="{{asset('img/icons/input-search.svg')}}"></button>
                             </div>
-                        </template>
+                            <template v-if="filters_isOpen">
+                                <div class="research-filter">
+                                    <div class="filters">
+                                        <div class="research-filter-category">
+                                            <p class="category">Quelle catégorie recherchez vous ?</p>
+                                            <div class="buttons">
+                                                <button class="btn btn-color btn-secondary btn-s btn-r8">Voir tout</button>
+                                                <button class="btn btn-white btn-s btn-r8">Restaurant</button>
+                                                <button class="btn btn-white btn-s  btn-r8">Alimentaire</button>
+                                                <button class="btn btn-white btn-s  btn-r8">Culture</button>
+                                                <button class="btn btn-white btn-s  btn-r8">Habits</button>
+                                            </div>
+
+                                        </div>
+                                        <div class="research-filter-subcategory">
+                                            <p class="subcategory">Besoin de plus de précision ?</p>
+                                            <div class="buttons">
+                                                <button class="btn btn-white btn-s  btn-r8">Indien</button>
+                                                <button class="btn btn-white btn-s  btn-r8">Chinois</button>
+                                                <button class="btn btn-white btn-s  btn-r8">Italien</button>
+                                                <button class="btn btn-white btn-s  btn-r8">Pizza</button>
+                                                <button class="btn btn-white btn-s  btn-r8">Kebab</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                        </div>
+                                        <button class="btn btn-s btn-action btn-r12">Appliquer</button>
+                                    </div>
+
+                                </div>
+                            </template>
+
+                        </div>
 
                     </div>
-
                 </div>
+
             </div>
         </div>
 
