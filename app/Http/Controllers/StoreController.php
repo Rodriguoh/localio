@@ -6,12 +6,16 @@ use App\Models\Category;
 use App\Models\State;
 use App\Models\Store;
 use App\Models\City;
+use App\Models\User;
+use App\Models\Comment;
+use App\Models\Consultation;
 use App\Models\Moderation;
 use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+
 
 class StoreController extends Controller
 {
@@ -35,6 +39,7 @@ class StoreController extends Controller
 
     public function showStore($idStore)
     {
+        /*
         $store = Store::where('stores.id', $idStore)
             ->join('users', 'users.id', '=', 'stores.user_id')
             ->join('states', 'states.id', '=', 'stores.state_id')
@@ -43,6 +48,7 @@ class StoreController extends Controller
             ->select(
                 'users.lastname',
                 'users.firstname',
+                'stores.id',
                 'stores.description',
                 'stores.number',
                 'stores.street',
@@ -64,7 +70,11 @@ class StoreController extends Controller
                 'categories.label as category_name',
                 'states.label as state_label'
             )->first();
-        return view('pages/account/stores/showStore', ['store' => $store])->with('openingHours', json_decode($store->openingHours, true));
+            */
+
+            $store = Store::find($idStore);
+
+        return view('pages/account/stores/showStore', ['store' =>  $store])->with('openingHours', json_decode($store->openingHours, true));
     }
     public function approve($idStore)
     {
@@ -87,8 +97,10 @@ class StoreController extends Controller
     public function requests()
     {
         $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
+            
             ->join('states', 'states.id', '=', 'stores.state_id')
-            ->select('lastname', 'firstname', 'stores.id', 'stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label')
+            ->join('cities', 'cities.INSEE', '=', 'stores.city_INSEE')
+            ->select('lastname', 'firstname', 'stores.id', 'stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label', 'cities.name as city_name')
             ->where('states.label', '=', 'pending')
             ->orderBy('name')
             ->paginate(5);
@@ -108,8 +120,31 @@ class StoreController extends Controller
 
     public function statsStore($idStore)
     {
+        $store = Store::find($idStore);
+
+        $consultationsByMonth = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
+
+        // get count consultation group by month for the last 12 month
+        $consultations = $store->consultations()
+            ->where("date", ">", Carbon::now()->subMonths(12))
+            ->orderBy('date')
+            ->get()
+            ->groupBy(function ($d) {
+                return Carbon::parse($d->date)->format('F');
+            })
+            ->map
+            ->count();
+
+        $consultationsResult = [];
+
+        // fill consultations with 0 by empty month
+        foreach ($consultationsByMonth as $month) {
+            $consultationsResult[$month] = $consultations[$month] ?? 0;
+        }
+
         return view('pages/account/stores/statsStore', [
-            'store' => Store::find($idStore)
+            'store' => $store,
+            'consultations' => $consultationsResult
         ]);
     }
 
@@ -223,5 +258,34 @@ class StoreController extends Controller
         $store->delete();
 
         return redirect()->route('myStores')->with('successDelete', 'Votre commerce a bien été supprimé');
+    }
+
+    public function stats()
+    {
+        $consultationsByMonth = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
+
+        // get count consultation group by month for the last 12 month
+        $consultations = Consultation::where("date", ">", Carbon::now()->subMonths(12))
+            ->orderBy('date')
+            ->get()
+            ->groupBy(function ($d) {
+                return Carbon::parse($d->date)->format('F');
+            })
+            ->map
+            ->count();
+
+        $consultationsResult = [];
+
+        // fill consultations with 0 by empty month
+        foreach ($consultationsByMonth as $month) {
+            $consultationsResult[$month] = $consultations[$month] ?? 0;
+        }
+
+        return view('pages/account/stats', [
+            'nbCommentaire' => Comment::count(),
+            'nbUtilisateurs' => User::count(),
+            'nbConsultations' => Consultation::count(),
+            'consultations' => $consultationsResult
+        ]);
     }
 }

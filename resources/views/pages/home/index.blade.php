@@ -122,7 +122,13 @@
             font-weight: 500;
             text-align:center;
         }
+        
+        @media (max-width: 768px) {
 
+            .leaflet-left{
+                display: none;
+            }
+        }
     </style>
 </head>
 

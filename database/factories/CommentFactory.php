@@ -22,7 +22,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            "note" => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 10),
+            "note" => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 5),
             "comment" => $this->faker->sentence($nbWords = 10, $variableNbWords = true),
             "date" => now(),
             "store_id" => \App\Models\Store::all()->random(1)[0]->id,

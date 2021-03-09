@@ -16,12 +16,12 @@ var app = new Vue({
         ],
         mapCenter: [44.5667, 6.0833],
         mapZoom: 13,
-        baseUrl: "https://localio-app.herokuapp.com", // http://localhost/localio/public mettre l'url sur laquelle on travail
+        baseUrl: "https://localio-app.herokuapp.com", //'http://localhost/PHP/Projet_tutore/localio/public',
         categorySelected: "",
         prevCatSelected: "",
         categoryFilter: "",
         querySearch: "",
-        comments:{},
+        comments: {},
         commentLimit: 1,
         commentPages: 0,
         resultsQueryCity: [],
@@ -131,18 +131,22 @@ var app = new Vue({
 
                 // Change la couleur de fond de la div du commerce lors du hover de son marqueur
                 marker.on("mouseover", async () => {
-                    let store = document.getElementById("list-store-"+rep[i].id);
+                    let store = document.getElementById(
+                        "list-store-" + rep[i].id
+                    );
                     store.classList.add("bg-dark");
                     store.style.opacity = "70%";
-                    store.style.color = "white"
+                    store.style.color = "white";
                     store.scrollIntoView();
                 });
 
                 // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
                 marker.on("mouseout", async () => {
-                    let store = document.getElementById("list-store-"+rep[i].id);
+                    let store = document.getElementById(
+                        "list-store-" + rep[i].id
+                    );
                     store.classList.remove("bg-dark");
-                    store.style.color= "black";
+                    store.style.color = "black";
                     store.style.opacity = "100%";
                 });
 
@@ -153,7 +157,6 @@ var app = new Vue({
             this.markers = L.layerGroup(allMarkers);
 
             this.allStoreOnMap = rep;
-
         },
         /**
          * Function to get all details on a store
@@ -191,8 +194,10 @@ var app = new Vue({
             this.commentPages = rep.pagination.total_pages;
             let comments = new Array();
 
-            for(let i=0; i < rep.data.length; i++){
-                if (typeof rep.data == "object"){comments.push(rep.data[i])};
+            for (let i = 0; i < rep.data.length; i++) {
+                if (typeof rep.data == "object") {
+                    comments.push(rep.data[i]);
+                }
             }
 
             this.comments = await comments;
@@ -251,33 +256,20 @@ var app = new Vue({
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
         },
-        // categoriesFilter: async function () {
-        //     let requestOptions = {
-        //         method: "GET",
-        //         redirect: "follow",
-        //     };
-        //     let url = new URL(`${this.baseUrl}/api/categories`);
-        //     let req = await fetch(url, requestOptions);
-        //     let rep = await req.json();
-        //     let mainCats = rep.data;
-        //     let subCats = new Object();
+        reportComment: async function(id){
 
-        //     for (let i = 0; i < mainCats.length; i++) {
-        //         let subCat = [];
-        //         mainCats[i].child.forEach((element) =>
-        //             subCat.push(element.label)
-        //         );
-        //         subCats[mainCats[i].label] = subCat;
-        //     }
+            let urlComment = new URL(
+                `${this.baseUrl}/api/comment/`+id
+            );
+            let req = await fetch(
+                urlComment
+            );
+            document.getElementById('reportButton'+id).innerHTML = "Avis signalé";
 
+        }
 
-        //     this.mainCat = await mainCats;
-        //     this.subCat = await subCats;
-        //     console.log(this.subCat);
-        // },
     },
     created() {
-        //this.categoriesFilter();
 
         this.mainCat = categories;
 
@@ -327,7 +319,6 @@ var app = new Vue({
 
         await this.getStoresOnMap();
         await this.map.addLayer(this.markers);
-        //await ;
 
         // add eventListener on the map movment
         this.map.on("moveend", () => {
