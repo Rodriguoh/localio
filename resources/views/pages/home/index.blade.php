@@ -56,30 +56,33 @@
                         <div class="research">
                             <div class="input-group-search">
                                 <button v-on:click="filters_isOpen = !filters_isOpen" class="button-input-filter"><img class="icon-menu-filter" src="{{asset('img/icons/input-menu-filter.svg')}}"></button>
-                                <input id="inputCity" type="text" value="Exemplio">
+                                <input id="inputCity" v-model="querySearch" v-on:keyup="autoComplete" v-on:focus="autoComplete" type="text" placeholder="Une ville ou un nom de commerce">
                                 <button class="button-input-search"><img class="icon-search" src="{{asset('img/icons/input-search.svg')}}"></button>
 
                             </div>
-                            <div class="research-propositions">
-                                <div class="research-proposition-link">
-                                    <span class="mark">&nbsp;</span>
-                                    <div class="icon"><img src="{{asset('img/icons/fa-shopping-basket-solid.svg')}}"></div>
-                                    <div class="title">Sushi ShopSushi ShopSushi Shop</div>
-                                    <div class="category">alimentaire</div>
+                            <template v-if="querySearch.length > 0">
+                                <div class="research-propositions">
+                                    <template v-if="resultsQueryCity.length > 0">
+                                        <div v-for="city in resultsQueryCity" class="research-proposition-link">
+                                            <span class="mark">&nbsp;</span>
+                                            <div class="icon"><img src="{{asset('img/icons/fa-building-solid.svg')}}"></div>
+                                            <div class="title"> @{{ city.properties.nom }}</div>
+                                            <div class="category">ville</div>
+                                        </div>
+                                    </template>
+
+                                    <template v-if="resultsQueryStore.length > 0">
+                                        <div v-for="store in resultsQueryStore" class="research-proposition-link">
+                                            <span class="mark">&nbsp;</span>
+                                            <div class="icon"><img src="{{asset('img/icons/fa-shopping-basket-solid.svg')}}"></div>
+                                            <div class="title"> @{{ store.name }}</div>
+                                            <div class="category">commerce</div>
+                                        </div>
+                                    </template>
+
                                 </div>
-                                <div class="research-proposition-link active">
-                                    <span class="mark">&nbsp;</span>
-                                    <div class="icon"><img src="{{asset('img/icons/fa-shopping-basket-solid.svg')}}"></div>
-                                    <div class="title">Sushi Shop</div>
-                                    <div class="category">alimentaire</div>
-                                </div>
-                                <div class="research-proposition-link">
-                                    <span class="mark">&nbsp;</span>
-                                    <div class="icon"><img src="{{asset('img/icons/fa-shopping-basket-solid.svg')}}"></div>
-                                    <div class="title">Sushi Shop</div>
-                                    <div class="category">alimentaire</div>
-                                </div>
-                            </div>
+                            </template>
+
 
 
                             <template v-if="filters_isOpen">

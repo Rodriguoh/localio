@@ -7,6 +7,14 @@ var app = new Vue({
         allStoreOnMap: [],
         filters_isOpen: false,
         mobileMenu_isOpen: false,
+        querySearch: "",
+        resultsQueryCity: [],
+        resultsQueryStore: [],
+        baseUrl: "https://localio-app.herokuapp.com",
+        limitAutoCompletion: 3,
+        categorySelected: "",
+        categoryFilter: ""
+
     },
     methods: {
         mobileMenu: function () {
@@ -28,6 +36,52 @@ var app = new Vue({
             links.forEach(link => {
                 link.classList.toggle("fade");
             });
+        },
+        autoComplete: async function () {
+            this.resultsQueryCity = [];
+            this.resultsQueryStore = [];
+            if (this.querySearch.length < 1) return;
+
+            //Récupération des noms de villes en fonction de l'entrée utilisateur
+            let requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+            let url = new URL(`https://geo.api.gouv.fr/communes`);
+            url.search = new URLSearchParams({
+                ...{
+                    nom: this.querySearch,
+                    format: "geojson",
+                    fields: "code,departement",
+                    boost: "population",
+                    limit: this.limitAutoCompletion,
+                },
+            });
+            let reqCities = await fetch(url, requestOptions);
+            let data = await reqCities.json();
+            this.resultsQueryCity = data.features;
+
+            let urlStore = new URL(
+                `${this.baseUrl}/api/stores/${this.querySearch}`
+            );
+            urlStore.search = new URLSearchParams({
+                ...(this.categorySelected.length > 0
+                    ? this.categoryFilter.length > 0
+                        ? {
+                              category: this.categoryFilter,
+                          }
+                        : {
+                              category: this.categorySelected,
+                          }
+                    : {}),
+            });
+            let reqStores = await fetch(
+                urlStore, // modifier la variable search
+                requestOptions
+            );
+            let dataStores = await reqStores.json();
+
+            this.resultsQueryStore = dataStores.data;
         }
     },
     mounted: async function () {
@@ -35,6 +89,15 @@ var app = new Vue({
     },
 
     computed: {
-
+        computedResultsQueryCity() {
+            return this.limitAutoCompletion
+                ? this.resultsQueryCity.slice(0, this.limitAutoCompletion)
+                : this.resultsQueryCity;
+        },
+        computedResultsQueryStore() {
+            return this.limitAutoCompletion
+                ? this.resultsQueryStore.slice(0, this.limitAutoCompletion)
+                : this.resultsQueryStore;
+        },
     }
 });

@@ -662,6 +662,7 @@ footer {
 .research .input-group-search .button-input-filter {
   padding-left: 5px;
   border-radius: 12px 0px 0px 12px;
+  cursor: pointer;
 }
 .research .input-group-search .button-input-search {
   border-radius: 0px 12px 12px 0px;
@@ -675,6 +676,7 @@ footer {
   width: 100%;
   max-width: calc(100vw - 40px);
   padding-top: 15px;
+  cursor: pointer;
 }
 .research .research-propositions .research-proposition-link {
   display: flex;
@@ -711,11 +713,11 @@ footer {
   font-size: 15px;
   font-weight: 300;
 }
-.research .research-propositions .research-proposition-link.active {
+.research .research-propositions .research-proposition-link:hover {
   position: relative;
   background-color: #FFFDF8;
 }
-.research .research-propositions .research-proposition-link.active .mark {
+.research .research-propositions .research-proposition-link:hover .mark {
   position: absolute;
   display: block;
   z-index: 21;
