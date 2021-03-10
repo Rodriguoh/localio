@@ -748,9 +748,11 @@ footer {
 }
 .research .research-filter .filters p.category {
   font-size: 18px;
+  font-weight: 400;
 }
 .research .research-filter .filters p.subcategory {
   font-size: 16px;
+  font-weight: 400;
 }
 .research .research-filter .filters .research-filter-category,
 .research .research-filter .filters .research-filter-subcategory {
@@ -767,6 +769,17 @@ footer {
 .research .research-filter .filters .buttons {
   display: flex;
   flex-wrap: wrap;
+}
+.research .research-filter .filters .buttons input[type=radio] {
+  display: none;
+}
+.research .research-filter .filters .buttons label {
+  display: block;
+  text-transform: lowercase;
+  cursor: pointer;
+}
+.research .research-filter .filters .buttons label::first-letter {
+  text-transform: uppercase;
 }
 .research .research-filter .filters .btn-color {
   text-shadow: 0px 3px 3px #00000029;

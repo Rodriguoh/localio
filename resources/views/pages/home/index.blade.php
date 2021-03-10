@@ -96,12 +96,14 @@
                                         <div class="research-filter-category">
                                             <p class="category">Quelle catégorie recherchez vous ?</p>
                                             <div class="buttons">
-                                                <button class="btn btn-color btn-secondary btn-s btn-r8">Voir tout</button>
-                                                <button class="btn btn-white btn-s btn-r8">Restaurant</button>
-                                                <button class="btn btn-white btn-s  btn-r8">Alimentaire</button>
-                                                <button class="btn btn-white btn-s  btn-r8">Culture</button>
-                                                <button class="btn btn-white btn-s  btn-r8">Habits</button>
+                                                <input type="radio" value="" id="tout" name="categorie" v-model="categorySelected">
+                                                <label for="tout" class="btn btn-s btn-r8" :class="[categorySelected == '' ? 'btn-color btn-secondary': 'btn-white']">voir tout</label>
+                                                <template v-for="cat in mainCat">
+                                                    <input :id="cat.label" type="radio" name="categorie" :value="cat.label" v-model="categorySelected" v-on:click="categoryFilter = ''">
+                                                    <label :for="cat.label" class="btn btn-s btn-r8" :class="[categorySelected == cat.label ? 'btn-color btn-secondary': 'btn-white']">@{{ cat.label }}</label>
+                                                </template>
                                             </div>
+
 
                                         </div>
                                         <div class="research-filter-subcategory">
@@ -203,7 +205,8 @@
 
 
     <script>
-
+        var categories = @json($categories);
+        var idUser = @json($id_user);
 
     </script>
 </body>

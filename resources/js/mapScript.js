@@ -12,6 +12,8 @@ var app = new Vue({
         resultsQueryStore: [],
         baseUrl: "https://localio-app.herokuapp.com",
         limitAutoCompletion: 3,
+        mainCat: [],
+        subCat: {},
         categorySelected: "",
         categoryFilter: ""
 
@@ -83,6 +85,10 @@ var app = new Vue({
 
             this.resultsQueryStore = dataStores.data;
         }
+    },
+    created() {
+
+        this.mainCat = categories;
     },
     mounted: async function () {
 

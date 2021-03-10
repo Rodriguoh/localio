@@ -139,9 +139,11 @@
             }
             p.category {
                 font-size: 18px;
+                font-weight: $regular;
             }
             p.subcategory {
                 font-size: 16px;
+                font-weight: $regular;
             }
             .research-filter-category,
             .research-filter-subcategory {
@@ -152,10 +154,23 @@
                 .btn-white:hover {
                     opacity: 1;
                 }
+                
             }
             .buttons {
                 display: flex;
                 flex-wrap: wrap;
+
+                input[type=radio]{
+                    display:none;
+                }
+                label{
+                    display: block;
+                    text-transform: lowercase;
+                    cursor: pointer;
+                }
+                label::first-letter {
+                        text-transform: uppercase;
+                }
             }
             .btn-color {
                 text-shadow: 0px 3px 3px #00000029;

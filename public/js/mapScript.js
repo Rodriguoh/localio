@@ -873,6 +873,8 @@ var app = new Vue({
     resultsQueryStore: [],
     baseUrl: "https://localio-app.herokuapp.com",
     limitAutoCompletion: 3,
+    mainCat: [],
+    subCat: {},
     categorySelected: "",
     categoryFilter: ""
   },
@@ -973,6 +975,9 @@ var app = new Vue({
 
       return autoComplete;
     }()
+  },
+  created: function created() {
+    this.mainCat = categories;
   },
   mounted: function () {
     var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
