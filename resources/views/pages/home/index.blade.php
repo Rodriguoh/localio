@@ -58,6 +58,7 @@
                                 <button v-on:click="filters_isOpen = !filters_isOpen" class="button-input-filter"><img class="icon-menu-filter" src="{{asset('img/icons/input-menu-filter.svg')}}"></button>
                                 <input id="inputCity" type="text" value="Exemplio">
                                 <button class="button-input-search"><img class="icon-search" src="{{asset('img/icons/input-search.svg')}}"></button>
+
                             </div>
                             <div class="research-propositions">
                                 <div class="research-proposition-link">
@@ -79,7 +80,8 @@
                                     <div class="category">alimentaire</div>
                                 </div>
                             </div>
-                            
+
+
                             <template v-if="filters_isOpen">
                                 <div class="research-filter">
                                     <div class="filters">

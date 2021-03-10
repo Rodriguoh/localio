@@ -621,6 +621,9 @@ footer {
   display: none;
 }
 
+.research {
+  position: relative;
+}
 .research .input-group-search {
   position: relative;
   display: flex;
@@ -691,21 +694,21 @@ footer {
   max-height: 16px;
 }
 .research .research-propositions .research-proposition-link .title {
-  font-size: 16px;
+  font-size: 15px;
   text-align: left;
-  width: 50%;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .research .research-propositions .research-proposition-link .category {
   display: flex;
-  width: 100%;
+  width: 70%;
   justify-content: flex-end;
   text-align: right;
   margin-left: 10px;
   margin-right: 15px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 300;
 }
 .research .research-propositions .research-proposition-link.active {
@@ -882,6 +885,10 @@ footer {
     font-size: clamp($min-size, $scaler, $max-size);
     font-weight: 300;
     margin-bottom: 25px;
+  }
+
+  .research .research-filter {
+    left: auto;
   }
 
   .map-and-list #map {

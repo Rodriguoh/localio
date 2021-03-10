@@ -9,8 +9,8 @@
         display: none;
     }
 }
-
 .research {
+    position: relative;
     //Groupe input search
     .input-group-search {
         position: relative;
@@ -84,21 +84,21 @@
                 }   
             }
             .title{
-                font-size: $sizeText;
+                font-size: $sizeTextParagraph;
                 text-align: left;
-                width: 50%;
+                width: 100%;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
             .category{
                 display:flex;
-                width: 100%;
+                width: 70%;
                 justify-content: flex-end;
                 text-align: right;
                 margin-left: 10px;
                 margin-right: 15px;
-                font-size: $sizeText;
+                font-size: $sizeTextParagraph;
                 font-weight: $ligth;
             }
         }
@@ -292,7 +292,11 @@
 
         }
     }
-
+    .research{
+        .research-filter{
+            left: auto;
+        }
+    }
     .map-and-list{
         #map{
             background: url("../img/bg-map.png");
