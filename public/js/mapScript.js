@@ -876,6 +876,7 @@ var app = new Vue({
     mainCat: [],
     subCat: {},
     categorySelected: "",
+    prevCatSelected: "",
     categoryFilter: ""
   },
   methods: {

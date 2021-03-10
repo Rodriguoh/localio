@@ -106,16 +106,20 @@
 
 
                                         </div>
+                                        <template v-if="categorySelected !== ''">
                                         <div class="research-filter-subcategory">
                                             <p class="subcategory">Besoin de plus de précision ?</p>
                                             <div class="buttons">
-                                                <button class="btn btn-white btn-s  btn-r8">Indien</button>
-                                                <button class="btn btn-white btn-s  btn-r8">Chinois</button>
-                                                <button class="btn btn-white btn-s  btn-r8">Italien</button>
-                                                <button class="btn btn-white btn-s  btn-r8">Pizza</button>
-                                                <button class="btn btn-white btn-s  btn-r8">Kebab</button>
+                                                <template v-for="cat in mainCat">
+                                                        <template v-for="sub in cat?.child">
+                                                            <input :id="sub.id" type="radio" name="categorie" :value="sub.label" v-model="categoryFilter">
+                                                            <label class="btn btn-s btn-r8" v-show="categorySelected == cat.label" :for="sub.id" :class="[categoryFilter == sub.label ? 'btn-color btn-secondary': 'btn-white']">@{{ sub.label }}</label>
+                                                        </template>
+                                                </template>
                                             </div>
                                         </div>
+                                        </template>
+                                        
                                         <div>
                                         </div>
                                         <button class="btn btn-s btn-action btn-r12">Appliquer</button>
