@@ -63,7 +63,7 @@
                             <template v-if="querySearch.length > 0 && filters_isOpen == false">
                                 <div class="research-propositions">
                                     <template v-if="resultsQueryCity.length > 0">
-                                        <div v-for="city in resultsQueryCity" class="research-proposition-link">
+                                        <div v-for="city in computedResultsQueryCity" class="research-proposition-link">
                                             <span class="mark">&nbsp;</span>
                                             <div class="icon"><img src="{{asset('img/icons/fa-building-solid.svg')}}"></div>
                                             <div class="title"> @{{ city.properties.nom }}</div>
@@ -72,14 +72,18 @@
                                     </template>
 
                                     <template v-if="resultsQueryStore.length > 0">
-                                        <div v-for="store in resultsQueryStore" class="research-proposition-link">
+                                        <div v-for="store in computedResultsQueryStore" class="research-proposition-link">
                                             <span class="mark">&nbsp;</span>
                                             <div class="icon"><img src="{{asset('img/icons/fa-shopping-basket-solid.svg')}}"></div>
                                             <div class="title"> @{{ store.name }}</div>
                                             <div class="category">commerce</div>
                                         </div>
                                     </template>
-                                    
+                                    <template v-if="resultsQueryCity.length < 1 && resultsQueryStore.length < 1">
+                                        <div style="display:flex; align-items: center; height: 40px; ">
+                                            <span style="margin: 0 auto; font-size:14px">Oops, il n'y a aucun résultat</span>
+                                        </div>
+                                    </template>
 
                                 </div>
                             </template>
