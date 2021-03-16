@@ -311,7 +311,7 @@ var app = new Vue({
         //setting up map
         this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
 
-        L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+        // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
         L.tileLayer.provider('Jawg.Sunny', {
             variant: '',
             accessToken: 'PyTJUlEU1OPJwCJlW1k0NC8JIt2CALpyuj7uc066O7XbdZCjWEL3WYJIk6dnXtps'
