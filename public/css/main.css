@@ -824,8 +824,9 @@ nav .nav-links.open {
 
 .map-and-list {
   position: absolute;
-  height: calc(90vh - 60px);
+  height: calc(90vh - 30px);
   width: 100%;
+  top: 90px;
 }
 .map-and-list #map {
   z-index: 10;
@@ -905,6 +906,7 @@ nav .nav-links.open {
   position: absolute;
   right: 40px;
   top: 15px;
+  display: none;
 }
 
 .leaflet-verticalcenter .leaflet-control {
@@ -1058,6 +1060,10 @@ nav .nav-links.open {
   }
   .map-and-list .stores-list .element-list:hover .info-element-list {
     background-color: #FFFDF8;
+  }
+
+  .leaflet-control-container {
+    display: block;
   }
 }
 .full-width {

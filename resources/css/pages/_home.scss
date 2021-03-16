@@ -183,8 +183,9 @@
 
 .map-and-list {
     position: absolute;
-    height: calc(90vh - 60px);
+    height: calc(90vh - 30px);
     width: 100%;
+    top: 90px;
 
     #map {
         z-index: 10;
@@ -272,12 +273,14 @@
     position: absolute;
     right: 40px;
     top: 15px;
+    display:none;
 }
 
 .leaflet-verticalcenter .leaflet-control {
     margin-bottom: 10px;
 }
 @include respond-to("M") {
+
     nav {
         margin-bottom: $marginBottom-section;
         .nav-links {
@@ -428,5 +431,9 @@
                 background-color: $yellowSecondary-extralight;
             }
         }
+    }
+    .leaflet-control-container {
+
+        display:block;
     }
 }
