@@ -596,7 +596,7 @@ var app = new Vue({
 
               L.tileLayer.provider('Jawg.Sunny', {
                 variant: '',
-                accessToken: 'PyTJUlEU1OPJwCJlW1k0NC8JIt2CALpyuj7uc066O7XbdZCjWEL3WYJIk6dnXtps'
+                accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
               }).addTo(this.map);
               _context11.next = 4;
               return this.getStoresOnMap();
