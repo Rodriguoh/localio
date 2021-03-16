@@ -201,7 +201,8 @@
         bottom: 20px;
         overflow-x: auto;
         align-items: flex-end;
-        width: 100%;
+        left: 20px;
+        right: 20px;
         .element-list {
             display: flex;
             flex-direction: column;
