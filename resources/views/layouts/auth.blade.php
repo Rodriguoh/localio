@@ -9,27 +9,38 @@
 
     <!-- Favicon and title -->
     <link rel="icon" href="path/to/fav.png">
-    <title>Starter template - Halfmoon</title>
+    <title>Login</title>
 
-    <!-- Halfmoon CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
-    <!--
-    Or,
-    Use the following (no variables, supports IE11):
-    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon.min.css" rel="stylesheet" />
-    Learn more: https://www.gethalfmoon.com/docs/customize/#notes-on-browser-compatibility
-  -->
 </head>
-<body class="">
-    @include('layouts.home.navigation')
-    <div class="text-center d-flex align-items-center justify-content-center" style="height:100%">
-        <div style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;">
-            @yield('content')
+<body class="full-with">
+    <div id="app">
+        <nav>
+            <div class="logo">
+                <img src="{{asset('img/logo_inline-clair.svg')}}" alt="logo de click and collect">
+            </div>
+            <div v-on:click="mobileMenu" class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
+                <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-login.svg')}}">Se connecter</a></li>
+                <li><a href="#0" class="btn-color btn-secondary btn-xs">Aide</a></li>
+            </ul>
+        </nav>
+        <!-- Container avec les marges -->
+        <div class="margin-constraint">
+         <!-- Container largeur utile -->
+            <div class="useful-width">
+              <!-- 
+                Contenu de la page
+              -->
+            </div>
         </div>
+        <footer>
+        </footer>
+
     </div>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
 </body>
 </html>
