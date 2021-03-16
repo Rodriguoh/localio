@@ -4,7 +4,21 @@
 var app = new Vue({
     el: `#app`,
     data: {
+        /* MAP */
+        map: undefined,
+        markers: undefined,
+        mapTiles: [
+            "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+            {
+                attribution: "",
+                minNativeZoom: 4,
+                minZoom: 4,
+            },
+        ],
+        mapCenter: [44.5667, 6.0833],
+        mapZoom: 13,
         allStoreOnMap: [],
+        /* SEARCH */
         filters_isOpen: false,
         mobileMenu_isOpen: false,
         querySearch: "",
@@ -71,11 +85,11 @@ var app = new Vue({
                 ...(this.categorySelected.length > 0
                     ? this.categoryFilter.length > 0
                         ? {
-                              category: this.categoryFilter,
-                          }
+                            category: this.categoryFilter,
+                        }
                         : {
-                              category: this.categorySelected,
-                          }
+                            category: this.categorySelected,
+                        }
                     : {}),
             });
             let reqStores = await fetch(
@@ -92,7 +106,22 @@ var app = new Vue({
         this.mainCat = categories;
     },
     mounted: async function () {
+        //setting up map
+        this.map = L.map('map', {scrollWheelZoom: false,  zoomControl: false}).setView(this.mapCenter, this.mapZoom);
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(this.map);
 
+        // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+        L.tileLayer.provider('Jawg.Sunny', {
+            variant: '',
+            accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
+        }).addTo(this.map);
+
+        //await this.getStoresOnMap();
+        //await this.map.addLayer(this.markers);
+
+      
     },
 
     computed: {

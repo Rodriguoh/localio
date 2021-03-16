@@ -11,6 +11,7 @@ nav {
     height: $navbar_height;
     padding: 0px 20px;
     justify-content: space-between;
+    z-index: 500;
     .hamburger {
         cursor: pointer;
         right: 20px;

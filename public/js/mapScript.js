@@ -865,7 +865,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var app = new Vue({
   el: "#app",
   data: {
+    /* MAP */
+    map: undefined,
+    markers: undefined,
+    mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+      attribution: "",
+      minNativeZoom: 4,
+      minZoom: 4
+    }],
+    mapCenter: [44.5667, 6.0833],
+    mapZoom: 13,
     allStoreOnMap: [],
+
+    /* SEARCH */
     filters_isOpen: false,
     mobileMenu_isOpen: false,
     querySearch: "",
@@ -986,11 +998,27 @@ var app = new Vue({
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              //setting up map
+              this.map = L.map('map', {
+                scrollWheelZoom: false,
+                zoomControl: false
+              }).setView(this.mapCenter, this.mapZoom);
+              L.control.zoom({
+                position: 'topright'
+              }).addTo(this.map); // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+
+              L.tileLayer.provider('Jawg.Sunny', {
+                variant: '',
+                accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
+              }).addTo(this.map); //await this.getStoresOnMap();
+              //await this.map.addLayer(this.markers);
+
+            case 3:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2);
+      }, _callee2, this);
     }));
 
     function mounted() {

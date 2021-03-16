@@ -1,6 +1,6 @@
-@import "abstracts/variables";
 @import "abstracts/functions";
 @import "abstracts/mixins";
+@import "abstracts/variables";
 
 //@import 'vendors';
 
@@ -9,18 +9,19 @@
 
 @import "components/buttons";
 
-@import "layouts/homeNavigation";
-@import "layouts/header";
 @import "layouts/footer";
+@import "layouts/header";
+@import "layouts/homeNavigation";
+
 
 //@import 'components';
 
-@import "pages/home";
+
 @import "pages/about";
-
 @import "pages/account";
-
 @import "pages/auth";
+@import "pages/home";
+@import "pages/login-register";
 
 .full-width {
     width: 100%;

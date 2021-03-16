@@ -423,6 +423,22 @@ body {
 /* --Mobile--*/
 /* --Epaisseur police --*/
 /* Time function */
+footer {
+  display: none;
+}
+
+/* -- Desktop --*/
+/* --Mobile--*/
+/* --Epaisseur police --*/
+/* Time function */
+header {
+  width: 100%;
+}
+
+/* -- Desktop --*/
+/* --Mobile--*/
+/* --Epaisseur police --*/
+/* Time function */
 .logo {
   max-width: 120px;
 }
@@ -434,6 +450,7 @@ nav {
   height: 60px;
   padding: 0px 20px;
   justify-content: space-between;
+  z-index: 500;
 }
 nav .hamburger {
   cursor: pointer;
@@ -596,18 +613,34 @@ nav .nav-links.open {
 /* --Mobile--*/
 /* --Epaisseur police --*/
 /* Time function */
-header {
-  width: 100%;
-}
-
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
 /* Time function */
-footer {
-  display: none;
-}
+@media (min-width: 768px) {
+  .account-info, .gestion-commerce {
+    margin: 0px;
+    width: 80%;
+    align-self: center;
+  }
 
+  .info {
+    margin-left: 25%;
+  }
+
+  .info .data {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .row {
+    width: 50%;
+  }
+}
+/* -- Desktop --*/
+/* --Mobile--*/
+/* --Epaisseur police --*/
+/* Time function */
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
@@ -633,7 +666,7 @@ footer {
   margin-bottom: 20px;
   box-shadow: 0px 0px 14px 0px #455b6314;
   border-radius: 12px;
-  z-index: 30;
+  z-index: 420;
 }
 .research .input-group-search input[type=text] {
   border-radius: 12px;
@@ -676,6 +709,7 @@ footer {
   width: 100%;
   max-width: calc(100vw - 40px);
   padding-top: 15px;
+  z-index: 410;
   cursor: pointer;
 }
 .research .research-propositions .research-proposition-link {
@@ -733,7 +767,7 @@ footer {
   width: auto;
   background-color: white;
   padding: 50px 20px 20px 35px;
-  z-index: 20;
+  z-index: 410;
   border-radius: 0px 0px 30px 30px;
 }
 .research .research-filter .filters {
@@ -795,11 +829,11 @@ footer {
 }
 .map-and-list #map {
   z-index: 10;
-  background: url("../img/bg-map.png");
   width: 100%;
   height: calc(90vh - 60px);
   margin-top: -60px;
-  background: linear-gradient(to top, transparent 80%, white 100%), linear-gradient(to bottom, transparent 80%, white 100%), url("../img/bg-map.png");
+  background: linear-gradient(to top, transparent 80%, white 100%), linear-gradient(to bottom, transparent 80%, white 100%);
+  margin-top: 0px;
 }
 .map-and-list .stores-list {
   position: absolute;
@@ -810,6 +844,7 @@ footer {
   align-items: flex-end;
   left: 20px;
   right: 20px;
+  z-index: 400;
 }
 .map-and-list .stores-list .element-list {
   display: flex;
@@ -856,6 +891,16 @@ footer {
 }
 .map-and-list .stores-list .element-list.active .img-element-list img {
   height: 120px;
+}
+
+.leaflet-control-container {
+  position: absolute;
+  right: 40px;
+  top: 15px;
+}
+
+.leaflet-verticalcenter .leaflet-control {
+  margin-bottom: 10px;
 }
 
 @media (min-width: 768px) {
@@ -914,7 +959,6 @@ footer {
     height: auto;
   }
   .map-and-list #map {
-    background: url("../img/bg-map.png");
     border-radius: 50px 50px 0px 0px;
     margin-top: 0px;
     height: 500px;
@@ -928,6 +972,7 @@ footer {
     width: 30%;
     max-width: 350px;
     margin-left: 15px;
+    z-index: 400;
   }
   .map-and-list .stores-list .element-list {
     position: relative;
@@ -1004,38 +1049,6 @@ footer {
     background-color: #FFFDF8;
   }
 }
-/* -- Desktop --*/
-/* --Mobile--*/
-/* --Epaisseur police --*/
-/* Time function */
-/* -- Desktop --*/
-/* --Mobile--*/
-/* --Epaisseur police --*/
-/* Time function */
-@media (min-width: 768px) {
-  .account-info, .gestion-commerce {
-    margin: 0px;
-    width: 80%;
-    align-self: center;
-  }
-
-  .info {
-    margin-left: 25%;
-  }
-
-  .info .data {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .row {
-    width: 50%;
-  }
-}
-/* -- Desktop --*/
-/* --Mobile--*/
-/* --Epaisseur police --*/
-/* Time function */
 .full-width {
   width: 100%;
 }

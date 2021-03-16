@@ -6,20 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    {{-- <link rel="stylesheet" href="css/main.css"> --}}
-
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-
+    {{-- Leaflet CSS --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
-    <link rel="shortcut icon" href="#">
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin="" defer></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js" defer></script>
+    {{-- Leaflet JS --}}
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+     <script src="{{ asset('js/leaflet-providers.js')}}" defer></script>
+    {{-- FontAwesome CSS --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+    {{-- VueJS --}}
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    {{-- mapScript.js --}}
     <script src="{{ asset('js/mapScript.js')}}" defer></script>
+    {{-- Style CSS --}}
+   
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 </head>
 
@@ -143,7 +142,7 @@
 
                     <div class="element-list">
                         <div class="img-element-list">
-                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                            <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
                         </div>
                         <div class="info-element-list">
                             <p>Sushi Place</p>
@@ -156,9 +155,9 @@
                             </div>
                         </div>
                     </div>
-                     <div class="element-list">
+                    <div class="element-list">
                         <div class="img-element-list">
-                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                            <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
                         </div>
                         <div class="info-element-list">
                             <p>Sushi Place</p>
@@ -171,9 +170,9 @@
                             </div>
                         </div>
                     </div>
-                     <div class="element-list">
+                    <div class="element-list">
                         <div class="img-element-list">
-                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                            <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
                         </div>
                         <div class="info-element-list">
                             <p>Sushi Place</p>
@@ -186,9 +185,9 @@
                             </div>
                         </div>
                     </div>
-                     <div class="element-list">
+                    <div class="element-list">
                         <div class="img-element-list">
-                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                            <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
                         </div>
                         <div class="info-element-list">
                             <p>Sushi Place</p>
