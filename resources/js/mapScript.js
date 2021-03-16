@@ -318,7 +318,7 @@ var app = new Vue({
         // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
         L.tileLayer.provider('Jawg.Sunny', {
             variant: '',
-            accessToken: 'PyTJUlEU1OPJwCJlW1k0NC8JIt2CALpyuj7uc066O7XbdZCjWEL3WYJIk6dnXtps'
+            accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
         }).addTo(this.map);
 
         await this.getStoresOnMap();
