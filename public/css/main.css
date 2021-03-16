@@ -904,6 +904,9 @@ footer {
     left: auto;
   }
 
+  .map-and-list {
+    position: relative;
+  }
   .map-and-list #map {
     background: url("../img/bg-map.png");
     border-radius: 50px 50px 0px 0px;
@@ -911,8 +914,9 @@ footer {
     height: 500px;
   }
   .map-and-list .stores-list {
-    bottom: 0;
-    height: 300px;
+    position: absolute;
+    top: 50px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     width: 30%;
@@ -973,11 +977,15 @@ footer {
     color: #78849E;
     font-weight: 300;
     line-height: 11px;
+    padding-bottom: 5px;
   }
   .map-and-list .stores-list .element-list .info-element-list div .note {
     display: flex;
     justify-content: flex-end;
     color: #78849E;
+  }
+  .map-and-list .stores-list .element-list .info-element-list div .note span:nth-child(2) {
+    width: auto;
   }
 }
 /* -- Desktop --*/

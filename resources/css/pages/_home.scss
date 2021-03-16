@@ -309,6 +309,7 @@
         }
     }
     .map-and-list {
+        position: relative;
         #map {
             background: url("../img/bg-map.png");
             border-radius: 50px 50px 0px 0px;
@@ -316,8 +317,9 @@
             height: 500px;
         }
         .stores-list {
-            bottom: 0;
-            height: 300px;
+            position: absolute;
+            top: 50px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             width: 30%;
@@ -378,12 +380,16 @@
                             color: $greyBlue-Light;
                             font-weight: $ligth;
                             line-height: 11px;
+                            padding-bottom: 5px;
                         }
                         
                         .note{
                            display:flex;
                            justify-content: flex-end;
                            color: $greyBlue-Light;
+                           span:nth-child(2){
+                               width: auto;
+                           }
                         }
                     }
                 }

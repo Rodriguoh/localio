@@ -171,7 +171,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="element-list">
+                    <div class="element-list">
                         <div class="img-element-list">
                             <img src="{{asset('img/photos/exemple-image-store.png')}}">
                         </div>
@@ -186,7 +186,37 @@
                             </div>
                         </div>
                     </div>
-                     <div class="element-list">
+                    <div class="element-list">
+                        <div class="img-element-list">
+                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                        </div>
+                        <div class="info-element-list">
+                            <p>Sushi Place</p>
+                            <div>
+                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
+                                <div class="note">
+                                    <span>5</span>
+                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="element-list">
+                        <div class="img-element-list">
+                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                        </div>
+                        <div class="info-element-list">
+                            <p>Sushi Place</p>
+                            <div>
+                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
+                                <div class="note">
+                                    <span>5</span>
+                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="element-list">
                         <div class="img-element-list">
                             <img src="{{asset('img/photos/exemple-image-store.png')}}">
                         </div>
