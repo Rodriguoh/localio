@@ -316,7 +316,7 @@ var app = new Vue({
      */
     getStore: function () {
       var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(storeId) {
-        var requestOptions, url, req, rep;
+        var requestOptions, url, req, rep, descriptionZone;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
@@ -336,9 +336,12 @@ var app = new Vue({
 
               case 7:
                 rep = _context6.sent;
-                this.storeSelected = rep.data;
+                this.storeSelected = rep.data; // Ajoute la description au format HTML au modal lors du clic sur un marqueur
 
-              case 9:
+                descriptionZone = document.getElementById('storeDescription');
+                descriptionZone.innerHTML = this.storeSelected.description;
+
+              case 11:
               case "end":
                 return _context6.stop();
             }
