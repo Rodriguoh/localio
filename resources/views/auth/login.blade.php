@@ -6,7 +6,7 @@
 
     <!-- Validation Errors -->
     <x-auth-validation-errors :errors="$errors" />
-   
+
         <form method="POST" action="{{ route('login') }}" style="width:100%">
             @csrf
 

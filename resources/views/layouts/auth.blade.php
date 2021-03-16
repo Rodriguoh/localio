@@ -7,6 +7,9 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <meta name="viewport" content="width=device-width" />
 
+    {{-- <link rel="stylesheet" href="css/main.css"> --}}
+    <link rel="stylesheet" href="{{asset('css/main.css')}}">
+
     <!-- Favicon and title -->
     <link rel="icon" href="path/to/fav.png">
     <title>Login</title>
@@ -33,9 +36,7 @@
         <div class="margin-constraint">
          <!-- Container largeur utile -->
             <div class="useful-width">
-              <!-- 
-                Contenu de la page
-              -->
+{{--                @include('auth.login')--}}
             </div>
         </div>
         <footer>
