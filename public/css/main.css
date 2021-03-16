@@ -832,8 +832,16 @@ nav .nav-links.open {
   width: 100%;
   height: calc(90vh - 60px);
   margin-top: -60px;
-  background: linear-gradient(to top, transparent 80%, white 100%), linear-gradient(to bottom, transparent 80%, white 100%);
   margin-top: 0px;
+}
+.map-and-list #map:before {
+  position: absolute;
+  content: "";
+  height: calc(90vh - 60px);
+  width: 100%;
+  background: linear-gradient(to top, transparent 80%, white 100%), linear-gradient(to bottom, transparent 80%, white 100%);
+  pointer-events: none;
+  z-index: 450;
 }
 .map-and-list .stores-list {
   position: absolute;
