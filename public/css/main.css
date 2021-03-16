@@ -862,6 +862,9 @@ footer {
   nav {
     margin-bottom: 40px;
   }
+  nav .nav-links {
+    height: 60px;
+  }
 
   .header {
     display: flex;

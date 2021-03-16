@@ -264,6 +264,9 @@
 @include respond-to("M") {
     nav {
         margin-bottom: $marginBottom-section;
+        .nav-links{
+            height: $navbar_height;
+        }
     }
 
     .header {
