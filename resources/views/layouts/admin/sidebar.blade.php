@@ -1,23 +1,29 @@
+@php
+use App\Models\User;
+@endphp
 <div class="sidebar">
     <div class="sidebar-menu">
         <!-- Sidebar brand -->
         <a href="{{ route('homeAccount') }}" class="sidebar-brand">
-            Administration
+            Localio
         </a>
         <!-- Sidebar content with the search box -->
         <div class="sidebar-content">
             Bonjour
         </div>
         <!-- Sidebar links (with icons) and titles -->
-        <h5 class="sidebar-title">Gérer les utilisateurs</h5>
-        <div class="sidebar-divider"></div>
-        <a href="{{ URL::route('listUsers') }}" class="sidebar-link sidebar-link-with-icon">
-            <span class="sidebar-icon">
-                <i class="fa fa-user" aria-hidden="true"></i>
-            </span>
-            Liste des utilisateurs
-        </a>
-        <br />
+        @if(User::find(Auth::id())->hasRole('admin'))
+            <h5 class="sidebar-title">Gérer les utilisateurs</h5>
+            <div class="sidebar-divider"></div>
+            <a href="{{ URL::route('listUsers') }}" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </span>
+                Liste des utilisateurs
+            </a>
+            <br />
+        @endif
+
         <h5 class="sidebar-title">Gérer ses commerces</h5>
         <div class="sidebar-divider"></div>
         <a href="{{ URL::route('myStores') }}" class="sidebar-link sidebar-link-with-icon">
