@@ -182,8 +182,8 @@
 
 //Map style
 .map-and-list {
-    position: relative;
-    height: 100%;
+    position: absolute;
+    height: calc(90vh - 60px);
     width: 100%;
     #map {
         z-index: 10;
@@ -339,7 +339,7 @@
                     height: $img-element-list-height;
                     $res: $element-list-height - $img-element-list-height;
                     margin: $res / 2;
-                    
+
                     z-index: 20;
                     display: flex;
                     align-items: center;
@@ -362,44 +362,46 @@
                     bottom: 0px;
                     border-radius: 10px !important;
                     background-color: white;
-                    box-shadow: 0px 4px 16px #455B6314;
-                    p{
+                    box-shadow: 0px 4px 16px #455b6314;
+                    p {
                         $res: $element-list-height - $img-element-list-height;
-                        margin: $res / 2 $res / 2 5px 40% ;
+                        margin: $res / 2 $res / 2 5px 40%;
                         color: $grey;
                         font-weight: $bold;
                         font-size: 13px;
                     }
-                    div{
+                    div {
+                        position: relative;
                         margin-left: 40%;
                         width: 55%;
-                        .description-veryshort{
-                            display:block;
+                        .description-veryshort {
+                            display: block;
                             font-size: 12px;
                             color: $grey;
                             font-weight: $ligth;
                             line-height: 11px;
                             padding-bottom: 5px;
                         }
-                        
-                        .note{
-                           display:flex;
-                           justify-content: flex-end;
-                           color: $yellowSecondary;
-                           font-weight: bold;
-                           margin-top: 10px;
-                           
-                           span:nth-child(2){
-                               width: auto;
-                           }
+
+                        .note {
+                            position: relative;
+                            display: flex;
+                            justify-content: flex-end;
+                            color: $yellowSecondary;
+                            font-weight: bold;
+                            margin-top: 5px;
+
+                            span:nth-child(2) {
+                                width: auto;
+                            }
                         }
                     }
                 }
             }
-            .element-list:hover{
+            .element-list:hover {
                 cursor: pointer;
             }
-            .element-list:hover .info-element-list{
+            .element-list:hover .info-element-list {
                 background-color: $yellowSecondary-extralight;
             }
         }
