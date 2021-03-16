@@ -971,6 +971,9 @@ nav .nav-links.open {
     margin-top: 0px;
     height: 500px;
   }
+  .map-and-list #map:before {
+    background: none;
+  }
   .map-and-list .stores-list {
     position: absolute;
     top: 50px;
