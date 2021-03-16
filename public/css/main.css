@@ -806,14 +806,15 @@ footer {
   display: flex;
   background: transparent;
   bottom: 20px;
-  flex-wrap: nowrap;
   overflow-x: auto;
   align-items: flex-end;
+  width: 100%;
 }
 .map-and-list .stores-list .element-list {
   display: flex;
   flex-direction: column;
-  max-width: 140px;
+  min-width: 140px;
+  width: 140px;
   margin-right: 15px;
 }
 .map-and-list .stores-list .element-list .img-element-list {
@@ -931,13 +932,13 @@ footer {
     margin-right: 0px;
     display: flex;
     flex-direction: row;
-    height: 80px;
+    height: 90px;
     margin-bottom: 15px;
   }
   .map-and-list .stores-list .element-list .img-element-list {
     width: 65px;
     height: 65px;
-    margin: 7.5px;
+    margin: 12.5px;
     z-index: 20;
     display: flex;
     align-items: center;
@@ -952,8 +953,8 @@ footer {
     z-index: 15;
     width: 100%;
     padding: 0px;
-    height: 80px !important;
-    max-height: 80px;
+    height: 90px !important;
+    max-height: 90px;
     right: 0px;
     top: 0px;
     left: 0px;
@@ -963,8 +964,8 @@ footer {
     box-shadow: 0px 4px 16px #455B6314;
   }
   .map-and-list .stores-list .element-list .info-element-list p {
-    margin: 7.5px 7.5px 7.5px 40%;
-    color: #78849E;
+    margin: 12.5px 12.5px 12.5px 40%;
+    color: #363636;
     font-weight: 700;
     font-size: 13px;
   }
@@ -975,7 +976,7 @@ footer {
   .map-and-list .stores-list .element-list .info-element-list div .description-veryshort {
     display: block;
     font-size: 12px;
-    color: #78849E;
+    color: #363636;
     font-weight: 300;
     line-height: 11px;
     padding-bottom: 5px;
@@ -983,7 +984,8 @@ footer {
   .map-and-list .stores-list .element-list .info-element-list div .note {
     display: flex;
     justify-content: flex-end;
-    color: #78849E;
+    color: #FFCF39;
+    font-weight: bold;
   }
   .map-and-list .stores-list .element-list .info-element-list div .note span:nth-child(2) {
     width: auto;
