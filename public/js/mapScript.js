@@ -1416,14 +1416,18 @@ var app = new Vue({
               //setting up map
               this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
               L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-              _context11.next = 4;
+              L.tileLayer.provider('Jawg.Sunny', {
+                variant: '',
+                accessToken: 'PyTJUlEU1OPJwCJlW1k0NC8JIt2CALpyuj7uc066O7XbdZCjWEL3WYJIk6dnXtps'
+              }).addTo(this.map);
+              _context11.next = 5;
               return this.getStoresOnMap();
 
-            case 4:
-              _context11.next = 6;
+            case 5:
+              _context11.next = 7;
               return this.map.addLayer(this.markers);
 
-            case 6:
+            case 7:
               // add eventListener on the map movment
               this.map.on("moveend", function () {
                 _this3.refreshMapView();
@@ -1432,7 +1436,7 @@ var app = new Vue({
                 localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
               });
 
-            case 7:
+            case 8:
             case "end":
               return _context11.stop();
           }
