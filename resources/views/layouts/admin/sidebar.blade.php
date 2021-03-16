@@ -1,5 +1,6 @@
 @php
 use App\Models\User;
+$role = User::find(Auth::id())->role->name;
 @endphp
 <div class="sidebar">
     <div class="sidebar-menu">
@@ -12,7 +13,7 @@ use App\Models\User;
             Bonjour
         </div>
         <!-- Sidebar links (with icons) and titles -->
-        @if(User::find(Auth::id())->hasRole('admin'))
+        @if($role === 'admin')
             <h5 class="sidebar-title">Gérer les utilisateurs</h5>
             <div class="sidebar-divider"></div>
             <a href="{{ URL::route('listUsers') }}" class="sidebar-link sidebar-link-with-icon">
@@ -23,60 +24,62 @@ use App\Models\User;
             </a>
             <br />
         @endif
+        @if($role === 'owner')
+            <h5 class="sidebar-title">Gérer ses commerces</h5>
+            <div class="sidebar-divider"></div>
+            <a href="{{ URL::route('myStores') }}" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                </span>
+                Mes commerces
+            </a>
+            <a href="{{ URL::route('createStore') }}" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                </span>
+                Ajouter un commerce
+            </a>
+        @endif
 
-        <h5 class="sidebar-title">Gérer ses commerces</h5>
-        <div class="sidebar-divider"></div>
-        <a href="{{ URL::route('myStores') }}" class="sidebar-link sidebar-link-with-icon">
-            <span class="sidebar-icon">
-                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-            </span>
-            Mes commerces
-        </a>
-        <a href="{{ URL::route('createStore') }}" class="sidebar-link sidebar-link-with-icon">
-            <span class="sidebar-icon">
-                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-            </span>
-            Ajouter un commerce
-        </a>
+        @if($role === 'moderator')
+            <h5 class="sidebar-title">Modérer les commerces</h5>
+            <div class="sidebar-divider"></div>
+            <a href="{{ URL::route('listStores')}}" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                </span>
+                Liste des commerces
+            </a>
+            <a href="{{ URL::route('requestsStores')}}" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                </span>
+                Traiter les demandes
+            </a>
+            </br>
+        @endif
 
-        <h5 class="sidebar-title">Modérer les commerces</h5>
-        <div class="sidebar-divider"></div>
-        <a href="{{ URL::route('listStores')}}" class="sidebar-link sidebar-link-with-icon">
-            <span class="sidebar-icon">
-                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-            </span>
-            Liste des commerces
-        </a>
-        <a href="{{ URL::route('requestsStores')}}" class="sidebar-link sidebar-link-with-icon">
-            <span class="sidebar-icon">
-                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-            </span>
-            Traiter les demandes
-        </a>
-        <!--
-        <a href="#" class="sidebar-link sidebar-link-with-icon" disabled>
-            <span class="sidebar-icon">
-                <i class="fa fa-exclamation" aria-hidden="true"></i>
-            </span>
-            Gerer les signalements
-        </a>
-        -->
-        </br>
-        <h5 class="sidebar-title">Gérer les avis</h5>
-        <div class="sidebar-divider"></div>
-        <a href="{{ URL::route('myComments')}}" class="sidebar-link sidebar-link-with-icon">
-            <span class="sidebar-icon">
-                <i class="fa fa-comment" aria-hidden="true"></i>
-            </span>
-            Gérer ses avis
-        </a>
-        <a href="{{ URL::route('flagComments')}}" class="sidebar-link sidebar-link-with-icon">
-            <span class="sidebar-icon">
-                <i class="fa fa-comment" aria-hidden="true"></i>
-            </span>
-            Modérer les avis
-        </a>
-        </br>
+        @if($role ==='user' ||$role === 'moderator')
+            <h5 class="sidebar-title">Gérer les avis</h5>
+            <div class="sidebar-divider"></div>
+            @if($role === 'user')
+            <a href="{{ URL::route('myComments')}}" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-comment" aria-hidden="true"></i>
+                </span>
+                Gérer ses avis
+            </a>
+            @endif
+            @if($role === 'moderator')
+            <a href="{{ URL::route('flagComments')}}" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-comment" aria-hidden="true"></i>
+                </span>
+                Modérer les avis
+            </a>
+            @endif
+            </br>
+        @endif
         <h5 class="sidebar-title">Gérer ses favoris</h5>
         <div class="sidebar-divider"></div>
         <a href="{{ route('myFavorites') }}" class="sidebar-link sidebar-link-with-icon">
@@ -86,21 +89,23 @@ use App\Models\User;
             Gérer ses favoris
         </a>
         </br>
-        <h5 class="sidebar-title">Administration</h5>
-        <div class="sidebar-divider"></div>
-        <a href="{{ route('categories') }}" class="sidebar-link sidebar-link-with-icon">
-            <span class="sidebar-icon">
-                <i class="fa fa-cog" aria-hidden="true"></i>
-            </span>
-            Gérer les catégories
-        </a>
-        <a href="{{ route('statistiques') }}" class="sidebar-link sidebar-link-with-icon">
-            <span class="sidebar-icon">
-                <i class="fa fa-line-chart" aria-hidden="true"></i>
-            </span>
-            Statistiques
-        </a>
-        </br>
+        @if($role ==='admin')
+            <h5 class="sidebar-title">Administration</h5>
+            <div class="sidebar-divider"></div>
+            <a href="{{ route('categories') }}" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                </span>
+                Gérer les catégories
+            </a>
+            <a href="{{ route('statistiques') }}" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                </span>
+                Statistiques
+            </a>
+            </br>
+        @endif
         <h5 class="sidebar-title">Gérer son compte</h5>
         <div class="sidebar-divider"></div>
         <a href="{{ URL::route('homeAccount')}}" class="sidebar-link sidebar-link-with-icon">
