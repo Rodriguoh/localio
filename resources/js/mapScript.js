@@ -82,7 +82,7 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
             rep = rep.data;
-            let allMarkers = [];
+            let allMarkers = new L.MarkerClusterGroup();
 
             for (let i = 0; i < rep.length; i++) {
                 let icone_img = "";
@@ -150,13 +150,13 @@ var app = new Vue({
                     store.style.opacity = "100%";
                 });
 
-                allMarkers.push(marker);
+                allMarkers.addLayer(marker);
             }
 
             this.prevCatSelected = this.categorySelected;
-            this.markers = L.layerGroup(allMarkers);
-
+            this.markers = allMarkers;
             this.allStoreOnMap = rep;
+
         },
         /**
          * Function to get all details on a store
