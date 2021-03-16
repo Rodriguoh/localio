@@ -24,6 +24,9 @@
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <script src="{{ asset('js/mapScript.js')}}" defer></script>
 
+    {{-- GOOGLE --}}
+    <meta name="google-site-verification" content="tTLLOaNjWOL2DP1xxPXA1B6z06Z308qj5ps-AauIvBc" />
+
     <style>
         #map {
             height: 100%;
@@ -122,7 +125,7 @@
             font-weight: 500;
             text-align:center;
         }
-        
+
         @media (max-width: 768px) {
 
             .leaflet-left{
@@ -235,7 +238,7 @@
 
                                     <div class="my-10">
                                         <span class="font-weight-medium">Description :</span>
-                                        <p id="storeDescription"></p> <!-- desciption add with getStore function --> 
+                                        <p id="storeDescription"></p> <!-- desciption add with getStore function -->
                                     </div>
 
                                     <div class="my-10">
