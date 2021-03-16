@@ -964,7 +964,7 @@ footer {
     box-shadow: 0px 4px 16px #455B6314;
   }
   .map-and-list .stores-list .element-list .info-element-list p {
-    margin: 12.5px 12.5px 12.5px 40%;
+    margin: 12.5px 12.5px 5px 40%;
     color: #363636;
     font-weight: 700;
     font-size: 13px;
@@ -986,9 +986,16 @@ footer {
     justify-content: flex-end;
     color: #FFCF39;
     font-weight: bold;
+    margin-top: 10px;
   }
   .map-and-list .stores-list .element-list .info-element-list div .note span:nth-child(2) {
     width: auto;
+  }
+  .map-and-list .stores-list .element-list:hover {
+    cursor: pointer;
+  }
+  .map-and-list .stores-list .element-list:hover .info-element-list {
+    background-color: #FFFDF8;
   }
 }
 /* -- Desktop --*/
