@@ -88,8 +88,6 @@
                                 </div>
                             </template>
 
-
-
                             <template v-if="filters_isOpen">
                                 <div class="research-filter">
                                     <div class="filters">
@@ -107,19 +105,19 @@
 
                                         </div>
                                         <template v-if="categorySelected !== ''">
-                                        <div class="research-filter-subcategory">
-                                            <p class="subcategory">Besoin de plus de précision ?</p>
-                                            <div class="buttons">
-                                                <template v-for="cat in mainCat">
+                                            <div class="research-filter-subcategory">
+                                                <p class="subcategory">Besoin de plus de précision ?</p>
+                                                <div class="buttons">
+                                                    <template v-for="cat in mainCat">
                                                         <template v-for="sub in cat?.child">
                                                             <input :id="sub.id" type="radio" name="categorie" :value="sub.label" v-model="categoryFilter">
                                                             <label class="btn btn-s btn-r8" v-show="categorySelected == cat.label" :for="sub.id" :class="[categoryFilter == sub.label ? 'btn-color btn-secondary': 'btn-white']">@{{ sub.label }}</label>
                                                         </template>
-                                                </template>
+                                                    </template>
+                                                </div>
                                             </div>
-                                        </div>
                                         </template>
-                                        
+
                                         <div>
                                         </div>
                                         <button class="btn btn-s btn-action btn-r12">Appliquer</button>
@@ -143,57 +141,66 @@
             <template>
                 <div class="stores-list">
 
-                    <a href="">
-                        <div class="element-list">
-                            <div class="img-element-list">
-                                <img src="{{asset('img/photos/exemple-image-store.png')}}">
-                            </div>
-                            <div class="info-element-list">
-                                <p>Sushi Place</p>
-                                <div>
-                                    <span class="description-veryshort">petit texte</span>
-                                    <div class="note">
-                                        <span>5</span>
-                                        <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
-                                    </div>
+                    <div class="element-list">
+                        <div class="img-element-list">
+                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                        </div>
+                        <div class="info-element-list">
+                            <p>Sushi Place</p>
+                            <div>
+                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
+                                <div class="note">
+                                    <span>5</span>
+                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
                                 </div>
                             </div>
                         </div>
-                    </a>
-                    <a href="">
-                        <div class="element-list active">
-                            <div class="img-element-list">
-                                <img src="{{asset('img/photos/exemple-image-store.png')}}">
-                            </div>
-                            <div class="info-element-list">
-                                <p>Sushi Place</p>
-                                <div>
-                                    <span class="description-veryshort">petit texte</span>
-                                    <div class="note">
-                                        <span>5</span>
-                                        <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
-                                    </div>
+                    </div>
+                    <div class="element-list">
+                        <div class="img-element-list">
+                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                        </div>
+                        <div class="info-element-list">
+                            <p>Sushi Place</p>
+                            <div>
+                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
+                                <div class="note">
+                                    <span>5</span>
+                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
                                 </div>
                             </div>
                         </div>
-                    </a>
-                    <a href="">
-                        <div class="element-list">
-                            <div class="img-element-list">
-                                <img src="{{asset('img/photos/exemple-image-store.png')}}">
-                            </div>
-                            <div class="info-element-list">
-                                <p>Sushi Place</p>
-                                <div>
-                                    <span class="description-veryshort">petit texte</span>
-                                    <div class="note">
-                                        <span>5</span>
-                                        <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
-                                    </div>
+                    </div>
+                     <div class="element-list">
+                        <div class="img-element-list">
+                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                        </div>
+                        <div class="info-element-list">
+                            <p>Sushi Place</p>
+                            <div>
+                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
+                                <div class="note">
+                                    <span>5</span>
+                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
+                     <div class="element-list">
+                        <div class="img-element-list">
+                            <img src="{{asset('img/photos/exemple-image-store.png')}}">
+                        </div>
+                        <div class="info-element-list">
+                            <p>Sushi Place</p>
+                            <div>
+                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
+                                <div class="note">
+                                    <span>5</span>
+                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;stars</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>

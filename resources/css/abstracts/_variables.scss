@@ -6,12 +6,21 @@ $yellowSecondary-dark: #F8C320; //use
 $yellowSecondary-extralight: #FFFDF8; //use
 $greyRed: #3F3543; //use
 $greyBlue: #3E3F68; //use
+$greyBlue-Light: #78849E; //use
 $greyLight: #707070; //use
+
+$whiteCustom: #FAF8F8;
 
 //Variables tailles
 $navbar_height: 60px; //use
 $margin-constraint-width: calc(100vw - 40px); //use
 $useful-width: map-get($breakpoints, "XL"); //use
+
+
+//Variables stores list
+$store-list-height: 350px;
+$element-list-height: 80px;
+$img-element-list-height: 65px;
 
 $listStores-element-img: 200px;
 $listStores-element-info: 60px;
