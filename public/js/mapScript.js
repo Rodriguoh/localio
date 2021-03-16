@@ -172,7 +172,7 @@ var app = new Vue({
               case 11:
                 rep = _context5.sent;
                 rep = rep.data;
-                allMarkers = [];
+                allMarkers = new L.MarkerClusterGroup();
 
                 _loop = function _loop(i) {
                   var icone_img = "";
@@ -285,7 +285,7 @@ var app = new Vue({
                       }
                     }, _callee4);
                   })));
-                  allMarkers.push(marker);
+                  allMarkers.addLayer(marker);
                 };
 
                 for (i = 0; i < rep.length; i++) {
@@ -293,7 +293,7 @@ var app = new Vue({
                 }
 
                 this.prevCatSelected = this.categorySelected;
-                this.markers = L.layerGroup(allMarkers);
+                this.markers = allMarkers;
                 this.allStoreOnMap = rep;
 
               case 19:
@@ -592,8 +592,12 @@ var app = new Vue({
           switch (_context11.prev = _context11.next) {
             case 0:
               //setting up map
-              this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
-              L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+              this.map = L.map("map").setView(this.mapCenter, this.mapZoom); // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+
+              L.tileLayer.provider('Jawg.Sunny', {
+                variant: '',
+                accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
+              }).addTo(this.map);
               _context11.next = 4;
               return this.getStoresOnMap();
 
