@@ -906,6 +906,7 @@ footer {
 
   .map-and-list {
     position: relative;
+    height: auto;
   }
   .map-and-list #map {
     background: url("../img/bg-map.png");
