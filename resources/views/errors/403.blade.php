@@ -40,7 +40,7 @@
 
     <div class="page-wrapper mt-5 pt-5">
         <div class="alert alert-danger text-center">
-            <h2 class="">404</h2>
+            <h2 class="">403</h2>
             <p class="">Oops! Une erreur est survenu.</p>
         </div>
 
