@@ -139,13 +139,13 @@
             </div>
             <template v-if="allStoreOnMap.length > 0">
                 <div class="stores-list">
-                    <template v-for="store in computedAllStoreOnMap">
-                        <div class="element-list">
+                    <template v-for="(store,index) in computedAllStoreOnMap">
+                        <div class="element-list" :id="'list-store-index-'+index">
                             <div class="img-element-list">
                                 <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
                             </div>
                             <div class="info-element-list">
-                                <p>@{{ store.name }}</p>
+                                <p>@{{ store.name}}</p>
                                 <div>
                                     <span class="description-veryshort">@{{ store.short_description }}.</span>
                                     <div class="note">
