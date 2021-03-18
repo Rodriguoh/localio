@@ -108,7 +108,7 @@
                                                 <div class="buttons">
                                                     <template v-for="cat in mainCat">
                                                         <template v-for="sub in cat?.child">
-                                                            <input :id="sub.id" type="radio" name="categorie" :value="sub.label" v-model="categoryFilter">
+                                                            <input :id="sub.id" v-on:change="refreshMapView" v-model="categoryFilter" :value="sub.label" type="radio" name="categorie"    >
                                                             <label class="btn btn-s btn-r8" v-show="categorySelected == cat.label" :for="sub.id" :class="[categoryFilter == sub.label ? 'btn-color btn-secondary': 'btn-white']">@{{ sub.label }}</label>
                                                         </template>
                                                     </template>
@@ -118,7 +118,7 @@
 
                                         <div>
                                         </div>
-                                        <button v-on:click="filters_isOpen = false;" onClick="document.querySelector('#map').scrollIntoView();" class="btn btn-s btn-action btn-r12">Appliquer</button>
+                                        <button v-on:click="filters_isOpen = false;" onClick="document.querySelector('#map').scrollIntoView();" class="btn btn-s btn-action btn-r12">Voir</button>
                                     </div>
 
                                 </div>
