@@ -1266,6 +1266,30 @@ var app = new Vue({
       }
 
       return refreshMapView;
+    }(),
+    resetFilters: function () {
+      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                this.refreshMapView();
+                this.categoryFilter = "";
+                this.categorySelected = "";
+
+              case 3:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
+
+      function resetFilters() {
+        return _resetFilters.apply(this, arguments);
+      }
+
+      return resetFilters;
     }()
   },
   created: function created() {
@@ -1292,12 +1316,12 @@ var app = new Vue({
     };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
       var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
         while (1) {
-          switch (_context8.prev = _context8.next) {
+          switch (_context9.prev = _context9.next) {
             case 0:
               //Set map
               this.map = L.map('map', {
@@ -1312,11 +1336,11 @@ var app = new Vue({
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
               }).addTo(this.map);
-              _context8.next = 5;
+              _context9.next = 5;
               return this.getStoresOnMap();
 
             case 5:
-              _context8.next = 7;
+              _context9.next = 7;
               return this.map.addLayer(this.markers);
 
             case 7:
@@ -1330,10 +1354,10 @@ var app = new Vue({
 
             case 8:
             case "end":
-              return _context8.stop();
+              return _context9.stop();
           }
         }
-      }, _callee8, this);
+      }, _callee9, this);
     }));
 
     function mounted() {

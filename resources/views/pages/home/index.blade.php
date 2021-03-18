@@ -118,7 +118,8 @@
 
                                         <div>
                                         </div>
-                                        <button v-on:click="filters_isOpen = false;" onClick="document.querySelector('#map').scrollIntoView();" class="btn btn-s btn-action btn-r12">Voir</button>
+                                        <button v-on:click="filters_isOpen = false;" onClick="document.querySelector('#map').scrollIntoView();" class="btn btn-s btn-action btn-r12 btn-py3">Voir</button>
+                                        <button v-on:click="resetFilters" class="btn btn-color btn-secondary btn-xs btn-resetFilters">Reinitialiser</button>
                                     </div>
 
                                 </div>

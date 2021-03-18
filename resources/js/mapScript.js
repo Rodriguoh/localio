@@ -233,6 +233,11 @@ var app = new Vue({
             await this.map.addLayer(this.markers);
             console.log('refreshMapView');
         },
+        resetFilters: async function (){
+            this.refreshMapView();
+            this.categoryFilter = "";
+            this.categorySelected = "";
+        }
     },
     created() {
 

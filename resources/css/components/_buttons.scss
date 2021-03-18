@@ -2,6 +2,7 @@
 .btn {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-right: 5px;
     margin-bottom:5px;
 }
@@ -43,6 +44,7 @@
 .btn-xs {
     font-size: 14px;
     padding: 4px 12px 1px 12px;
+    width: auto;
 }
 .btn-s {
     font-size: 16px;
@@ -55,4 +57,14 @@
 .btn-r12 {
     border-radius: 12px !important;
 }
-//
+//Padding des boutons
+.btn-py3{
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+//Customs
+.btn-resetFilters{
+    max-width: 80px;
+    margin: 5px auto;
+}
+
