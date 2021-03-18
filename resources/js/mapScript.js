@@ -4,19 +4,20 @@
 var app = new Vue({
     el: `#app`,
     data: {
-        allStoreOnMap: [],
         filters_isOpen: false,
         mobileMenu_isOpen: false,
-        querySearch: "",
+        connexion: true,
         resultsQueryCity: [],
         resultsQueryStore: [],
+        mainCat: [],
+        allStoreOnMap: [],
+        subCat: {},
         baseUrl: "https://localio-app.herokuapp.com",
         limitAutoCompletion: 3,
-        mainCat: [],
-        subCat: {},
         categorySelected: "",
         prevCatSelected: "",
-        categoryFilter: ""
+        categoryFilter: "",
+        querySearch: ""
 
     },
     methods: {
