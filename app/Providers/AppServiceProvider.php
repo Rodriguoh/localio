@@ -32,8 +32,10 @@ class AppServiceProvider extends ServiceProvider
 
         // force urls to https
         if (env('APP_ENV') !== 'local') {
-            URL::forceScheme('https');
+            // URL::forceScheme('https');
             //test
+            // force https for pagination
+            $this->app['request']->server->set('HTTPS','on');
         }
     }
 }
