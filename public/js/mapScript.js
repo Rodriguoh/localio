@@ -1169,10 +1169,10 @@ var app = new Vue({
                       while (1) {
                         switch (_context4.prev = _context4.next) {
                           case 0:
-                            store = document.getElementById("list-store-" + rep[i].id);
-                            store.classList.add("bg-dark");
-                            store.style.opacity = "70%";
-                            store.style.color = "white";
+                            store = document.querySelector("#list-store-".concat(rep[i].id, " .info-element-list"));
+                            document.querySelector("#list-store-".concat(rep[i].id, " .info-element-list .note")).style.color = "#000000";
+                            console.log(store);
+                            store.style.backgroundColor = "#ffe492";
                             store.scrollIntoView();
 
                           case 5:
@@ -1189,12 +1189,11 @@ var app = new Vue({
                       while (1) {
                         switch (_context5.prev = _context5.next) {
                           case 0:
-                            store = document.getElementById("list-store-" + rep[i].id);
-                            store.classList.remove("bg-dark");
-                            store.style.color = "black";
-                            store.style.opacity = "100%";
+                            store = document.querySelector("#list-store-".concat(rep[i].id, " .info-element-list"));
+                            document.querySelector("#list-store-".concat(rep[i].id, " .info-element-list .note")).style.color = "black";
+                            store.style.backgroundColor = "";
 
-                          case 4:
+                          case 3:
                           case "end":
                             return _context5.stop();
                         }

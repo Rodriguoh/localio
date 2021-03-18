@@ -1064,7 +1064,7 @@ nav .nav-links.open {
     position: relative;
     display: flex;
     justify-content: flex-end;
-    color: #FFCF39;
+    color: #000000;
     font-weight: bold;
     margin-top: 5px;
   }
@@ -1075,7 +1075,7 @@ nav .nav-links.open {
     cursor: pointer;
   }
   .map-and-list .stores-list .element-list:hover .info-element-list {
-    background-color: #FFFDF8;
+    background-color: #ffe492;
   }
 
   .leaflet-control-container {

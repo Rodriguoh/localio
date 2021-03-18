@@ -194,23 +194,18 @@ var app = new Vue({
 
                 // Change la couleur de fond de la div du commerce lors du hover de son marqueur
                 marker.on("mouseover", async () => {
-                    let store = document.getElementById(
-                        "list-store-" + rep[i].id
-                    );
-                    store.classList.add("bg-dark");
-                    store.style.opacity = "70%";
-                    store.style.color = "white";
+                    let store = document.querySelector(`#list-store-${rep[i].id} .info-element-list`);
+                    document.querySelector(`#list-store-${rep[i].id} .info-element-list .note`).style.color = "#000000";
+                    console.log(store)
+                    store.style.backgroundColor = "#ffe492";
                     store.scrollIntoView();
                 });
 
                 // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
                 marker.on("mouseout", async () => {
-                    let store = document.getElementById(
-                        "list-store-" + rep[i].id
-                    );
-                    store.classList.remove("bg-dark");
-                    store.style.color = "black";
-                    store.style.opacity = "100%";
+                    let store = document.querySelector(`#list-store-${rep[i].id} .info-element-list`);
+                    document.querySelector(`#list-store-${rep[i].id} .info-element-list .note`).style.color = "black";
+                    store.style.backgroundColor = "";
                 });
 
                 allMarkers.addLayer(marker);
@@ -233,7 +228,7 @@ var app = new Vue({
             await this.map.addLayer(this.markers);
             console.log('refreshMapView');
         },
-        resetFilters: async function (){
+        resetFilters: async function () {
             this.refreshMapView();
             this.categoryFilter = "";
             this.categorySelected = "";
@@ -297,8 +292,10 @@ var app = new Vue({
         await this.getStoresOnMap();
         await this.map.addLayer(this.markers);
 
-         //add eventListener on the map movment
-         this.map.on("moveend", () => {
+
+
+        //add eventListener on the map movment
+        this.map.on("moveend", () => {
             this.refreshMapView();
             localStorage.setItem("centerMap", [
                 this.map.getCenter().lat,
@@ -322,10 +319,10 @@ var app = new Vue({
                 ? this.resultsQueryStore.slice(0, this.limitAutoCompletion)
                 : this.resultsQueryStore;
         },
-        computedAllStoreOnMap(){
+        computedAllStoreOnMap() {
             return this.allStoreOnMap
-            ? this.allStoreOnMap.slice(0, this.limitStoreInList)
-            : this.allStoreOnMap; 
+                ? this.allStoreOnMap.slice(0, this.limitStoreInList)
+                : this.allStoreOnMap;
         }
     }
 });

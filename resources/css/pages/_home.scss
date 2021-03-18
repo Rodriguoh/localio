@@ -413,7 +413,7 @@
                             position: relative;
                             display: flex;
                             justify-content: flex-end;
-                            color: $yellowSecondary;
+                            color: #000000;
                             font-weight: bold;
                             margin-top: 5px;
 
@@ -428,7 +428,7 @@
                 cursor: pointer;
             }
             .element-list:hover .info-element-list {
-                background-color: $yellowSecondary-extralight;
+                background-color: $yellowSecondary-light;
             }
         }
     }
