@@ -12,6 +12,10 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script src="{{ asset('js/leaflet-providers.js')}}" defer></script>
     <script src="{{ asset('js/leaflet.markercluster.js')}}" defer></script>
+    {{-- MarkerCluster CSS --}}
+    <link rel="stylesheet" href="{{asset('css/MarkerCluster.css')}}">
+    <link rel="stylesheet" href="{{asset('css/MarkerCluster.Default.css')}}">
+    
     {{-- FontAwesome CSS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
     {{-- VueJS --}}
@@ -34,8 +38,8 @@
                 <div class="line"></div>
             </div>
             <ul class="nav-links">
-                <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
-                <li><a class="linkMenu" href="#0"><img src="{{asset('img/icons/fa-login.svg')}}">Se connecter</a></li>
+                <li><a class="linkMenu" href="{{route('home')}}"><img src="{{asset('img/icons/fa-home.svg')}}">Accueil</a></li>
+                <li><a class="linkMenu" href="{{route('homeAccount')}}"><img src="{{asset('img/icons/fa-login.svg')}}">Se connecter</a></li>
                 <li><a href="#0" class="btn-color btn-secondary btn-xs">Aide</a></li>
             </ul>
         </nav>
@@ -108,7 +112,7 @@
                                                 <div class="buttons">
                                                     <template v-for="cat in mainCat">
                                                         <template v-for="sub in cat?.child">
-                                                            <input :id="sub.id" v-on:change="refreshMapView" v-model="categoryFilter" :value="sub.label" type="radio" name="categorie"    >
+                                                            <input :id="sub.id" v-on:change="refreshMapView" v-model="categoryFilter" :value="sub.label" type="radio" name="categorie">
                                                             <label class="btn btn-s btn-r8" v-show="categorySelected == cat.label" :for="sub.id" :class="[categoryFilter == sub.label ? 'btn-color btn-secondary': 'btn-white']">@{{ sub.label }}</label>
                                                         </template>
                                                     </template>
