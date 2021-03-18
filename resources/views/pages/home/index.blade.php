@@ -51,10 +51,9 @@
                     <div class="home-col-2">
                         <h1>Avec Localio le click and drive n’a jamais été aussi simple.</h1>
                         <p>Recherchez des magasins de proximité proposant le Click and Collect facilement avec Localio. Consultez et commandez vos produits en ligne pour ensuite retirer les articles à l’heure que vous souhaitez.</p>
-
                         <div class="research">
                             <div class="input-group-search">
-                                <button v-on:click="filters_isOpen = !filters_isOpen" class="button-input-filter"><img class="icon-menu-filter" src="{{asset('img/icons/input-menu-filter.svg')}}"></button>
+                                <button v-on:change="refreshMapView" v-on:click="filters_isOpen = !filters_isOpen" class="button-input-filter"><img class="icon-menu-filter" src="{{asset('img/icons/input-menu-filter.svg')}}"></button>
                                 <input id="inputCity" v-model="querySearch" v-on:keyup="autoComplete" v-on:focus="filters_isOpen = false" type="text" placeholder="Une ville ou un nom de commerce">
                                 <button class="button-input-search"><img class="icon-search" src="{{asset('img/icons/input-search.svg')}}"></button>
 
@@ -93,10 +92,10 @@
                                         <div class="research-filter-category">
                                             <p class="category">Quelle catégorie recherchez vous ?</p>
                                             <div class="buttons">
-                                                <input type="radio" value="" id="all" name="categorie" v-model="categorySelected">
-                                                <label for="tout" class="btn btn-s btn-r8" :class="[categorySelected == '' ? 'btn-color btn-secondary': 'btn-white']">voir tout</label>
+                                                <input type="radio" v-on:change="refreshMapView" value="" id="all" name="categorie" v-model="categorySelected">
+                                                <label for="all" class="btn btn-s btn-r8" :class="[categorySelected == '' ? 'btn-color btn-secondary': 'btn-white']">voir tout</label>
                                                 <template v-for="cat in mainCat">
-                                                    <input :id="cat.label" type="radio" name="categorie" :value="cat.label" v-model="categorySelected" v-on:click="categoryFilter = ''">
+                                                    <input :id="cat.label" v-on:change="refreshMapView" type="radio" name="categorie" :value="cat.label" v-model="categorySelected" v-on:click="categoryFilter = ''">
                                                     <label :for="cat.label" class="btn btn-s btn-r8" :class="[categorySelected == cat.label ? 'btn-color btn-secondary': 'btn-white']">@{{ cat.label }}</label>
                                                 </template>
                                             </div>
