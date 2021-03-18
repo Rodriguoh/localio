@@ -370,6 +370,10 @@ body {
   margin-bottom: 5px;
 }
 
+.btn:hover {
+  cursor: pointer;
+}
+
 .btn-color {
   color: white;
   border-radius: 30px;

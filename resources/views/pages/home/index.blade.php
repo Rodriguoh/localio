@@ -118,7 +118,7 @@
 
                                         <div>
                                         </div>
-                                        <button class="btn btn-s btn-action btn-r12">Appliquer</button>
+                                        <button v-on:click="filters_isOpen = false;" onClick="document.querySelector('#map').scrollIntoView();" class="btn btn-s btn-action btn-r12">Appliquer</button>
                                     </div>
 
                                 </div>
