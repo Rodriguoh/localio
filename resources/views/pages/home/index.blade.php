@@ -62,7 +62,7 @@
                             <template v-if="querySearch.length > 0 && filters_isOpen == false">
                                 <div class="research-propositions">
                                     <template v-if="resultsQueryCity.length > 0">
-                                        <div v-for="city in computedResultsQueryCity" class="research-proposition-link">
+                                        <div v-for="city in computedResultsQueryCity" v-on:click="setViewMap(city.geometry.coordinates[1],city.geometry.coordinates[0])" class="research-proposition-link">
                                             <span class="mark">&nbsp;</span>
                                             <div class="icon"><img src="{{asset('img/icons/fa-building-solid.svg')}}"></div>
                                             <div class="title"> @{{ city.properties.nom }}</div>
@@ -71,7 +71,7 @@
                                     </template>
 
                                     <template v-if="resultsQueryStore.length > 0">
-                                        <div v-for="store in computedResultsQueryStore" class="research-proposition-link">
+                                        <div v-for="store in computedResultsQueryStore" v-on:click="setViewMap(store.latnlg.lat, store.latnlg.lng)" class="research-proposition-link">
                                             <span class="mark">&nbsp;</span>
                                             <div class="icon"><img src="{{asset('img/icons/fa-shopping-basket-solid.svg')}}"></div>
                                             <div class="title"> @{{ store.name }}</div>

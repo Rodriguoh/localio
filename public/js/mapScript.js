@@ -987,16 +987,246 @@ var app = new Vue({
       }
 
       return autoComplete;
-    }()
+    }(),
+    getStoresByName: function () {
+      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var requestOptions, reqStores, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                _context2.next = 3;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
+
+              case 3:
+                reqStores = _context2.sent;
+                _context2.next = 6;
+                return reqStores.json();
+
+              case 6:
+                data = _context2.sent;
+                console.log(data);
+                return _context2.abrupt("return", data.data);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getStoresByName() {
+        return _getStoresByName.apply(this, arguments);
+      }
+
+      return getStoresByName;
+    }(),
+
+    /**
+     * Function to get all store to display on map
+     */
+    getStoresOnMap: function () {
+      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var _this = this;
+
+        var catFilter, requestOptions, url, req, rep, allMarkers, _loop, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                if (this.prevCatSelected != this.categorySelected) {
+                  this.categoryFilter = "";
+                }
+
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                this.categoryFilter === "" ? catFilter = this.categorySelected : catFilter = this.categoryFilter;
+
+                if (document.getElementById("tout").checked == true) {
+                  catFilter = "";
+                }
+
+                url = new URL("".concat(this.baseUrl, "/api/stores/map"));
+                url.search = new URLSearchParams(_objectSpread(_objectSpread({}, catFilter.length > 0 && {
+                  category: catFilter
+                }), {}, {
+                  lat_ne: this.map.getBounds()._northEast.lat,
+                  lng_ne: this.map.getBounds()._northEast.lng,
+                  lat_sw: this.map.getBounds()._southWest.lat,
+                  lng_sw: this.map.getBounds()._southWest.lng
+                }));
+                _context6.next = 8;
+                return fetch(url, requestOptions);
+
+              case 8:
+                req = _context6.sent;
+                _context6.next = 11;
+                return req.json();
+
+              case 11:
+                rep = _context6.sent;
+                rep = rep.data;
+                allMarkers = new L.MarkerClusterGroup();
+
+                _loop = function _loop(i) {
+                  var icone_img = "";
+
+                  switch (rep[i].category_id) {
+                    case 1:
+                      icone_img = "img/markers/restauration.png";
+                      break;
+
+                    case 71:
+                      icone_img = "img/markers/alimentaire.png";
+                      break;
+
+                    case 141:
+                      icone_img = "img/markers/bio.png";
+                      break;
+
+                    case 191:
+                      icone_img = "img/markers/sante.png";
+                      break;
+
+                    case 251:
+                      icone_img = "img/markers/culture.png";
+                      break;
+
+                    case 311:
+                      icone_img = "img/markers/habillement.png";
+                      break;
+
+                    default:
+                      icone_img = "img/markers/default.png";
+                      break;
+                  }
+
+                  var icone = L.icon({
+                    iconUrl: icone_img,
+                    shadowUrl: "img/markers/shadow.png",
+                    iconSize: [30, 42.5],
+                    shadowSize: [40, 40],
+                    shadowAnchor: [15, 19]
+                  });
+                  var lat = rep[i].latnlg.lat;
+                  var lon = rep[i].latnlg.lng;
+                  var marker = L.marker([lat, lon], {
+                    icon: icone
+                  }); // Affiche la modal lors du clic sur le marqueur
+
+                  marker.on("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+                      while (1) {
+                        switch (_context3.prev = _context3.next) {
+                          case 0:
+                            _context3.next = 2;
+                            return _this.getStore(rep[i].id);
+
+                          case 2:
+                            _context3.next = 4;
+                            return _this.getStoreComments(rep[i].id);
+
+                          case 4:
+                            _context3.next = 6;
+                            return halfmoon.toggleModal("modal-store");
+
+                          case 6:
+                            _this.commentLimit = 1;
+
+                          case 7:
+                          case "end":
+                            return _context3.stop();
+                        }
+                      }
+                    }, _callee3);
+                  }))); // Change la couleur de fond de la div du commerce lors du hover de son marqueur
+
+                  marker.on("mouseover", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+                    var store;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+                      while (1) {
+                        switch (_context4.prev = _context4.next) {
+                          case 0:
+                            store = document.getElementById("list-store-" + rep[i].id);
+                            store.classList.add("bg-dark");
+                            store.style.opacity = "70%";
+                            store.style.color = "white";
+                            store.scrollIntoView();
+
+                          case 5:
+                          case "end":
+                            return _context4.stop();
+                        }
+                      }
+                    }, _callee4);
+                  }))); // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
+
+                  marker.on("mouseout", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+                    var store;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+                      while (1) {
+                        switch (_context5.prev = _context5.next) {
+                          case 0:
+                            store = document.getElementById("list-store-" + rep[i].id);
+                            store.classList.remove("bg-dark");
+                            store.style.color = "black";
+                            store.style.opacity = "100%";
+
+                          case 4:
+                          case "end":
+                            return _context5.stop();
+                        }
+                      }
+                    }, _callee5);
+                  })));
+                  allMarkers.addLayer(marker);
+                };
+
+                for (i = 0; i < rep.length; i++) {
+                  _loop(i);
+                }
+
+                this.prevCatSelected = this.categorySelected;
+                this.markers = allMarkers;
+                this.allStoreOnMap = rep;
+
+              case 19:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function getStoresOnMap() {
+        return _getStoresOnMap.apply(this, arguments);
+      }
+
+      return getStoresOnMap;
+    }(),
+    setViewMap: function setViewMap(lat, lon) {
+      document.querySelector("#map").scrollIntoView();
+      this.querySearch = '';
+      this.map.setView([lat, lon], 14);
+    }
   },
   created: function created() {
     this.mainCat = categories;
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
               //setting up map
               this.map = L.map('map', {
@@ -1015,10 +1245,10 @@ var app = new Vue({
 
             case 3:
             case "end":
-              return _context2.stop();
+              return _context7.stop();
           }
         }
-      }, _callee2, this);
+      }, _callee7, this);
     }));
 
     function mounted() {
