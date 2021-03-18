@@ -1,19 +1,19 @@
 @import "../abstracts/mixins";
 @import "../abstracts/variables";
 
-
-.login-container{
-    margin-top: 35px !important;
-    width: 100vw !important;
+.login-illustration{
+    display: none;
+}
+.login-forms{
+    margin-top: 35px;
+    width: 100vw;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 .select-type{
     width: 50%;
-    margin: auto;
+    margin: 0 auto 30px auto !important;
     display: flex;
     justify-content: space-around;
 
@@ -32,7 +32,7 @@
 .login-section{
 
     width: 80%;
-    margin: auto;
+    margin: 15px auto 0 auto !important;
 
     & .login-input > input{
         width: 100%;
@@ -93,4 +93,44 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
+    .login-container{
+        display: flex;
+        justify-content: left;
+        width: 80%;
+        margin: auto;
+
+        input,
+        label,
+        a{
+            font-size: 1.2em;
+        }
+    }
+
+    .login-illustration{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 55%;
+
+        & h1{
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        & h3{
+            font-size: 2.5em;
+            font-weight: normal;
+            margin-top: 10px;
+        }
+
+        & img{
+            width: 50%;
+            margin: auto;
+        }
+    }
+
+    .login-forms{
+        width: 30%;
+    }
 }
