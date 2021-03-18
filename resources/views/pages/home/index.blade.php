@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     {{-- Leaflet JS --}}
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-     <script src="{{ asset('js/leaflet-providers.js')}}" defer></script>
-     <script src="{{ asset('js/leaflet.markercluster.js')}}" defer></script>
+    <script src="{{ asset('js/leaflet-providers.js')}}" defer></script>
+    <script src="{{ asset('js/leaflet.markercluster.js')}}" defer></script>
     {{-- FontAwesome CSS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
     {{-- VueJS --}}
@@ -137,69 +137,25 @@
             <div id="map">
 
             </div>
-            <template>
+            <template v-if="allStoreOnMap.length > 0">
                 <div class="stores-list">
-
-                    <div class="element-list">
-                        <div class="img-element-list">
-                            <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
-                        </div>
-                        <div class="info-element-list">
-                            <p>Sushi Place</p>
-                            <div>
-                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
-                                <div class="note">
-                                    <span>5</span>
-                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;étoiles</span></span>
+                    <template v-for="store in computedAllStoreOnMap">
+                        <div class="element-list">
+                            <div class="img-element-list">
+                                <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
+                            </div>
+                            <div class="info-element-list">
+                                <p>@{{ store.name }}</p>
+                                <div>
+                                    <span class="description-veryshort">@{{ store.short_description }}.</span>
+                                    <div class="note">
+                                        <span>@{{Math.round(store.avg_note * 100)/100}}</span>
+                                        <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">/5</span></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="element-list">
-                        <div class="img-element-list">
-                            <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
-                        </div>
-                        <div class="info-element-list">
-                            <p>Sushi Place</p>
-                            <div>
-                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
-                                <div class="note">
-                                    <span>5</span>
-                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;étoiles</span></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="element-list">
-                        <div class="img-element-list">
-                            <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
-                        </div>
-                        <div class="info-element-list">
-                            <p>Sushi Place</p>
-                            <div>
-                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
-                                <div class="note">
-                                    <span>5</span>
-                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;étoiles</span></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="element-list">
-                        <div class="img-element-list">
-                            <img src="{{asset('img/photos/exemple-image-store-2.jpeg')}}">
-                        </div>
-                        <div class="info-element-list">
-                            <p>Sushi Place</p>
-                            <div>
-                                <span class="description-veryshort">If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.</span>
-                                <div class="note">
-                                    <span>5</span>
-                                    <span><img src="{{asset('img/icons/star.svg')}}"><span class="stars-word">&nbsp;étoiles</span></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
             </template>
 

@@ -849,6 +849,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -885,11 +897,13 @@ var app = new Vue({
     resultsQueryStore: [],
     baseUrl: "https://localio-app.herokuapp.com",
     limitAutoCompletion: 3,
+    limitStoreInList: 10,
     mainCat: [],
     subCat: {},
     categorySelected: "",
     prevCatSelected: "",
-    categoryFilter: ""
+    categoryFilter: "",
+    myFavorites: []
   },
   methods: {
     mobileMenu: function mobileMenu() {
@@ -1010,10 +1024,9 @@ var app = new Vue({
 
               case 6:
                 data = _context2.sent;
-                console.log(data);
                 return _context2.abrupt("return", data.data);
 
-              case 9:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -1198,8 +1211,10 @@ var app = new Vue({
                 this.prevCatSelected = this.categorySelected;
                 this.markers = allMarkers;
                 this.allStoreOnMap = rep;
+                console.log(rep);
+                console.log(this.allStoreOnMap);
 
-              case 19:
+              case 21:
               case "end":
                 return _context6.stop();
             }
@@ -1236,6 +1251,9 @@ var app = new Vue({
                 return this.map.addLayer(this.markers);
 
               case 6:
+                console.log('refreshMapView');
+
+              case 7:
               case "end":
                 return _context7.stop();
             }
@@ -1251,11 +1269,31 @@ var app = new Vue({
     }()
   },
   created: function created() {
-    this.mainCat = categories;
+    var _JSON$parse,
+        _this2 = this;
+
+    this.mainCat = categories; // get last map position from localStorage
+
+    localStorage.getItem("centerMap") && (this.mapCenter = localStorage.getItem("centerMap").split(",")); // get last map zoom from localStorage
+
+    localStorage.getItem("zoomMap") && (this.mapZoom = localStorage.getItem("zoomMap")); // mix favorite in bdd and localstorage
+
+    this.myFavorites = _toConsumableArray(new Set([].concat(_toConsumableArray(myFavorites), _toConsumableArray((_JSON$parse = JSON.parse(localStorage.getItem("myFavorites"))) !== null && _JSON$parse !== void 0 ? _JSON$parse : [])))); // save favorite in localstorage and try to save them in bdd on page leave
+
+    window.onunload = function () {
+      localStorage.setItem("myFavorites", JSON.stringify(_this2.myFavorites));
+      if (idUser == null || !navigator.sendBeacon) return;
+      navigator.sendBeacon("".concat(_this2.baseUrl, "/api/stores/setFavorites"), new Blob([JSON.stringify({
+        id: idUser,
+        favorites: _this2.myFavorites
+      })], {
+        type: "application/json"
+      }));
+    };
   },
   mounted: function () {
     var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
@@ -1268,7 +1306,8 @@ var app = new Vue({
               }).setView(this.mapCenter, this.mapZoom);
               L.control.zoom({
                 position: 'topright'
-              }).addTo(this.map);
+              }).addTo(this.map); //Set map layer
+
               L.tileLayer.provider('Jawg.Sunny', {
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
@@ -1283,10 +1322,10 @@ var app = new Vue({
             case 7:
               //add eventListener on the map movment
               this.map.on("moveend", function () {
-                _this2.refreshMapView();
+                _this3.refreshMapView();
 
-                localStorage.setItem("centerMap", [_this2.map.getCenter().lat, _this2.map.getCenter().lng]);
-                localStorage.setItem("zoomMap", _this2.map.getZoom()); // Insert les données de la map en localstorage
+                localStorage.setItem("centerMap", [_this3.map.getCenter().lat, _this3.map.getCenter().lng]);
+                localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
               });
 
             case 8:
@@ -1309,6 +1348,9 @@ var app = new Vue({
     },
     computedResultsQueryStore: function computedResultsQueryStore() {
       return this.limitAutoCompletion ? this.resultsQueryStore.slice(0, this.limitAutoCompletion) : this.resultsQueryStore;
+    },
+    computedAllStoreOnMap: function computedAllStoreOnMap() {
+      return this.allStoreOnMap ? this.allStoreOnMap.slice(0, this.limitStoreInList) : this.allStoreOnMap;
     }
   }
 });

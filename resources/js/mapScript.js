@@ -26,12 +26,13 @@ var app = new Vue({
         resultsQueryStore: [],
         baseUrl: "https://localio-app.herokuapp.com",
         limitAutoCompletion: 3,
+        limitStoreInList: 10,
         mainCat: [],
         subCat: {},
         categorySelected: "",
         prevCatSelected: "",
-        categoryFilter: ""
-
+        categoryFilter: "",
+        myFavorites: []
     },
     methods: {
         mobileMenu: function () {
@@ -110,7 +111,6 @@ var app = new Vue({
                 requestOptions
             );
             let data = await reqStores.json();
-            console.log(data);
             return data.data;
         },
         /**
@@ -219,7 +219,8 @@ var app = new Vue({
             this.prevCatSelected = this.categorySelected;
             this.markers = allMarkers;
             this.allStoreOnMap = rep;
-
+            console.log(rep)
+            console.log(this.allStoreOnMap)
         },
         setViewMap: function (lat, lon) {
             document.querySelector("#map").scrollIntoView();
@@ -230,11 +231,50 @@ var app = new Vue({
             await this.map.removeLayer(this.markers);
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
+            console.log('refreshMapView');
         },
     },
     created() {
 
         this.mainCat = categories;
+
+        // get last map position from localStorage
+        localStorage.getItem("centerMap") &&
+            (this.mapCenter = localStorage.getItem("centerMap").split(","));
+
+        // get last map zoom from localStorage
+        localStorage.getItem("zoomMap") &&
+            (this.mapZoom = localStorage.getItem("zoomMap"));
+
+        // mix favorite in bdd and localstorage
+        this.myFavorites = [
+            ...new Set([
+                ...myFavorites,
+                ...(JSON.parse(localStorage.getItem("myFavorites")) ?? []),
+            ]),
+        ];
+
+        // save favorite in localstorage and try to save them in bdd on page leave
+        window.onunload = () => {
+            localStorage.setItem(
+                "myFavorites",
+                JSON.stringify(this.myFavorites)
+            );
+            if (idUser == null || !navigator.sendBeacon) return;
+
+            navigator.sendBeacon(
+                `${this.baseUrl}/api/stores/setFavorites`,
+                new Blob(
+                    [
+                        JSON.stringify({
+                            id: idUser,
+                            favorites: this.myFavorites,
+                        }),
+                    ],
+                    { type: "application/json" }
+                )
+            );
+        };
     },
     mounted: async function () {
         //Set map
@@ -243,7 +283,7 @@ var app = new Vue({
             position: 'topright'
         }).addTo(this.map);
 
-
+        //Set map layer
         L.tileLayer.provider('Jawg.Sunny', {
             variant: '',
             accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
@@ -276,5 +316,10 @@ var app = new Vue({
                 ? this.resultsQueryStore.slice(0, this.limitAutoCompletion)
                 : this.resultsQueryStore;
         },
+        computedAllStoreOnMap(){
+            return this.allStoreOnMap
+            ? this.allStoreOnMap.slice(0, this.limitStoreInList)
+            : this.allStoreOnMap; 
+        }
     }
 });
