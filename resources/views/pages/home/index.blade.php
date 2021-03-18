@@ -11,6 +11,7 @@
     {{-- Leaflet JS --}}
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
      <script src="{{ asset('js/leaflet-providers.js')}}" defer></script>
+     <script src="{{ asset('js/leaflet.markercluster.js')}}" defer></script>
     {{-- FontAwesome CSS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
     {{-- VueJS --}}
@@ -18,7 +19,6 @@
     {{-- mapScript.js --}}
     <script src="{{ asset('js/mapScript.js')}}" defer></script>
     {{-- Style CSS --}}
-   
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 </head>
 
@@ -87,13 +87,13 @@
                                 </div>
                             </template>
 
-                            <template v-if="filters_isOpen">
+                            <div v-show="filters_isOpen">
                                 <div class="research-filter">
                                     <div class="filters">
                                         <div class="research-filter-category">
                                             <p class="category">Quelle catégorie recherchez vous ?</p>
                                             <div class="buttons">
-                                                <input type="radio" value="" id="tout" name="categorie" v-model="categorySelected">
+                                                <input type="radio" value="" id="all" name="categorie" v-model="categorySelected">
                                                 <label for="tout" class="btn btn-s btn-r8" :class="[categorySelected == '' ? 'btn-color btn-secondary': 'btn-white']">voir tout</label>
                                                 <template v-for="cat in mainCat">
                                                     <input :id="cat.label" type="radio" name="categorie" :value="cat.label" v-model="categorySelected" v-on:click="categoryFilter = ''">
@@ -123,7 +123,7 @@
                                     </div>
 
                                 </div>
-                            </template>
+                            </div>
 
                         </div>
 

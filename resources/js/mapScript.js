@@ -128,7 +128,7 @@ var app = new Vue({
             this.categoryFilter === ""
                 ? (catFilter = this.categorySelected)
                 : (catFilter = this.categoryFilter);
-            if (document.getElementById("tout").checked == true) {
+            if (document.querySelector("#all").checked == true) {
                 catFilter = "";
             }
             let url = new URL(`${this.baseUrl}/api/stores/map`);
@@ -226,26 +226,41 @@ var app = new Vue({
             this.querySearch = '';
             this.map.setView([lat, lon], 14);
         },
+        refreshMapView: async function () {
+            await this.map.removeLayer(this.markers);
+            await this.getStoresOnMap();
+            await this.map.addLayer(this.markers);
+        },
     },
     created() {
 
         this.mainCat = categories;
     },
     mounted: async function () {
-        //setting up map
+        //Set map
         this.map = L.map('map', { scrollWheelZoom: false, zoomControl: false }).setView(this.mapCenter, this.mapZoom);
         L.control.zoom({
             position: 'topright'
         }).addTo(this.map);
 
-        // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+
         L.tileLayer.provider('Jawg.Sunny', {
             variant: '',
             accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
         }).addTo(this.map);
 
-        //await this.getStoresOnMap();
-        //await this.map.addLayer(this.markers);
+        await this.getStoresOnMap();
+        await this.map.addLayer(this.markers);
+
+         //add eventListener on the map movment
+         this.map.on("moveend", () => {
+            this.refreshMapView();
+            localStorage.setItem("centerMap", [
+                this.map.getCenter().lat,
+                this.map.getCenter().lng,
+            ]);
+            localStorage.setItem("zoomMap", this.map.getZoom()); // Insert les données de la map en localstorage
+        });
 
 
     },

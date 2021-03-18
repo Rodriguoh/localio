@@ -1051,7 +1051,7 @@ var app = new Vue({
                 };
                 this.categoryFilter === "" ? catFilter = this.categorySelected : catFilter = this.categoryFilter;
 
-                if (document.getElementById("tout").checked == true) {
+                if (document.querySelector("#all").checked == true) {
                   catFilter = "";
                 }
 
@@ -1217,38 +1217,84 @@ var app = new Vue({
       document.querySelector("#map").scrollIntoView();
       this.querySearch = '';
       this.map.setView([lat, lon], 14);
-    }
+    },
+    refreshMapView: function () {
+      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.next = 2;
+                return this.map.removeLayer(this.markers);
+
+              case 2:
+                _context7.next = 4;
+                return this.getStoresOnMap();
+
+              case 4:
+                _context7.next = 6;
+                return this.map.addLayer(this.markers);
+
+              case 6:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function refreshMapView() {
+        return _refreshMapView.apply(this, arguments);
+      }
+
+      return refreshMapView;
+    }()
   },
   created: function created() {
     this.mainCat = categories;
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+      var _this2 = this;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
-              //setting up map
+              //Set map
               this.map = L.map('map', {
                 scrollWheelZoom: false,
                 zoomControl: false
               }).setView(this.mapCenter, this.mapZoom);
               L.control.zoom({
                 position: 'topright'
-              }).addTo(this.map); // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-
+              }).addTo(this.map);
               L.tileLayer.provider('Jawg.Sunny', {
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
-              }).addTo(this.map); //await this.getStoresOnMap();
-              //await this.map.addLayer(this.markers);
+              }).addTo(this.map);
+              _context8.next = 5;
+              return this.getStoresOnMap();
 
-            case 3:
+            case 5:
+              _context8.next = 7;
+              return this.map.addLayer(this.markers);
+
+            case 7:
+              //add eventListener on the map movment
+              this.map.on("moveend", function () {
+                _this2.refreshMapView();
+
+                localStorage.setItem("centerMap", [_this2.map.getCenter().lat, _this2.map.getCenter().lng]);
+                localStorage.setItem("zoomMap", _this2.map.getZoom()); // Insert les données de la map en localstorage
+              });
+
+            case 8:
             case "end":
-              return _context7.stop();
+              return _context8.stop();
           }
         }
-      }, _callee7, this);
+      }, _callee8, this);
     }));
 
     function mounted() {
