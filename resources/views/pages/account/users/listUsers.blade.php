@@ -2,13 +2,13 @@
 
 @section('content')
 
-<div class="card p-0 m-0 m-sm-10 table-responsive">
+<div class="card p-0 m-0 m-sm-10">
     <div class="d-flex text-center">
         <h2 class="font-size-22 w-half py-5 m-0 flex-shrink-1">
             Liste des utilisateurs
         </h2>
     </div>
-    
+
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -35,7 +35,7 @@
                         </button>
                         <div class="dropdown-menu w-200 w-sm-250 w-md-300 dropdown-menu-right">
                             <p>Modifier le rôle de <b>{{$user->firstname}} {{$user->lastname}}</b></p>
-                        
+
                             <form action="{{ route('editRoleUser') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$user->id}}">
@@ -53,7 +53,7 @@
                     </div>
                 </td>
             </tr>
-        @endforeach    
+        @endforeach
         </tbody>
     </table>
     <div class="text-center">{{ $users->links() }}</div>
