@@ -1034,6 +1034,87 @@ footer {
 /* --Mobile--*/
 /* --Epaisseur police --*/
 /* Time function */
+.login-container {
+  margin-top: 35px !important;
+  width: 100vw !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-type {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.select-type label {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 15px 15px 10px 15px;
+  border-radius: 15px;
+}
+.select-type #connexion:checked + label[for=connexion],
+.select-type #inscription:checked + label[for=inscription] {
+  background-color: #FFCF39;
+  color: white;
+}
+
+.login-section {
+  width: 80%;
+  margin: auto;
+}
+.login-section .login-input > input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 10px !important;
+  margin: 10px 0 10px 0;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 6px #ebebeb;
+}
+.login-section .login-btn {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  padding: 14px 0 14px 0 !important;
+  font-weight: bold;
+  margin-top: 15px;
+}
+.login-section a:nth-child(2) {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  margin-top: 15px;
+  padding: 14px 0 14px 15px;
+  box-sizing: border-box;
+  box-shadow: 0 0 6px #cccccc;
+  border-radius: 10px;
+}
+.login-section a:nth-child(3) {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+}
+.login-section .checkbox {
+  display: flex;
+  margin-top: 5px;
+}
+
+.circle {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background-color: #FFCF39;
+  position: absolute;
+  top: 40%;
+  right: -50%;
+}
+
 .full-width {
   width: 100%;
 }

@@ -1,6 +1,6 @@
 @extends('layouts.auth')
-@section('content')
-    <h1>Connexion</h1>
+@section('content.login')
+
     <!-- Session Status -->
     <x-auth-session-status :status="session('status')" />
 
@@ -16,7 +16,7 @@
             </div>
 
             <!-- Password -->
-            <div class="">
+            <div class="login-input">
 
                 <x-input id="password" class="form-control form-control-lg" type="password" name="password" placeholder="Mot de passe" required autocomplete="current-password" style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;outline:none" />
             </div>
@@ -25,7 +25,7 @@
 
             <div class="checkbox mb-3">
                 <label>
-                    <input id="remember_me" type="checkbox" name="remember"> Remember me
+                    <input id="remember_me" type="checkbox" name="remember"> Rester connecter
                 </label>
             </div>
 
