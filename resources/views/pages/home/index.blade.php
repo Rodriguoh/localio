@@ -36,7 +36,7 @@
 
 <body class="full-with">
     <div id="app">
-        <nav>
+        <nav v-show="!showStore">
             <div class="logo">
                 <img src="{{ asset('img/logo_inline-clair.svg') }}" alt="logo de click and collect">
             </div>
@@ -207,7 +207,7 @@
 
 
         <div class="modal-store" style="display:none" v-show="showStore">
-            <button v-on:click="maskModalStore">Mask</button>
+           <a class="close" v-on:click="maskModalStore"></a>
             <div class="header-modal-store">
                 <div class="img-store"><img src="{{ asset('img/photos/exemple-image-store-3.jpg') }}"></div>
                 <div class="margin-constraint">
@@ -254,9 +254,7 @@
                             </div>
 
                             <div class="pagination-comment">
-                                <button>
-                                    << /button>
-                                        <button>></button>
+                                <button><<button>></button>
                             </div>
 
                         </div>

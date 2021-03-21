@@ -936,6 +936,34 @@ nav .nav-links.open {
   z-index: 1000;
   min-height: 100%;
 }
+.modal-store .close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  z-index: 1;
+  opacity: 1;
+}
+.modal-store .close:hover {
+  opacity: 1;
+}
+.modal-store .close:before,
+.modal-store .close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 2px;
+  background-color: white;
+}
+.modal-store .close:before {
+  transform: rotate(45deg);
+}
+.modal-store .close:after {
+  transform: rotate(-45deg);
+}
 .modal-store .header-modal-store {
   position: relative;
   display: flex;
@@ -1011,7 +1039,7 @@ nav .nav-links.open {
 }
 .modal-store .main-modal-store .comments-modal-store .comment {
   padding: 12px;
-  box-shadow: 0px 4px 16px #455B6314;
+  box-shadow: 0px 4px 16px #455b6314;
 }
 .modal-store .main-modal-store .comments-modal-store .comment .info-comment {
   display: flex;
@@ -1192,6 +1220,70 @@ nav .nav-links.open {
 @media (min-width: 768px) {
   .modal-store {
     width: 100%;
+  }
+  .modal-store .close:before,
+.modal-store .close:after {
+    background-color: #363636;
+  }
+  .modal-store .header-modal-store {
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 40px auto;
+  }
+  .modal-store .header-modal-store .img-store {
+    width: calc(40% - 20px);
+    margin-left: 20px;
+    height: 20vw;
+  }
+  .modal-store .header-modal-store .info-store {
+    margin-left: 100px;
+    width: 40%;
+  }
+  .modal-store .header-modal-store .info-store h3,
+.modal-store .header-modal-store .info-store .total-notes {
+    color: #363636 !important;
+  }
+  .modal-store .main-modal-store .useful-width {
+    flex-direction: row;
+  }
+  .modal-store .main-modal-store .useful-width .comments-modal-store,
+.modal-store .main-modal-store .useful-width .description-modal-store {
+    width: 40%;
+  }
+  .modal-store .main-modal-store .useful-width .comments-modal-store {
+    order: 0;
+  }
+  .modal-store .main-modal-store .useful-width .comments-modal-store .comment {
+    padding: 15px;
+  }
+  .modal-store .main-modal-store .useful-width .comments-modal-store .date-comment {
+    font-size: 14;
+  }
+  .modal-store .main-modal-store .useful-width .comments-modal-store .note-comment {
+    color: #FFCF39;
+    font-size: 14px;
+  }
+  .modal-store .main-modal-store .useful-width .comments-modal-store .contain-comment {
+    font-size: 14px;
+  }
+  .modal-store .main-modal-store .useful-width .comments-modal-store .pagination-comment {
+    display: flex;
+    justify-content: center;
+  }
+  .modal-store .main-modal-store .useful-width .comments-modal-store .pagination-comment button {
+    margin: 10px;
+    background-color: white;
+    display: block;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px #00000029;
+    border: 0px;
+    font-size: 15px;
+    color: #363636;
+  }
+  .modal-store .main-modal-store .useful-width .description-modal-store {
+    margin-left: 100px;
   }
 
   nav {

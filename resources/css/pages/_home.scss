@@ -287,6 +287,36 @@
 
     z-index: 1000;
     min-height: 100%;
+
+    .close {
+        position: absolute;
+        right: 32px;
+        top: 32px;
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+        z-index: 1;
+        opacity: 1;
+    }
+    .close:hover {
+        opacity: 1;
+    }
+    .close:before,
+    .close:after {
+        position: absolute;
+        left: 15px;
+        content: " ";
+        height: 33px;
+        width: 2px;
+        background-color: white;
+    }
+    .close:before {
+        transform: rotate(45deg);
+    }
+    .close:after {
+        transform: rotate(-45deg);
+    }
+
     .header-modal-store {
         position: relative;
         display: flex;
@@ -358,38 +388,38 @@
         border-radius: 15px;
         background-color: white;
         .comments-modal-store {
-            h3{
+            h3 {
                 font-size: $sizeSubTitle--mobile;
                 font-weight: $regular;
             }
-            .comment{
+            .comment {
                 padding: 12px;
-                box-shadow: 0px 4px 16px #455B6314;
-                .info-comment{
-                    display:flex;
+                box-shadow: 0px 4px 16px #455b6314;
+                .info-comment {
+                    display: flex;
                     justify-content: space-between;
                     align-items: flex-start;
                     margin-bottom: 2px;
-                    div:nth-child(1){
-                        display:flex;
+                    div:nth-child(1) {
+                        display: flex;
                         flex-direction: column;
-                        .owner-comment{
+                        .owner-comment {
                             font-size: $sizeText--mobile;
                             font-weight: $bold;
                         }
-                        .data-comment{
+                        .data-comment {
                             font-size: $sizeText--mobile;
                             font-weight: $ligth;
                         }
                     }
                 }
-                .contain-comment{
+                .contain-comment {
                     font-size: $sizeTextAdditionnal--mobile;
                     font-weight: $ligth;
                 }
             }
-            .pagination-comment{
-                display:none;
+            .pagination-comment {
+                display: none;
             }
         }
         .useful-width {
@@ -487,8 +517,8 @@
             }
             .info-contact-store {
                 margin-bottom: 20px;
-                .part{
-                    display:flex;
+                .part {
+                    display: flex;
                     flex-wrap: wrap;
                     max-width: 400px;
                 }
@@ -515,8 +545,75 @@
 }
 
 @include respond-to("M") {
-    .modal-store{
+    .modal-store {
         width: 100%;
+        .close:before,
+        .close:after {
+           
+            background-color: $grey;
+        }
+        .header-modal-store {
+            flex-direction: row;
+            max-width: $useful-width;
+            margin: 40px auto;
+            .img-store {
+                width: calc(40% - 20px);
+                margin-left: 20px;
+                height: 20vw;
+            }
+            .info-store {
+                margin-left: 100px;
+                width: 40%;
+                h3,
+                .total-notes {
+                    color: $grey !important;
+                }
+            }
+        }
+        .main-modal-store {
+            .useful-width {
+                flex-direction: row;
+                .comments-modal-store,
+                .description-modal-store {
+                    width: 40%;
+                }
+                .comments-modal-store {
+                    order: 0;
+                    .comment {
+                        padding: 15px;
+                    }
+                    .date-comment {
+                        font-size: 14;
+                    }
+                    .note-comment {
+                        color: $yellowSecondary;
+                        font-size: 14px;
+                    }
+                    .contain-comment {
+                        font-size: 14px;
+                    }
+                    .pagination-comment {
+                        display: flex;
+                        justify-content: center;
+                        button {
+                            margin: 10px;
+                            background-color: white;
+                            display: block;
+                            height: 40px;
+                            width: 40px;
+                            border-radius: 10px;
+                            box-shadow: 0px 4px 6px #00000029;
+                            border: 0px;
+                            font-size: 15px;
+                            color: $grey;
+                        }
+                    }
+                }
+                .description-modal-store {
+                    margin-left: 100px;
+                }
+            }
+        }
     }
     nav {
         margin-bottom: $marginBottom-section;
