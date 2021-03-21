@@ -97,7 +97,7 @@ class StoreController extends Controller
     public function requests()
     {
         $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
-            
+
             ->join('states', 'states.id', '=', 'stores.state_id')
             ->join('cities', 'cities.INSEE', '=', 'stores.city_INSEE')
             ->select('lastname', 'firstname', 'stores.id', 'stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label', 'cities.name as city_name')
@@ -173,7 +173,7 @@ class StoreController extends Controller
             'phone' => 'required|digits:10',
             'mail' => 'required|email',
             'SIRET' => 'required|digits:14',
-            'url' => 'url',
+            'url' => 'nullable|url',
             'category_id' => 'required|exists:categories,id',
             'number' => 'required',
             'street' => 'required',
