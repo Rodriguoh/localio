@@ -905,7 +905,7 @@ nav .nav-links.open {
 .map-and-list .stores-list .element-list .info-element-list div .note {
   display: flex;
   color: white;
-  opacity: 0.5;
+  opacity: 0.7;
   font-size: 12px;
 }
 .map-and-list .stores-list .element-list .info-element-list div .note span:nth-child(2) {
@@ -927,6 +927,196 @@ nav .nav-links.open {
 
 .leaflet-verticalcenter .leaflet-control {
   margin-bottom: 10px;
+}
+
+.modal-store {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  min-height: 100%;
+}
+.modal-store .header-modal-store {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.modal-store .header-modal-store .img-store {
+  width: 100%;
+  height: 170px;
+}
+.modal-store .header-modal-store .img-store img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.modal-store .header-modal-store .info-store {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 30px;
+}
+.modal-store .header-modal-store .info-store h3 {
+  color: white;
+  font-size: 42px;
+  margin-bottom: 0px;
+}
+.modal-store .header-modal-store .info-store .note-store {
+  display: flex;
+}
+.modal-store .header-modal-store .info-store .note-store .icon-star {
+  width: 16px;
+  margin: 0 2px;
+}
+.modal-store .header-modal-store .info-store .note-store .icon-star img {
+  width: 100%;
+  height: 100%;
+}
+.modal-store .header-modal-store .info-store .note-store .icon-star.disable {
+  opacity: 0.6;
+}
+.modal-store .header-modal-store .info-store .stars-and-notes {
+  display: flex;
+  align-items: center;
+}
+.modal-store .header-modal-store .info-store .stars-and-notes .total-notes {
+  margin-left: 10px;
+  color: #363636;
+  font-size: 14px;
+}
+.modal-store .header-modal-store .info-store .info-contact-store {
+  background-color: red;
+}
+.modal-store .main-modal-store {
+  position: relative;
+  margin-top: -25px;
+  border-radius: 15px;
+  background-color: white;
+}
+.modal-store .main-modal-store .useful-width {
+  display: flex;
+  flex-direction: column;
+}
+.modal-store .main-modal-store .comments-modal-store {
+  order: 2;
+}
+.modal-store .main-modal-store .description-modal-store .title-favorite {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-store .main-modal-store .description-modal-store .title-favorite h3 {
+  font-size: 18px;
+  font-weight: 400;
+}
+.modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+}
+.modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite .fav-btn {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+@-webkit-keyframes favme-anime {
+  0% {
+    opacity: 1;
+    font-size: ms(0);
+    -webkit-text-stroke-color: transparent;
+  }
+  25% {
+    opacity: 0.6;
+    color: #FFF;
+    font-size: ms(-2);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #DC3232;
+  }
+  75% {
+    opacity: 0.6;
+    color: #FFF;
+    font-size: ms(3);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #DC3232;
+  }
+  100% {
+    opacity: 1;
+    font-size: ms(2);
+    -webkit-text-stroke-color: transparent;
+  }
+}
+@keyframes favme-anime {
+  0% {
+    opacity: 1;
+    font-size: ms(0);
+    -webkit-text-stroke-color: transparent;
+  }
+  25% {
+    opacity: 0.6;
+    color: #FFF;
+    font-size: ms(-2);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #DC3232;
+  }
+  75% {
+    opacity: 0.6;
+    color: #FFF;
+    font-size: ms(3);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #DC3232;
+  }
+  100% {
+    opacity: 1;
+    font-size: ms(2);
+    -webkit-text-stroke-color: transparent;
+  }
+}
+@-webkit-keyframes favme-hover {
+  from {
+    font-size: ms(3);
+  }
+  80% {
+    font-size: ms(2);
+  }
+}
+@keyframes favme-hover {
+  from {
+    font-size: ms(3);
+  }
+  80% {
+    font-size: ms(2);
+  }
+}
+.modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite .favme {
+  display: block;
+  font-size: ms(2);
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all 0.2s ease;
+  color: #CBCDCE;
+  margin: 0;
+}
+.modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite .favme.active {
+  color: #DC3232;
+}
+.modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite .favme:hover {
+  -webkit-animation: favme-hover 0.3s infinite alternate;
+          animation: favme-hover 0.3s infinite alternate;
+}
+.modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite .favme.is_animating {
+  -webkit-animation: favme-anime 0.3s;
+          animation: favme-anime 0.3s;
+}
+.modal-store .main-modal-store .description-modal-store .content-description {
+  font-size: 14px;
+  color: #3F3543;
+  font-weight: 300;
+  line-height: 1.4;
 }
 
 @media (min-width: 768px) {
