@@ -26,6 +26,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $dates = [
+        'banned_until'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

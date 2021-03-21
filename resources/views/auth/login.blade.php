@@ -6,7 +6,11 @@
 
     <!-- Validation Errors -->
     <x-auth-validation-errors :errors="$errors" />
-   
+
+    @if (session('message'))
+        <div class="alert alert-danger">{{ session('message') }}</div>
+    @endif
+
         <form method="POST" action="{{ route('login') }}" style="width:100%">
             @csrf
 
