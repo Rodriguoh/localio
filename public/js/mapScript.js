@@ -903,7 +903,8 @@ var app = new Vue({
     categorySelected: "",
     prevCatSelected: "",
     categoryFilter: "",
-    myFavorites: []
+    myFavorites: [],
+    showStore: false
   },
   methods: {
     mobileMenu: function mobileMenu() {
@@ -1141,21 +1142,14 @@ var app = new Vue({
                       while (1) {
                         switch (_context3.prev = _context3.next) {
                           case 0:
-                            _context3.next = 2;
-                            return _this.getStore(rep[i].id);
-
-                          case 2:
-                            _context3.next = 4;
-                            return _this.getStoreComments(rep[i].id);
-
-                          case 4:
-                            _context3.next = 6;
-                            return halfmoon.toggleModal("modal-store");
-
-                          case 6:
+                            //await this.getStore(rep[i].id);
+                            //await this.getStoreComments(rep[i].id);
+                            //await halfmoon.toggleModal("modal-store");
                             _this.commentLimit = 1;
 
-                          case 7:
+                            _this.showModalStore(rep[i].id);
+
+                          case 2:
                           case "end":
                             return _context3.stop();
                         }
@@ -1210,10 +1204,8 @@ var app = new Vue({
                 this.prevCatSelected = this.categorySelected;
                 this.markers = allMarkers;
                 this.allStoreOnMap = rep;
-                console.log(rep);
-                console.log(this.allStoreOnMap);
 
-              case 21:
+              case 19:
               case "end":
                 return _context6.stop();
             }
@@ -1289,6 +1281,69 @@ var app = new Vue({
       }
 
       return resetFilters;
+    }(),
+    showModalStore: function () {
+      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9(idStore) {
+        var requestOptions, url, req, rep;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(idStore));
+                _context9.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context9.sent;
+                _context9.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context9.sent;
+                rep = rep.data;
+                console.log(rep);
+                this.showStore = true;
+                console.log(idStore);
+
+              case 12:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9, this);
+      }));
+
+      function showModalStore(_x) {
+        return _showModalStore.apply(this, arguments);
+      }
+
+      return showModalStore;
+    }(),
+    maskModalStore: function () {
+      var _maskModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                this.showStore = false;
+
+              case 1:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, this);
+      }));
+
+      function maskModalStore() {
+        return _maskModalStore.apply(this, arguments);
+      }
+
+      return maskModalStore;
     }()
   },
   created: function created() {
@@ -1315,12 +1370,12 @@ var app = new Vue({
     };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
       var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
         while (1) {
-          switch (_context9.prev = _context9.next) {
+          switch (_context11.prev = _context11.next) {
             case 0:
               //Set map
               this.map = L.map('map', {
@@ -1335,11 +1390,11 @@ var app = new Vue({
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
               }).addTo(this.map);
-              _context9.next = 5;
+              _context11.next = 5;
               return this.getStoresOnMap();
 
             case 5:
-              _context9.next = 7;
+              _context11.next = 7;
               return this.map.addLayer(this.markers);
 
             case 7:
@@ -1369,10 +1424,10 @@ var app = new Vue({
 
             case 13:
             case "end":
-              return _context9.stop();
+              return _context11.stop();
           }
         }
-      }, _callee9, this);
+      }, _callee11, this);
     }));
 
     function mounted() {

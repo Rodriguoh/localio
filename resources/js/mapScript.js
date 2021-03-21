@@ -32,7 +32,8 @@ var app = new Vue({
         categorySelected: "",
         prevCatSelected: "",
         categoryFilter: "",
-        myFavorites: []
+        myFavorites: [],
+        showStore: false
     },
     methods: {
         mobileMenu: function () {
@@ -186,10 +187,11 @@ var app = new Vue({
 
                 // Affiche la modal lors du clic sur le marqueur
                 marker.on("click", async () => {
-                    await this.getStore(rep[i].id);
-                    await this.getStoreComments(rep[i].id);
-                    await halfmoon.toggleModal("modal-store");
+                    //await this.getStore(rep[i].id);
+                    //await this.getStoreComments(rep[i].id);
+                    //await halfmoon.toggleModal("modal-store");
                     this.commentLimit = 1;
+                    this.showModalStore(rep[i].id);
                 });
 
                 // Change la couleur de fond de la div du commerce lors du hover de son marqueur
@@ -208,14 +210,13 @@ var app = new Vue({
                     store.style.backgroundColor = "";
                 });
 
+
                 allMarkers.addLayer(marker);
             }
 
             this.prevCatSelected = this.categorySelected;
             this.markers = allMarkers;
             this.allStoreOnMap = rep;
-            console.log(rep)
-            console.log(this.allStoreOnMap)
         },
         setViewMap: function (lat, lon) {
             document.querySelector("#map").scrollIntoView();
@@ -232,12 +233,27 @@ var app = new Vue({
             this.refreshMapView();
             this.categoryFilter = "";
             this.categorySelected = "";
+        },
+        showModalStore: async function (idStore){
+            let requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+            let url = new URL(`${this.baseUrl}/api/store/${idStore}`);
+            let req = await fetch(url, requestOptions);
+            let rep = await req.json();
+            rep = rep.data;
+            console.log(rep)
+            this.showStore = true;
+            console.log(idStore);
+        },
+        maskModalStore: async function (){
+            this.showStore = false;
         }
     },
     created() {
 
         this.mainCat = categories;
-
         // get last map position from localStorage
         localStorage.getItem("centerMap") &&
             (this.mapCenter = localStorage.getItem("centerMap").split(","));

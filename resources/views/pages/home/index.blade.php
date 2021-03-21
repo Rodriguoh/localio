@@ -206,7 +206,7 @@
         </div>
 
 
-        <div class="modal-store">
+        <div class="modal-store" style="display:none" v-show="showStore">
             <div class="header-modal-store">
                 <div class="img-store"><img src="{{ asset('img/photos/exemple-image-store-3.jpg') }}"></div>
                 <div class="margin-constraint">

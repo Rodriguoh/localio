@@ -1139,7 +1139,7 @@ nav .nav-links.open {
 .modal-store .main-modal-store .description-modal-store .info-contact-store .part {
   display: flex;
   flex-wrap: wrap;
-  max-width: 450px;
+  max-width: 400px;
 }
 .modal-store .main-modal-store .description-modal-store .info-contact-store .element-info-contact-store {
   display: flex;
@@ -1160,6 +1160,11 @@ nav .nav-links.open {
 }
 
 @media (min-width: 768px) {
+  .modal-store {
+    width: 100%;
+    background-color: red;
+  }
+
   nav {
     margin-bottom: 40px;
   }

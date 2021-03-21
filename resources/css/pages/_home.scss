@@ -458,7 +458,7 @@
                 .part{
                     display:flex;
                     flex-wrap: wrap;
-                    max-width: 450px;
+                    max-width: 400px;
                 }
                 .element-info-contact-store {
                     display: flex;
@@ -483,13 +483,16 @@
 }
 
 @include respond-to("M") {
+    .modal-store{
+        width: 100%;
+        background-color: red;
+    }
     nav {
         margin-bottom: $marginBottom-section;
         .nav-links {
             height: $navbar_height;
         }
     }
-
     .header {
         display: flex;
         margin-bottom: 50px;
