@@ -234,20 +234,19 @@ var app = new Vue({
             this.categoryFilter = "";
             this.categorySelected = "";
         },
+
         showModalStore: async function (idStore){
-            let requestOptions = {
+            let req = await fetch(new URL(`${this.baseUrl}/api/store/${idStore}`), {
                 method: "GET",
                 redirect: "follow",
-            };
-            let url = new URL(`${this.baseUrl}/api/store/${idStore}`);
-            let req = await fetch(url, requestOptions);
+            });
             let rep = await req.json();
             rep = rep.data;
             console.log(rep)
-            this.showStore = true;
+            this.showStore = await true;
             console.log(idStore);
         },
-        maskModalStore: async function (){
+        maskModalStore: function (){
             this.showStore = false;
         }
     },

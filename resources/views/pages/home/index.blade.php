@@ -176,7 +176,7 @@
             </div>
         </div>
 
-        <div class="map-and-list">
+        <div class="map-and-list" v-show="!showStore">
             <div id="map">
 
             </div>
@@ -207,6 +207,7 @@
 
 
         <div class="modal-store" style="display:none" v-show="showStore">
+        <button v-on:click="maskModalStore">Mask</button>
             <div class="header-modal-store">
                 <div class="img-store"><img src="{{ asset('img/photos/exemple-image-store-3.jpg') }}"></div>
                 <div class="margin-constraint">
