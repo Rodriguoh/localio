@@ -315,7 +315,7 @@
                                     morbi leo urna molestie. Mauris ultrices eros in cursus turpis massa.</p>
                             </div>
                             <div class="info-contact-store">
-                                <div>
+                                <div class="part">
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-envelope"></i></div>
                                         guillaume11@orange.fr
@@ -328,7 +328,7 @@
                                         Arrondissement
                                     </div>
                                 </div>
-                                <div>
+                                <div class="part">
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-phone"></i></div> +33 4 67 12 32 23
                                     </div>

@@ -292,13 +292,26 @@
         display: flex;
         flex-direction: column;
         .img-store {
+            position: relative;
+            display: inline-block;
             width: 100%;
             height: 170px;
             img {
+                display: block;
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
             }
+        }
+        .img-store:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            background: transparent linear-gradient(180deg, #2a2e4300 0%, #795656 100%) 0% 0% no-repeat padding-box;
         }
         .info-store {
             display: flex;
@@ -322,7 +335,7 @@
                     }
                 }
                 .icon-star.disable {
-                    opacity: 0.6;
+                    opacity: 0.4;
                 }
             }
 
@@ -333,11 +346,8 @@
                     margin-left: 10px;
                     color: $grey;
                     font-size: $sizeText--mobile;
+                    color: white;
                 }
-            }
-
-            .info-contact-store {
-                background-color: red;
             }
         }
     }
@@ -347,8 +357,8 @@
         margin-top: -25px;
         border-radius: 15px;
         background-color: white;
-        .comments-modal-store{
-            display:none;
+        .comments-modal-store {
+            display: none;
         }
         .useful-width {
             display: flex;
@@ -378,62 +388,62 @@
                         align-items: center;
                     }
                     @keyframes favme-anime {
-                        0%   { 
-                              opacity: 1;
-                              font-size: ms(0);
-                              -webkit-text-stroke-color: transparent;
-                          }
-                          25%	 { 
-                              opacity:.6;
-                              color: #FFF;
-                              font-size: ms(-2);
-                              -webkit-text-stroke-width: 1px;
-                             -webkit-text-stroke-color: #DC3232;
-                          }
-                          75%	 { 
-                              opacity:.6;
-                              color: #FFF;
-                              font-size: ms(3);
-                              -webkit-text-stroke-width: 1px;
-                             -webkit-text-stroke-color: #DC3232;
-                          }
-                        100% { 
-                              opacity: 1;
-                              font-size: ms(2);
-                              -webkit-text-stroke-color: transparent;
-                          }
-                      }
-                      
-                      @keyframes favme-hover {
-                          from {
-                              font-size: ms(3);
-                          }
-                          80% {
-                              font-size: ms(2);
-                          }
-                      }
-                      
-                      .favme {
-                          display:block;
-                          font-size: 25px;;
-                          width: auto;
-                          height: auto;
-                          cursor: pointer;
-                          box-shadow: none;
-                          transition: all .2s ease;
-                          color: #CBCDCE;
-                          margin: 0;
-                          
-                          &.active {
-                              color: #DC3232;
-                          }
-                          &:hover {
-                              animation: favme-hover .3s infinite alternate;
-                          }
-                          &.is_animating {
-                              animation: favme-anime .3s;
-                          }
-                      }
+                        0% {
+                            opacity: 1;
+                            font-size: ms(0);
+                            -webkit-text-stroke-color: transparent;
+                        }
+                        25% {
+                            opacity: 0.6;
+                            color: #fff;
+                            font-size: ms(-2);
+                            -webkit-text-stroke-width: 1px;
+                            -webkit-text-stroke-color: #dc3232;
+                        }
+                        75% {
+                            opacity: 0.6;
+                            color: #fff;
+                            font-size: ms(3);
+                            -webkit-text-stroke-width: 1px;
+                            -webkit-text-stroke-color: #dc3232;
+                        }
+                        100% {
+                            opacity: 1;
+                            font-size: ms(2);
+                            -webkit-text-stroke-color: transparent;
+                        }
+                    }
+
+                    @keyframes favme-hover {
+                        from {
+                            font-size: ms(3);
+                        }
+                        80% {
+                            font-size: ms(2);
+                        }
+                    }
+
+                    .favme {
+                        display: block;
+                        font-size: 25px;
+                        width: auto;
+                        height: auto;
+                        cursor: pointer;
+                        box-shadow: none;
+                        transition: all 0.2s ease;
+                        color: #cbcdce;
+                        margin: 0;
+
+                        &.active {
+                            color: #dc3232;
+                        }
+                        &:hover {
+                            animation: favme-hover 0.3s infinite alternate;
+                        }
+                        &.is_animating {
+                            animation: favme-anime 0.3s;
+                        }
+                    }
                 }
             }
             .content-description {
@@ -443,26 +453,29 @@
                 line-height: 1.4;
                 margin-bottom: 20px;
             }
-            .info-contact-store{
+            .info-contact-store {
                 margin-bottom: 20px;
-                .element-info-contact-store{
+                .part{
                     display:flex;
+                    flex-wrap: wrap;
+                    max-width: 450px;
+                }
+                .element-info-contact-store {
+                    display: flex;
                     align-items: center;
                     margin-bottom: 10px;
                     font-size: $sizeText--mobile;
                     font-weight: $ligth;
-                    div{
-                        display:flex;
+                    div {
+                        display: flex;
                         align-items: center;
                         justify-content: center;
                         min-width: 40px;
-                        i{
+                        i {
                             font-size: 20px;
                             color: $yellowSecondary;
                         }
-                        
                     }
-                   
                 }
             }
         }

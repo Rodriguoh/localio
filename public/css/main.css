@@ -942,14 +942,27 @@ nav .nav-links.open {
   flex-direction: column;
 }
 .modal-store .header-modal-store .img-store {
+  position: relative;
+  display: inline-block;
   width: 100%;
   height: 170px;
 }
 .modal-store .header-modal-store .img-store img {
+  display: block;
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+.modal-store .header-modal-store .img-store:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background: transparent linear-gradient(180deg, #2a2e4300 0%, #795656 100%) 0% 0% no-repeat padding-box;
 }
 .modal-store .header-modal-store .info-store {
   display: flex;
@@ -974,7 +987,7 @@ nav .nav-links.open {
   height: 100%;
 }
 .modal-store .header-modal-store .info-store .note-store .icon-star.disable {
-  opacity: 0.6;
+  opacity: 0.4;
 }
 .modal-store .header-modal-store .info-store .stars-and-notes {
   display: flex;
@@ -984,9 +997,7 @@ nav .nav-links.open {
   margin-left: 10px;
   color: #363636;
   font-size: 14px;
-}
-.modal-store .header-modal-store .info-store .info-contact-store {
-  background-color: red;
+  color: white;
 }
 .modal-store .main-modal-store {
   position: relative;
@@ -1033,17 +1044,17 @@ nav .nav-links.open {
   }
   25% {
     opacity: 0.6;
-    color: #FFF;
+    color: #fff;
     font-size: ms(-2);
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #DC3232;
+    -webkit-text-stroke-color: #dc3232;
   }
   75% {
     opacity: 0.6;
-    color: #FFF;
+    color: #fff;
     font-size: ms(3);
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #DC3232;
+    -webkit-text-stroke-color: #dc3232;
   }
   100% {
     opacity: 1;
@@ -1059,17 +1070,17 @@ nav .nav-links.open {
   }
   25% {
     opacity: 0.6;
-    color: #FFF;
+    color: #fff;
     font-size: ms(-2);
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #DC3232;
+    -webkit-text-stroke-color: #dc3232;
   }
   75% {
     opacity: 0.6;
-    color: #FFF;
+    color: #fff;
     font-size: ms(3);
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #DC3232;
+    -webkit-text-stroke-color: #dc3232;
   }
   100% {
     opacity: 1;
@@ -1101,11 +1112,11 @@ nav .nav-links.open {
   cursor: pointer;
   box-shadow: none;
   transition: all 0.2s ease;
-  color: #CBCDCE;
+  color: #cbcdce;
   margin: 0;
 }
 .modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite .favme.active {
-  color: #DC3232;
+  color: #dc3232;
 }
 .modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite .favme:hover {
   -webkit-animation: favme-hover 0.3s infinite alternate;
@@ -1124,6 +1135,11 @@ nav .nav-links.open {
 }
 .modal-store .main-modal-store .description-modal-store .info-contact-store {
   margin-bottom: 20px;
+}
+.modal-store .main-modal-store .description-modal-store .info-contact-store .part {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 450px;
 }
 .modal-store .main-modal-store .description-modal-store .info-contact-store .element-info-contact-store {
   display: flex;
