@@ -98,7 +98,7 @@ class StoreController extends Controller
     public function requests()
     {
         $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
-            
+
             ->join('states', 'states.id', '=', 'stores.state_id')
             ->join('cities', 'cities.INSEE', '=', 'stores.city_INSEE')
             ->select('lastname', 'firstname', 'stores.id', 'stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label', 'cities.name as city_name')
