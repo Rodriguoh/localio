@@ -8,14 +8,13 @@
 @import "base/typography";
 
 @import "components/buttons";
+@import "components/modal";
 
 @import "layouts/footer";
 @import "layouts/header";
 @import "layouts/homeNavigation";
 
-
 //@import 'components';
-
 
 @import "pages/about";
 @import "pages/account";
@@ -29,14 +28,14 @@
 .margin-constraint {
     @include flex-column-verticalHorizontalCenter;
     width: $margin-constraint-width;
-    flex:1;
+    flex: 1;
     margin: 0 auto;
 }
 .useful-width {
     width: 100%;
     max-width: $useful-width;
 }
-#app{
+#app {
     width: 100%;
     height: 100%;
 }
