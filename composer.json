@@ -16,6 +16,8 @@
         "laravel/framework": "^8.12",
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "league/flysystem-sftp": "~1.0",
         "wildbit/swiftmailer-postmark": "^3.3"
     },
     "require-dev": {

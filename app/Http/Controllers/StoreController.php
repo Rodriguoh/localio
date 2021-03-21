@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 
 class StoreController extends Controller
@@ -178,7 +179,7 @@ class StoreController extends Controller
             'number' => 'required',
             'street' => 'required',
             'city' => 'required',
-            'lat' => 'required'
+            'lat' => 'required',
         ]);
 
         $store = isset($request->id) ? Store::find($request->id) : new Store();
@@ -206,7 +207,7 @@ class StoreController extends Controller
         } else {
             $city = new City([
                 'name' => $request->city,
-                'ZIPcode' => $request->ZIPCode,
+                'ZIPcode' => explode(',',$request->ZIPCode)[0],
                 'INSEE' => $request->INSEE,
             ]);
 
@@ -227,9 +228,11 @@ class StoreController extends Controller
             $extension = $request->file('photo')->getClientOriginalExtension();
             $fileName = $fileName . '_' . time() . '.' . $extension;
 
-            $request->file('photo')->move(public_path('images/store_minia/'), $fileName);
+            //$request->file('photo')->move(public_path('images/store_minia/'), $fileName);
 
-            $url = asset('images/store_minia/' . $fileName);
+            Storage::disk('sftp')->put($fileName, fopen($request->file('photo'),'r+')); // stock l'image sur le ftp
+
+            $url = 'https://www.theoboudier.fr/espace-projets/localio/images/' . $fileName; // url de la photo hébergé
 
             $photo->url = $url;
             $photo->alt = 'Photo de ' . $store->name;
@@ -240,7 +243,7 @@ class StoreController extends Controller
         if (isset($request->id)) {
             return redirect()->back()->with('success', 'Modification réussite un modérateur doit la valider');
         } else {
-            return redirect()->route('myStores');
+            return redirect()->route('myStores'); // myStores
         }
     }
 
