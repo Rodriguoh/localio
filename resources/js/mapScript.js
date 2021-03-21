@@ -304,8 +304,19 @@ var app = new Vue({
 
         //Favorite button
         document.querySelector('.favme').addEventListener('click', function () {
-
             this.classList.toggle('active');
+        });
+        document.querySelector(".favme").addEventListener('click', function () {
+            this.classList.toggle('is_animating');
+        });
+        document.querySelector(".favme").addEventListener('touchstart', function () {
+            this.classList.toggle('is_animating');
+        });
+        document.querySelector(".favme").addEventListener('touchstart', function () {
+            this.classList.toggle('is_animating');
+        });
+        document.querySelector(".favme").addEventListener('animationend', function () {
+            this.classList.toggle('is_animating');
         });
     },
 

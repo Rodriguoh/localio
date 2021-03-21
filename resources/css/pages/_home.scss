@@ -347,6 +347,9 @@
         margin-top: -25px;
         border-radius: 15px;
         background-color: white;
+        .comments-modal-store{
+            display:none;
+        }
         .useful-width {
             display: flex;
             flex-direction: column;
@@ -412,7 +415,7 @@
                       
                       .favme {
                           display:block;
-                          font-size: ms(2);
+                          font-size: 25px;;
                           width: auto;
                           height: auto;
                           cursor: pointer;
@@ -438,6 +441,29 @@
                 color: $greyRed;
                 font-weight: $ligth;
                 line-height: 1.4;
+                margin-bottom: 20px;
+            }
+            .info-contact-store{
+                margin-bottom: 20px;
+                .element-info-contact-store{
+                    display:flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+                    font-size: $sizeText--mobile;
+                    font-weight: $ligth;
+                    div{
+                        display:flex;
+                        align-items: center;
+                        justify-content: center;
+                        min-width: 40px;
+                        i{
+                            font-size: 20px;
+                            color: $yellowSecondary;
+                        }
+                        
+                    }
+                   
+                }
             }
         }
     }

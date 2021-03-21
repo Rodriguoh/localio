@@ -317,21 +317,23 @@
                             <div class="info-contact-store">
                                 <div>
                                     <div class="element-info-contact-store">
-                                        <span class="icon"></span> guillaume11@orange.fr
+                                        <div><i class="fas fa-envelope"></i></div>
+                                        guillaume11@orange.fr
                                     </div>
                                     <div class="element-info-contact-store">
-                                        <span class="icon"></span> http://www.delahaye.fr/
+                                        <div><i class="fas fa-mouse-pointer"></i></div> http://www.delahaye.fr/
                                     </div>
                                     <div class="element-info-contact-store">
-                                        <span class="icon"></span> 337, rue Dijoux, Paris 11e Arrondissement
+                                        <div><i class="fas fa-map-marker-alt"></i></div> 337, rue Dijoux, Paris 11e
+                                        Arrondissement
                                     </div>
                                 </div>
                                 <div>
                                     <div class="element-info-contact-store">
-                                        <span class="icon"></span> +33 4 67 12 32 23
+                                        <div><i class="fas fa-phone"></i></div> +33 4 67 12 32 23
                                     </div>
                                     <div class="element-info-contact-store">
-                                        <span class="icon"></span> ne livre pas
+                                        <div><i class="fas fa-biking"></i></div> ne livre pas
                                     </div>
 
                                 </div>

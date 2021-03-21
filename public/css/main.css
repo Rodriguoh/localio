@@ -994,6 +994,9 @@ nav .nav-links.open {
   border-radius: 15px;
   background-color: white;
 }
+.modal-store .main-modal-store .comments-modal-store {
+  display: none;
+}
 .modal-store .main-modal-store .useful-width {
   display: flex;
   flex-direction: column;
@@ -1092,7 +1095,7 @@ nav .nav-links.open {
 }
 .modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite .favme {
   display: block;
-  font-size: ms(2);
+  font-size: 25px;
   width: auto;
   height: auto;
   cursor: pointer;
@@ -1117,6 +1120,27 @@ nav .nav-links.open {
   color: #3F3543;
   font-weight: 300;
   line-height: 1.4;
+  margin-bottom: 20px;
+}
+.modal-store .main-modal-store .description-modal-store .info-contact-store {
+  margin-bottom: 20px;
+}
+.modal-store .main-modal-store .description-modal-store .info-contact-store .element-info-contact-store {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 300;
+}
+.modal-store .main-modal-store .description-modal-store .info-contact-store .element-info-contact-store div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
+.modal-store .main-modal-store .description-modal-store .info-contact-store .element-info-contact-store div i {
+  font-size: 20px;
+  color: #FFCF39;
 }
 
 @media (min-width: 768px) {
