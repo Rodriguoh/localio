@@ -292,8 +292,6 @@ var app = new Vue({
         await this.getStoresOnMap();
         await this.map.addLayer(this.markers);
 
-
-
         //add eventListener on the map movment
         this.map.on("moveend", () => {
             this.refreshMapView();
@@ -304,8 +302,11 @@ var app = new Vue({
             localStorage.setItem("zoomMap", this.map.getZoom()); // Insert les données de la map en localstorage
         });
 
+        //Favorite button
+        document.querySelector('.favme').addEventListener('click', function () {
 
-
+            this.classList.toggle('active');
+        });
     },
 
     computed: {

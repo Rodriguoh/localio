@@ -21,7 +21,11 @@
     <link rel="stylesheet" href="{{ asset('css/MarkerCluster.Default.css') }}">
 
     {{-- FontAwesome CSS --}}
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+    {{-- Dashicons CSS --}}
+    <link href="//s.w.org/wp-includes/css/dashicons.css?20150710" rel="stylesheet" type="text/css">
     {{-- VueJS --}}
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
     {{-- mapScript.js --}}
@@ -268,7 +272,7 @@
                                 <h3> Description</h3>
                                 <div class="icon-favorite">
                                     <div class="fav-btn">
-                                       <i class="fas fa-heart"></i>
+                                        <span href="" class="favme dashicons dashicons-heart"></span>
                                     </div>
                                 </div>
                             </div>

@@ -1349,9 +1349,13 @@ var app = new Vue({
 
                 localStorage.setItem("centerMap", [_this3.map.getCenter().lat, _this3.map.getCenter().lng]);
                 localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
+              }); //Favorite button
+
+              document.querySelector('.favme').addEventListener('click', function () {
+                this.classList.toggle('active');
               });
 
-            case 8:
+            case 9:
             case "end":
               return _context9.stop();
           }
