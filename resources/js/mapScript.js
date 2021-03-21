@@ -31,6 +31,7 @@ var app = new Vue({
         subCat: {},
         categorySelected: "",
         prevCatSelected: "",
+        selectedStore: "",
         categoryFilter: "",
         myFavorites: [],
         showStore: false
@@ -201,6 +202,7 @@ var app = new Vue({
                     console.log(store)
                     store.style.backgroundColor = "#ffe492";
                     store.scrollIntoView();
+                    
                 });
 
                 // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
@@ -218,8 +220,23 @@ var app = new Vue({
             this.markers = allMarkers;
             this.allStoreOnMap = rep;
         },
+        /**
+        * Function to get all details on a store
+        */
+        getStore: async function (storeId) {
+            let requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+            let url = new URL(`${this.baseUrl}/api/store/${storeId}`);
+            let req = await fetch(url, requestOptions);
+            let rep = await req.json();
+            return await rep.data;
+        },
         setViewMap: function (lat, lon) {
             document.querySelector("#map").scrollIntoView();
+            
+
             this.querySearch = '';
             this.map.setView([lat, lon], 14);
         },
@@ -235,19 +252,16 @@ var app = new Vue({
             this.categorySelected = "";
         },
 
-        showModalStore: async function (idStore){
-            let req = await fetch(new URL(`${this.baseUrl}/api/store/${idStore}`), {
-                method: "GET",
-                redirect: "follow",
-            });
-            let rep = await req.json();
-            rep = rep.data;
-            console.log(rep)
-            this.showStore = await true;
-            console.log(idStore);
+        showModalStore: async function (idStore) {
+            this.selectedStore = await this.getStore(idStore);
+            console.log(this.selectedStore)
+            this.showStore = true;
         },
-        maskModalStore: function (){
+        maskModalStore: function () {
             this.showStore = false;
+            console.log('to bot')
+            document.querySelector("#map").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            console.log(document.querySelector("#map"))
         }
     },
     created() {

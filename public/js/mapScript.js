@@ -902,6 +902,7 @@ var app = new Vue({
     subCat: {},
     categorySelected: "",
     prevCatSelected: "",
+    selectedStore: "",
     categoryFilter: "",
     myFavorites: [],
     showStore: false
@@ -1219,26 +1220,72 @@ var app = new Vue({
 
       return getStoresOnMap;
     }(),
+
+    /**
+    * Function to get all details on a store
+    */
+    getStore: function () {
+      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(storeId) {
+        var requestOptions, url, req, rep;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
+                _context7.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context7.sent;
+                _context7.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context7.sent;
+                _context7.next = 10;
+                return rep.data;
+
+              case 10:
+                return _context7.abrupt("return", _context7.sent);
+
+              case 11:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function getStore(_x) {
+        return _getStore.apply(this, arguments);
+      }
+
+      return getStore;
+    }(),
     setViewMap: function setViewMap(lat, lon) {
       document.querySelector("#map").scrollIntoView();
       this.querySearch = '';
       this.map.setView([lat, lon], 14);
     },
     refreshMapView: function () {
-      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context8.prev = _context8.next) {
               case 0:
-                _context7.next = 2;
+                _context8.next = 2;
                 return this.map.removeLayer(this.markers);
 
               case 2:
-                _context7.next = 4;
+                _context8.next = 4;
                 return this.getStoresOnMap();
 
               case 4:
-                _context7.next = 6;
+                _context8.next = 6;
                 return this.map.addLayer(this.markers);
 
               case 6:
@@ -1246,10 +1293,10 @@ var app = new Vue({
 
               case 7:
               case "end":
-                return _context7.stop();
+                return _context8.stop();
             }
           }
-        }, _callee7, this);
+        }, _callee8, this);
       }));
 
       function refreshMapView() {
@@ -1259,10 +1306,10 @@ var app = new Vue({
       return refreshMapView;
     }(),
     resetFilters: function () {
-      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context9.prev = _context9.next) {
               case 0:
                 this.refreshMapView();
                 this.categoryFilter = "";
@@ -1270,10 +1317,10 @@ var app = new Vue({
 
               case 3:
               case "end":
-                return _context8.stop();
+                return _context9.stop();
             }
           }
-        }, _callee8, this);
+        }, _callee9, this);
       }));
 
       function resetFilters() {
@@ -1283,43 +1330,28 @@ var app = new Vue({
       return resetFilters;
     }(),
     showModalStore: function () {
-      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9(idStore) {
-        var req, rep;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(idStore) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
           while (1) {
-            switch (_context9.prev = _context9.next) {
+            switch (_context10.prev = _context10.next) {
               case 0:
-                _context9.next = 2;
-                return fetch(new URL("".concat(this.baseUrl, "/api/store/").concat(idStore)), {
-                  method: "GET",
-                  redirect: "follow"
-                });
+                _context10.next = 2;
+                return this.getStore(idStore);
 
               case 2:
-                req = _context9.sent;
-                _context9.next = 5;
-                return req.json();
+                this.selectedStore = _context10.sent;
+                console.log(this.selectedStore);
+                this.showStore = true;
 
               case 5:
-                rep = _context9.sent;
-                rep = rep.data;
-                console.log(rep);
-                _context9.next = 10;
-                return true;
-
-              case 10:
-                this.showStore = _context9.sent;
-                console.log(idStore);
-
-              case 12:
               case "end":
-                return _context9.stop();
+                return _context10.stop();
             }
           }
-        }, _callee9, this);
+        }, _callee10, this);
       }));
 
-      function showModalStore(_x) {
+      function showModalStore(_x2) {
         return _showModalStore.apply(this, arguments);
       }
 
@@ -1327,6 +1359,13 @@ var app = new Vue({
     }(),
     maskModalStore: function maskModalStore() {
       this.showStore = false;
+      console.log('to bot');
+      document.querySelector("#map").scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest"
+      });
+      console.log(document.querySelector("#map"));
     }
   },
   created: function created() {
@@ -1353,12 +1392,12 @@ var app = new Vue({
     };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
       var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
         while (1) {
-          switch (_context10.prev = _context10.next) {
+          switch (_context11.prev = _context11.next) {
             case 0:
               //Set map
               this.map = L.map('map', {
@@ -1373,11 +1412,11 @@ var app = new Vue({
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
               }).addTo(this.map);
-              _context10.next = 5;
+              _context11.next = 5;
               return this.getStoresOnMap();
 
             case 5:
-              _context10.next = 7;
+              _context11.next = 7;
               return this.map.addLayer(this.markers);
 
             case 7:
@@ -1407,10 +1446,10 @@ var app = new Vue({
 
             case 13:
             case "end":
-              return _context10.stop();
+              return _context11.stop();
           }
         }
-      }, _callee10, this);
+      }, _callee11, this);
     }));
 
     function mounted() {

@@ -54,7 +54,7 @@
             </ul>
         </nav>
 
-        <div class="margin-constraint">
+        <div class="margin-constraint" v-show="!showStore">
             <div class="useful-width">
                 <div class="header">
                     <div class="home-col-1">
@@ -207,13 +207,13 @@
 
 
         <div class="modal-store" style="display:none" v-show="showStore">
-        <button v-on:click="maskModalStore">Mask</button>
+            <button v-on:click="maskModalStore">Mask</button>
             <div class="header-modal-store">
                 <div class="img-store"><img src="{{ asset('img/photos/exemple-image-store-3.jpg') }}"></div>
                 <div class="margin-constraint">
                     <div class="useful-width">
                         <div class="info-store">
-                            <h3>Sushi Binks</h3>
+                            <h3>@{{ selectedStore ? selectedStore . name : '' }}</h3>
                             <div class="stars-and-notes">
                                 <div class="note-store">
                                     <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
@@ -223,7 +223,7 @@
                                     <span class="icon-star disable"><img
                                             src="{{ asset('img/icons/star.svg') }}"></span>
                                 </div>
-                                <div class="total-notes"><span>24</span> avis</div>
+                                <div class="total-notes"><span>X</span> avis</div>
                             </div>
 
 
@@ -236,6 +236,7 @@
                 <div class="margin-constraint">
                     <div class="useful-width">
                         <div class="comments-modal-store">
+                            <h3></h3>
                             <div class="comment">
                                 <div class="info-comment">
                                     <div>
@@ -245,21 +246,13 @@
                                     <div>
                                         <span class="note-comment">6.8/10</span>
                                     </div>
-
                                 </div>
+                                <div class="contain-comment">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua elit, sed do eiusmod tempor et dolore
+                                    magna aliqua.</div>
                             </div>
-                            <div class="comment">
-                                <div class="info-comment">
-                                    <div>
-                                        <span class="owner-comment">Marie Nathalie</span>
-                                        <span class="date-comment">3 Mars</span>
-                                    </div>
-                                    <div>
-                                        <span class="note-comment">6.8/10</span>
-                                    </div>
 
-                                </div>
-                            </div>
                             <div class="pagination-comment">
                                 <button>
                                     << /button>
@@ -279,62 +272,31 @@
                             </div>
 
                             <div class="content-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor
-                                    incididunt ut
-                                    labore et dolore magna aliqua. Porta non pulvinar neque laoreet suspendisse
-                                    interdum. Tellus
-                                    molestie nunc non blandit massa enim nec dui. Feugiat vivamus at augue eget arcu
-                                    dictum.
-                                    Morbi tempus iaculis urna id volutpat lacus laoreet. In mollis nunc sed id
-                                    semper.
-                                    Velit
-                                    dignissim sodales ut eu sem integer vitae justo eget. Urna condimentum mattis
-                                    pellentesque
-                                    id. Congue nisi vitae suscipit tellus mauris a diam. Consectetur adipiscing elit
-                                    ut
-                                    aliquam.
-                                    Integer quis auctor elit sed vulputate mi. Consequat semper viverra nam libero
-                                    justo
-                                    laoreet
-                                    sit amet. Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus.
-                                    Scelerisque
-                                    purus semper eget duis at tellus at. Quam nulla porttitor massa id neque. Tellus
-                                    integer
-                                    feugiat scelerisque varius morbi. Risus viverra adipiscing at in tellus integer
-                                    feugiat.
-                                    Odio tempor orci dapibus ultrices in iaculis nunc. Erat imperdiet sed euismod
-                                    nisi
-                                    porta.
-                                    Neque gravida in fermentum et sollicitudin ac orci. Semper feugiat nibh sed
-                                    pulvinar
-                                    proin.
-                                    Sed augue lacus viverra vitae congue eu. Tortor dignissim convallis aenean et.
-                                    Malesuada
-                                    bibendum arcu vitae elementum curabitur vitae nunc sed. Maecenas pharetra
-                                    convallis
-                                    posuere
-                                    morbi leo urna molestie. Mauris ultrices eros in cursus turpis massa.</p>
+                                <p>@{{ selectedStore ? selectedStore . description : '' }}</p>
                             </div>
                             <div class="info-contact-store">
                                 <div class="part">
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-envelope"></i></div>
-                                        guillaume11@orange.fr
+                                        @{{ selectedStore ? selectedStore . mail : '' }}
                                     </div>
                                     <div class="element-info-contact-store">
-                                        <div><i class="fas fa-mouse-pointer"></i></div> http://www.delahaye.fr/
+                                        <div><i class="fas fa-mouse-pointer"></i></div>
+                                        @{{ selectedStore ? selectedStore . url : '' }}
                                     </div>
                                     <div class="element-info-contact-store">
-                                        <div><i class="fas fa-map-marker-alt"></i></div> 337, rue Dijoux, Paris 11e
-                                        Arrondissement
+                                        <div><i class="fas fa-map-marker-alt"></i></div>
+                                        @{{ selectedStore ? `${selectedStore . adresse . number != undefined ? selectedStore . adresse . number : ''} ${selectedStore . adresse . street != undefined ? selectedStore . adresse . street : ''}, ${selectedStore . adresse . ZIPcode != undefined ? selectedStore . adresse . ZIPcode : ''} ${selectedStore . adresse . city != undefined ? selectedStore . adresse . city : ''}` : '' }}
                                     </div>
                                 </div>
                                 <div class="part">
                                     <div class="element-info-contact-store">
-                                        <div><i class="fas fa-phone"></i></div> +33 4 67 12 32 23
+                                        <div><i class="fas fa-phone"></i></div>
+                                        @{{ selectedStore ? selectedStore . phone : '' }}
                                     </div>
                                     <div class="element-info-contact-store">
-                                        <div><i class="fas fa-biking"></i></div> ne livre pas
+                                        <div><i class="fas fa-biking"></i></div>
+                                        @{{ selectedStore . isDelivering ? 'Oui' : 'Non' }}
                                     </div>
 
                                 </div>
