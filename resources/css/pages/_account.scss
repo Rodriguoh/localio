@@ -92,10 +92,15 @@ h1 {
     margin-left: 25px;
 }
 
+.card{
+    overflow: auto !important;
+    margin: 0 !important;
+}
+
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-   
+
     .account-info, .gestion-commerce {
         margin:0px;
         width:80%;
