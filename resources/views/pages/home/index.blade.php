@@ -77,7 +77,6 @@
                                     placeholder="Une ville ou un nom de commerce">
                                 <button class="button-input-search"><img class="icon-search"
                                         src="{{ asset('img/icons/input-search.svg') }}"></button>
-
                             </div>
                             <template v-if="querySearch.length > 0 && filters_isOpen == false">
                                 <div class="research-propositions">
@@ -237,32 +236,7 @@
                     <div class="useful-width">
                         <div class="comments-modal-store">
                             <h3></h3>
-                            <div class="comment" v-for="comment in comments">
-                                <div class="info-comment">
-                                    <div>
-                                        <span class="owner-comment">Marie Nathalie</span>
-                                        <span class="date-comment">@{{ comment . date }}</span>
-                                    </div>
-                                    <div>
-                                        <span class="note-comment">@{{ comment . note }}/5</span>
-                                    </div>
-                                </div>
-                                <div class="contain-comment">@{{ comment . comment }}</div>
-                                <div>
-                                    <a v-if="comment.flagged == 2">Commentaire approuvé</a>
-                                    <a v-on:click="reportComment(comment.id)" v-bind:id="'reportButton'+comment.id"
-                                        v-else="comment.flagged != 0" href="#">Signaler ce commentaire </a>
-                                </div>
-                            </div>
-
-                            <div class="pagination-comment">
-                                <button class="btn"
-                                    v-on:click="commentLimit-=1;commentLimit<=1?commentLimit=1:commentLimit-=1;getStoreComments(selectedStore.id, commentLimit)">
-                                    << </button>
-                                        <button class="btn">@{{ commentLimit }}</button>
-                                        <button class="btn"
-                                            v-on:click="commentLimit+=1; commentLimit>=commentPages?commentLimit=commentPages:commentLimit+=1; getStoreComments(selectedStore.id, commentLimit)">>></button>
-                            </div>
+                            @include('components.comments')
 
                         </div>
 
@@ -271,8 +245,10 @@
                                 <h3> Description</h3>
                                 <div class="icon-favorite">
                                     <div class="fav-btn">
-                                        <input type="checkbox" id="checkbox-favoris" :value="selectedStore.id" v-model="myFavorites">
-                                        <label for="checkbox-favoris" :class="[myFavorites.includes(selectedStore.id) ? 'favme dashicons dashicons-heart active' : 'favme dashicons dashicons-heart']"></label>
+                                        <input type="checkbox" id="checkbox-favoris" :value="selectedStore.id"
+                                            v-model="myFavorites">
+                                        <label for="checkbox-favoris"
+                                            :class="[myFavorites.includes(selectedStore.id) ? 'favme dashicons dashicons-heart active' : 'favme dashicons dashicons-heart']"></label>
                                     </div>
                                 </div>
                             </div>
@@ -325,6 +301,7 @@
             var categories = @json($categories);
             var myFavorites = @json($favorites);
             var idUser = @json($id_user);
+
         </script>
 </body>
 
