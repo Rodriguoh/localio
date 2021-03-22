@@ -19,23 +19,20 @@ var app = new Vue({
         mapZoom: 13,
         allStoreOnMap: [],
         /* QUERY SEARCH */
+        baseUrl: "https://localio-app.herokuapp.com", //'http://localhost/PHP/Projet_tutore/localio/public',
+        categorySelected: "",
+        prevCatSelected: "",
+        categoryFilter: "",
         querySearch: "",
         resultsQueryCity: [],
         resultsQueryStore: [],
-        baseUrl: "https://localio-app.herokuapp.com",
         /* AUTOCOMPLETION */
         limitAutoCompletion: 3,
         /* Store list*/
         limitStoreInList: 10,
         mainCat: [],
-        allStoreOnMap: [],
         subCat: {},
-        baseUrl: "https://localio-app.herokuapp.com",
-        limitAutoCompletion: 3,
-        categorySelected: "",
-        prevCatSelected: "",
         selectedStore: "",
-        categoryFilter: "",
         /* Favorites */
         myFavorites: [],
         /* States */
@@ -224,13 +221,13 @@ var app = new Vue({
                     store.style.backgroundColor = "";
                 });
 
-
                 allMarkers.addLayer(marker);
             }
 
             this.prevCatSelected = this.categorySelected;
             this.markers = allMarkers;
             this.allStoreOnMap = rep;
+
         },
         /**
         * Function to get all details on a store
@@ -244,6 +241,7 @@ var app = new Vue({
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
             return await rep.data;
+
         },
         /**
         * Function to get comments with paginate on a store
@@ -365,7 +363,6 @@ var app = new Vue({
             position: 'topright'
         }).addTo(this.map);
 
-        //Set map layer
         L.tileLayer.provider('Jawg.Sunny', {
             variant: '',
             accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'

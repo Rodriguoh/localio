@@ -130,6 +130,7 @@ var runtime = (function (exports) {
     "GeneratorFunction"
   );
 
+<<<<<<< HEAD
   // Helper for defining the .next, .throw, and .return methods of the
   // Iterator interface in terms of a single ._invoke method.
   function defineIteratorMethods(prototype) {
@@ -139,6 +140,59 @@ var runtime = (function (exports) {
       });
     });
   }
+=======
+// import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
+// var _ = require("lodash"); Import lodash en cas de besoin
+// import debounce from "lodash/debounce";
+var app = new Vue({
+  el: "#app",
+  data: {
+    map: undefined,
+    markers: undefined,
+    mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+      attribution: "",
+      minNativeZoom: 4,
+      minZoom: 4
+    }],
+    mapCenter: [44.5667, 6.0833],
+    mapZoom: 13,
+    baseUrl: "https://localio-app.herokuapp.com",
+    //'http://localhost/PHP/Projet_tutore/localio/public',
+    categorySelected: "",
+    prevCatSelected: "",
+    categoryFilter: "",
+    querySearch: "",
+    comments: {},
+    commentLimit: 1,
+    commentPages: 0,
+    resultsQueryCity: [],
+    resultsQueryStore: [],
+    mainCat: [],
+    subCat: {},
+    limitAutoCompletion: 5,
+    storeSelected: {},
+    allStoreOnMap: undefined,
+    myFavorites: []
+  },
+  methods: {
+    /**
+     * Function for search stores by name in autocomplete
+     */
+    getStoresByName: function () {
+      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var requestOptions, reqStores, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                _context.next = 3;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
+>>>>>>> main
 
   exports.isGeneratorFunction = function(genFun) {
     var ctor = typeof genFun === "function" && genFun.constructor;
@@ -253,12 +307,19 @@ var runtime = (function (exports) {
       PromiseImpl
     );
 
+<<<<<<< HEAD
     return exports.isGeneratorFunction(outerFn)
       ? iter // If outerFn is a generator, return the full iterator.
       : iter.next().then(function(result) {
           return result.done ? result.value : iter.next();
         });
   };
+=======
+              case 11:
+                rep = _context5.sent;
+                rep = rep.data;
+                allMarkers = new L.MarkerClusterGroup();
+>>>>>>> main
 
   function makeInvokeMethod(innerFn, self, context) {
     var state = GenStateSuspendedStart;
@@ -358,20 +419,38 @@ var runtime = (function (exports) {
           context.arg = undefined;
           maybeInvokeDelegate(delegate, context);
 
+<<<<<<< HEAD
           if (context.method === "throw") {
             // If maybeInvokeDelegate(context) changed context.method from
             // "return" to "throw", let that override the TypeError below.
             return ContinueSentinel;
           }
         }
+=======
+                          case 4:
+                          case "end":
+                            return _context4.stop();
+                        }
+                      }
+                    }, _callee4);
+                  })));
+                  allMarkers.addLayer(marker);
+                };
+>>>>>>> main
 
         context.method = "throw";
         context.arg = new TypeError(
           "The iterator does not provide a 'throw' method");
       }
 
+<<<<<<< HEAD
       return ContinueSentinel;
     }
+=======
+                this.prevCatSelected = this.categorySelected;
+                this.markers = allMarkers;
+                this.allStoreOnMap = rep;
+>>>>>>> main
 
     var record = tryCatch(method, delegate.iterator, context.arg);
 
@@ -384,6 +463,7 @@ var runtime = (function (exports) {
 
     var info = record.arg;
 
+<<<<<<< HEAD
     if (! info) {
       context.method = "throw";
       context.arg = new TypeError("iterator result is not an object");
@@ -398,6 +478,45 @@ var runtime = (function (exports) {
 
       // Resume execution at the desired location (see delegateYield).
       context.next = delegate.nextLoc;
+=======
+    /**
+     * Function to get all details on a store
+     */
+    getStore: function () {
+      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(storeId) {
+        var requestOptions, url, req, rep, descriptionZone;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
+                _context6.next = 4;
+                return fetch(url, requestOptions);
+
+              case 4:
+                req = _context6.sent;
+                _context6.next = 7;
+                return req.json();
+
+              case 7:
+                rep = _context6.sent;
+                this.storeSelected = rep.data; // Ajoute la description au format HTML au modal lors du clic sur un marqueur
+
+                descriptionZone = document.getElementById('storeDescription');
+                descriptionZone.innerHTML = this.storeSelected.description;
+
+              case 11:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+>>>>>>> main
 
       // If context.method was "throw" but the delegate handled the
       // exception, let the outer generator proceed normally. If
@@ -576,6 +695,7 @@ var runtime = (function (exports) {
         throw rootRecord.arg;
       }
 
+<<<<<<< HEAD
       return this.rval;
     },
 
@@ -589,6 +709,45 @@ var runtime = (function (exports) {
         record.type = "throw";
         record.arg = exception;
         context.next = loc;
+=======
+      return refreshMapView;
+    }(),
+    reportComment: function () {
+      var _reportComment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(id) {
+        var urlComment, req;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                urlComment = new URL("".concat(this.baseUrl, "/api/comment/") + id);
+                _context10.next = 3;
+                return fetch(urlComment);
+
+              case 3:
+                req = _context10.sent;
+                document.getElementById('reportButton' + id).innerHTML = "Avis signalé";
+
+              case 5:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, this);
+      }));
+
+      function reportComment(_x3) {
+        return _reportComment.apply(this, arguments);
+      }
+
+      return reportComment;
+    }()
+  },
+  created: function created() {
+    var _JSON$parse,
+        _this2 = this;
+
+    this.mainCat = categories; // get last map position from localStorage
+>>>>>>> main
 
         if (caught) {
           // If the dispatched exception was caught by a catch block,
@@ -604,6 +763,7 @@ var runtime = (function (exports) {
         var entry = this.tryEntries[i];
         var record = entry.completion;
 
+<<<<<<< HEAD
         if (entry.tryLoc === "root") {
           // Exception thrown outside of any try block that could handle
           // it, so set the completion value of the entire function to
@@ -621,6 +781,40 @@ var runtime = (function (exports) {
             } else if (this.prev < entry.finallyLoc) {
               return handle(entry.finallyLoc);
             }
+=======
+    window.onunload = function () {
+      localStorage.setItem("myFavorites", JSON.stringify(_this2.myFavorites));
+      if (idUser == null || !navigator.sendBeacon) return;
+      navigator.sendBeacon("".concat(_this2.baseUrl, "/api/stores/setFavorites"), new Blob([JSON.stringify({
+        id: idUser,
+        favorites: _this2.myFavorites
+      })], {
+        type: "application/json"
+      }));
+    };
+  },
+  mounted: function () {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+      var _this3 = this;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+        while (1) {
+          switch (_context11.prev = _context11.next) {
+            case 0:
+              //setting up map
+              this.map = L.map("map").setView(this.mapCenter, this.mapZoom); // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
+
+              L.tileLayer.provider('Jawg.Sunny', {
+                variant: '',
+                accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
+              }).addTo(this.map);
+              _context11.next = 4;
+              return this.getStoresOnMap();
+
+            case 4:
+              _context11.next = 6;
+              return this.map.addLayer(this.markers);
+>>>>>>> main
 
           } else if (hasCatch) {
             if (this.prev < entry.catchLoc) {
@@ -632,11 +826,31 @@ var runtime = (function (exports) {
               return handle(entry.finallyLoc);
             }
 
+<<<<<<< HEAD
           } else {
             throw new Error("try statement without catch or finally");
           }
         }
       }
+=======
+            case 7:
+            case "end":
+              return _context11.stop();
+          }
+        }
+      }, _callee11, this);
+    }));
+
+    function mounted() {
+      return _mounted.apply(this, arguments);
+    }
+
+    return mounted;
+  }(),
+  computed: {
+    computedResultsQueryCity: function computedResultsQueryCity() {
+      return this.limitAutoCompletion ? this.resultsQueryCity.slice(0, this.limitAutoCompletion) : this.resultsQueryCity;
+>>>>>>> main
     },
 
     abrupt: function(type, arg) {

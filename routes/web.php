@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
@@ -48,32 +49,33 @@ Route::post('Ckeditor/upload', 'CkeditorController@upload')->name('ckeditor.uplo
 //Administrations routes
 Route::get('/account/home', 'HomeAccountController@index')->name('homeAccount');
 //-- Users
-Route::get('/account/listUsers', 'UserController@index')->name('listUsers');
+Route::get('/account/listUsers', 'UserController@index')->name('listUsers')->middleware('role:admin');
 
-Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser');
+Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser')->middleware('role:admin');
 
 Route::post('/account/editUserInformations', [UserController::class, 'editUsersInformations'])->name('editUsersInformations');
 
 //Modif rôle user
-Route::post('/account/editRoleUser', [UserController::class, 'editRoleUser'])->name('editRoleUser');
+Route::post('/account/editRoleUser', [UserController::class, 'editRoleUser'])->name('editRoleUser')->middleware('role:admin');
 
 //-- Store
-Route::get('/account/myStores', [StoreController::class, 'userStore'])->name('myStores'); //ok
+Route::get('/account/myStores', [StoreController::class, 'userStore'])->name('myStores')->middleware('role:owner'); //ok
 
-Route::get('/account/listStores', [StoreController::class, 'index'])->name('listStores'); //ok
+Route::get('/account/listStores', [StoreController::class, 'index'])->name('listStores')->middleware('role:moderator'); //ok
 
-Route::get('/account/statsStore/{idStore}', [StoreController::class, 'statsStore'])->name('statsStore'); //ok
+Route::get('/account/statsStore/{idStore}', [StoreController::class, 'statsStore'])->name('statsStore')->middleware('role:owner'); //ok
 
-Route::get('/account/formStore/{idStore?}', [StoreController::class, 'formStore'])->name('createStore'); //ok
+Route::get('/account/formStore/{idStore?}', [StoreController::class, 'formStore'])->name('createStore')->middleware('role:owner'); //ok
 
 Route::get('/account/settingsAccount', 'UserController@settings')->name('settingsAccount');
 
 Route::get('/account/showStore/{idStore}', 'StoreController@showStore')->name('showStore');
-Route::get('/account/approveStore/{idStore}', 'StoreController@approve')->name('approveStore');
-Route::get('/account/refuseStore/{idStore}', 'StoreController@refuse')->name('refuseStore');
+Route::get('/account/approveStore/{idStore}', 'StoreController@approve')->name('approveStore')->middleware('role:moderator');
+Route::get('/account/refuseStore/{idStore}', 'StoreController@refuse')->name('refuseStore')->middleware('role:moderator');
 
-Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore');
-Route::post('/store/delete', [StoreController::class, 'deleteStore'])->name('deleteStore');
+
+Route::post('/store/form', [StoreController::class, 'postStore'])->name('postStore')->middleware('role:owner');
+Route::post('/store/delete', [StoreController::class, 'deleteStore'])->name('deleteStore')->middleware('role:owner');
 
 //--Favoris
 Route::get('/account/favorites', [FavoriteController::class, 'myFavorites'])->name('myFavorites');
@@ -81,14 +83,28 @@ Route::get('/account/editFavorite/{idStore}', [FavoriteController::class, 'editF
 Route::post('/account/deleteFavorite', [FavoriteController::class, 'deleteFavorite'])->name('deleteFavorite');
 
 
-Route::get('/account/requestsStores', 'StoreController@requests')->name('requestsStores');
+Route::get('/account/requestsStores', 'StoreController@requests')->name('requestsStores')->middleware('role:moderator');
 Route::get('/account/reportsStores', 'StoreController@reports')->name('reportStores');
 
 //-- Notice
-Route::get('/account/myComments', [CommentController::class, 'comments'])->name('myComments');
-Route::post('/account/editComment', [CommentController::class, 'edit'])->name('editComment');
-Route::get('/account/createComment', [CommentController::class, 'create'])->name('addComments');
-Route::post('/comment/form', [CommentController::class, 'postComment'])->name('postComment');
-Route::post('/comment/delete', [CommentController::class, 'delete'])->name('deleteComment');
-
+Route::get('/account/myComments', [CommentController::class, 'comments'])->name('myComments')->middleware('role:user');
+Route::get('/account/flagComments', [CommentController::class, 'flaggedComments'])->name('flagComments')->middleware('role:moderator');
+Route::post('/account/editComment', [CommentController::class, 'edit'])->name('editComment')->middleware('role:user');
+Route::get('/account/createComment', [CommentController::class, 'create'])->name('addComments')->middleware('role:user');
+Route::post('/comment/form', [CommentController::class, 'postComment'])->name('postComment')->middleware('role:user');
+Route::post('/comment/delete', [CommentController::class, 'delete'])->name('deleteComment')->middleware('role:user');
 Route::get('/legalNotices', 'AboutController@legalNotices')->name('legalNotices');
+Route::get('/account/approveComment/{idComment}', 'CommentController@approve')->name('approveComment')->middleware('role:moderator');
+Route::get('/account/refuseComment/{idComment}', 'CommentController@refuse')->name('refuseComment')->middleware('role:moderator');
+
+
+
+//ADMIN
+// Categories
+Route::get('account/categories/{category_id?}', [CategoryController::class, 'index'])->name('categories')->middleware('role:admin');
+Route::post('account/category/add', [CategoryController::class, 'add'])->name('addCategory')->middleware('role:admin');
+Route::post('account/category/edit', [CategoryController::class, 'edit'])->name('editCategory')->middleware('role:admin');
+Route::post('account/category/delete', [CategoryController::class, 'delete'])->name('deleteCategory')->middleware('role:admin');
+
+// Statistique
+Route::get('account/statistiques', [StoreController::class, 'stats'])->name('statistiques')->middleware('role:admin');
