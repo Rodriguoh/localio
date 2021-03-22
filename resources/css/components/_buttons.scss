@@ -1,0 +1,70 @@
+//Buttons
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    margin-bottom:5px;
+}
+.btn:hover{
+    cursor:pointer;
+}
+//Types de button
+.btn-color {
+    color: white;
+    border-radius: 30px;
+    border: 0px;
+    outline:none;
+}
+.btn-white {
+    background-color: white;
+    color: $greyLight;
+
+    border: 1px solid #707070;
+}
+.btn-action{
+    background-color: #E50027;
+    color:white;
+    border: 0px;
+    padding: 5px 25px !important;
+  
+    margin: 0 auto;
+
+}
+//Déclinaisons de button
+.btn-secondary {
+    background-color: $yellowSecondary;
+    color: white !important;
+}
+.btn-secondary:hover {
+    background-color: $yellowSecondary-dark;
+    color: white;
+}
+//Taille de button
+.btn-xs {
+    font-size: 14px;
+    padding: 4px 12px 1px 12px;
+    width: auto;
+}
+.btn-s {
+    font-size: 16px;
+    padding: 4px 12px 1px 12px;
+}
+//Radius des boutons
+.btn-r8 {
+    border-radius: 8px !important;
+}
+.btn-r12 {
+    border-radius: 12px !important;
+}
+//Padding des boutons
+.btn-py3{
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+//Customs
+.btn-resetFilters{
+    max-width: 80px;
+    margin: 5px auto;
+}
+

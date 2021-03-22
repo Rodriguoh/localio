@@ -849,6 +849,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
 
+var _data;
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -867,18 +869,19 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
 // var _ = require("lodash"); Import lodash en cas de besoin
 // import debounce from "lodash/debounce";
 var app = new Vue({
   el: "#app",
-  data: {
+  data: (_data = {
+    /* MAP */
     map: undefined,
     markers: undefined,
     mapTiles: ["https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
@@ -890,57 +893,152 @@ var app = new Vue({
     mapZoom: 13,
     baseUrl: "https://localio-app.herokuapp.com",
     //'http://localhost/PHP/Projet_tutore/localio/public',
-    categorySelected: "",
-    prevCatSelected: "",
     categoryFilter: "",
+    allStoreOnMap: [],
+
+    /* QUERY SEARCH */
     querySearch: "",
-    comments: {},
-    commentLimit: 1,
-    commentPages: 0,
     resultsQueryCity: [],
     resultsQueryStore: [],
+
+    /* AUTOCOMPLETION */
+    limitAutoCompletion: 3,
+
+    /* Store list*/
+    limitStoreInList: 10,
     mainCat: [],
     subCat: {},
-    limitAutoCompletion: 5,
-    storeSelected: {},
-    allStoreOnMap: undefined,
-    myFavorites: []
-  },
+    categorySelected: "",
+    prevCatSelected: "",
+    selectedStore: ""
+  }, _defineProperty(_data, "categoryFilter", ""), _defineProperty(_data, "myFavorites", []), _defineProperty(_data, "showStore", false), _defineProperty(_data, "filters_isOpen", false), _defineProperty(_data, "mobileMenu_isOpen", false), _defineProperty(_data, "connexion", true), _defineProperty(_data, "comments", {}), _defineProperty(_data, "commentLimit", 1), _defineProperty(_data, "commentPages", 0), _data),
   methods: {
-    /**
-     * Function for search stores by name in autocomplete
-     */
-    getStoresByName: function () {
-      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var requestOptions, reqStores, data;
+    mobileMenu: function mobileMenu() {
+      var hamburger = document.querySelector(".hamburger");
+      var navLinks = document.querySelector(".nav-links");
+      var links = document.querySelectorAll(".nav-links li");
+
+      if (!this.mobileMenu_isOpen) {
+        navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open');
+        this.mobileMenu_isOpen = !this.mobileMenu_isOpen;
+      } else {
+        navLinks.classList.toggle('open');
+        setTimeout(function () {
+          hamburger.classList.toggle('open');
+        }, 700);
+        this.mobileMenu_isOpen = !this.mobileMenu_isOpen;
+      }
+
+      links.forEach(function (link) {
+        link.classList.toggle("fade");
+      });
+    },
+    autoComplete: function () {
+      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var requestOptions, url, reqCities, data, urlStore, reqStores, dataStores;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                this.resultsQueryCity = [];
+                this.resultsQueryStore = [];
+
+                if (!(this.querySearch.length < 1)) {
+                  _context.next = 4;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 4:
+                //Récupération des noms de villes en fonction de l'entrée utilisateur
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
                 };
-                _context.next = 3;
-                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
-                requestOptions);
-
-              case 3:
-                reqStores = _context.sent;
-                _context.next = 6;
-                return reqStores.json();
-
-              case 6:
-                data = _context.sent;
-                console.log(data);
-                return _context.abrupt("return", data.data);
+                url = new URL("https://geo.api.gouv.fr/communes");
+                url.search = new URLSearchParams(_objectSpread({}, {
+                  nom: this.querySearch,
+                  format: "geojson",
+                  fields: "code,departement",
+                  boost: "population",
+                  limit: this.limitAutoCompletion
+                }));
+                _context.next = 9;
+                return fetch(url, requestOptions);
 
               case 9:
+                reqCities = _context.sent;
+                _context.next = 12;
+                return reqCities.json();
+
+              case 12:
+                data = _context.sent;
+                this.resultsQueryCity = data.features;
+                urlStore = new URL("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch));
+                urlStore.search = new URLSearchParams(_objectSpread({}, this.categorySelected.length > 0 ? this.categoryFilter.length > 0 ? {
+                  category: this.categoryFilter
+                } : {
+                  category: this.categorySelected
+                } : {}));
+                _context.next = 18;
+                return fetch(urlStore, // modifier la variable search
+                requestOptions);
+
+              case 18:
+                reqStores = _context.sent;
+                _context.next = 21;
+                return reqStores.json();
+
+              case 21:
+                dataStores = _context.sent;
+                this.resultsQueryStore = dataStores.data;
+
+              case 23:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee, this);
+      }));
+
+      function autoComplete() {
+        return _autoComplete.apply(this, arguments);
+      }
+
+      return autoComplete;
+    }(),
+    getStoresByName: function () {
+      var _getStoresByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var requestOptions, reqStores, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                _context2.next = 3;
+                return fetch("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch), // modifier la variable search
+                requestOptions);
+
+              case 3:
+                reqStores = _context2.sent;
+                _context2.next = 6;
+                return reqStores.json();
+
+              case 6:
+                data = _context2.sent;
+                return _context2.abrupt("return", data.data);
+
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
       }));
 
       function getStoresByName() {
@@ -954,14 +1052,14 @@ var app = new Vue({
      * Function to get all store to display on map
      */
     getStoresOnMap: function () {
-      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      var _getStoresOnMap = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
         var _this = this;
 
         var catFilter, requestOptions, url, req, rep, allMarkers, _loop, i;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
                 if (this.prevCatSelected != this.categorySelected) {
                   this.categoryFilter = "";
@@ -973,7 +1071,7 @@ var app = new Vue({
                 };
                 this.categoryFilter === "" ? catFilter = this.categorySelected : catFilter = this.categoryFilter;
 
-                if (document.getElementById("tout").checked == true) {
+                if (document.querySelector("#all").checked == true) {
                   catFilter = "";
                 }
 
@@ -986,16 +1084,16 @@ var app = new Vue({
                   lat_sw: this.map.getBounds()._southWest.lat,
                   lng_sw: this.map.getBounds()._southWest.lng
                 }));
-                _context5.next = 8;
+                _context6.next = 8;
                 return fetch(url, requestOptions);
 
               case 8:
-                req = _context5.sent;
-                _context5.next = 11;
+                req = _context6.sent;
+                _context6.next = 11;
                 return req.json();
 
               case 11:
-                rep = _context5.sent;
+                rep = _context6.sent;
                 rep = rep.data;
                 allMarkers = new L.MarkerClusterGroup();
 
@@ -1045,70 +1143,62 @@ var app = new Vue({
                     icon: icone
                   }); // Affiche la modal lors du clic sur le marqueur
 
-                  marker.on("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-                      while (1) {
-                        switch (_context2.prev = _context2.next) {
-                          case 0:
-                            _context2.next = 2;
-                            return _this.getStore(rep[i].id);
-
-                          case 2:
-                            _context2.next = 4;
-                            return _this.getStoreComments(rep[i].id);
-
-                          case 4:
-                            _context2.next = 6;
-                            return halfmoon.toggleModal("modal-store");
-
-                          case 6:
-                            _this.commentLimit = 1;
-
-                          case 7:
-                          case "end":
-                            return _context2.stop();
-                        }
-                      }
-                    }, _callee2);
-                  }))); // Change la couleur de fond de la div du commerce lors du hover de son marqueur
-
-                  marker.on("mouseover", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-                    var store;
+                  marker.on("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
                       while (1) {
                         switch (_context3.prev = _context3.next) {
                           case 0:
-                            store = document.getElementById("list-store-" + rep[i].id);
-                            store.classList.add("bg-dark");
-                            store.style.opacity = "70%";
-                            store.style.color = "white";
-                            store.scrollIntoView();
+                            //await this.getStore(rep[i].id);
+                            //await this.getStoreComments(rep[i].id);
+                            //await halfmoon.toggleModal("modal-store");
+                            _this.commentLimit = 1;
 
-                          case 5:
+                            _this.showModalStore(rep[i].id);
+
+                          case 2:
                           case "end":
                             return _context3.stop();
                         }
                       }
                     }, _callee3);
-                  }))); // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
+                  }))); // Change la couleur de fond de la div du commerce lors du hover de son marqueur
 
-                  marker.on("mouseout", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+                  marker.on("mouseover", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
                     var store;
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
                       while (1) {
                         switch (_context4.prev = _context4.next) {
                           case 0:
-                            store = document.getElementById("list-store-" + rep[i].id);
-                            store.classList.remove("bg-dark");
-                            store.style.color = "black";
-                            store.style.opacity = "100%";
+                            store = document.querySelector("#list-store-".concat(rep[i].id, " .info-element-list"));
+                            document.querySelector("#list-store-".concat(rep[i].id, " .info-element-list .note")).style.color = "#000000";
+                            console.log(store);
+                            store.style.backgroundColor = "#ffe492";
+                            store.scrollIntoView();
 
-                          case 4:
+                          case 5:
                           case "end":
                             return _context4.stop();
                         }
                       }
                     }, _callee4);
+                  }))); // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
+
+                  marker.on("mouseout", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+                    var store;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+                      while (1) {
+                        switch (_context5.prev = _context5.next) {
+                          case 0:
+                            store = document.querySelector("#list-store-".concat(rep[i].id, " .info-element-list"));
+                            document.querySelector("#list-store-".concat(rep[i].id, " .info-element-list .note")).style.color = "black";
+                            store.style.backgroundColor = "";
+
+                          case 3:
+                          case "end":
+                            return _context5.stop();
+                        }
+                      }
+                    }, _callee5);
                   })));
                   allMarkers.addLayer(marker);
                 };
@@ -1123,10 +1213,10 @@ var app = new Vue({
 
               case 19:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee6, this);
       }));
 
       function getStoresOnMap() {
@@ -1137,41 +1227,42 @@ var app = new Vue({
     }(),
 
     /**
-     * Function to get all details on a store
-     */
+    * Function to get all details on a store
+    */
     getStore: function () {
-      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(storeId) {
-        var requestOptions, url, req, rep, descriptionZone;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+      var _getStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(storeId) {
+        var requestOptions, url, req, rep;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
                 };
                 url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId));
-                _context6.next = 4;
+                _context7.next = 4;
                 return fetch(url, requestOptions);
 
               case 4:
-                req = _context6.sent;
-                _context6.next = 7;
+                req = _context7.sent;
+                _context7.next = 7;
                 return req.json();
 
               case 7:
-                rep = _context6.sent;
-                this.storeSelected = rep.data; // Ajoute la description au format HTML au modal lors du clic sur un marqueur
+                rep = _context7.sent;
+                _context7.next = 10;
+                return rep.data;
 
-                descriptionZone = document.getElementById('storeDescription');
-                descriptionZone.innerHTML = this.storeSelected.description;
+              case 10:
+                return _context7.abrupt("return", _context7.sent);
 
               case 11:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6, this);
+        }, _callee7, this);
       }));
 
       function getStore(_x) {
@@ -1182,10 +1273,10 @@ var app = new Vue({
     }(),
 
     /**
-     * Function to get comments with paginate on a store
-     */
+    * Function to get comments with paginate on a store
+    */
     getStoreComments: function () {
-      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(storeId) {
+      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(storeId) {
         var nbPage,
             requestOptions,
             url,
@@ -1193,12 +1284,12 @@ var app = new Vue({
             rep,
             comments,
             i,
-            _args7 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+            _args8 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context8.prev = _context8.next) {
               case 0:
-                nbPage = _args7.length > 1 && _args7[1] !== undefined ? _args7[1] : null;
+                nbPage = _args8.length > 1 && _args8[1] !== undefined ? _args8[1] : null;
                 requestOptions = {
                   method: "GET",
                   redirect: "follow"
@@ -1207,16 +1298,16 @@ var app = new Vue({
                 url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
                   page: nbPage
                 }));
-                _context7.next = 6;
+                _context8.next = 6;
                 return fetch(url, requestOptions);
 
               case 6:
-                req = _context7.sent;
-                _context7.next = 9;
+                req = _context8.sent;
+                _context8.next = 9;
                 return req.json();
 
               case 9:
-                rep = _context7.sent;
+                rep = _context8.sent;
                 this.commentPages = rep.pagination.total_pages;
                 comments = new Array();
 
@@ -1226,18 +1317,18 @@ var app = new Vue({
                   }
                 }
 
-                _context7.next = 15;
+                _context8.next = 15;
                 return comments;
 
               case 15:
-                this.comments = _context7.sent;
+                this.comments = _context8.sent;
 
               case 16:
               case "end":
-                return _context7.stop();
+                return _context8.stop();
             }
           }
-        }, _callee7, this);
+        }, _callee8, this);
       }));
 
       function getStoreComments(_x2) {
@@ -1246,82 +1337,9 @@ var app = new Vue({
 
       return getStoreComments;
     }(),
-    autoComplete: function () {
-      var _autoComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        var requestOptions, url, reqCities, data, urlStore, reqStores, dataStores;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                this.resultsQueryCity = [];
-                this.resultsQueryStore = [];
-
-                if (!(this.querySearch.length < 1)) {
-                  _context8.next = 4;
-                  break;
-                }
-
-                return _context8.abrupt("return");
-
-              case 4:
-                //Récupération des noms de villes en fonction de l'entrée utilisateur
-                requestOptions = {
-                  method: "GET",
-                  redirect: "follow"
-                };
-                url = new URL("https://geo.api.gouv.fr/communes");
-                url.search = new URLSearchParams(_objectSpread({}, {
-                  nom: this.querySearch,
-                  format: "geojson",
-                  fields: "code,departement",
-                  boost: "population",
-                  limit: this.limitAutoCompletion
-                }));
-                _context8.next = 9;
-                return fetch(url, requestOptions);
-
-              case 9:
-                reqCities = _context8.sent;
-                _context8.next = 12;
-                return reqCities.json();
-
-              case 12:
-                data = _context8.sent;
-                this.resultsQueryCity = data.features;
-                urlStore = new URL("".concat(this.baseUrl, "/api/stores/").concat(this.querySearch));
-                urlStore.search = new URLSearchParams(_objectSpread({}, this.categorySelected.length > 0 ? this.categoryFilter.length > 0 ? {
-                  category: this.categoryFilter
-                } : {
-                  category: this.categorySelected
-                } : {}));
-                _context8.next = 18;
-                return fetch(urlStore, // modifier la variable search
-                requestOptions);
-
-              case 18:
-                reqStores = _context8.sent;
-                _context8.next = 21;
-                return reqStores.json();
-
-              case 21:
-                dataStores = _context8.sent;
-                this.resultsQueryStore = dataStores.data;
-
-              case 23:
-              case "end":
-                return _context8.stop();
-            }
-          }
-        }, _callee8, this);
-      }));
-
-      function autoComplete() {
-        return _autoComplete.apply(this, arguments);
-      }
-
-      return autoComplete;
-    }(),
     setViewMap: function setViewMap(lat, lon) {
+      document.querySelector("#map").scrollIntoView();
+      this.querySearch = '';
       this.map.setView([lat, lon], 14);
     },
     refreshMapView: function () {
@@ -1342,6 +1360,9 @@ var app = new Vue({
                 return this.map.addLayer(this.markers);
 
               case 6:
+                console.log('refreshMapView');
+
+              case 7:
               case "end":
                 return _context9.stop();
             }
@@ -1383,7 +1404,76 @@ var app = new Vue({
       }
 
       return reportComment;
-    }()
+    }(),
+    resetFilters: function () {
+      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
+              case 0:
+                this.refreshMapView();
+                this.categoryFilter = "";
+                this.categorySelected = "";
+
+              case 3:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11, this);
+      }));
+
+      function resetFilters() {
+        return _resetFilters.apply(this, arguments);
+      }
+
+      return resetFilters;
+    }(),
+    showModalStore: function () {
+      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12(idStore) {
+        var descriptionZone;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
+          while (1) {
+            switch (_context12.prev = _context12.next) {
+              case 0:
+                _context12.next = 2;
+                return this.getStore(idStore);
+
+              case 2:
+                this.selectedStore = _context12.sent;
+                descriptionZone = document.getElementById('storeDescription');
+                descriptionZone.innerHTML = this.selectedStore.description;
+                _context12.next = 7;
+                return this.getStoreComments(idStore);
+
+              case 7:
+                this.commentLimit = 1;
+                this.showStore = true;
+
+              case 9:
+              case "end":
+                return _context12.stop();
+            }
+          }
+        }, _callee12, this);
+      }));
+
+      function showModalStore(_x4) {
+        return _showModalStore.apply(this, arguments);
+      }
+
+      return showModalStore;
+    }(),
+    maskModalStore: function maskModalStore() {
+      this.showStore = false;
+      console.log('to bot');
+      document.querySelector("#map").scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest"
+      });
+      console.log(document.querySelector("#map"));
+    }
   },
   created: function created() {
     var _JSON$parse,
@@ -1409,42 +1499,66 @@ var app = new Vue({
     };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
       var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+      var checkboxFavorite;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
         while (1) {
-          switch (_context11.prev = _context11.next) {
+          switch (_context13.prev = _context13.next) {
             case 0:
-              //setting up map
-              this.map = L.map("map").setView(this.mapCenter, this.mapZoom); // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
-
+              //Set map
+              this.map = L.map('map', {
+                scrollWheelZoom: false,
+                zoomControl: false
+              }).setView(this.mapCenter, this.mapZoom);
+              L.control.zoom({
+                position: 'topright'
+              }).addTo(this.map);
               L.tileLayer.provider('Jawg.Sunny', {
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
               }).addTo(this.map);
-              _context11.next = 4;
+              _context13.next = 5;
               return this.getStoresOnMap();
 
-            case 4:
-              _context11.next = 6;
+            case 5:
+              _context13.next = 7;
               return this.map.addLayer(this.markers);
 
-            case 6:
-              // add eventListener on the map movment
+            case 7:
+              //add eventListener on the map movment
               this.map.on("moveend", function () {
                 _this3.refreshMapView();
 
                 localStorage.setItem("centerMap", [_this3.map.getCenter().lat, _this3.map.getCenter().lng]);
                 localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
+              }); //Favorite button
+
+              checkboxFavorite = document.querySelector('#checkbox-favoris');
+              document.querySelector('.favme').addEventListener('click', function () {
+                this.classList.toggle('active');
+                checkboxFavorite.toggleAttribute("checked");
+              });
+              document.querySelector(".favme").addEventListener('click', function () {
+                this.classList.toggle('is_animating');
+              });
+              document.querySelector(".favme").addEventListener('touchstart', function () {
+                this.classList.toggle('is_animating');
+              });
+              document.querySelector(".favme").addEventListener('touchstart', function () {
+                this.classList.toggle('is_animating');
+              });
+              document.querySelector(".favme").addEventListener('animationend', function () {
+                this.classList.toggle('is_animating');
               });
 
-            case 7:
+            case 14:
             case "end":
-              return _context11.stop();
+              return _context13.stop();
           }
         }
-      }, _callee11, this);
+      }, _callee13, this);
     }));
 
     function mounted() {
@@ -1459,6 +1573,9 @@ var app = new Vue({
     },
     computedResultsQueryStore: function computedResultsQueryStore() {
       return this.limitAutoCompletion ? this.resultsQueryStore.slice(0, this.limitAutoCompletion) : this.resultsQueryStore;
+    },
+    computedAllStoreOnMap: function computedAllStoreOnMap() {
+      return this.allStoreOnMap ? this.allStoreOnMap.slice(0, this.limitStoreInList) : this.allStoreOnMap;
     }
   }
 });
