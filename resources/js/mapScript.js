@@ -17,15 +17,15 @@ var app = new Vue({
         ],
         mapCenter: [44.5667, 6.0833],
         mapZoom: 13,
-        allStoreOnMap: [],
-        /* SEARCH */
-        filters_isOpen: false,
-        mobileMenu_isOpen: false,
+        /* QUERY SEARCH */
         querySearch: "",
         resultsQueryCity: [],
         resultsQueryStore: [],
         baseUrl: "https://localio-app.herokuapp.com",
+        /* AUTOCOMPLETION */
         limitAutoCompletion: 3,
+        /* Store list*/
+        allStoreOnMap: [],
         limitStoreInList: 10,
         mainCat: [],
         subCat: {},
@@ -33,8 +33,16 @@ var app = new Vue({
         prevCatSelected: "",
         selectedStore: "",
         categoryFilter: "",
+        /* Favorites */
         myFavorites: [],
-        showStore: false
+        /* States */
+        showStore: false,
+        filters_isOpen: false,
+        mobileMenu_isOpen: false,
+        /* Comments */
+        comments: {},
+        commentLimit: 1,
+        commentPages: 0
     },
     methods: {
         mobileMenu: function () {
@@ -233,6 +241,31 @@ var app = new Vue({
             let rep = await req.json();
             return await rep.data;
         },
+         /**
+         * Function to get comments with paginate on a store
+         */
+          getStoreComments: async function (storeId, nbPage = null) {
+            let requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+            let url = new URL(`${this.baseUrl}/api/store/${storeId}/comments`);
+            url.search = new URLSearchParams({
+                ...(nbPage != null && { page: nbPage }),
+            });
+
+            let req = await fetch(url, requestOptions);
+            let rep = await req.json();
+            this.commentPages = rep.pagination.total_pages;
+            let comments = new Array();
+
+            for (let i = 0; i < rep.data.length; i++) {
+                if (typeof rep.data == "object") {
+                    comments.push(rep.data[i]);
+                }
+            }
+            this.comments = await comments;
+        },
         setViewMap: function (lat, lon) {
             document.querySelector("#map").scrollIntoView();
             
@@ -254,7 +287,8 @@ var app = new Vue({
 
         showModalStore: async function (idStore) {
             this.selectedStore = await this.getStore(idStore);
-            console.log(this.selectedStore)
+            await this.getStoreComments(idStore);
+            this.commentLimit = 1;
             this.showStore = true;
         },
         maskModalStore: function () {

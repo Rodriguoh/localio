@@ -454,6 +454,7 @@ body {
 }
 .modal-store .close:hover {
   opacity: 1;
+  cursor: pointer;
 }
 .modal-store .close:before,
 .modal-store .close:after {

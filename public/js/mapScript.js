@@ -861,6 +861,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -887,16 +889,18 @@ var app = new Vue({
     }],
     mapCenter: [44.5667, 6.0833],
     mapZoom: 13,
-    allStoreOnMap: [],
 
-    /* SEARCH */
-    filters_isOpen: false,
-    mobileMenu_isOpen: false,
+    /* QUERY SEARCH */
     querySearch: "",
     resultsQueryCity: [],
     resultsQueryStore: [],
     baseUrl: "https://localio-app.herokuapp.com",
+
+    /* AUTOCOMPLETION */
     limitAutoCompletion: 3,
+
+    /* Store list*/
+    allStoreOnMap: [],
     limitStoreInList: 10,
     mainCat: [],
     subCat: {},
@@ -904,8 +908,19 @@ var app = new Vue({
     prevCatSelected: "",
     selectedStore: "",
     categoryFilter: "",
+
+    /* Favorites */
     myFavorites: [],
-    showStore: false
+
+    /* States */
+    showStore: false,
+    filters_isOpen: false,
+    mobileMenu_isOpen: false,
+
+    /* Comments */
+    comments: {},
+    commentLimit: 1,
+    commentPages: 0
   },
   methods: {
     mobileMenu: function mobileMenu() {
@@ -1266,26 +1281,92 @@ var app = new Vue({
 
       return getStore;
     }(),
+
+    /**
+    * Function to get comments with paginate on a store
+    */
+    getStoreComments: function () {
+      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(storeId) {
+        var nbPage,
+            requestOptions,
+            url,
+            req,
+            rep,
+            comments,
+            i,
+            _args8 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                nbPage = _args8.length > 1 && _args8[1] !== undefined ? _args8[1] : null;
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId, "/comments"));
+                url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
+                  page: nbPage
+                }));
+                _context8.next = 6;
+                return fetch(url, requestOptions);
+
+              case 6:
+                req = _context8.sent;
+                _context8.next = 9;
+                return req.json();
+
+              case 9:
+                rep = _context8.sent;
+                this.commentPages = rep.pagination.total_pages;
+                comments = new Array();
+
+                for (i = 0; i < rep.data.length; i++) {
+                  if (_typeof(rep.data) == "object") {
+                    comments.push(rep.data[i]);
+                  }
+                }
+
+                _context8.next = 15;
+                return comments;
+
+              case 15:
+                this.comments = _context8.sent;
+
+              case 16:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
+
+      function getStoreComments(_x2) {
+        return _getStoreComments.apply(this, arguments);
+      }
+
+      return getStoreComments;
+    }(),
     setViewMap: function setViewMap(lat, lon) {
       document.querySelector("#map").scrollIntoView();
       this.querySearch = '';
       this.map.setView([lat, lon], 14);
     },
     refreshMapView: function () {
-      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context9.prev = _context9.next) {
               case 0:
-                _context8.next = 2;
+                _context9.next = 2;
                 return this.map.removeLayer(this.markers);
 
               case 2:
-                _context8.next = 4;
+                _context9.next = 4;
                 return this.getStoresOnMap();
 
               case 4:
-                _context8.next = 6;
+                _context9.next = 6;
                 return this.map.addLayer(this.markers);
 
               case 6:
@@ -1293,10 +1374,10 @@ var app = new Vue({
 
               case 7:
               case "end":
-                return _context8.stop();
+                return _context9.stop();
             }
           }
-        }, _callee8, this);
+        }, _callee9, this);
       }));
 
       function refreshMapView() {
@@ -1306,10 +1387,10 @@ var app = new Vue({
       return refreshMapView;
     }(),
     resetFilters: function () {
-      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
           while (1) {
-            switch (_context9.prev = _context9.next) {
+            switch (_context10.prev = _context10.next) {
               case 0:
                 this.refreshMapView();
                 this.categoryFilter = "";
@@ -1317,10 +1398,10 @@ var app = new Vue({
 
               case 3:
               case "end":
-                return _context9.stop();
+                return _context10.stop();
             }
           }
-        }, _callee9, this);
+        }, _callee10, this);
       }));
 
       function resetFilters() {
@@ -1330,28 +1411,32 @@ var app = new Vue({
       return resetFilters;
     }(),
     showModalStore: function () {
-      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(idStore) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11(idStore) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
           while (1) {
-            switch (_context10.prev = _context10.next) {
+            switch (_context11.prev = _context11.next) {
               case 0:
-                _context10.next = 2;
+                _context11.next = 2;
                 return this.getStore(idStore);
 
               case 2:
-                this.selectedStore = _context10.sent;
-                console.log(this.selectedStore);
-                this.showStore = true;
+                this.selectedStore = _context11.sent;
+                _context11.next = 5;
+                return this.getStoreComments(idStore);
 
               case 5:
+                this.commentLimit = 1;
+                this.showStore = true;
+
+              case 7:
               case "end":
-                return _context10.stop();
+                return _context11.stop();
             }
           }
-        }, _callee10, this);
+        }, _callee11, this);
       }));
 
-      function showModalStore(_x2) {
+      function showModalStore(_x3) {
         return _showModalStore.apply(this, arguments);
       }
 
@@ -1392,12 +1477,12 @@ var app = new Vue({
     };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
       var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
         while (1) {
-          switch (_context11.prev = _context11.next) {
+          switch (_context12.prev = _context12.next) {
             case 0:
               //Set map
               this.map = L.map('map', {
@@ -1412,11 +1497,11 @@ var app = new Vue({
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
               }).addTo(this.map);
-              _context11.next = 5;
+              _context12.next = 5;
               return this.getStoresOnMap();
 
             case 5:
-              _context11.next = 7;
+              _context12.next = 7;
               return this.map.addLayer(this.markers);
 
             case 7:
@@ -1446,10 +1531,10 @@ var app = new Vue({
 
             case 13:
             case "end":
-              return _context11.stop();
+              return _context12.stop();
           }
         }
-      }, _callee11, this);
+      }, _callee12, this);
     }));
 
     function mounted() {

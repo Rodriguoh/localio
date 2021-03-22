@@ -207,7 +207,7 @@
 
 
         <div class="modal-store" style="display:none" v-show="showStore">
-           <a class="close" v-on:click="maskModalStore"></a>
+            <a class="close" v-on:click="maskModalStore"></a>
             <div class="header-modal-store">
                 <div class="img-store"><img src="{{ asset('img/photos/exemple-image-store-3.jpg') }}"></div>
                 <div class="margin-constraint">
@@ -237,24 +237,32 @@
                     <div class="useful-width">
                         <div class="comments-modal-store">
                             <h3></h3>
-                            <div class="comment">
+                            <div class="comment" v-for="comment in comments">
                                 <div class="info-comment">
                                     <div>
                                         <span class="owner-comment">Marie Nathalie</span>
-                                        <span class="date-comment">3 Mars</span>
+                                        <span class="date-comment">@{{ comment . date }}</span>
                                     </div>
                                     <div>
-                                        <span class="note-comment">6.8/10</span>
+                                        <span class="note-comment">@{{ comment . note }}/5</span>
                                     </div>
                                 </div>
-                                <div class="contain-comment">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua elit, sed do eiusmod tempor et dolore
-                                    magna aliqua.</div>
+                                <div class="contain-comment">@{{ comment . comment }}</div>
+                                <div>
+                                    <a v-if="comment.flagged == 2">Commentaire approuvé</a>
+                                    <a v-on:click="reportComment(comment.id)" v-bind:id="'reportButton'+comment.id"
+                                        v-else="comment.flagged != 0" href="#">Signaler ce commentaire
+                                    </a>
+                                </div>
                             </div>
 
                             <div class="pagination-comment">
-                                <button><<button>></button>
+                                <button class="btn"
+                                    v-on:click="commentLimit-=1;commentLimit<=1?commentLimit=1:commentLimit-=1;getStoreComments(selectedStore.id, commentLimit)">
+                                    <<< /button>
+                                        <button class="btn">@{{ commentLimit }}</button>
+                                        <button class="btn"
+                                            v-on:click="commentLimit+=1; commentLimit>=commentPages?commentLimit=commentPages:commentLimit+=1; getStoreComments(selectedStore.id, commentLimit)">>></button>
                             </div>
 
                         </div>
@@ -268,9 +276,9 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- <p>@{{ selectedStore ? selectedStore . description : '' }}</p> -->
                             <div class="content-description">
-                                <p>@{{ selectedStore ? selectedStore . description : '' }}</p>
+                                <p id="storeDescription"></p> <!-- desciption add with getStore function -->
                             </div>
                             <div class="info-contact-store">
                                 <div class="part">
