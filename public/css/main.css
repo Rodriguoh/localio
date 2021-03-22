@@ -1549,7 +1549,7 @@ nav .nav-links.open {
     justify-content: flex-end;
     color: #000000;
     font-weight: bold;
-    margin-top: 5px;
+    margin-top: 0px;
   }
   .map-and-list .stores-list .element-list .info-element-list div .note span:nth-child(2) {
     width: auto;

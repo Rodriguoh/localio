@@ -189,7 +189,7 @@
                             <div class="info-element-list">
                                 <p>@{{ store . name }}</p>
                                 <div>
-                                    <span class="description-veryshort">@{{ store . short_description }}.</span>
+                                    <span class="description-veryshort">@{{  store.short_description && store.short_description.length > 50 ? store.short_description.slice(0,70) + '...' : store.short_description }}.</span>
                                     <div class="note">
                                         <span>@{{ Math . round(store . avg_note * 100) / 100 }}</span>
                                         <span><img src="{{ asset('img/icons/star.svg') }}"><span
