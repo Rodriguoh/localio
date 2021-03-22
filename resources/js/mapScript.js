@@ -21,20 +21,25 @@ var app = new Vue({
         /* SEARCH */
         filters_isOpen: false,
         mobileMenu_isOpen: false,
-        querySearch: "",
+        connexion: true,
         resultsQueryCity: [],
         resultsQueryStore: [],
         baseUrl: "https://localio-app.herokuapp.com",
         limitAutoCompletion: 3,
         limitStoreInList: 10,
         mainCat: [],
+        allStoreOnMap: [],
         subCat: {},
+        baseUrl: "https://localio-app.herokuapp.com",
+        limitAutoCompletion: 3,
         categorySelected: "",
         prevCatSelected: "",
         selectedStore: "",
         categoryFilter: "",
         myFavorites: [],
-        showStore: false
+        showStore: false,
+        querySearch: ""
+
     },
     methods: {
         mobileMenu: function () {

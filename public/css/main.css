@@ -927,6 +927,7 @@ nav .nav-links.open {
     -webkit-clip-path: circle(1000px at 100%);
     pointer-events: all;
     background: none;
+    height: auto;
     position: initial;
     padding-left: 0px;
     max-width: 400px;
@@ -1014,6 +1015,127 @@ nav .nav-links.open {
 /* --Mobile--*/
 /* --Epaisseur police --*/
 /* Time function */
+.login-illustration {
+  display: none;
+}
+
+.login-forms {
+  margin-top: 35px;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.select-type {
+  width: 50%;
+  margin: 0 auto 30px auto !important;
+  display: flex;
+  justify-content: space-around;
+}
+.select-type label {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 15px 15px 10px 15px;
+  border-radius: 15px;
+}
+.select-type #connexion:checked + label[for=connexion],
+.select-type #inscription:checked + label[for=inscription] {
+  background-color: #FFCF39;
+  color: white;
+}
+
+.login-section {
+  width: 80%;
+  margin: 15px auto 0 auto !important;
+}
+.login-section .login-input > input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 10px !important;
+  margin: 10px 0 10px 0;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 6px #ebebeb;
+}
+.login-section .login-btn {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  padding: 14px 0 14px 0 !important;
+  font-weight: bold;
+  margin-top: 15px;
+}
+.login-section a:nth-child(2) {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  margin-top: 15px;
+  padding: 14px 0 14px 15px;
+  box-sizing: border-box;
+  box-shadow: 0 0 6px #cccccc;
+  border-radius: 10px;
+}
+.login-section a:nth-child(3) {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+}
+.login-section .checkbox {
+  display: flex;
+  margin-top: 5px;
+}
+
+.circle {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background-color: #FFCF39;
+  position: absolute;
+  top: 40%;
+  right: -50%;
+}
+
+@media (min-width: 1200px) {
+  .login-container {
+    display: flex;
+    justify-content: left;
+    width: 80%;
+    margin: auto;
+  }
+  .login-container input,
+.login-container label,
+.login-container a {
+    font-size: 1.2em;
+  }
+
+  .login-illustration {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 55%;
+  }
+  .login-illustration h1 {
+    font-size: 3.5em;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+  .login-illustration h3 {
+    font-size: 2.5em;
+    font-weight: normal;
+    margin-top: 10px;
+  }
+  .login-illustration img {
+    width: 50%;
+    margin: auto;
+  }
+
+  .login-forms {
+    width: 30%;
+  }
+}
 /* -- Desktop --*/
 /* --Mobile--*/
 /* --Epaisseur police --*/
@@ -1439,6 +1561,10 @@ nav .nav-links.open {
     display: block;
   }
 }
+/* -- Desktop --*/
+/* --Mobile--*/
+/* --Epaisseur police --*/
+/* Time function */
 .full-width {
   width: 100%;
 }

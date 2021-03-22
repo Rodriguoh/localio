@@ -118,6 +118,7 @@ nav {
             -webkit-clip-path: circle(1000px at 100%);
             pointer-events: all;
             background: none;
+            height: auto;
             position: initial;
             padding-left: 0px;
             max-width: 400px;
@@ -176,6 +177,7 @@ nav {
         }
     }
 }
+
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
 }
