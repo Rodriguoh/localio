@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -50,8 +51,23 @@ class UserController extends Controller
         $user = User::findOrFail($request->id);
         $user->role_id = $request->role;
         $user->save();
-        
-        return redirect()->back()->with($user->wasChanged() ? 'successEdit' : '', 'Le rôle a bien été modifié');
+
+        return redirect()->back()->with($user->wasChanged() ? 'successEdit' : '', 'Le rôle à bien été modifié');
+    }
+
+    public function editPassword(Request $request) {
+        $this->validate($request, [
+            'password' => 'required|min:8',
+            'confirm-password' => 'same:password'
+        ]);
+
+        $user = Auth::user();
+
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('successPassword', 'Le mots de passe à bien été modifié');
     }
 
     public function delete()
