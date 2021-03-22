@@ -128,9 +128,7 @@
 
     <input type="hidden" id="INSEE" name="INSEE" value="{{old('INSEE', $store->city_INSEE)}}">
     <input type="hidden" id="ZIPCode" name="ZIPCode" value="{{old('ZIPCode', $store->city->ZIPcode ?? '')}}">
-
     <input type="hidden" id="lng" name="lng" value="{{old('lng', $store->lng)}}">
-
     <input type="hidden" id="lat" name="lat" value="{{old('lat', $store->lat)}}">
 
     <h3 class="card-title">

@@ -62,8 +62,6 @@ class UserController extends Controller
         ]);
 
         $user = Auth::user();
-
-
         $user->password = Hash::make($request->password);
         $user->save();
 
@@ -73,7 +71,20 @@ class UserController extends Controller
     public function delete()
     {
     }
-    public function suspend()
+
+    public function suspend(Request $request)
     {
+        $this->validate($request, [
+            'id' => 'required',
+            'banned_until' => 'required',
+        ]);
+        $user = User::findOrFail($request->id);
+        if ($request->banned_until == "NULL"){
+            $request->banned_until = NULL;
+        }
+        $user->banned_until = $request->banned_until;
+        $user->save();
+
+        return redirect()->back()->with($user->wasChanged() ? 'successEdit' : '', "L'utilisateur à été suspendu jusqu'au ".$request->banned_until);
     }
 }
