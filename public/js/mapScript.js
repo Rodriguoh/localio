@@ -1386,11 +1386,40 @@ var app = new Vue({
 
       return refreshMapView;
     }(),
-    resetFilters: function () {
-      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+    reportComment: function () {
+      var _reportComment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(id) {
+        var urlComment, req;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
           while (1) {
             switch (_context10.prev = _context10.next) {
+              case 0:
+                urlComment = new URL("".concat(this.baseUrl, "/api/comment/") + id);
+                _context10.next = 3;
+                return fetch(urlComment);
+
+              case 3:
+                req = _context10.sent;
+                document.getElementById('reportButton' + id).innerHTML = "Avis signalé";
+
+              case 5:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, this);
+      }));
+
+      function reportComment(_x3) {
+        return _reportComment.apply(this, arguments);
+      }
+
+      return reportComment;
+    }(),
+    resetFilters: function () {
+      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
               case 0:
                 this.refreshMapView();
                 this.categoryFilter = "";
@@ -1398,10 +1427,10 @@ var app = new Vue({
 
               case 3:
               case "end":
-                return _context10.stop();
+                return _context11.stop();
             }
           }
-        }, _callee10, this);
+        }, _callee11, this);
       }));
 
       function resetFilters() {
@@ -1411,20 +1440,20 @@ var app = new Vue({
       return resetFilters;
     }(),
     showModalStore: function () {
-      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11(idStore) {
+      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12(idStore) {
         var descriptionZone;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
           while (1) {
-            switch (_context11.prev = _context11.next) {
+            switch (_context12.prev = _context12.next) {
               case 0:
-                _context11.next = 2;
+                _context12.next = 2;
                 return this.getStore(idStore);
 
               case 2:
-                this.selectedStore = _context11.sent;
+                this.selectedStore = _context12.sent;
                 descriptionZone = document.getElementById('storeDescription');
                 descriptionZone.innerHTML = this.selectedStore.description;
-                _context11.next = 7;
+                _context12.next = 7;
                 return this.getStoreComments(idStore);
 
               case 7:
@@ -1433,13 +1462,13 @@ var app = new Vue({
 
               case 9:
               case "end":
-                return _context11.stop();
+                return _context12.stop();
             }
           }
-        }, _callee11, this);
+        }, _callee12, this);
       }));
 
-      function showModalStore(_x3) {
+      function showModalStore(_x4) {
         return _showModalStore.apply(this, arguments);
       }
 
@@ -1480,12 +1509,13 @@ var app = new Vue({
     };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
       var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
+      var checkboxFavorite;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
         while (1) {
-          switch (_context12.prev = _context12.next) {
+          switch (_context13.prev = _context13.next) {
             case 0:
               //Set map
               this.map = L.map('map', {
@@ -1500,11 +1530,11 @@ var app = new Vue({
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
               }).addTo(this.map);
-              _context12.next = 5;
+              _context13.next = 5;
               return this.getStoresOnMap();
 
             case 5:
-              _context12.next = 7;
+              _context13.next = 7;
               return this.map.addLayer(this.markers);
 
             case 7:
@@ -1516,8 +1546,10 @@ var app = new Vue({
                 localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
               }); //Favorite button
 
+              checkboxFavorite = document.querySelector('#checkbox-favoris');
               document.querySelector('.favme').addEventListener('click', function () {
                 this.classList.toggle('active');
+                checkboxFavorite.toggleAttribute("checked");
               });
               document.querySelector(".favme").addEventListener('click', function () {
                 this.classList.toggle('is_animating');
@@ -1532,12 +1564,12 @@ var app = new Vue({
                 this.classList.toggle('is_animating');
               });
 
-            case 13:
+            case 14:
             case "end":
-              return _context12.stop();
+              return _context13.stop();
           }
         }
-      }, _callee12, this);
+      }, _callee13, this);
     }));
 
     function mounted() {

@@ -601,6 +601,9 @@ body {
   justify-content: center;
   align-items: center;
 }
+.modal-store .main-modal-store .description-modal-store .title-favorite .icon-favorite .fav-btn #checkbox-favoris {
+  display: none;
+}
 @-webkit-keyframes favme-anime {
   0% {
     opacity: 1;

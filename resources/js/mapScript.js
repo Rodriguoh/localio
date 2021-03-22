@@ -279,6 +279,17 @@ var app = new Vue({
             await this.map.addLayer(this.markers);
             console.log('refreshMapView');
         },
+        reportComment: async function(id){
+
+            let urlComment = new URL(
+                `${this.baseUrl}/api/comment/`+id
+            );
+            let req = await fetch(
+                urlComment
+            );
+            document.getElementById('reportButton'+id).innerHTML = "Avis signalé";
+
+        },
         resetFilters: async function () {
             this.refreshMapView();
             this.categoryFilter = "";
@@ -290,7 +301,7 @@ var app = new Vue({
 
             let descriptionZone = document.getElementById('storeDescription');
             descriptionZone.innerHTML = this.selectedStore.description;
-            
+
             await this.getStoreComments(idStore);
             this.commentLimit = 1;
             this.showStore = true;
@@ -370,8 +381,11 @@ var app = new Vue({
         });
 
         //Favorite button
+        let checkboxFavorite = document.querySelector('#checkbox-favoris');
+
         document.querySelector('.favme').addEventListener('click', function () {
             this.classList.toggle('active');
+            checkboxFavorite.toggleAttribute("checked")
         });
         document.querySelector(".favme").addEventListener('click', function () {
             this.classList.toggle('is_animating');

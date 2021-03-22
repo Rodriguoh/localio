@@ -251,15 +251,14 @@
                                 <div>
                                     <a v-if="comment.flagged == 2">Commentaire approuvé</a>
                                     <a v-on:click="reportComment(comment.id)" v-bind:id="'reportButton'+comment.id"
-                                        v-else="comment.flagged != 0" href="#">Signaler ce commentaire
-                                    </a>
+                                        v-else="comment.flagged != 0" href="#">Signaler ce commentaire </a>
                                 </div>
                             </div>
 
                             <div class="pagination-comment">
                                 <button class="btn"
                                     v-on:click="commentLimit-=1;commentLimit<=1?commentLimit=1:commentLimit-=1;getStoreComments(selectedStore.id, commentLimit)">
-                                    <<< /button>
+                                    << </button>
                                         <button class="btn">@{{ commentLimit }}</button>
                                         <button class="btn"
                                             v-on:click="commentLimit+=1; commentLimit>=commentPages?commentLimit=commentPages:commentLimit+=1; getStoreComments(selectedStore.id, commentLimit)">>></button>
@@ -272,7 +271,8 @@
                                 <h3> Description</h3>
                                 <div class="icon-favorite">
                                     <div class="fav-btn">
-                                        <span href="" class="favme dashicons dashicons-heart"></span>
+                                        <input type="checkbox" id="checkbox-favoris" :value="selectedStore.id" v-model="myFavorites">
+                                        <label for="checkbox-favoris" :class="[myFavorites.includes(selectedStore.id) ? 'favme dashicons dashicons-heart active' : 'favme dashicons dashicons-heart']"></label>
                                     </div>
                                 </div>
                             </div>
@@ -323,6 +323,7 @@
 
         <script>
             var categories = @json($categories);
+            var myFavorites = @json($favorites);
             var idUser = @json($id_user);
 
         </script>
