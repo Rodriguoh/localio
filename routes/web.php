@@ -51,7 +51,7 @@ Route::get('/account/home', 'HomeAccountController@index')->name('homeAccount');
 //-- Users
 Route::get('/account/listUsers', 'UserController@index')->name('listUsers')->middleware('role:admin');
 
-Route::get('/account/suspendUser', 'UserController@suspend')->name('suspendUser')->middleware('role:admin');
+Route::post('/account/suspendUser', 'UserController@suspend')->name('suspendUser')->middleware('role:admin');
 
 Route::post('/account/editUserInformations', [UserController::class, 'editUsersInformations'])->name('editUsersInformations');
 

@@ -174,7 +174,7 @@ class StoreController extends Controller
             'phone' => 'required|digits:10',
             'mail' => 'required|email',
             'SIRET' => 'required|digits:14',
-            'url' => 'url',
+            'url' => 'nullable|url',
             'category_id' => 'required|exists:categories,id',
             'number' => 'required',
             'street' => 'required',
