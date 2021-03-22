@@ -1412,6 +1412,7 @@ var app = new Vue({
     }(),
     showModalStore: function () {
       var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11(idStore) {
+        var descriptionZone;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
           while (1) {
             switch (_context11.prev = _context11.next) {
@@ -1421,14 +1422,16 @@ var app = new Vue({
 
               case 2:
                 this.selectedStore = _context11.sent;
-                _context11.next = 5;
+                descriptionZone = document.getElementById('storeDescription');
+                descriptionZone.innerHTML = this.selectedStore.description;
+                _context11.next = 7;
                 return this.getStoreComments(idStore);
 
-              case 5:
+              case 7:
                 this.commentLimit = 1;
                 this.showStore = true;
 
-              case 7:
+              case 9:
               case "end":
                 return _context11.stop();
             }

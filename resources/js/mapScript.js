@@ -210,7 +210,7 @@ var app = new Vue({
                     console.log(store)
                     store.style.backgroundColor = "#ffe492";
                     store.scrollIntoView();
-                    
+
                 });
 
                 // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
@@ -241,10 +241,10 @@ var app = new Vue({
             let rep = await req.json();
             return await rep.data;
         },
-         /**
-         * Function to get comments with paginate on a store
-         */
-          getStoreComments: async function (storeId, nbPage = null) {
+        /**
+        * Function to get comments with paginate on a store
+        */
+        getStoreComments: async function (storeId, nbPage = null) {
             let requestOptions = {
                 method: "GET",
                 redirect: "follow",
@@ -268,7 +268,7 @@ var app = new Vue({
         },
         setViewMap: function (lat, lon) {
             document.querySelector("#map").scrollIntoView();
-            
+
 
             this.querySearch = '';
             this.map.setView([lat, lon], 14);
@@ -287,6 +287,10 @@ var app = new Vue({
 
         showModalStore: async function (idStore) {
             this.selectedStore = await this.getStore(idStore);
+
+            let descriptionZone = document.getElementById('storeDescription');
+            descriptionZone.innerHTML = this.selectedStore.description;
+            
             await this.getStoreComments(idStore);
             this.commentLimit = 1;
             this.showStore = true;
@@ -294,7 +298,7 @@ var app = new Vue({
         maskModalStore: function () {
             this.showStore = false;
             console.log('to bot')
-            document.querySelector("#map").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            document.querySelector("#map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
             console.log(document.querySelector("#map"))
         }
     },
