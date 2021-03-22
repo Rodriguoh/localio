@@ -1,0 +1,133 @@
+@import "../abstract/mixins";
+@import "../abstract/variables";
+
+.navbar{
+    @include flex-row-HorizontalBetween;
+    align-items: center;
+    width: 80%;
+    height: 110px;
+    margin: auto;
+
+    & .site-logo{
+        width: 40%;
+    }
+    & .main-menu{
+        margin-top: 2px;
+        width: 23%;
+        max-width: 80px;
+        list-style-type: none;
+    }
+    & .menu-link{
+        display: none;
+    }
+    & .background-menu{
+        height: 100vh;
+        width: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 4;
+        background-color: #3F3543;
+        padding: 0;
+        transition: 300ms;
+    }
+    & .burger-menu{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 35px;
+        right: 35px;
+        z-index: 6;
+
+        hr{
+            margin: 15%;
+            height: 3px;
+            background-color: black;
+            border: none;
+            transition: all .2s ease-in-out;
+        }
+    }
+    & .mobile-menu{
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        display: none;
+        line-height: 100px;
+        margin-left: auto;
+        text-align: right;
+        font-size: 30px;
+        font-weight: bold;
+        z-index: 6;
+
+        a{
+            color: white;
+        }
+    }
+
+    input[type='checkbox'].burger-menu{
+        opacity: 0;
+        z-index: 7;
+    }
+    input[type='checkbox'].burger-menu:checked ~ .background-menu{
+        width: 75%;
+    }
+    input[type='checkbox'].burger-menu:checked ~ .mobile-menu{
+        display: block;
+    }
+    input[type='checkbox'].burger-menu:checked + div.burger-menu{
+
+        margin-top: 5px;
+
+        :first-child{
+            transform: rotate(45deg) translate(3.6px, 3.6px);
+        }
+        :nth-child(2){
+            display: none;
+        }
+        :nth-child(3){
+            transform: rotate(-45deg) translate(3.6px, -3.6px);
+        }
+        hr{
+            background-color: white;
+        }
+
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+
+    .navbar {
+
+        .site-logo {
+            width: 15%;
+            min-width: 150px;
+            padding: 10px;
+        }
+
+        .main-menu {
+            @include flex-row-HorizontalBetween;
+            width: 310px;
+            margin-top: 0;
+            max-width: none;
+        }
+
+        .menu-link {
+            display: block;
+            padding: 10px 0 0 0;
+            font-size: $sizeSubTitle;
+        }
+
+        .burger-menu,
+        .background-menu,
+        .mobile-menu{
+            display: none;
+        }
+    }
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+}

@@ -1,16 +1,11 @@
-
 *,
 *::before,
 *::after {
-    -webkit-box-sizing: inherit;
-    -moz-box-sizing: inherit;
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
-
 
 html {
     font-family: sans-serif;
-    font-size: 62.5%;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -42,24 +37,17 @@ body {
     font-size: 1rem;
     font-weight: 400;
     text-align: left;
-    left: 0;
-    top: 0;
-}
-.page-wrapper, body, html {
-    position: absolute;
-    height: 100%;
-    width: 100%;
 }
 
 [tabindex="-1"]:focus {
     outline: none !important;
 }
 
-h2 {
+h2{
     display: block;
     width: 100%;
     text-align: center;
-    color: #cb7731;
+    color: #CB7731;
 }
 
 hr {
@@ -154,7 +142,7 @@ a {
 }
 
 a:hover {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:not([href]):not([tabindex]) {
@@ -237,11 +225,11 @@ label {
 
 button {
     border-radius: 0;
-    outline: none;
 }
 
 button:focus {
-    outline: none;
+    outline: 1px dotted;
+    outline: 5px auto -webkit-focus-ring-color;
 }
 
 input,
@@ -355,9 +343,4 @@ template {
 
 [hidden] {
     display: none !important;
-}
-body{
-    width: 100%;
-    font-family: 'Josefin Sans', sans-serif !important;
-    color: #3F3543;
 }

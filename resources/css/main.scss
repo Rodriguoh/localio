@@ -1,41 +1,23 @@
-@import "abstracts/functions";
-@import "abstracts/mixins";
-@import "abstracts/variables";
+@import "abstract/variables";
+@import "abstract/functions";
+@import "abstract/mixins";
 
 //@import 'vendors';
 
 @import "base/reset";
 @import "base/typography";
 
-@import "components/buttons";
-@import "components/modal";
-
-@import "layouts/footer";
-@import "layouts/header";
-@import "layouts/homeNavigation";
+@import "layout/navigation";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/forms";
 
 //@import 'components';
 
-@import "pages/about";
-@import "pages/account";
-@import "pages/auth";
 @import "pages/home";
-@import "pages/login-register";
+@import "pages/about";
 
-.full-width {
-    width: 100%;
-}
-.margin-constraint {
-    @include flex-column-verticalHorizontalCenter;
-    width: $margin-constraint-width;
-    flex: 1;
-    margin: 0 auto;
-}
-.useful-width {
-    width: 100%;
-    max-width: $useful-width;
-}
-#app {
-    width: 100%;
-    height: 100%;
-}
+@import "pages/account";
+
+@import "pages/auth";
+
