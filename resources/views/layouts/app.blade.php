@@ -55,6 +55,12 @@
         let pageWrapper = document.getElementsByClassName("page-wrapper")[0];
         pageWrapper.setAttribute("data-sidebar-hidden", "hidden");
       }
+
+
+
+
+
+
     </script>
 </body>
 </html>
