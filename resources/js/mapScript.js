@@ -18,14 +18,14 @@ var app = new Vue({
         mapCenter: [44.5667, 6.0833],
         mapZoom: 13,
         allStoreOnMap: [],
-        /* SEARCH */
-        filters_isOpen: false,
-        mobileMenu_isOpen: false,
-        connexion: true,
+        /* QUERY SEARCH */
+        querySearch: "",
         resultsQueryCity: [],
         resultsQueryStore: [],
         baseUrl: "https://localio-app.herokuapp.com",
+        /* AUTOCOMPLETION */
         limitAutoCompletion: 3,
+        /* Store list*/
         limitStoreInList: 10,
         mainCat: [],
         allStoreOnMap: [],
@@ -36,10 +36,17 @@ var app = new Vue({
         prevCatSelected: "",
         selectedStore: "",
         categoryFilter: "",
+        /* Favorites */
         myFavorites: [],
+        /* States */
         showStore: false,
-        querySearch: ""
-
+        filters_isOpen: false,
+        mobileMenu_isOpen: false,
+        connexion: true,
+        /* Comments */
+        comments: {},
+        commentLimit: 1,
+        commentPages: 0
     },
     methods: {
         mobileMenu: function () {
@@ -207,7 +214,7 @@ var app = new Vue({
                     console.log(store)
                     store.style.backgroundColor = "#ffe492";
                     store.scrollIntoView();
-                    
+
                 });
 
                 // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
@@ -238,9 +245,34 @@ var app = new Vue({
             let rep = await req.json();
             return await rep.data;
         },
+        /**
+        * Function to get comments with paginate on a store
+        */
+        getStoreComments: async function (storeId, nbPage = null) {
+            let requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+            let url = new URL(`${this.baseUrl}/api/store/${storeId}/comments`);
+            url.search = new URLSearchParams({
+                ...(nbPage != null && { page: nbPage }),
+            });
+
+            let req = await fetch(url, requestOptions);
+            let rep = await req.json();
+            this.commentPages = rep.pagination.total_pages;
+            let comments = new Array();
+
+            for (let i = 0; i < rep.data.length; i++) {
+                if (typeof rep.data == "object") {
+                    comments.push(rep.data[i]);
+                }
+            }
+            this.comments = await comments;
+        },
         setViewMap: function (lat, lon) {
             document.querySelector("#map").scrollIntoView();
-            
+
 
             this.querySearch = '';
             this.map.setView([lat, lon], 14);
@@ -251,6 +283,17 @@ var app = new Vue({
             await this.map.addLayer(this.markers);
             console.log('refreshMapView');
         },
+        reportComment: async function(id){
+
+            let urlComment = new URL(
+                `${this.baseUrl}/api/comment/`+id
+            );
+            let req = await fetch(
+                urlComment
+            );
+            document.getElementById('reportButton'+id).innerHTML = "Avis signalé";
+
+        },
         resetFilters: async function () {
             this.refreshMapView();
             this.categoryFilter = "";
@@ -259,13 +302,18 @@ var app = new Vue({
 
         showModalStore: async function (idStore) {
             this.selectedStore = await this.getStore(idStore);
-            console.log(this.selectedStore)
+
+            let descriptionZone = document.getElementById('storeDescription');
+            descriptionZone.innerHTML = this.selectedStore.description;
+
+            await this.getStoreComments(idStore);
+            this.commentLimit = 1;
             this.showStore = true;
         },
         maskModalStore: function () {
             this.showStore = false;
             console.log('to bot')
-            document.querySelector("#map").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            document.querySelector("#map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
             console.log(document.querySelector("#map"))
         }
     },
@@ -337,8 +385,11 @@ var app = new Vue({
         });
 
         //Favorite button
+        let checkboxFavorite = document.querySelector('#checkbox-favoris');
+
         document.querySelector('.favme').addEventListener('click', function () {
             this.classList.toggle('active');
+            checkboxFavorite.toggleAttribute("checked")
         });
         document.querySelector(".favme").addEventListener('click', function () {
             this.classList.toggle('is_animating');

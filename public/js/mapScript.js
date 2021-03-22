@@ -863,6 +863,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -891,17 +893,19 @@ var app = new Vue({
     mapZoom: 13,
     allStoreOnMap: [],
 
-    /* SEARCH */
-    filters_isOpen: false,
-    mobileMenu_isOpen: false,
-    connexion: true,
+    /* QUERY SEARCH */
+    querySearch: "",
     resultsQueryCity: [],
     resultsQueryStore: [],
     baseUrl: "https://localio-app.herokuapp.com",
+
+    /* AUTOCOMPLETION */
     limitAutoCompletion: 3,
+
+    /* Store list*/
     limitStoreInList: 10,
     mainCat: []
-  }, _defineProperty(_data, "allStoreOnMap", []), _defineProperty(_data, "subCat", {}), _defineProperty(_data, "baseUrl", "https://localio-app.herokuapp.com"), _defineProperty(_data, "limitAutoCompletion", 3), _defineProperty(_data, "categorySelected", ""), _defineProperty(_data, "prevCatSelected", ""), _defineProperty(_data, "selectedStore", ""), _defineProperty(_data, "categoryFilter", ""), _defineProperty(_data, "myFavorites", []), _defineProperty(_data, "showStore", false), _defineProperty(_data, "querySearch", ""), _data),
+  }, _defineProperty(_data, "allStoreOnMap", []), _defineProperty(_data, "subCat", {}), _defineProperty(_data, "baseUrl", "https://localio-app.herokuapp.com"), _defineProperty(_data, "limitAutoCompletion", 3), _defineProperty(_data, "categorySelected", ""), _defineProperty(_data, "prevCatSelected", ""), _defineProperty(_data, "selectedStore", ""), _defineProperty(_data, "categoryFilter", ""), _defineProperty(_data, "myFavorites", []), _defineProperty(_data, "showStore", false), _defineProperty(_data, "filters_isOpen", false), _defineProperty(_data, "mobileMenu_isOpen", false), _defineProperty(_data, "connexion", true), _defineProperty(_data, "comments", {}), _defineProperty(_data, "commentLimit", 1), _defineProperty(_data, "commentPages", 0), _data),
   methods: {
     mobileMenu: function mobileMenu() {
       var hamburger = document.querySelector(".hamburger");
@@ -1261,26 +1265,92 @@ var app = new Vue({
 
       return getStore;
     }(),
+
+    /**
+    * Function to get comments with paginate on a store
+    */
+    getStoreComments: function () {
+      var _getStoreComments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(storeId) {
+        var nbPage,
+            requestOptions,
+            url,
+            req,
+            rep,
+            comments,
+            i,
+            _args8 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                nbPage = _args8.length > 1 && _args8[1] !== undefined ? _args8[1] : null;
+                requestOptions = {
+                  method: "GET",
+                  redirect: "follow"
+                };
+                url = new URL("".concat(this.baseUrl, "/api/store/").concat(storeId, "/comments"));
+                url.search = new URLSearchParams(_objectSpread({}, nbPage != null && {
+                  page: nbPage
+                }));
+                _context8.next = 6;
+                return fetch(url, requestOptions);
+
+              case 6:
+                req = _context8.sent;
+                _context8.next = 9;
+                return req.json();
+
+              case 9:
+                rep = _context8.sent;
+                this.commentPages = rep.pagination.total_pages;
+                comments = new Array();
+
+                for (i = 0; i < rep.data.length; i++) {
+                  if (_typeof(rep.data) == "object") {
+                    comments.push(rep.data[i]);
+                  }
+                }
+
+                _context8.next = 15;
+                return comments;
+
+              case 15:
+                this.comments = _context8.sent;
+
+              case 16:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
+
+      function getStoreComments(_x2) {
+        return _getStoreComments.apply(this, arguments);
+      }
+
+      return getStoreComments;
+    }(),
     setViewMap: function setViewMap(lat, lon) {
       document.querySelector("#map").scrollIntoView();
       this.querySearch = '';
       this.map.setView([lat, lon], 14);
     },
     refreshMapView: function () {
-      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+      var _refreshMapView = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context9.prev = _context9.next) {
               case 0:
-                _context8.next = 2;
+                _context9.next = 2;
                 return this.map.removeLayer(this.markers);
 
               case 2:
-                _context8.next = 4;
+                _context9.next = 4;
                 return this.getStoresOnMap();
 
               case 4:
-                _context8.next = 6;
+                _context9.next = 6;
                 return this.map.addLayer(this.markers);
 
               case 6:
@@ -1288,10 +1358,10 @@ var app = new Vue({
 
               case 7:
               case "end":
-                return _context8.stop();
+                return _context9.stop();
             }
           }
-        }, _callee8, this);
+        }, _callee9, this);
       }));
 
       function refreshMapView() {
@@ -1300,43 +1370,20 @@ var app = new Vue({
 
       return refreshMapView;
     }(),
-    resetFilters: function () {
-      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
-          while (1) {
-            switch (_context9.prev = _context9.next) {
-              case 0:
-                this.refreshMapView();
-                this.categoryFilter = "";
-                this.categorySelected = "";
-
-              case 3:
-              case "end":
-                return _context9.stop();
-            }
-          }
-        }, _callee9, this);
-      }));
-
-      function resetFilters() {
-        return _resetFilters.apply(this, arguments);
-      }
-
-      return resetFilters;
-    }(),
-    showModalStore: function () {
-      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(idStore) {
+    reportComment: function () {
+      var _reportComment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(id) {
+        var urlComment, req;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
           while (1) {
             switch (_context10.prev = _context10.next) {
               case 0:
-                _context10.next = 2;
-                return this.getStore(idStore);
+                urlComment = new URL("".concat(this.baseUrl, "/api/comment/") + id);
+                _context10.next = 3;
+                return fetch(urlComment);
 
-              case 2:
-                this.selectedStore = _context10.sent;
-                console.log(this.selectedStore);
-                this.showStore = true;
+              case 3:
+                req = _context10.sent;
+                document.getElementById('reportButton' + id).innerHTML = "Avis signalé";
 
               case 5:
               case "end":
@@ -1346,7 +1393,66 @@ var app = new Vue({
         }, _callee10, this);
       }));
 
-      function showModalStore(_x2) {
+      function reportComment(_x3) {
+        return _reportComment.apply(this, arguments);
+      }
+
+      return reportComment;
+    }(),
+    resetFilters: function () {
+      var _resetFilters = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
+              case 0:
+                this.refreshMapView();
+                this.categoryFilter = "";
+                this.categorySelected = "";
+
+              case 3:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11, this);
+      }));
+
+      function resetFilters() {
+        return _resetFilters.apply(this, arguments);
+      }
+
+      return resetFilters;
+    }(),
+    showModalStore: function () {
+      var _showModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12(idStore) {
+        var descriptionZone;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
+          while (1) {
+            switch (_context12.prev = _context12.next) {
+              case 0:
+                _context12.next = 2;
+                return this.getStore(idStore);
+
+              case 2:
+                this.selectedStore = _context12.sent;
+                descriptionZone = document.getElementById('storeDescription');
+                descriptionZone.innerHTML = this.selectedStore.description;
+                _context12.next = 7;
+                return this.getStoreComments(idStore);
+
+              case 7:
+                this.commentLimit = 1;
+                this.showStore = true;
+
+              case 9:
+              case "end":
+                return _context12.stop();
+            }
+          }
+        }, _callee12, this);
+      }));
+
+      function showModalStore(_x4) {
         return _showModalStore.apply(this, arguments);
       }
 
@@ -1387,12 +1493,13 @@ var app = new Vue({
     };
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
       var _this3 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+      var checkboxFavorite;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
         while (1) {
-          switch (_context11.prev = _context11.next) {
+          switch (_context13.prev = _context13.next) {
             case 0:
               //Set map
               this.map = L.map('map', {
@@ -1407,11 +1514,11 @@ var app = new Vue({
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
               }).addTo(this.map);
-              _context11.next = 5;
+              _context13.next = 5;
               return this.getStoresOnMap();
 
             case 5:
-              _context11.next = 7;
+              _context13.next = 7;
               return this.map.addLayer(this.markers);
 
             case 7:
@@ -1423,8 +1530,10 @@ var app = new Vue({
                 localStorage.setItem("zoomMap", _this3.map.getZoom()); // Insert les données de la map en localstorage
               }); //Favorite button
 
+              checkboxFavorite = document.querySelector('#checkbox-favoris');
               document.querySelector('.favme').addEventListener('click', function () {
                 this.classList.toggle('active');
+                checkboxFavorite.toggleAttribute("checked");
               });
               document.querySelector(".favme").addEventListener('click', function () {
                 this.classList.toggle('is_animating');
@@ -1439,12 +1548,12 @@ var app = new Vue({
                 this.classList.toggle('is_animating');
               });
 
-            case 13:
+            case 14:
             case "end":
-              return _context11.stop();
+              return _context13.stop();
           }
         }
-      }, _callee11, this);
+      }, _callee13, this);
     }));
 
     function mounted() {
