@@ -321,11 +321,10 @@
 
 
 
-        <script>
+        <script type="application/javascript">
             var categories = @json($categories);
             var myFavorites = @json($favorites);
             var idUser = @json($id_user);
-
         </script>
 </body>
 
