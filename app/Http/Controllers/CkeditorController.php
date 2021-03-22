@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class CkeditorController extends Controller
 {
@@ -28,10 +30,12 @@ class CkeditorController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $fileName.'_'.time().'.'.$extension;
 
-            $request->file('upload')->move(public_path('images/store/'), $fileName); // place l'image uploadé dans images/store
+            Storage::disk('sftp')->put($fileName, fopen($request->file('upload'),'r+')); // stock l'image sur le ftp
+
+            $url = 'https://www.theoboudier.fr/espace-projets/localio/images/' . $fileName; // url de la photo hébergé
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('images/store/'.$fileName); // Ckeditor récupère l'image uploadé
+            
             $msg = 'Image Uploaded successfully';
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum,'$url','$msg')</script>";
 
