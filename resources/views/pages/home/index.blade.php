@@ -225,7 +225,6 @@
                                 <div class="total-notes"><span>X</span> avis</div>
                             </div>
 
-
                         </div>
                     </div>
                 </div>
