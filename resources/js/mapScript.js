@@ -4,6 +4,7 @@
 var app = new Vue({
     el: `#app`,
     data: {
+        /* MAP */
         map: undefined,
         markers: undefined,
         mapTiles: [
@@ -16,27 +17,101 @@ var app = new Vue({
         ],
         mapCenter: [44.5667, 6.0833],
         mapZoom: 13,
+        allStoreOnMap: [],
+        /* QUERY SEARCH */
         baseUrl: "https://localio-app.herokuapp.com", //'http://localhost/PHP/Projet_tutore/localio/public',
         categorySelected: "",
         prevCatSelected: "",
         categoryFilter: "",
         querySearch: "",
-        comments: {},
-        commentLimit: 1,
-        commentPages: 0,
         resultsQueryCity: [],
         resultsQueryStore: [],
+        /* AUTOCOMPLETION */
+        limitAutoCompletion: 3,
+        /* Store list*/
+        limitStoreInList: 10,
         mainCat: [],
         subCat: {},
-        limitAutoCompletion: 5,
-        storeSelected: {},
-        allStoreOnMap: undefined,
+        selectedStore: "",
+        /* Favorites */
         myFavorites: [],
+        /* States */
+        showStore: false,
+        filters_isOpen: false,
+        mobileMenu_isOpen: false,
+        connexion: true,
+        /* Comments */
+        comments: {},
+        commentLimit: 1,
+        commentPages: 0
     },
     methods: {
-        /**
-         * Function for search stores by name in autocomplete
-         */
+        mobileMenu: function () {
+            let hamburger = document.querySelector(".hamburger");
+            let navLinks = document.querySelector(".nav-links");
+            let links = document.querySelectorAll(".nav-links li");
+            if (!this.mobileMenu_isOpen) {
+                navLinks.classList.toggle('open');
+                hamburger.classList.toggle('open');
+                this.mobileMenu_isOpen = !this.mobileMenu_isOpen;
+            } else {
+                navLinks.classList.toggle('open');
+                setTimeout(function () {
+                    hamburger.classList.toggle('open')
+                }, 700);
+                this.mobileMenu_isOpen = !this.mobileMenu_isOpen;
+            }
+
+            links.forEach(link => {
+                link.classList.toggle("fade");
+            });
+        },
+        autoComplete: async function () {
+            this.resultsQueryCity = [];
+            this.resultsQueryStore = [];
+            if (this.querySearch.length < 1) return;
+
+            //Récupération des noms de villes en fonction de l'entrée utilisateur
+            let requestOptions = {
+                method: "GET",
+                redirect: "follow",
+            };
+            let url = new URL(`https://geo.api.gouv.fr/communes`);
+            url.search = new URLSearchParams({
+                ...{
+                    nom: this.querySearch,
+                    format: "geojson",
+                    fields: "code,departement",
+                    boost: "population",
+                    limit: this.limitAutoCompletion,
+                },
+            });
+            let reqCities = await fetch(url, requestOptions);
+            let data = await reqCities.json();
+            this.resultsQueryCity = data.features;
+
+            let urlStore = new URL(
+                `${this.baseUrl}/api/stores/${this.querySearch}`
+            );
+            urlStore.search = new URLSearchParams({
+                ...(this.categorySelected.length > 0
+                    ? this.categoryFilter.length > 0
+                        ? {
+                            category: this.categoryFilter,
+                        }
+                        : {
+                            category: this.categorySelected,
+                        }
+                    : {}),
+            });
+            let reqStores = await fetch(
+                urlStore, // modifier la variable search
+                requestOptions
+            );
+            let dataStores = await reqStores.json();
+
+            this.resultsQueryStore = dataStores.data;
+        },
         getStoresByName: async function () {
             let requestOptions = {
                 method: "GET",
@@ -47,7 +122,6 @@ var app = new Vue({
                 requestOptions
             );
             let data = await reqStores.json();
-            console.log(data);
             return data.data;
         },
         /**
@@ -65,7 +139,7 @@ var app = new Vue({
             this.categoryFilter === ""
                 ? (catFilter = this.categorySelected)
                 : (catFilter = this.categoryFilter);
-            if (document.getElementById("tout").checked == true) {
+            if (document.querySelector("#all").checked == true) {
                 catFilter = "";
             }
             let url = new URL(`${this.baseUrl}/api/stores/map`);
@@ -123,31 +197,28 @@ var app = new Vue({
 
                 // Affiche la modal lors du clic sur le marqueur
                 marker.on("click", async () => {
-                    await this.getStore(rep[i].id);
-                    await this.getStoreComments(rep[i].id);
-                    await halfmoon.toggleModal("modal-store");
+                    //await this.getStore(rep[i].id);
+                    //await this.getStoreComments(rep[i].id);
+                    //await halfmoon.toggleModal("modal-store");
                     this.commentLimit = 1;
+                    this.showModalStore(rep[i].id);
                 });
 
                 // Change la couleur de fond de la div du commerce lors du hover de son marqueur
                 marker.on("mouseover", async () => {
-                    let store = document.getElementById(
-                        "list-store-" + rep[i].id
-                    );
-                    store.classList.add("bg-dark");
-                    store.style.opacity = "70%";
-                    store.style.color = "white";
+                    let store = document.querySelector(`#list-store-${rep[i].id} .info-element-list`);
+                    document.querySelector(`#list-store-${rep[i].id} .info-element-list .note`).style.color = "#000000";
+                    console.log(store)
+                    store.style.backgroundColor = "#ffe492";
                     store.scrollIntoView();
+
                 });
 
                 // remet la couleur de fond de la div lors que la souris sort la zone du marqueur
                 marker.on("mouseout", async () => {
-                    let store = document.getElementById(
-                        "list-store-" + rep[i].id
-                    );
-                    store.classList.remove("bg-dark");
-                    store.style.color = "black";
-                    store.style.opacity = "100%";
+                    let store = document.querySelector(`#list-store-${rep[i].id} .info-element-list`);
+                    document.querySelector(`#list-store-${rep[i].id} .info-element-list .note`).style.color = "black";
+                    store.style.backgroundColor = "";
                 });
 
                 allMarkers.addLayer(marker);
@@ -159,8 +230,8 @@ var app = new Vue({
 
         },
         /**
-         * Function to get all details on a store
-         */
+        * Function to get all details on a store
+        */
         getStore: async function (storeId) {
             let requestOptions = {
                 method: "GET",
@@ -169,16 +240,12 @@ var app = new Vue({
             let url = new URL(`${this.baseUrl}/api/store/${storeId}`);
             let req = await fetch(url, requestOptions);
             let rep = await req.json();
+            return await rep.data;
 
-            this.storeSelected = rep.data;
-
-            // Ajoute la description au format HTML au modal lors du clic sur un marqueur
-            let descriptionZone = document.getElementById('storeDescription');
-            descriptionZone.innerHTML = this.storeSelected.description;
         },
         /**
-         * Function to get comments with paginate on a store
-         */
+        * Function to get comments with paginate on a store
+        */
         getStoreComments: async function (storeId, nbPage = null) {
             let requestOptions = {
                 method: "GET",
@@ -199,62 +266,20 @@ var app = new Vue({
                     comments.push(rep.data[i]);
                 }
             }
-
             this.comments = await comments;
         },
-        autoComplete: async function () {
-            this.resultsQueryCity = [];
-            this.resultsQueryStore = [];
-            if (this.querySearch.length < 1) return;
-
-            //Récupération des noms de villes en fonction de l'entrée utilisateur
-            let requestOptions = {
-                method: "GET",
-                redirect: "follow",
-            };
-            let url = new URL(`https://geo.api.gouv.fr/communes`);
-            url.search = new URLSearchParams({
-                ...{
-                    nom: this.querySearch,
-                    format: "geojson",
-                    fields: "code,departement",
-                    boost: "population",
-                    limit: this.limitAutoCompletion,
-                },
-            });
-            let reqCities = await fetch(url, requestOptions);
-            let data = await reqCities.json();
-            this.resultsQueryCity = data.features;
-
-            let urlStore = new URL(
-                `${this.baseUrl}/api/stores/${this.querySearch}`
-            );
-            urlStore.search = new URLSearchParams({
-                ...(this.categorySelected.length > 0
-                    ? this.categoryFilter.length > 0
-                        ? {
-                              category: this.categoryFilter,
-                          }
-                        : {
-                              category: this.categorySelected,
-                          }
-                    : {}),
-            });
-            let reqStores = await fetch(
-                urlStore, // modifier la variable search
-                requestOptions
-            );
-            let dataStores = await reqStores.json();
-
-            this.resultsQueryStore = dataStores.data;
-        },
         setViewMap: function (lat, lon) {
+            document.querySelector("#map").scrollIntoView();
+
+
+            this.querySearch = '';
             this.map.setView([lat, lon], 14);
         },
         refreshMapView: async function () {
             await this.map.removeLayer(this.markers);
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
+            console.log('refreshMapView');
         },
         reportComment: async function(id){
 
@@ -266,13 +291,33 @@ var app = new Vue({
             );
             document.getElementById('reportButton'+id).innerHTML = "Avis signalé";
 
-        }
+        },
+        resetFilters: async function () {
+            this.refreshMapView();
+            this.categoryFilter = "";
+            this.categorySelected = "";
+        },
 
+        showModalStore: async function (idStore) {
+            this.selectedStore = await this.getStore(idStore);
+
+            let descriptionZone = document.getElementById('storeDescription');
+            descriptionZone.innerHTML = this.selectedStore.description;
+
+            await this.getStoreComments(idStore);
+            this.commentLimit = 1;
+            this.showStore = true;
+        },
+        maskModalStore: function () {
+            this.showStore = false;
+            console.log('to bot')
+            document.querySelector("#map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+            console.log(document.querySelector("#map"))
+        }
     },
     created() {
 
         this.mainCat = categories;
-
         // get last map position from localStorage
         localStorage.getItem("centerMap") &&
             (this.mapCenter = localStorage.getItem("centerMap").split(","));
@@ -312,10 +357,12 @@ var app = new Vue({
         };
     },
     mounted: async function () {
-        //setting up map
-        this.map = L.map("map").setView(this.mapCenter, this.mapZoom);
+        //Set map
+        this.map = L.map('map', { scrollWheelZoom: false, zoomControl: false }).setView(this.mapCenter, this.mapZoom);
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(this.map);
 
-        // L.tileLayer(this.mapTiles[0], this.mapTiles[1]).addTo(this.map);
         L.tileLayer.provider('Jawg.Sunny', {
             variant: '',
             accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
@@ -324,7 +371,7 @@ var app = new Vue({
         await this.getStoresOnMap();
         await this.map.addLayer(this.markers);
 
-        // add eventListener on the map movment
+        //add eventListener on the map movment
         this.map.on("moveend", () => {
             this.refreshMapView();
             localStorage.setItem("centerMap", [
@@ -332,6 +379,26 @@ var app = new Vue({
                 this.map.getCenter().lng,
             ]);
             localStorage.setItem("zoomMap", this.map.getZoom()); // Insert les données de la map en localstorage
+        });
+
+        //Favorite button
+        let checkboxFavorite = document.querySelector('#checkbox-favoris');
+
+        document.querySelector('.favme').addEventListener('click', function () {
+            this.classList.toggle('active');
+            checkboxFavorite.toggleAttribute("checked")
+        });
+        document.querySelector(".favme").addEventListener('click', function () {
+            this.classList.toggle('is_animating');
+        });
+        document.querySelector(".favme").addEventListener('touchstart', function () {
+            this.classList.toggle('is_animating');
+        });
+        document.querySelector(".favme").addEventListener('touchstart', function () {
+            this.classList.toggle('is_animating');
+        });
+        document.querySelector(".favme").addEventListener('animationend', function () {
+            this.classList.toggle('is_animating');
         });
     },
 
@@ -346,5 +413,10 @@ var app = new Vue({
                 ? this.resultsQueryStore.slice(0, this.limitAutoCompletion)
                 : this.resultsQueryStore;
         },
-    },
+        computedAllStoreOnMap() {
+            return this.allStoreOnMap
+                ? this.allStoreOnMap.slice(0, this.limitStoreInList)
+                : this.allStoreOnMap;
+        }
+    }
 });
