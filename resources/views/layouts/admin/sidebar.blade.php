@@ -115,7 +115,7 @@ $role = User::find(Auth::id())->role->name;
             <span class="sidebar-icon">
                 <i class="fa fa-sign-out text-danger" aria-hidden="true"></i>
             </span>
-            Se deconnecter
+            Se déconnecter
         </a>
     </div>
 </div>
