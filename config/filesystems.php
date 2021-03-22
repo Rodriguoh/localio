@@ -52,6 +52,15 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'sftp' => [
+            'driver' => 'sftp',
+            'host' => env('SFTP_HOST'),
+            'username' => env('SFTP_USERNAME'),
+            'password' => env('SFTP_PASSWORD'),
+            'root' => '/images', // Dossier de stockage d'image
+            'port' => env('SFTP_PORT'), 
+        ],    
+
     ],
 
     /*

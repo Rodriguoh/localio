@@ -184,7 +184,7 @@
                     <template v-for="store in computedAllStoreOnMap">
                         <div class="element-list" :id="'list-store-'+store.id">
                             <div class="img-element-list">
-                                <img src="{{ asset('img/photos/exemple-image-store-2.jpeg') }}">
+                                <img :src="store.thumbnails">
                             </div>
                             <div class="info-element-list">
                                 <p>@{{ store . name }}</p>
@@ -208,7 +208,7 @@
         <div class="modal-store" style="display:none" v-show="showStore">
             <a class="close" v-on:click="maskModalStore"></a>
             <div class="header-modal-store">
-                <div class="img-store"><img src="{{ asset('img/photos/exemple-image-store-3.jpg') }}"></div>
+                <div class="img-store"><img :src="selectedStore.thumbnails"></div>
                 <div class="margin-constraint">
                     <div class="useful-width">
                         <div class="info-store">
@@ -224,7 +224,6 @@
                                 </div>
                                 <div class="total-notes"><span>X</span> avis</div>
                             </div>
-
 
                         </div>
                     </div>
