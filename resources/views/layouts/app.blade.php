@@ -40,7 +40,7 @@
         @include('layouts.admin.sidebar')
 
         <!-- Content wrapper start -->
-        <div class="content-wrapper p-20">
+        <div class="content-wrapper p-5 p-sm-10 p-md-20">
             @yield('content')
         </div>
         <!-- Content wrapper end -->
