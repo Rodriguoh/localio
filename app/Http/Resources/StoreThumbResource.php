@@ -26,7 +26,7 @@ class StoreThumbResource extends JsonResource
             'avg_note' => Comment::where([['store_id', $this->id],])
             ->where(function ($query) {$query->where('flagged', '!=', 1)->orWhereNull('flagged');})
             ->avg('note'),
-            'nb_comment' => $this->comments->where('flagged', '!=', 1)->count(),
+            'nb_comment' => $this->comments->where(function ($query) {$query->where('flagged', '!=', 1)->orWhereNull('flagged');})->count(),
             'latnlg' => [
                 'lat' => $this->lat,
                 'lng' => $this->lng
