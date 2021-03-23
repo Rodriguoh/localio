@@ -19,7 +19,7 @@
     <p>Aucun commentaire disponible.</p>
 </div>
 
-<div class="pagination-comment" v-if="comments.length != 0">
+<div class="pagination-comment" v-if="commentPages > 1">
     <button class="btn"
     v-if="commentPages <= commentLimit"
         v-on:click="commentLimit-=1;commentLimit<=1?commentLimit=1:commentLimit-=1;getStoreComments(selectedStore.id, commentLimit)">
