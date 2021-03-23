@@ -74,7 +74,7 @@
                         <div class="checkbox mb-3">
                             <input id="remember_me" type="checkbox" name="remember">
                             <label for="remember_me" style="margin: 2px 0 0 5px">
-                                Rester Connecter
+                                Rester Connecté
                             </label>
                         </div>
 

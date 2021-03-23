@@ -12,6 +12,6 @@
                     src="{{ asset('img/icons/fa-home.svg') }}">Accueil</a></li>
         <li><a class="linkMenu" href="{{ route('homeAccount') }}"><img
                     src="{{ asset('img/icons/fa-login.svg') }}">{{$id_user ?? '' ? 'Mon compte' : 'Se connecter'}}</a></li>
-        <li><a href="{{route('legalNotice')}}" class="btn-color btn-secondary btn-xs">CGU</a></li>
+        <li><a href="{{route('legalNotices')}}" class="btn-color btn-secondary btn-xs">CGU</a></li>
     </ul>
 </nav>

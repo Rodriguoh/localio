@@ -7,7 +7,14 @@
                 </button>
             @endif
             <a href="{{URL::route('home')}}">
-            <img src="{{asset('img/logos/logo-sombre.png')}}" alt="logo-localio" style="height:35px">
+                <img
+                    @if (!Auth::guest())
+                        src="{{asset('img/logos/logo-sombre.png')}}"
+                    @else
+                        src="{{asset('img/logos/logo_inline-sombre.png')}}"
+                    @endif
+                    alt="logo-localio"
+                    style="height:35px">
             </a>
 
             <button class="btn btn-action mr-5" type="button" onclick="halfmoon.toggleDarkMode()" aria-label="Toggle dark mode">

@@ -1,4 +1,4 @@
-<a href="{{ route('google-auth') }}" class="d-flex align-items-center">
+<a href="{{ route('google-auth') }}" class="d-flex align-items-center" style="justify-content: center">
     <div class="p-10">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -12,5 +12,5 @@
             </defs>
         </svg>
     </div>
-    <p style="margin-left: 20px">Se connecter avec Google</p>
+    <p style="margin-left: 10px">Se connecter avec Google</p>
 </a>

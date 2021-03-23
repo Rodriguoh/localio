@@ -79,7 +79,7 @@
     </form>
     <div class="sidebar-divider"></div>
     <h2 class="card-title">Modifier mon mots de passe</h2>
-    <form action="{{route('editPassword')}}" method="POST" class="w-400 wm-full">
+    <form action="{{ route('editPassword') }}" method="POST" class="w-400 wm-full">
         @csrf
         <div class="form-group">
             @if($errors->has('password'))

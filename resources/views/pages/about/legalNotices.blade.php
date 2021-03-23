@@ -30,7 +30,6 @@
                 Mentions légales
             </h1>
 
-
                 <h2>Définitions</h2>
                 <p><b>Client :</b> tout professionnel ou personne physique capable au sens des articles 1123 et suivants du Code civil, ou personne morale, qui visite le Site objet des présentes conditions générales.<br>
                 <b>Prestations et Services :</b> <a href="https://localio-app.herokuapp.com/">https://localio-app.herokuapp.com/</a> met à disposition des Clients :</p>
