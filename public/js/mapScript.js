@@ -13489,7 +13489,8 @@ var app = new vue_dist_vue_esm__WEBPACK_IMPORTED_MODULE_1__.default({
         block: "end",
         inline: "nearest"
       });
-      this.map.setView(localStorage.getItem("centerMap").split(",")); // this.refreshMapView();
+      this.map.setView(localStorage.getItem("centerMap").split(","));
+      alert(this.map.getCenter().lat + ' ' + this.map.getCenter().lng + ' ' + localStorage.getItem("centerMap").split(",")); // this.refreshMapView();
     }
   },
   created: function created() {
