@@ -50,14 +50,14 @@
                             src="{{ asset('img/icons/fa-home.svg') }}">Accueil</a></li>
                 <li><a class="linkMenu" href="{{ route('homeAccount') }}"><img
                             src="{{ asset('img/icons/fa-login.svg') }}">Se connecter</a></li>
-                <li><a href="#0" class="btn-color btn-secondary btn-xs">Aide</a></li>
+                <li><a href="{{ route('legalNotices') }}" class="btn-color btn-secondary btn-xs">CGU</a></li>
             </ul>
         </nav>
 
         <div class="margin-constraint" v-show="!showStore">
             <div class="useful-width">
                 <div class="header">
-                    <div class="home-col-1">
+                    <div class="home-col-1 drive-image">
                         <div class="illustration_home">
                             <img src="{{ asset('img/illustrations/home_car.svg') }}">
                         </div>
@@ -295,6 +295,7 @@
             <footer>
             </footer>
 
+        </div>
         </div>
 
 

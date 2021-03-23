@@ -358,7 +358,7 @@ var app = new Vue({
     },
     mounted: async function () {
         //Set map
-        this.map = L.map('map', { scrollWheelZoom: false, zoomControl: false }).setView(this.mapCenter, this.mapZoom);
+        this.map = L.map('map', { scrollWheelZoom: true, zoomControl: false }).setView(this.mapCenter, this.mapZoom);
         L.control.zoom({
             position: 'topright'
         }).addTo(this.map);
