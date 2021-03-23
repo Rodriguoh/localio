@@ -28,7 +28,7 @@
         <div class="content">
             <h1 class="content-title">
                 Mentions légales
-            </h2>
+            </h1>
 
 
                 <h2>Définitions</h2>
