@@ -39,7 +39,7 @@ var app = new Vue({
         showStore: false,
         filters_isOpen: false,
         mobileMenu_isOpen: false,
-        connexion: true,
+        connexion: 0,
         /* Comments */
         comments: {},
         commentLimit: 1,

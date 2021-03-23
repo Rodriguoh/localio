@@ -20,10 +20,10 @@
 
 </head>
 <body class="full-with">
+
     <div id="app">
 
         @include('components.navbar')
-
 
 
         <!-- Container avec les marges -->
@@ -39,16 +39,16 @@
 
                 <div class="select-type">
 
-                    <input type="radio" id="connexion" v-model="connexion" value="{{true}}" checked hidden>
+                    <input type="radio" id="connexion" v-model="connexion" value="0" checked hidden>
                     <label for="connexion">CONNEXION</label>
 
-                    <input type="radio" id="inscription" v-model="connexion" value="{{false}}" hidden>
+                    <input type="radio" id="inscription" v-model="connexion" value="1" hidden>
                     <label for="inscription">INSCRIPTION</label>
 
                 </div>
 
                 <!-- Container largeur utile -->
-                <div class="login-section" v-if="connexion">
+                <div class="login-section" v-if="connexion == 0">
                     <!-- Session Status -->
                     <x-auth-session-status :status="session('status')" />
 
@@ -83,8 +83,9 @@
                             <button class="btn btn-action btn-r8 login-btn">SE CONNECTER</button>
                             <x-google-link/>
                             @if (Route::has('password.request'))
-                                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                                    Mot de passe oublié ?
+                                <a class="underline text-sm text-gray-600 hover:text-gray-900">
+                                    <input type="radio" id="fg-pswd" v-model="connexion" value="3" hidden>
+                                    <label for="fg-pswd">Mot de passe oublié ?</label>
                                 </a><br>
                             @endif
 
@@ -94,7 +95,7 @@
                 </div>
 
                 <!-- Container largeur utile -->
-                <div class="login-section" v-else>
+                <div class="login-section" v-if="connexion == 1">
 
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -119,7 +120,32 @@
                     </form>
                 </div>
 
-                {{-- <div class="circle"></div>--}}
+                <!-- Container largeur utile -->
+                <div class="login-section" v-if="connexion == 3">
+
+                    <h1>Mots de passe oubliés ?</h1>
+
+                    <!-- Session Status -->
+                    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                    <!-- Validation Errors -->
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+                    <form method="POST" action="{{ route('password.email') }}">
+                    @csrf
+
+                    <!-- Email Address -->
+                        <div class="login-input">
+                            <x-input id="email" type="email" name="email" :value="old('email')" placeholder="Votre email" required autofocus />
+                        </div>
+
+                        <div class="m-10">
+                            <x-button class="btn btn-action btn-r8 login-btn">RÉINITIALISER</x-button>
+                        </div>
+                    </form>
+
+                </div>
+
 
             </div>
 
