@@ -108,11 +108,22 @@
                         </div>
                         <!-- Password -->
                         <div class="login-input">
-                            <x-input id="password" class="form-control form-control-lg" type="password" name="password" placeholder="Mot de passe" pattern=".{8,}" required autocomplete="new-password" style="margin-bottom: -1px;border-radius:0" />
+                            <x-input
+                                id="password"
+                                class="form-control form-control-lg"
+                                type="password"
+                                name="password"
+                                placeholder="Mot de passe"
+                                pattern=".{8,}"
+                                title="Votre mot de passe doit contenir au moins 8 caractères"
+                                autocomplete="new-password"
+                                style="margin-bottom: -1px;border-radius:0"
+                                required/>
                         </div>
                         <!-- Confirm Password -->
                         <div class="login-input">
-                            <x-input id="password_confirmation" class="form-control form-control-lg" type="password" name="password_confirmation" placeholder="Confirmation mot de passe" style="margin-bottom:-1px; border-top-left-radius:0;border-top-right-radius:0" required />
+                            <x-input
+                                id="password_confirmation" class="form-control form-control-lg" type="password" name="password_confirmation" placeholder="Confirmation mot de passe" style="margin-bottom:-1px; border-top-left-radius:0;border-top-right-radius:0" required />
                             <label for="password_confirmation" style="margin: 15px 0 0 15px">Mot de passe de 8 caractères minimum</label>
                         </div>
 
