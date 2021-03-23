@@ -34,11 +34,12 @@
 
 <body class="full-with">
     <div id="app">
+
         @include('components.navbar')
         <div class="margin-constraint" v-show="!showStore">
             <div class="useful-width">
                 <div class="header">
-                    <div class="home-col-1">
+                    <div class="home-col-1 drive-image">
                         <div class="illustration_home">
                             <img src="{{ asset('img/illustrations/home_car.svg') }}">
                         </div>
@@ -54,12 +55,12 @@
                                     class="button-input-filter"><img class="icon-menu-filter"
                                         src="{{ asset('img/icons/input-menu-filter.svg') }}"></button>
                                 <input id="inputCity" v-model="querySearch" v-on:keyup="autoComplete"
-                                    v-on:focus="filters_isOpen = false" type="text"
+                                    @focus="filters_isOpen = false; querySearch_isFocus = true" @blur="querySearch_isFocus = false" type="text"
                                     placeholder="Une ville ou un nom de commerce">
                                 <button class="button-input-search"><img class="icon-search"
                                         src="{{ asset('img/icons/input-search.svg') }}"></button>
                             </div>
-                            <template v-if="querySearch.length > 0 && filters_isOpen == false">
+                            <template v-if="querySearch.length > 0 && filters_isOpen == false && querySearch_isFocus">
                                 <div class="research-propositions">
                                     <template v-if="resultsQueryCity.length > 0">
                                         <div v-for="city in computedResultsQueryCity"
@@ -246,13 +247,14 @@
                                 <div class="part">
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-envelope"></i></div>
-                                        @{{ selectedStore ? selectedStore . mail : '' }}
-
-
+                                        <!-- open mailto link -->
+                                        <a :href="'mailto:'+selectedStore.mail">@{{selectedStore . mail}}</a>
+                                        
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-mouse-pointer"></i></div>
-                                        @{{ selectedStore ? selectedStore . url : '' }}
+                                        <!-- open link in new tab -->
+                                        <a :href='selectedStore.url' target="_blank">@{{selectedStore . url}}</a>
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-map-marker-alt"></i></div>
@@ -262,7 +264,8 @@
                                 <div class="part">
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-phone"></i></div>
-                                        @{{ selectedStore ? selectedStore . phone : '' }}
+                                        <!-- link for phone call -->
+                                        <a :href="'tel:'+selectedStore.phone"> @{{selectedStore.phone}}</a>
 
                                     </div>
                                     <div class="element-info-contact-store">
@@ -281,6 +284,7 @@
             <footer>
             </footer>
 
+        </div>
         </div>
 
 
