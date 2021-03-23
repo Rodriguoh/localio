@@ -119,7 +119,6 @@
                                                 </template>
                                             </div>
 
-
                                         </div>
                                         <template v-if="categorySelected !== ''">
                                             <div class="research-filter-subcategory">
@@ -200,14 +199,9 @@
                             <div class="stars-and-notes">
                                 <div class="note-store">
                                     <template v-for="index in 5" :key="index">
-                                        <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                        <span class="icon-star" v-if="selectedStore.avg_note >= index"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                        <span class="icon-star disable" v-if="selectedStore.avg_note < index"><img src="{{ asset('img/icons/star.svg') }}"></span>
                                     </template>
-
-                                    {{-- <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
-                                    <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
-                                    <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
-                                    <span class="icon-star disable"><img
-                                            src="{{ asset('img/icons/star.svg') }}"></span> --}}
                                 </div>
                             </div>
                         </div>

@@ -21,12 +21,13 @@
 
 <div class="pagination-comment" v-if="comments.length != 0">
     <button class="btn"
+    v-if="commentPages < commentLimit"
         v-on:click="commentLimit-=1;commentLimit<=1?commentLimit=1:commentLimit-=1;getStoreComments(selectedStore.id, commentLimit)">
         << </button>
 
         <button class="btn"
+        v-if="commentPages > commentLimit"
                 v-on:click="commentLimit+=1; commentLimit>=commentPages?commentLimit=commentPages:commentLimit+=1; getStoreComments(selectedStore.id, commentLimit)">
                 >>
             </button>
-            @{{comments}}
 </div>
