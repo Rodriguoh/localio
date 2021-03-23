@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -40,41 +41,7 @@ class StoreController extends Controller
 
     public function showStore($idStore)
     {
-        /*
-        $store = Store::where('stores.id', $idStore)
-            ->join('users', 'users.id', '=', 'stores.user_id')
-            ->join('states', 'states.id', '=', 'stores.state_id')
-            ->join('cities', 'cities.insee', '=', 'stores.city_insee')
-            ->join('categories', 'categories.id', '=', 'stores.category_id')
-            ->select(
-                'users.lastname',
-                'users.firstname',
-                'stores.id',
-                'stores.description',
-                'stores.number',
-                'stores.street',
-                'stores.name as store_name',
-                'stores.created_at',
-                'stores.state_id',
-                'stores.siret',
-                'stores.phone',
-                'stores.codeComment',
-                'stores.mail',
-                'stores.url',
-                'stores.lat',
-                'stores.lng',
-                'stores.delivery',
-                'stores.conditionDelivery',
-                'stores.openingHours',
-                'city_insee',
-                'cities.name as city_name',
-                'categories.label as category_name',
-                'states.label as state_label'
-            )->first();
-            */
-
-            $store = Store::find($idStore);
-
+        $store = Store::find($idStore);
         return view('pages/account/stores/showStore', ['store' =>  $store])->with('openingHours', json_decode($store->openingHours, true));
     }
     public function approve($idStore)
@@ -98,7 +65,6 @@ class StoreController extends Controller
     public function requests()
     {
         $stores = Store::join('users', 'users.id', '=', 'stores.user_id')
-
             ->join('states', 'states.id', '=', 'stores.state_id')
             ->join('cities', 'cities.INSEE', '=', 'stores.city_INSEE')
             ->select('lastname', 'firstname', 'stores.id', 'stores.description', 'stores.name', 'stores.created_at', 'stores.state_id', 'states.label as state_label', 'cities.name as city_name')
@@ -284,11 +250,14 @@ class StoreController extends Controller
             $consultationsResult[$month] = $consultations[$month] ?? 0;
         }
 
+        $consultationsBycat = DB::select('select label, count(*) from categories inner join stores on stores.category_id = categories.id inner join consultations on stores.id = consultations.store_id group by label', [1]);
+
         return view('pages/account/stats', [
             'nbCommentaire' => Comment::count(),
             'nbUtilisateurs' => User::count(),
             'nbConsultations' => Consultation::count(),
-            'consultations' => $consultationsResult
+            'consultations' => $consultationsResult,
+            'consultationsByCat' => $consultationsBycat
         ]);
     }
 }

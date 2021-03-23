@@ -12,6 +12,14 @@
         <h4 class="alert-heading">{{session('successEdit')}}</h4>
     </div>
     @endif
+    @if (session('successPassword'))
+    <div class="alert alert-success mb-10" role="alert">
+        <button class="close" data-dismiss="alert" type="button" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">{{session('successPassword')}}</h4>
+    </div>
+    @endif
     <form id="form-info" action="{{route('editUsersInformations')}}" method="POST" class="w-400 mw-full">
         @csrf
         <input type="hidden" name="id" value="{{$user->id}}">
@@ -69,6 +77,31 @@
             <input id="disableEdit" type="reset" value="Annuler" class="btn d-none">
         </div>
     </form>
+    <div class="sidebar-divider"></div>
+    <h2 class="card-title">Modifier mon mots de passe</h2>
+    <form action="{{route('editPassword')}}" method="POST" class="w-400 wm-full">
+        @csrf
+        <div class="form-group">
+            @if($errors->has('password'))
+            <div class="invalid-feedback">
+                Le mots doit comporter au moins 8 caractères.
+            </div>
+            @endif
+            <label for="password">Mon nouveau mots de passe</label>
+            <input type="password" class="form-control" id="password" name="password" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+            @if($errors->has('confirm-password'))
+            <div class="invalid-feedback">
+                Le mots de passe n'est pas identique.
+            </div>
+            @endif
+            <label for="confirm-password">Confirmer mon mots de passe</label>
+            <input type="password" class="form-control" id="confirm-password" name="confirm-password" autocomplete="new-password">
+        </div>
+
+        <input id="editPassword" class="btn px-0 px-sm-10 btn-secondary" type="submit" value="Modifier" disabled>
+    </form>
 
 </div>
 
@@ -93,6 +126,22 @@
         document.getElementById('availableEdit').classList.remove('d-none');
         document.getElementById('submitEdit').classList.add('d-none');
         document.getElementById('disableEdit').classList.add('d-none');
+    });
+
+    document.querySelector('#password').addEventListener('keyup', (ele) => {
+        if(ele.target.value === document.querySelector('#confirm-password').value) {
+            document.getElementById('editPassword').removeAttribute('disabled');
+        } else {
+            document.getElementById('editPassword').setAttribute('disabled', 'disabled');
+        }
+    });
+
+    document.querySelector('#confirm-password').addEventListener('keyup', (ele) => {
+        if(ele.target.value === document.querySelector('#password').value) {
+            document.getElementById('editPassword').removeAttribute('disabled');
+        } else {
+            document.getElementById('editPassword').setAttribute('disabled', 'disabled');
+        }
     });
 </script>
 

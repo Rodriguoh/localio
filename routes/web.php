@@ -55,6 +55,8 @@ Route::post('/account/suspendUser', 'UserController@suspend')->name('suspendUser
 
 Route::post('/account/editUserInformations', [UserController::class, 'editUsersInformations'])->name('editUsersInformations');
 
+Route::post('/account/editPassword', [UserController::class, 'editPassword'])->name('editPassword');
+
 //Modif rôle user
 Route::post('/account/editRoleUser', [UserController::class, 'editRoleUser'])->name('editRoleUser')->middleware('role:admin');
 
