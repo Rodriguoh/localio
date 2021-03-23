@@ -5,7 +5,7 @@
             <span class="date-comment">@{{ comment . date }}</span>
         </div>
         <div>
-            <span class="note-comment">@{{ comment . note }}/5</span>
+            <span class="note-comment">@{{ Math . round(comment . note * 100) / 100 }}/5</span>
         </div>
     </div>
     <div class="contain-comment">@{{ comment . comment }}</div>
@@ -21,7 +21,7 @@
 
 <div class="pagination-comment" v-if="comments.length != 0">
     <button class="btn"
-    v-if="commentPages < commentLimit"
+    v-if="commentPages <= commentLimit"
         v-on:click="commentLimit-=1;commentLimit<=1?commentLimit=1:commentLimit-=1;getStoreComments(selectedStore.id, commentLimit)">
         << </button>
 

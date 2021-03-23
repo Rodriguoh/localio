@@ -25,6 +25,7 @@ class StoreResource extends JsonResource
             'SIRET' => $this->SIRET,
             'thumbnails' => $this->photos()->first()->url ?? '',
             'avg_note' => Comment::where('store_id', $this->id)->avg('note'),
+            'nb_comment' => $this->comments->count(),
             'adresse' => [
                 'number' => $this->number,
                 'street' => $this->street,

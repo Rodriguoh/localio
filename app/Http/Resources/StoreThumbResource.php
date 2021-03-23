@@ -24,6 +24,7 @@ class StoreThumbResource extends JsonResource
             'category' => $this->category->label,
             'thumbnails' => $this->photos()->first()->url ?? '',
             'avg_note' => Comment::where('store_id', $this->id)->avg('note'),
+            'nb_comment' => $this->comments->count(),
             'latnlg' => [
                 'lat' => $this->lat,
                 'lng' => $this->lng
