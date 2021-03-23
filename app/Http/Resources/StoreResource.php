@@ -24,7 +24,8 @@ class StoreResource extends JsonResource
             'mail' => $this->mail,
             'SIRET' => $this->SIRET,
             'thumbnails' => $this->photos()->first()->url ?? '',
-            'avg_note' => Comment::where('store_id', $this->id)->avg('note'),
+            'avg_note' => Comment::where('store_id', $this->id)->where('flagged', '!=', 1)->avg('note'),
+            'nb_comment' => $this->comments->where('flagged', '!=', 1)->count(),
             'adresse' => [
                 'number' => $this->number,
                 'street' => $this->street,
