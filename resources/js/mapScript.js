@@ -1,4 +1,4 @@
-// import Vue from "vue/dist/vue.esm"; Import de VueJS pour la build lors de la mise en prod
+import Vue from "vue/dist/vue.esm"; //Import de VueJS pour la build lors de la mise en prod
 // var _ = require("lodash"); Import lodash en cas de besoin
 // import debounce from "lodash/debounce";
 var app = new Vue({
