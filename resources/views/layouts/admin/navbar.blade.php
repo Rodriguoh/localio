@@ -7,7 +7,7 @@
             <a href="{{URL::route('home')}}">
             <img src="{{asset('img/logos/logo-sombre.png')}}" alt="logo-localio" style="height:35px">
             </a>
-             
+
             <button class="btn btn-action mr-5" type="button" onclick="halfmoon.toggleDarkMode()" aria-label="Toggle dark mode">
                 <i class="fa fa-moon-o" aria-hidden="true"></i>
             </button>

@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        return redirect()->route('home');
+        return redirect()->route('homeAccount');
     }
 }

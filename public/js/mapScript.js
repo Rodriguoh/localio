@@ -1530,7 +1530,7 @@ var app = new Vue({
             case 0:
               //Set map
               this.map = L.map('map', {
-                scrollWheelZoom: false,
+                scrollWheelZoom: true,
                 zoomControl: false
               }).setView(this.mapCenter, this.mapZoom);
               L.control.zoom({

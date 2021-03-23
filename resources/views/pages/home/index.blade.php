@@ -36,11 +36,12 @@
 
 <body class="full-with">
     <div id="app">
+
         @include('components.navbar')
         <div class="margin-constraint" v-show="!showStore">
             <div class="useful-width">
                 <div class="header">
-                    <div class="home-col-1">
+                    <div class="home-col-1 drive-image">
                         <div class="illustration_home">
                             <img src="{{ asset('img/illustrations/home_car.svg') }}">
                         </div>
@@ -277,6 +278,7 @@
             <footer>
             </footer>
 
+        </div>
         </div>
 
 
