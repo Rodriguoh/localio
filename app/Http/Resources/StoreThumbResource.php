@@ -23,7 +23,9 @@ class StoreThumbResource extends JsonResource
             'category_id' => $this->category->category_id == null ? $this->category->id : $this->category->category_id,
             'category' => $this->category->label,
             'thumbnails' => $this->photos()->first()->url ?? '',
-            'avg_note' => Comment::where('store_id', $this->id)->where('flagged', '!=', 1)->avg('note'),
+            'avg_note' => Comment::where([['store_id', $this->id],])
+            ->where(function ($query) {$query->where('flagged', '!=', 1)->orWhereNull('flagged');})
+            ->avg('note'),
             'nb_comment' => $this->comments->where('flagged', '!=', 1)->count(),
             'latnlg' => [
                 'lat' => $this->lat,
