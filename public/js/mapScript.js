@@ -13490,15 +13490,14 @@ var app = new vue_dist_vue_esm__WEBPACK_IMPORTED_MODULE_1__.default({
               case 0:
                 this.showStore = false;
                 vue_dist_vue_esm__WEBPACK_IMPORTED_MODULE_1__.default.nextTick(function () {
-                  // console.log('test', app);
                   document.querySelector("#map").scrollIntoView({
                     behavior: "smooth",
                     block: "end",
                     inline: "nearest"
                   });
                   app.map.setView(localStorage.getItem("centerMap").split(","));
-                  alert(app.map.getCenter().lat + ' ' + app.map.getCenter().lng + ' ' + localStorage.getItem("centerMap").split(","));
-                }); // this.refreshMapView();
+                  app.map.invalidateSize();
+                });
 
               case 2:
               case "end":
