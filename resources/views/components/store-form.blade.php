@@ -4,20 +4,19 @@
     <div class="form-group w-400 mw-full">
         <label for="name" class="required">Nom du commerce</label>
         @if($errors->has('name'))
-            <div class="invalid-feedback">
-                Le nom de commerce est obligatoire.
-            </div>
+        <div class="invalid-feedback">
+            Le nom de commerce est obligatoire.
+        </div>
         @endif
-        <input type="text" class="form-control" id="name" placeholder="Nom entier" name="name"
-        value="{{old('name', $store->name)}}">
+        <input type="text" class="form-control" id="name" placeholder="Nom entier" name="name" value="{{old('name', $store->name)}}">
     </div>
 
     <div class="form-group w-400 mw-full">
         <label for="short_description" class="required">Description courte</label>
         @if($errors->has('short_description'))
-            <div class="invalid-feedback">
-                La description courte est obligatoire.
-            </div>
+        <div class="invalid-feedback">
+            La description courte est obligatoire.
+        </div>
         @endif
         <textarea class="form-control" id="short_description" name="short_description">{{old('short_description', $store->short_description)}}</textarea>
     </div>
@@ -26,9 +25,9 @@
     <div class="form-group">
         <label class="required">Une photo pour mettre en avant votre commerce</label>
         @if($errors->has('photo'))
-            <div class="invalid-feedback">
-                La photo est obligatoire.
-            </div>
+        <div class="invalid-feedback">
+            La photo est obligatoire.
+        </div>
         @endif
         <div class="custom-file">
             <input type="file" id="photo" name="photo" accept="image/*">
@@ -40,27 +39,27 @@
     <div class="form-group w-400 mw-full">
         <label for="phone" class="required">Numéro de téléphone</label>
         @if($errors->has('phone'))
-            <div class="invalid-feedback">
-                Le numéro de téléphone de votre commerce est obligatoire.
-            </div>
+        <div class="invalid-feedback">
+            Le numéro de téléphone de votre commerce est obligatoire.
+        </div>
         @endif
         <input type="text" class="form-control" id="phone" placeholder="Numéro" name="phone" value="{{old('phone', $store->phone)}}">
     </div>
     <div class="form-group w-400 mw-full">
         <label for="mail" class="required">Adresse Mail</label>
         @if($errors->has('mail'))
-            <div class="invalid-feedback">
-                L'adresse mail de votre commerce est obligatoire.{{$errors->first('mail')}}
-            </div>
+        <div class="invalid-feedback">
+            L'adresse mail de votre commerce est obligatoire.{{$errors->first('mail')}}
+        </div>
         @endif
         <input type="text" class="form-control" id="mail" placeholder="Mail" name="mail" value="{{old('mail', $store->mail)}}">
     </div>
     <div class="form-group w-400 mw-full">
         <label for="SIRET" class="required">Numéro de SIRET</label>
         @if($errors->has('SIRET'))
-            <div class="invalid-feedback">
-                Le numéro de SIRET est obligatoire.
-            </div>
+        <div class="invalid-feedback">
+            Le numéro de SIRET est obligatoire.
+        </div>
         @endif
         <input type="text" class="form-control" id="SIRET" placeholder="SIRET" name="SIRET" value="{{old('SIRET', $store->SIRET)}}">
     </div>
@@ -74,16 +73,63 @@
         <select class="form-control" id="category" required name="category_id">
             <option value="" selected="selected" disabled="disabled">Choisir une catégorie</option>
             @foreach($categories as $category)
-                <option {{old('category_id', $store->category_id) == $category->id ? "selected": ""}} value="{{$category->id}}">{{$category->label}}</option>
-                @foreach($category->child as $categoryChild)
-                    <option {{old('category_id', $store->category_id) == $categoryChild->id ? "selected": ""}} value="{{$categoryChild->id}}"> -  {{$categoryChild->label}}</option>
-                @endforeach
+            <option {{old('category_id', $store->category_id) == $category->id ? "selected": ""}} value="{{$category->id}}">{{$category->label}}</option>
+            @foreach($category->child as $categoryChild)
+            <option {{old('category_id', $store->category_id) == $categoryChild->id ? "selected": ""}} value="{{$categoryChild->id}}"> - {{$categoryChild->label}}</option>
+            @endforeach
             @endforeach
         </select>
     </div>
 
     <div class="form-group">
-        <textarea name="description" id="editor">{{old('description', $store->description)}}</textarea>
+        <textarea name="description" id="editor">{{old('description', $store->description)}}
+        <h3>Horaires : </h3>
+        <table align="left" border="1" width="60%">
+            <thead>
+                <tr>
+                    <th>Jour</th>
+                    <td style="text-align:center">Horaires</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Lundi</th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>Mardi</th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>Mercredi</th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>Jeudi</th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>Vendredi</th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>Samedi</th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>Dimanche</th>
+                    <td></td>
+                </tr>
+                
+            </tbody>
+        </table>
+        </textarea>
     </div>
 
 
@@ -94,9 +140,9 @@
     <div class="w-400 mw-full">
         <label for="number" class="required">Adresse</label>
         @if($errors->has('number') || $errors->has('street'))
-            <div class="invalid-feedback">
-                Le numéro et le nom de la rue sont obligatoire.
-            </div>
+        <div class="invalid-feedback">
+            Le numéro et le nom de la rue sont obligatoire.
+        </div>
         @endif
         <div class="form-row row-eq-spacing">
             <div class="col">
@@ -111,18 +157,18 @@
     <div class="form-group w-400 mw-full position-relative">
         <label for="city" class="required">Ville</label>
         @if($errors->has('INSEE'))
-            <div class="invalid-feedback">
-                Vous devez sélectionner une ville dans la liste.
-            </div>
+        <div class="invalid-feedback">
+            Vous devez sélectionner une ville dans la liste.
+        </div>
         @endif
         <input type="text" class="form-control" id="city" placeholder="Le nom de la ville" name="city" value="{{old('city', $store->city->name ?? '')}}" autocomplete="new-password">
         <ul class="position-absolute d-none auto-comp z-10 text-dark-lm text-light-dm bg-dark-light-dm bg-light-lm w-full" id="autocomplete">
         </ul>
         <p>Cliquez sur votre ville quand elle apparraitera dans la liste.</p>
         @if($errors->has('lat'))
-            <div class="invalid-feedback">
-                Impossible de localiser votre adresse, si cette erreur persiste, contacté un administrateur.
-            </div>
+        <div class="invalid-feedback">
+            Impossible de localiser votre adresse, si cette erreur persiste, contacté un administrateur.
+        </div>
         @endif
     </div>
 
@@ -150,7 +196,7 @@
     <input class="btn btn-success" id="subStore" type="button" value="Valider">
 
     <style>
-        #city:focus + .auto-comp {
+        #city:focus+.auto-comp {
             display: block !important;
         }
 
@@ -160,13 +206,13 @@
     </style>
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script>
-        var editor = CKEDITOR.replace( 'editor', {
+        var editor = CKEDITOR.replace('editor', {
             filebrowserUploadUrl: "{{route('ckeditor.upload',['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form',
             uiColor: '#ADD8E6',
-            width:'100%',
-            height:500
-        } );
+            width: '100%',
+            height: 500
+        });
     </script>
     <script>
         const listCity = document.getElementById('autocomplete');
@@ -191,7 +237,7 @@
             let [number, street, city] = [...document.querySelectorAll(['#number', '#street', '#city'])];
             let req = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${number.value + ' ' + street.value + ' ' + city.value}&type=housenumber`);
             let rep = await req.json();
-            let [lng, lat] = rep?.features?.[0]?.geometry?.coordinates;
+            let [lng, lat] = rep?.features?. [0]?.geometry?.coordinates;
             document.getElementById('lat').value = lat;
             document.getElementById('lng').value = lng;
             document.form.submit();
