@@ -3,7 +3,7 @@
 
 <head>
 
-   
+
 
     {{-- Meta Tags --}}
     <title>Localio - Click and collect</title>
@@ -43,8 +43,8 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
-    <script src="{{ asset('js/leaflet-providers.js') }}"></script>
-    <script src="{{ asset('js/leaflet.markercluster.js') }}" async></script>
+    <script src="{{ asset('js/leaflet-providers.js') }}" defer></script>
+    <script src="{{ asset('js/leaflet.markercluster.js') }}" defer></script>
     {{-- MarkerCluster CSS --}}
     <link rel="stylesheet" href="{{ asset('css/MarkerCluster.css') }}">
     <link rel="stylesheet" href="{{ asset('css/MarkerCluster.Default.css') }}">
@@ -56,7 +56,7 @@
     {{-- Dashicons CSS --}}
     <link href="https://s.w.org/wp-includes/css/dashicons.css?20150710" rel="stylesheet" type="text/css">
     {{-- mapScript.js --}}
-    <script src="{{ asset('js/mapScript.js') }}" async></script>
+    <script src="{{ asset('js/mapScript.js') }}" defer></script>
     {{-- Style CSS --}}
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
@@ -315,15 +315,10 @@
 
         </div>
         </div>
-
-
-
-
         <script type="application/javascript">
             var categories = @json($categories);
             var myFavorites = @json($favorites);
             var idUser = @json($id_user);
-
         </script>
 </body>
 
