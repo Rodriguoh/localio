@@ -16,7 +16,16 @@
         <h1 class="content-title font-size-22">
             {{ $store->name}}
         </h1>
-        <p>{{ $store->number . ' ' . $store->street . ' ' . $store->city->name}}</p>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>Adresse : <span class="badge">{{ $store->number . ' ' . $store->street . ' ' . $store->city->name}}</span></p>
+                <p>Code commentaire : <span class="badge">{{ $store->codeComment}}</span></p>
+            </div>
+            <div class="col-sm-6">
+                <p>Etat : <span class="badge">{{ $store->state->label}}</span></p>
+            </div>
+        </div>
+
         <div class="row row-eq-spacing">
             <div class="col-12 col-md-4">
                 <div class="card bg-dark-light-dm">
@@ -37,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <canvas id="myChart" width="300" height="100"></canvas>
+        <canvas id="myChart" width="200" height="110"></canvas>
     </div>
     <script>
         var consultations = @json($consultations);

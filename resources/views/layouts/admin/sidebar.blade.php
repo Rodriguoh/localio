@@ -56,7 +56,6 @@ $role = User::find(Auth::id())->role->name;
                 </span>
                 Traiter les demandes
             </a>
-            </br>
         @endif
 
         @if($role ==='user' ||$role === 'moderator')
@@ -78,7 +77,6 @@ $role = User::find(Auth::id())->role->name;
                 Modérer les avis
             </a>
             @endif
-            </br>
         @endif
         <h5 class="sidebar-title">Gérer ses favoris</h5>
         <div class="sidebar-divider"></div>
@@ -88,7 +86,6 @@ $role = User::find(Auth::id())->role->name;
             </span>
             Gérer ses favoris
         </a>
-        </br>
         @if($role ==='admin')
             <h5 class="sidebar-title">Administration</h5>
             <div class="sidebar-divider"></div>
@@ -104,7 +101,6 @@ $role = User::find(Auth::id())->role->name;
                 </span>
                 Statistiques
             </a>
-            </br>
         @endif
         <h5 class="sidebar-title">Gérer son compte</h5>
         <div class="sidebar-divider"></div>
@@ -112,14 +108,14 @@ $role = User::find(Auth::id())->role->name;
             <span class="sidebar-icon">
                 <i class="fa fa-lock" aria-hidden="true"></i>
             </span>
-            Parametre du compte
+            Paramètre du compte
         </a>
         <div class="sidebar-divider"></div>
         <a href="{{ URL::route('logout')}}" class="sidebar-link sidebar-link-with-icon text-danger">
             <span class="sidebar-icon">
                 <i class="fa fa-sign-out text-danger" aria-hidden="true"></i>
             </span>
-            Se deconnecter
+            Se déconnecter
         </a>
     </div>
 </div>

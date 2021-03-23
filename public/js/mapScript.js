@@ -1510,6 +1510,15 @@ var app = new Vue({
       }));
     };
   },
+  filters: {
+    truncate: function truncate(text, length, suffix) {
+      if (text.length > length) {
+        return text.substring(0, length) + suffix;
+      } else {
+        return text;
+      }
+    }
+  },
   mounted: function () {
     var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
       var _this3 = this;

@@ -1491,7 +1491,7 @@ nav .nav-links.open {
     width: 30%;
     max-width: 350px;
     margin-left: 15px;
-    z-index: 400;
+    z-index: unset;
   }
   .map-and-list .stores-list .element-list {
     position: relative;
@@ -1556,7 +1556,7 @@ nav .nav-links.open {
     justify-content: flex-end;
     color: #000000;
     font-weight: bold;
-    margin-top: 5px;
+    margin-top: 0px;
   }
   .map-and-list .stores-list .element-list .info-element-list div .note span:nth-child(2) {
     width: auto;

@@ -27,7 +27,7 @@ class StoreController extends Controller
      * @param string $name
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function getStoresByName(string $name, Request $request, $limit)
+    public function getStoresByName(string $name, Request $request)
     {
         if (isset($request->category)) {
             $category_id = Category::where('label', 'like', '%' . $request->category . '%')->first()->id;
