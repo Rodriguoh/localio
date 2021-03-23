@@ -283,6 +283,10 @@
     margin-bottom: 10px;
 }
 
+.leaflet-control-attribution{
+    display:none;
+}
+
 
 @include respond-to("M") {
 
