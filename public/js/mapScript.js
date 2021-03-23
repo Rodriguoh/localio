@@ -917,6 +917,7 @@ var app = new Vue({
     showStore: false,
     filters_isOpen: false,
     mobileMenu_isOpen: false,
+    querySearch_isFocus: false,
     connexion: 0,
 
     /* Comments */
