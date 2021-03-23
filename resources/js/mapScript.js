@@ -309,7 +309,8 @@ var app = new Vue({
         maskModalStore: function async () {
             this.showStore = false;
             document.querySelector("#map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-            this.refreshMapView();
+            this.map.setView(localStorage.getItem("centerMap").split(","));
+            // this.refreshMapView();
         }
     },
     created() {
