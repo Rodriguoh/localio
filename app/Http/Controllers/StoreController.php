@@ -250,7 +250,7 @@ class StoreController extends Controller
             $consultationsResult[$month] = $consultations[$month] ?? 0;
         }
 
-        $consultationsBycat = DB::select('select label, count(*) from categories inner join stores on stores.category_id = categories.id inner join consultations on stores.id = consultations.store_id group by label', [1]);
+        $consultationsBycat = DB::select('select label, count(*) from categories inner join stores on stores.category_id = categories.id inner join consultations on stores.id = consultations.store_id group by label');
 
         return view('pages/account/stats', [
             'nbCommentaire' => Comment::count(),
