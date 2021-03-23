@@ -310,7 +310,6 @@ var app = new Vue({
             this.showStore = false;
             Vue.nextTick(function () {
                 document.querySelector("#map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-                app.map.setView(localStorage.getItem("centerMap").split(","));
                 app.map.invalidateSize();
             });
         }

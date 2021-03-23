@@ -13495,7 +13495,6 @@ var app = new vue_dist_vue_esm__WEBPACK_IMPORTED_MODULE_1__.default({
                     block: "end",
                     inline: "nearest"
                   });
-                  app.map.setView(localStorage.getItem("centerMap").split(","));
                   app.map.invalidateSize();
                 });
 
