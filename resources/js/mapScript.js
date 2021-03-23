@@ -306,12 +306,16 @@ var app = new Vue({
             this.commentLimit = 1;
             this.showStore = true;
         },
-        maskModalStore: function async () {
+        maskModalStore: async function  () {
             this.showStore = false;
+            Vue.nextTick(function () {
+                // console.log('test', app);
             document.querySelector("#map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-            this.map.setView(localStorage.getItem("centerMap").split(","));
-            alert(this.map.getCenter().lat + ' ' +
-            this.map.getCenter().lng + ' ' + localStorage.getItem("centerMap").split(","));
+            app.map.setView(localStorage.getItem("centerMap").split(","));
+            alert(app.map.getCenter().lat + ' ' +
+            app.map.getCenter().lng + ' ' + localStorage.getItem("centerMap").split(","));
+              })
+
             // this.refreshMapView();
         }
     },

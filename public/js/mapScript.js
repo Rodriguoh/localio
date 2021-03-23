@@ -13482,16 +13482,38 @@ var app = new vue_dist_vue_esm__WEBPACK_IMPORTED_MODULE_1__.default({
 
       return showModalStore;
     }(),
-    maskModalStore: function async() {
-      this.showStore = false;
-      document.querySelector("#map").scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-        inline: "nearest"
-      });
-      this.map.setView(localStorage.getItem("centerMap").split(","));
-      alert(this.map.getCenter().lat + ' ' + this.map.getCenter().lng + ' ' + localStorage.getItem("centerMap").split(",")); // this.refreshMapView();
-    }
+    maskModalStore: function () {
+      var _maskModalStore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
+          while (1) {
+            switch (_context13.prev = _context13.next) {
+              case 0:
+                this.showStore = false;
+                vue_dist_vue_esm__WEBPACK_IMPORTED_MODULE_1__.default.nextTick(function () {
+                  // console.log('test', app);
+                  document.querySelector("#map").scrollIntoView({
+                    behavior: "smooth",
+                    block: "end",
+                    inline: "nearest"
+                  });
+                  app.map.setView(localStorage.getItem("centerMap").split(","));
+                  alert(app.map.getCenter().lat + ' ' + app.map.getCenter().lng + ' ' + localStorage.getItem("centerMap").split(","));
+                }); // this.refreshMapView();
+
+              case 2:
+              case "end":
+                return _context13.stop();
+            }
+          }
+        }, _callee13, this);
+      }));
+
+      function maskModalStore() {
+        return _maskModalStore.apply(this, arguments);
+      }
+
+      return maskModalStore;
+    }()
   },
   created: function created() {
     var _JSON$parse,
@@ -13526,13 +13548,13 @@ var app = new vue_dist_vue_esm__WEBPACK_IMPORTED_MODULE_1__.default({
     }
   },
   mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
+    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14() {
       var _this3 = this;
 
       var checkboxFavorite;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
         while (1) {
-          switch (_context13.prev = _context13.next) {
+          switch (_context14.prev = _context14.next) {
             case 0:
               //Set map
               this.map = L.map('map', {
@@ -13546,11 +13568,11 @@ var app = new vue_dist_vue_esm__WEBPACK_IMPORTED_MODULE_1__.default({
                 variant: '',
                 accessToken: '9zKBU8aYvWv4EZGNqDxbchlyWN5MUsWUAHGn3ku9anzWz8nndmhQprvQGH1aikE5'
               }).addTo(this.map);
-              _context13.next = 5;
+              _context14.next = 5;
               return this.getStoresOnMap();
 
             case 5:
-              _context13.next = 7;
+              _context14.next = 7;
               return this.map.addLayer(this.markers);
 
             case 7:
@@ -13582,10 +13604,10 @@ var app = new vue_dist_vue_esm__WEBPACK_IMPORTED_MODULE_1__.default({
 
             case 14:
             case "end":
-              return _context13.stop();
+              return _context14.stop();
           }
         }
-      }, _callee13, this);
+      }, _callee14, this);
     }));
 
     function mounted() {
