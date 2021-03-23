@@ -30,7 +30,6 @@
                 <td class="d-lg-table-cell">{{$user->role->name}}</td>
                 <td class="text-center">
                     <div class="dropdown with-arrow">
-<<<<<<< HEAD
                         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                             <button class="btn btn-secondary btn-square m-2" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false" id="dropdown-toggle-btn-1">
                                 <i class="fa fa-eye text-white" aria-hidden="true"></i>
@@ -52,27 +51,6 @@
                                     <input type="submit" class="btn btn-success" value="Modifier">
                                 </form>
                             </div>
-=======
-                        <button class="btn btn-secondary btn-square m-2" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-eye text-white" aria-hidden="true"></i>
-                        </button>
-                        <div class="dropdown-menu w-200 w-sm-250 w-md-300 dropdown-menu-right">
-                            <p>Modifier le rôle de <b>{{$user->firstname}} {{$user->lastname}}</b></p>
-
-                            <form action="{{ route('editRoleUser') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$user->id}}">
-                                <div class="form-group">
-                                    <label class="required">Rôle :</label>
-                                    <select name="role" required="required" class="form-control">
-                                        @foreach($roles as $role)
-                                            <option value="{{$role->id}}">{{$role->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <input type="submit" class="btn btn-success" value="Modifier">
-                            </form>
->>>>>>> 6a7862b (style)
                         </div>
                     </div>
                     @if($user->banned_until == null)
