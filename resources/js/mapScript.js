@@ -39,6 +39,7 @@ var app = new Vue({
         showStore: false,
         filters_isOpen: false,
         mobileMenu_isOpen: false,
+        querySearch_isFocus: false,
         connexion: 0,
         /* Comments */
         comments: {},
@@ -281,15 +282,15 @@ var app = new Vue({
             await this.map.addLayer(this.markers);
             console.log('refreshMapView');
         },
-        reportComment: async function(id){
+        reportComment: async function (id) {
 
             let urlComment = new URL(
-                `${this.baseUrl}/api/comment/`+id
+                `${this.baseUrl}/api/comment/` + id
             );
             let req = await fetch(
                 urlComment
             );
-            document.getElementById('reportButton'+id).innerHTML = "Avis signalé";
+            document.getElementById('reportButton' + id).innerHTML = "Avis signalé";
 
         },
         resetFilters: async function () {
@@ -297,7 +298,6 @@ var app = new Vue({
             this.categoryFilter = "";
             this.categorySelected = "";
         },
-
         showModalStore: async function (idStore) {
             this.selectedStore = await this.getStore(idStore);
 
