@@ -27,7 +27,9 @@ class StoreResource extends JsonResource
             'avg_note' => Comment::where([['store_id', $this->id],])
             ->where(function ($query) {$query->where('flagged', '!=', 1)->orWhereNull('flagged');})
             ->avg('note'),
-            'nb_comment' => $this->comments->where(function ($query) {$query->where('flagged', '!=', 1)->orWhereNull('flagged');})->count(),
+            'nb_comment' => Comment::where([['store_id', $this->id],])
+            ->where(function ($query) {$query->where('flagged', '!=', 1)->orWhereNull('flagged');})
+            ->count(),
             'adresse' => [
                 'number' => $this->number,
                 'street' => $this->street,
