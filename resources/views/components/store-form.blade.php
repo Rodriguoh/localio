@@ -85,49 +85,48 @@
         <textarea name="description" id="editor">{{old('description', isset($store->description) ? $store->description : 
         
             '<h3>Horaires : </h3>
-        <table align="left" border="1" width="60%">
+        <table border="1" width="60%">
             <thead>
                 <tr>
                     <th>Jour</th>
-                    <td style="text-align:center">Horaires</td>
+                    <td align="center">Horaires</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th>Lundi</th>
-                    <td></td>
+                    <td align="center"></td>
                 </tr>
 
                 <tr>
                     <th>Mardi</th>
-                    <td></td>
+                    <td align="center"></td>
                 </tr>
 
                 <tr>
                     <th>Mercredi</th>
-                    <td></td>
+                    <td align="center"></td>
                 </tr>
 
                 <tr>
                     <th>Jeudi</th>
-                    <td></td>
+                    <td align="center"></td>
                 </tr>
 
                 <tr>
                     <th>Vendredi</th>
-                    <td></td>
+                    <td align="center"></td>
                 </tr>
 
                 <tr>
                     <th>Samedi</th>
-                    <td></td>
+                    <td align="center"></td>
                 </tr>
 
                 <tr>
                     <th>Dimanche</th>
-                    <td></td>
+                    <td align="center"></td>
                 </tr>
-                
             </tbody>
         </table>'
 
