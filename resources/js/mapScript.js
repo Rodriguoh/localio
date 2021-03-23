@@ -356,6 +356,15 @@ var app = new Vue({
             );
         };
     },
+    filters: {
+        truncate: function (text, length, suffix) {
+            if (text.length > length) {
+                return text.substring(0, length) + suffix;
+            } else {
+                return text;
+            }
+        },
+    },
     mounted: async function () {
         //Set map
         this.map = L.map('map', { scrollWheelZoom: true, zoomControl: false }).setView(this.mapCenter, this.mapZoom);

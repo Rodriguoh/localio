@@ -36,7 +36,8 @@
 
 <body class="full-with">
     <div id="app">
-        @include('layouts.home.navigation')
+
+        @include('components.navbar')
         <div class="margin-constraint" v-show="!showStore">
             <div class="useful-width">
                 <div class="header">
@@ -167,12 +168,12 @@
                     <template v-for="store in computedAllStoreOnMap">
                         <div class="element-list" :id="'list-store-'+store.id">
                             <div class="img-element-list">
-                                <img src="{{ asset('img/photos/exemple-image-store-2.jpeg') }}">
+                                <img :src="store.thumbnails">
                             </div>
                             <div class="info-element-list">
                                 <p>@{{ store . name }}</p>
                                 <div>
-                                    <span class="description-veryshort">@{{ store . short_description }}.</span>
+                                    <span class="description-veryshort">@{{  store.short_description && store.short_description.length > 50 ? store.short_description.slice(0,70) + '...' : store.short_description }}.</span>
                                     <div class="note">
                                         <span>@{{ Math . round(store . avg_note * 100) / 100 }}</span>
                                         <span><img src="{{ asset('img/icons/star.svg') }}"><span
@@ -191,7 +192,7 @@
         <div class="modal-store" style="display:none" v-show="showStore">
             <a class="close" v-on:click="maskModalStore"></a>
             <div class="header-modal-store">
-                <div class="img-store"><img src="{{ asset('img/photos/exemple-image-store-3.jpg') }}"></div>
+                <div class="img-store"><img :src="selectedStore.thumbnails"></div>
                 <div class="margin-constraint">
                     <div class="useful-width">
                         <div class="info-store">
@@ -207,7 +208,6 @@
                                 </div>
                                 <div class="total-notes"><span>X</span> avis</div>
                             </div>
-
 
                         </div>
                     </div>

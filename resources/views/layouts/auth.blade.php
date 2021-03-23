@@ -21,7 +21,8 @@
 </head>
 <body class="full-with">
     <div id="app">
-        @include('layouts.home.navigation')
+
+        @include('components.navbar')
 
 
         <!-- Container avec les marges -->
