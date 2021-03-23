@@ -198,16 +198,17 @@
                             <h3>@{{ selectedStore ? selectedStore . name : '' }}</h3>
                             <div class="stars-and-notes">
                                 <div class="note-store">
-                                    <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
-                                    <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                    <template v-for="index in 5" :key="index">
+                                        <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                    </template>
+
+                                    {{-- <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
                                     <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
                                     <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
                                     <span class="icon-star disable"><img
-                                            src="{{ asset('img/icons/star.svg') }}"></span>
+                                            src="{{ asset('img/icons/star.svg') }}"></span> --}}
                                 </div>
-                                <div class="total-notes"><span>X</span> avis</div>
                             </div>
-
                         </div>
                     </div>
                 </div>
