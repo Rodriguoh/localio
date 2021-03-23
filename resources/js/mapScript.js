@@ -209,7 +209,6 @@ var app = new Vue({
                 marker.on("mouseover", async () => {
                     let store = document.querySelector(`#list-store-${rep[i].id} .info-element-list`);
                     document.querySelector(`#list-store-${rep[i].id} .info-element-list .note`).style.color = "#000000";
-                    console.log(store)
                     store.style.backgroundColor = "#ffe492";
                     store.scrollIntoView();
 
@@ -280,7 +279,6 @@ var app = new Vue({
             await this.map.removeLayer(this.markers);
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
-            console.log('refreshMapView');
         },
         reportComment: async function (id) {
 
@@ -308,11 +306,10 @@ var app = new Vue({
             this.commentLimit = 1;
             this.showStore = true;
         },
-        maskModalStore: function () {
+        maskModalStore: function async () {
             this.showStore = false;
-            console.log('to bot')
             document.querySelector("#map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-            console.log(document.querySelector("#map"))
+            this.refreshMapView();
         }
     },
     created() {
