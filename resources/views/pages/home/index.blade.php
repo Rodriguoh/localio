@@ -26,8 +26,6 @@
         crossorigin="anonymous" />
     {{-- Dashicons CSS --}}
     <link href="//s.w.org/wp-includes/css/dashicons.css?20150710" rel="stylesheet" type="text/css">
-    {{-- VueJS --}}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
     {{-- mapScript.js --}}
     <script src="{{ asset('js/mapScript.js') }}" defer></script>
     {{-- Style CSS --}}
@@ -165,7 +163,7 @@
             <template v-if="allStoreOnMap.length > 0">
                 <div class="stores-list">
                     <template v-for="store in computedAllStoreOnMap">
-                        <div class="element-list" :id="'list-store-'+store.id">
+                        <div class="element-list" :id="'list-store-'+store.id" v-on:click="commentLimit = 1;showModalStore(store.id);">
                             <div class="img-element-list">
                                 <img :src="store.thumbnails">
                             </div>
