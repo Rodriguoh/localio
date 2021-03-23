@@ -251,10 +251,10 @@
                                         <a :href="'mailto:'+selectedStore.mail">@{{selectedStore . mail}}</a>
 
                                     </div>
-                                    <div class="element-info-contact-store">
-                                        <div><i class="fas fa-mouse-pointer"></i></div>
-                                        <!-- open link in new tab -->
-                                        <a :href='selectedStore.url' target="_blank">@{{selectedStore . url}}</a>
+                                    <div v-if="selectedStore.url" class="element-info-contact-store">
+                                            <div><i class="fas fa-mouse-pointer"></i></div>
+                                            <!-- open link in new tab -->
+                                            <a :href='selectedStore.url' target="_blank">@{{selectedStore . url}}</a>
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-map-marker-alt"></i></div>
