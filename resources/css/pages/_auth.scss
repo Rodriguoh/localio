@@ -94,14 +94,10 @@
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-}
-
-// Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
     .login-container{
         display: flex;
-        justify-content: left;
-        width: 80%;
+        justify-content: space-between;
+        width: 95%;
         margin: auto;
 
         input,
@@ -136,6 +132,15 @@
     }
 
     .login-forms{
-        width: 30%;
+        width: 45%;
     }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+    .login-container{
+        width: 80%;
+    }
+
 }

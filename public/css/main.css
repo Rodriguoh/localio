@@ -1112,11 +1112,11 @@ nav .nav-links.open {
   right: -50%;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .login-container {
     display: flex;
-    justify-content: left;
-    width: 80%;
+    justify-content: space-between;
+    width: 95%;
     margin: auto;
   }
   .login-container input,
@@ -1147,7 +1147,12 @@ nav .nav-links.open {
   }
 
   .login-forms {
-    width: 30%;
+    width: 45%;
+  }
+}
+@media (min-width: 1200px) {
+  .login-container {
+    width: 80%;
   }
 }
 /* -- Desktop --*/
