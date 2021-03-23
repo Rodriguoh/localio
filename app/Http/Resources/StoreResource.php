@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Resources;
-
+use App\Models\Comment;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StoreResource extends JsonResource
@@ -24,6 +24,7 @@ class StoreResource extends JsonResource
             'mail' => $this->mail,
             'SIRET' => $this->SIRET,
             'thumbnails' => $this->photos()->first()->url ?? '',
+            'avg_note' => Comment::where('store_id', $this->id)->avg('note'),
             'adresse' => [
                 'number' => $this->number,
                 'street' => $this->street,

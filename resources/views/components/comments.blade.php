@@ -1,7 +1,7 @@
-<div class="comment" v-for="comment in comments">
+<div class="comment" v-for="comment in comments" v-if="comments.length != 0">
     <div class="info-comment">
         <div>
-            <span class="owner-comment">Marie Nathalie</span>
+            <span class="owner-comment">@{{ comment . user_firstname ?? 'Anonyme' }}</span>
             <span class="date-comment">@{{ comment . date }}</span>
         </div>
         <div>
@@ -15,12 +15,18 @@
             href="#">Signaler ce commentaire </a>
     </div>
 </div>
+<div class="comment" v-if="comments.length == 0">
+    <p>Aucun commentaire disponible.</p>
+</div>
 
-<div class="pagination-comment">
+<div class="pagination-comment" v-if="comments.length != 0">
     <button class="btn"
         v-on:click="commentLimit-=1;commentLimit<=1?commentLimit=1:commentLimit-=1;getStoreComments(selectedStore.id, commentLimit)">
         << </button>
-            <button class="btn">@{{ commentLimit }}</button>
-            <button class="btn"
-                v-on:click="commentLimit+=1; commentLimit>=commentPages?commentLimit=commentPages:commentLimit+=1; getStoreComments(selectedStore.id, commentLimit)">>></button>
+
+        <button class="btn"
+                v-on:click="commentLimit+=1; commentLimit>=commentPages?commentLimit=commentPages:commentLimit+=1; getStoreComments(selectedStore.id, commentLimit)">
+                >>
+            </button>
+            @{{comments}}
 </div>
