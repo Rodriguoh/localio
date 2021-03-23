@@ -128,8 +128,4 @@
     <div class="text-center">{{ $users->links() }}</div>
 
 </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 6a7862b (style)
 @endsection
