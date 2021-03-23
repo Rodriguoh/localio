@@ -26,8 +26,6 @@
         crossorigin="anonymous" />
     {{-- Dashicons CSS --}}
     <link href="//s.w.org/wp-includes/css/dashicons.css?20150710" rel="stylesheet" type="text/css">
-    {{-- VueJS --}}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
     {{-- mapScript.js --}}
     <script src="{{ asset('js/mapScript.js') }}" defer></script>
     {{-- Style CSS --}}
@@ -57,13 +55,13 @@
                                     class="button-input-filter"><img class="icon-menu-filter"
                                         src="{{ asset('img/icons/input-menu-filter.svg') }}"></button>
                                 <input id="inputCity" v-model="querySearch" v-on:keyup="autoComplete"
-                                    v-on:focus="filters_isOpen = false" type="text"
+                                    @focus="filters_isOpen = false; querySearch_isFocus = true" @blur="querySearch_isFocus = false" type="text"
                                     placeholder="Une ville ou un nom de commerce">
                                 <button class="button-input-search"><img class="icon-search"
                                         src="{{ asset('img/icons/input-search.svg') }}"></button>
                             </div>
-                            <template v-if="querySearch.length > 0 && filters_isOpen == false">
-                                <div class="research-propositions">
+                            <template>
+                                <div class="research-propositions"  :style="[querySearch.length > 0 && filters_isOpen == false && querySearch_isFocus ? {'display': 'block'} : {'display': 'none'}]">
                                     <template v-if="resultsQueryCity.length > 0">
                                         <div v-for="city in computedResultsQueryCity"
                                             v-on:click="setViewMap(city.geometry.coordinates[1],city.geometry.coordinates[0])"
@@ -79,7 +77,7 @@
 
                                     <template v-if="resultsQueryStore.length > 0">
                                         <div v-for="store in computedResultsQueryStore"
-                                            v-on:click="setViewMap(store.latnlg.lat, store.latnlg.lng)"
+                                            v-on:click="setViewMap(store.latnlg.lat, store.latnlg.lng); console.log('test');"
                                             class="research-proposition-link">
                                             <span class="mark">&nbsp;</span>
                                             <div class="icon"><img
@@ -118,7 +116,6 @@
                                                         :class="[categorySelected == cat.label ? 'btn-color btn-secondary': 'btn-white']">@{{ cat . label }}</label>
                                                 </template>
                                             </div>
-
 
                                         </div>
                                         <template v-if="categorySelected !== ''">
@@ -166,7 +163,7 @@
             <template v-if="allStoreOnMap.length > 0">
                 <div class="stores-list">
                     <template v-for="store in computedAllStoreOnMap">
-                        <div class="element-list" :id="'list-store-'+store.id">
+                        <div class="element-list" :id="'list-store-'+store.id" v-on:click="commentLimit = 1;showModalStore(store.id);">
                             <div class="img-element-list">
                                 <img :src="store.thumbnails">
                             </div>
@@ -175,9 +172,14 @@
                                 <div>
                                     <span class="description-veryshort">@{{  store.short_description && store.short_description.length > 50 ? store.short_description.slice(0,70) + '...' : store.short_description }}.</span>
                                     <div class="note">
-                                        <span>@{{ Math . round(store . avg_note * 100) / 100 }}</span>
-                                        <span><img src="{{ asset('img/icons/star.svg') }}"><span
-                                                class="stars-word">/5</span></span>
+                                        <template v-if="store.nb_comment > 0">
+                                            <span>@{{ Math . round(store . avg_note * 100) / 100 }}</span>
+                                            <span><img src="{{ asset('img/icons/star.svg') }}"><span
+                                                    class="stars-word">/5</span></span>
+                                        </template>
+                                        <template v-else>
+                                            <span>Aucun avis</span>
+                                        </template>
                                     </div>
                                 </div>
                             </div>
@@ -199,15 +201,16 @@
                             <h3>@{{ selectedStore ? selectedStore . name : '' }}</h3>
                             <div class="stars-and-notes">
                                 <div class="note-store">
-                                    <template v-for="index in 5" :key="index">
-                                        <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                    <template v-if="selectedStore?.nb_comment > 0">
+                                        <template v-for="index in 5">
+                                            <span class="icon-star" v-if="selectedStore.avg_note >= index"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                            <span class="icon-star disable" v-if="selectedStore.avg_note < index"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                        </template>
+                                        <span>@{{selectedStore?.nb_comment}} Evaluations</span>
                                     </template>
-
-                                    {{-- <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
-                                    <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
-                                    <span class="icon-star"><img src="{{ asset('img/icons/star.svg') }}"></span>
-                                    <span class="icon-star disable"><img
-                                            src="{{ asset('img/icons/star.svg') }}"></span> --}}
+                                    <template v-else>
+                                        <span>Aucune évaluation</span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -226,7 +229,7 @@
 
                         <div class="description-modal-store">
                             <div class="title-favorite">
-                                <h3> Description</h3>
+                                <h3>Description</h3>
                                 <div class="icon-favorite">
                                     <div class="fav-btn">
                                         <input type="checkbox" id="checkbox-favoris" :value="selectedStore.id"
@@ -244,13 +247,14 @@
                                 <div class="part">
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-envelope"></i></div>
-                                        @{{ selectedStore ? selectedStore . mail : '' }}
-
+                                        <!-- open mailto link -->
+                                        <a :href="'mailto:'+selectedStore.mail">@{{selectedStore . mail}}</a>
 
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-mouse-pointer"></i></div>
-                                        @{{ selectedStore ? selectedStore . url : '' }}
+                                        <!-- open link in new tab -->
+                                        <a :href='selectedStore.url' target="_blank">@{{selectedStore . url}}</a>
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-map-marker-alt"></i></div>
@@ -260,12 +264,13 @@
                                 <div class="part">
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-phone"></i></div>
-                                        @{{ selectedStore ? selectedStore . phone : '' }}
+                                        <!-- link for phone call -->
+                                        <a :href="'tel:'+selectedStore.phone"> @{{selectedStore.phone}}</a>
 
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-biking"></i></div>
-                                        @{{ selectedStore . isDelivering ? 'Oui' : 'Non' }}
+                                        Livraison: @{{ selectedStore . isDelivering ? 'Oui' : 'Non' }}
                                     </div>
 
                                 </div>

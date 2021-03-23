@@ -50,7 +50,7 @@ class StoreController extends Controller
         $store->state_id = State::where('label', '=', 'approved')->first()->id;
         $store->save();
         Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => Auth::user()->id, 'action' => 'approve']);
-        return redirect()->route('requestsStores');
+        return redirect()->route('listStores');
     }
 
     public function refuse($idStore)
@@ -59,7 +59,7 @@ class StoreController extends Controller
         $store->state_id = State::where('label', '=', 'refused')->first()->id;
         $store->save();
         Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => Auth::user()->id, 'action' => 'refuse']);
-        return redirect()->route('requestsStores');
+        return redirect()->route('listStores');
     }
 
     public function requests()
@@ -250,7 +250,7 @@ class StoreController extends Controller
             $consultationsResult[$month] = $consultations[$month] ?? 0;
         }
 
-        $consultationsBycat = DB::select('select label, count(*) from categories inner join stores on stores.category_id = categories.id inner join consultations on stores.id = consultations.store_id group by label', [1]);
+        $consultationsBycat = DB::select('select label, count(*) from categories inner join stores on stores.category_id = categories.id inner join consultations on stores.id = consultations.store_id group by label');
 
         return view('pages/account/stats', [
             'nbCommentaire' => Comment::count(),
