@@ -1,5 +1,16 @@
 @extends('layouts.auth')
-@section('content.login')
+@section('content')
+
+    <div class="select-type">
+
+        <a href="{{route('login')}}" class="active">CONNEXION</a>
+
+        <a href="{{route('register')}}">INSCRIPTION</a>
+
+    </div>
+
+    <!-- Container largeur utile -->
+    <div class="login-section">
 
     <!-- Session Status -->
     <x-auth-session-status :status="session('status')" />
@@ -7,42 +18,42 @@
     <!-- Validation Errors -->
     <x-auth-validation-errors :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}" style="width:100%">
-            @csrf
+    <form method="POST" action="{{ route('login') }}" style="width:100%">
+    @csrf
 
-            <!-- Email Address -->
-            <div class="">
-                <x-input id="email" class="form-control form-control-lg" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0" />
-            </div>
+    <!-- Email Address -->
+        <div class="login-input">
+            <x-input id="email" class="form-control form-control-lg" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0" />
+        </div>
 
-            <!-- Password -->
-            <div class="login-input">
+        <!-- Password -->
+        <div class="login-input">
 
-                <x-input id="password" class="form-control form-control-lg" type="password" name="password" placeholder="Mot de passe" required autocomplete="current-password" style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;outline:none" />
-            </div>
+            <x-input id="password" class="form-control form-control-lg" type="password" name="password" placeholder="Mot de passe" required autocomplete="current-password" style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;outline:none" />
+        </div>
 
-            <!-- Remember Me -->
+        <!-- Remember Me -->
 
-            <div class="checkbox mb-3">
-                <label>
-                    <input id="remember_me" type="checkbox" name="remember"> Rester connecter
-                </label>
-            </div>
+        <div class="checkbox mb-3">
+            <input id="remember_me" type="checkbox" name="remember">
+            <label for="remember_me" style="margin: 2px 0 0 5px">
+                Rester Connecté
+            </label>
+        </div>
 
-            <div class="d-flex flex-column align-items-center">
+        <div class="d-flex flex-column align-items-center">
 
-                <a class="" href="{{ route('register') }}">
-                    Pas encore inscrit ?
-                </a>
-
-                <button class="btn btn-lg btn-primary btn-block m-10">Envoyer</button>
-               <x-google-link/>
-                @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+            <button class="btn btn-action btn-r8 login-btn">SE CONNECTER</button>
+            <x-google-link/>
+            @if (Route::has('password.request'))
+                <a href="{{route('password.request')}}">
                     Mot de passe oublié ?
-                </a>
-                @endif
-            </div>
-        </form>
+                </a><br>
+            @endif
+
+        </div>
+    </form>
+    </div>
+
 
 @endsection
