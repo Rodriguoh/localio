@@ -67,6 +67,9 @@
         padding-top: 15px;
         z-index: 410;
         cursor: pointer;
+        &:hover {
+            display: block !important;
+        }
         .research-proposition-link {
             display: flex;
             align-items: center;
