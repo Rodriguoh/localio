@@ -287,6 +287,12 @@
             .info-store {
                 margin-left: 100px;
                 width: 40%;
+                .stars-and-notes{
+                    z-index: 99;
+                }
+                h3{
+                    margin-top:0px;
+                }
                 h3,
                 .total-notes {
                     color: $grey !important;
@@ -334,6 +340,29 @@
                 }
                 .description-modal-store {
                     margin-left: 100px;
+                    display:flex;
+                    flex-direction: column;
+                    margin-top: 0px;
+                    .info-contact-store{
+                        order: -1;
+                    }
+                }
+            }
+        }
+    }
+}
+@include respond-to("L") {
+    .modal-store {
+        .main-modal-store {
+            .useful-width {
+                .description-modal-store {
+                    margin-left: 100px;
+                    display:flex;
+                    flex-direction: column;
+                    margin-top: -80px;
+                    .info-contact-store{
+                        order: -1;
+                    }
                 }
             }
         }
