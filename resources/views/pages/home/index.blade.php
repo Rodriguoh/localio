@@ -174,9 +174,14 @@
                                 <div>
                                     <span class="description-veryshort">@{{  store.short_description && store.short_description.length > 50 ? store.short_description.slice(0,70) + '...' : store.short_description }}.</span>
                                     <div class="note">
-                                        <span>@{{ Math . round(store . avg_note * 100) / 100 }}</span>
-                                        <span><img src="{{ asset('img/icons/star.svg') }}"><span
-                                                class="stars-word">/5</span></span>
+                                        <template v-if="store.nb_comment > 0">
+                                            <span>@{{ Math . round(store . avg_note * 100) / 100 }}</span>
+                                            <span><img src="{{ asset('img/icons/star.svg') }}"><span
+                                                    class="stars-word">/5</span></span>
+                                        </template>
+                                        <template v-else>
+                                            <span>Aucun avis</span>
+                                        </template>
                                     </div>
                                 </div>
                             </div>
@@ -198,9 +203,15 @@
                             <h3>@{{ selectedStore ? selectedStore . name : '' }}</h3>
                             <div class="stars-and-notes">
                                 <div class="note-store">
-                                    <template v-for="index in 5" :key="index">
-                                        <span class="icon-star" v-if="selectedStore.avg_note >= index"><img src="{{ asset('img/icons/star.svg') }}"></span>
-                                        <span class="icon-star disable" v-if="selectedStore.avg_note < index"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                    <template v-if="selectedStore?.nb_comment > 0">
+                                        <template v-for="index in 5">
+                                            <span class="icon-star" v-if="selectedStore.avg_note >= index"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                            <span class="icon-star disable" v-if="selectedStore.avg_note < index"><img src="{{ asset('img/icons/star.svg') }}"></span>
+                                        </template>
+                                        <span>@{{selectedStore?.nb_comment}} Evaluations</span>
+                                    </template>
+                                    <template v-else>
+                                        <span>Aucune évaluation</span>
                                     </template>
                                 </div>
                             </div>
