@@ -259,13 +259,14 @@
                                 <div class="part">
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-envelope"></i></div>
-                                        @{{ selectedStore ? selectedStore . mail : '' }}
-
-
+                                        <!-- open mailto link -->
+                                        <a :href="'mailto:'+selectedStore.mail">@{{selectedStore . mail}}</a>
+                                        
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-mouse-pointer"></i></div>
-                                        @{{ selectedStore ? selectedStore . url : '' }}
+                                        <!-- open link in new tab -->
+                                        <a :href='selectedStore.url' target="_blank">@{{selectedStore . url}}</a>
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-map-marker-alt"></i></div>
@@ -275,7 +276,8 @@
                                 <div class="part">
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-phone"></i></div>
-                                        @{{ selectedStore ? selectedStore . phone : '' }}
+                                        <!-- link for phone call -->
+                                        <a :href="'tel:'+selectedStore.phone"> @{{selectedStore.phone}}</a>
 
                                     </div>
                                     <div class="element-info-contact-store">
