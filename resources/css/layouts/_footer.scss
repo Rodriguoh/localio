@@ -1,16 +1,12 @@
-@import "../abstract/mixins";
-@import "../abstract/variables";
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
 
-header{
-    width: 100%;
+footer{
+    display: none;
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-
-    header{
-        box-shadow: 0 1px 10px grey;
-    }
 
 }
 
@@ -18,3 +14,4 @@ header{
 @media (min-width: 1200px) {
 
 }
+
