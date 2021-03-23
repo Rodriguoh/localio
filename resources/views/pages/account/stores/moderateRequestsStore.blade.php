@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card">
+<div class="card table-responsive">
     <h1 class="card-title">Demandes de mise en ligne de commerce</h1>
     @if(isset($stores) && $stores->count() > 0)
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
         <thead>
-            <tr class="d-flex">
+            <tr>
                 <th class="col-sm-1">Utilisateur</th>
                 <th class="col-sm-2">Nom du commerce</th>
                 <th class="col-sm-4">Ville</th>
@@ -18,7 +18,7 @@
         <tbody>
 
             @foreach ($stores as $store)
-            <tr class="d-flex">
+            <tr>
                 <td class="col-sm-1">{{$store->lastname.' '.$store->firstname}}</td>
                 <td class="col-sm-2">{{$store->name}}</td>
                 <td class="col-sm-4">{{$store->city_name}}</td>
@@ -26,8 +26,8 @@
                 <td class="col-sm-1">{{$store->state_label}}</td>
                 <td class="col-sm-2">
                     <a href="{{ route('showStore', ['idStore' => $store->id]) }}" class="btn btn-secondary btn-square m-2" type="button"><i class="fa fa-eye" style="color:white" aria-hidden="true"></i></a>
-                    <a href="#modal-confirmationApprove" onclick="editModalOnApprove('{{$store->id}}', '{{$store->name}}')" class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></a>
-                    <a href="#modal-confirmationRefuse" onclick="editModalOnRefuse('{{$store->id}}', '{{$store->name}}')" class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
+                    <a href="#modal-confirmationApprove" onclick="editModalOnApprove(`{{$store->id}}`, `{{$store->name}}`)" class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></a>
+                    <a href="#modal-confirmationRefuse" onclick="editModalOnRefuse(`{{$store->id}}`, `{{$store->name}}`)" class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
                 </td>
             </tr>
             @endforeach

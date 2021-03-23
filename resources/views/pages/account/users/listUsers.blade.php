@@ -44,7 +44,7 @@
                                         <label class="required">Rôle:</label>
                                         <select name="role" required="required" class="form-control">
                                             @foreach($roles as $role)
-                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                                <option {{$user->role_id == $role->id ? 'selected' : ''}} value="{{$role->id}}">{{$role->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

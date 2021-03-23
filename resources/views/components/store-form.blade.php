@@ -82,8 +82,9 @@
     </div>
 
     <div class="form-group">
-        <textarea name="description" id="editor">{{old('description', $store->description)}}
-        <h3>Horaires : </h3>
+        <textarea name="description" id="editor">{{old('description', isset($store->description) ? $store->description : 
+        
+            '<h3>Horaires : </h3>
         <table align="left" border="1" width="60%">
             <thead>
                 <tr>
@@ -128,7 +129,10 @@
                 </tr>
                 
             </tbody>
-        </table>
+        </table>'
+
+        )}}
+        
         </textarea>
     </div>
 
