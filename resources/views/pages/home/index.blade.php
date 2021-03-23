@@ -60,8 +60,8 @@
                                 <button class="button-input-search"><img class="icon-search"
                                         src="{{ asset('img/icons/input-search.svg') }}"></button>
                             </div>
-                            <template v-if="querySearch.length > 0 && filters_isOpen == false && querySearch_isFocus">
-                                <div class="research-propositions">
+                            <template>
+                                <div class="research-propositions"  :style="[querySearch.length > 0 && filters_isOpen == false && querySearch_isFocus ? {'display': 'block'} : {'display': 'none'}]">
                                     <template v-if="resultsQueryCity.length > 0">
                                         <div v-for="city in computedResultsQueryCity"
                                             v-on:click="setViewMap(city.geometry.coordinates[1],city.geometry.coordinates[0])"
@@ -77,7 +77,7 @@
 
                                     <template v-if="resultsQueryStore.length > 0">
                                         <div v-for="store in computedResultsQueryStore"
-                                            v-on:click="setViewMap(store.latnlg.lat, store.latnlg.lng)"
+                                            v-on:click="setViewMap(store.latnlg.lat, store.latnlg.lng); console.log('test');"
                                             class="research-proposition-link">
                                             <span class="mark">&nbsp;</span>
                                             <div class="icon"><img
@@ -249,7 +249,7 @@
                                         <div><i class="fas fa-envelope"></i></div>
                                         <!-- open mailto link -->
                                         <a :href="'mailto:'+selectedStore.mail">@{{selectedStore . mail}}</a>
-                                        
+
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-mouse-pointer"></i></div>
