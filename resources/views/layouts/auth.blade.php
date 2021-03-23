@@ -85,7 +85,7 @@
                             @if (Route::has('password.request'))
                                 <a class="underline text-sm text-gray-600 hover:text-gray-900">
                                     <input type="radio" id="fg-pswd" v-model="connexion" value="3" hidden>
-                                    <label for="fg-pswd">Mot de passe oublié ?</label>
+                                    <label for="fg-pswd" style="cursor: pointer">Mot de passe oublié ?</label>
                                 </a><br>
                             @endif
 
