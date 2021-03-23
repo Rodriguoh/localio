@@ -229,7 +229,7 @@
 
                         <div class="description-modal-store">
                             <div class="title-favorite">
-                                <h3> Description</h3>
+                                <h3>Description</h3>
                                 <div class="icon-favorite">
                                     <div class="fav-btn">
                                         <input type="checkbox" id="checkbox-favoris" :value="selectedStore.id"
@@ -270,7 +270,7 @@
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-biking"></i></div>
-                                        @{{ selectedStore . isDelivering ? 'Oui' : 'Non' }}
+                                        Livraison: @{{ selectedStore . isDelivering ? 'Oui' : 'Non' }}
                                     </div>
 
                                 </div>
