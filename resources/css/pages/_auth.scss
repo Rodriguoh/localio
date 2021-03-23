@@ -16,16 +16,16 @@
     margin: 0 auto 30px auto !important;
     display: flex;
     justify-content: space-around;
+    text-decoration: none;
 
-    & label{
+    & a{
         font-weight: bold;
         font-size: 1.2em;
         padding: 15px 15px 10px 15px;
         border-radius: 15px;
         cursor: pointer;
     }
-    & #connexion:checked + label[for="connexion"],
-      #inscription:checked + label[for="inscription"]{
+    & .active{
         background-color: $yellowSecondary;
         color: white;
     }

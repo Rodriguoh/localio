@@ -1042,16 +1042,16 @@ nav .nav-links.open {
   margin: 0 auto 30px auto !important;
   display: flex;
   justify-content: space-around;
+  text-decoration: none;
 }
-.select-type label {
+.select-type a {
   font-weight: bold;
   font-size: 1.2em;
   padding: 15px 15px 10px 15px;
   border-radius: 15px;
   cursor: pointer;
 }
-.select-type #connexion:checked + label[for=connexion],
-.select-type #inscription:checked + label[for=inscription] {
+.select-type .active {
   background-color: #FFCF39;
   color: white;
 }
