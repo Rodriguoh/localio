@@ -81,10 +81,21 @@
     <h2 class="card-title">Modifier mon mots de passe</h2>
     <form action="{{route('editPassword')}}" method="POST" class="w-400 wm-full">
         @csrf
+        @if($user->password)
+        <div class="form-group">
+            @if($errors->has('current-password'))
+            <div class="invalid-feedback">
+                Le mots de passe ne correspond pas a l'ancien.
+            </div>
+            @endif
+            <label for="current-password">Mon ancien mots de passe</label>
+            <input type="password" class="form-control" id="current-password" name="current-password" autocomplete="new-password">
+        </div>
+        @endif
         <div class="form-group">
             @if($errors->has('password'))
             <div class="invalid-feedback">
-                Le mots doit comporter au moins 8 caractères.
+                Le mots de passe doit comporter au moins 8 caractères et être différent de l'ancien.
             </div>
             @endif
             <label for="password">Mon nouveau mots de passe</label>

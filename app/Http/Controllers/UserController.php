@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -56,8 +57,11 @@ class UserController extends Controller
     }
 
     public function editPassword(Request $request) {
+        $user = Auth::user();
+        // dd($request);
         $this->validate($request, [
-            'password' => 'required|min:8',
+            'current-password' => $user->password ? ['required', function ($attribute, $value, $fail) use ($user) {if (!Hash::check($value, $user->password)) $fail($attribute); }] : '',
+            'password' => 'required|min:8|different:current-password',
             'confirm-password' => 'same:password'
         ]);
 
