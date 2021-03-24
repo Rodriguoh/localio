@@ -19,7 +19,7 @@ class CheckBanned
                 $message = 'Votre compte a été suspendu '.$banned_days.' jours.';
             }
 
-            return redirect()->route('login')->withMessage($message);
+            return redirect()->route('login')->withErrors([$message]);
         }
 
         return $next($request);
