@@ -25,10 +25,8 @@ class StoreResource extends JsonResource
             'SIRET' => $this->SIRET,
             'thumbnails' => $this->photos()->first()->url ?? '',
             'avg_note' => Comment::where([['store_id', $this->id],])
-            ->where(function ($query) {$query->where('flagged', '!=', 1)->orWhereNull('flagged');})
             ->avg('note'),
             'nb_comment' => Comment::where([['store_id', $this->id],])
-            ->where(function ($query) {$query->where('flagged', '!=', 1)->orWhereNull('flagged');})
             ->count(),
             'adresse' => [
                 'number' => $this->number,
