@@ -2,30 +2,30 @@
 
 @section('content')
 
-    <div class="card">
+    <div class="card m-0 p-5 p-sm-10">
         <h1 class="card-title">Avis signalés</h1>
         @if(isset($comments) && $comments->count() > 0)
             <table class="table table-striped">
                 <thead>
-                <tr class="d-flex">
-                    <th class="col-sm-1">Commerce</th>
-                    <th class="col-sm-2">Note</th>
-                    <th class="col-sm-4">Avis</th>
-                    <th class="col-sm-2">Date d'ajout</th>
-                    <th class="col-sm-1">Auteur</th>
-                    <th class="col-sm-2">Action</th>
+                <tr>
+                    <th class="">Commerce</th>
+                    <th class="">Note</th>
+                    <th class="">Avis</th>
+                    <th class="d-none d-md-table-cell">Date d'ajout</th>
+                    <th class="d-none d-sm-table-cell">Auteur</th>
+                    <th class="">Action</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 @foreach ($comments as $comment)
-                    <tr class="d-flex">
-                        <td class="col-sm-1">{{$comment->store->name}}</td>
-                        <td class="col-sm-2">{{$comment->note}}</td>
-                        <td class="col-sm-4">{{$comment->comment}}</td>
-                        <td class="col-sm-2">{{$comment->updated_at}}</td>
-                        <td class="col-sm-1">{{$comment->user->firstname}} {{$comment->user->lastname}}</td>
-                        <td class="col-sm-2">
+                    <tr>
+                        <td class="">{{$comment->store->name}}</td>
+                        <td class="">{{$comment->note}}</td>
+                        <td class="">{{$comment->comment}}</td>
+                        <td class="d-none d-md-table-cell">{{$comment->updated_at}}</td>
+                        <td class="d-none d-sm-table-cell">{{$comment->user->firstname}} {{$comment->user->lastname}}</td>
+                        <td class="">
                             <a href="{{route('approveComment', ['idComment' => $comment->id])}}" class="btn btn-success btn-square m-2" type="button"><i class="fa fa-check" style="color:white" aria-hidden="true"></i></a>
                             <a href="{{route('refuseComment', ['idComment' => $comment->id])}}" class="btn btn-danger btn-square m-2" type="button"><i class="fa fa-times" style="color:white" aria-hidden="true"></i></a>
                         </td>
