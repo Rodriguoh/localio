@@ -270,13 +270,11 @@ var app = new Vue({
         },
         setViewMap: function (lat, lon) {
             document.querySelector("#map").scrollIntoView();
-
-
             this.querySearch = '';
             this.map.setView([lat, lon], 14);
         },
         refreshMapView: async function () {
-            await this.map.removeLayer(this.markers);
+            this.map.eachLayer(((layer) => {!!layer.toGeoJSON && this.map.removeLayer(layer)}));
             await this.getStoresOnMap();
             await this.map.addLayer(this.markers);
         },
