@@ -21,7 +21,7 @@
                     </div>
                 @endif
                 <p class="m-0">Ce code a du vous être fournis par le commercant.</p>
-                <input type="text" class="form-control" id="codeComment" name="codeComment">
+                <input type="text" class="form-control" id="codeComment" name="codeComment" value="{{old('codeComment')}}">
             </div>
             <div class="sidebar-divider"></div>
 
@@ -52,7 +52,7 @@
                         Veuillez saisir un commentaire.
                     </div>
                 @endif
-                <textarea class="form-control" id="comment" name="comment"></textarea>
+                <textarea class="form-control" id="comment" name="comment">{{old('comment')}}</textarea>
             </div>
             <input type="submit" value="Envoyer" class="btn btn-success">
         </form>

@@ -46,6 +46,7 @@
 
         <div class="mt-20 ml-10">
             <div class="text-center">
+                <a class="btn btn-success btn-lg" href="{{ URL::previous() }}">Page précédente</a>
                 <a class="btn btn-primary btn-lg"  href="{{route('home')}}">Retourner à l'accueil</a>
             </div>
 

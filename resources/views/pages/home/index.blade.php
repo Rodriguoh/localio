@@ -299,7 +299,7 @@
                                     </div>
                                     <div class="element-info-contact-store">
                                         <div><i class="fas fa-biking"></i></div>
-                                        Livraison: @{{ selectedStore . isDelivering ? 'Oui' : 'Non' }}
+                                        Livraison: @{{ !selectedStore . isDelivering ? 'Oui' : 'Non' }}
                                     </div>
 
                                 </div>

@@ -1,3 +1,4 @@
+<p><label for="" class="required"></label> = Champ obligatoire</p>
 <form name="form" id="form" action="{{route('postStore')}}" method="POST" class="mw-full" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="id" value="{{$store->id}}">
@@ -8,7 +9,7 @@
             Le nom de commerce est obligatoire.
         </div>
         @endif
-        <input type="text" class="form-control" id="name" placeholder="Nom entier" name="name" value="{{old('name', $store->name)}}">
+        <input type="text" class="form-control" id="name" placeholder="L'incroyable Pizzeria" name="name" value="{{old('name', $store->name)}}">
     </div>
 
     <div class="form-group w-400 mw-full">
@@ -18,7 +19,7 @@
             La description courte est obligatoire.
         </div>
         @endif
-        <textarea class="form-control" id="short_description" name="short_description">{{old('short_description', $store->short_description)}}</textarea>
+        <textarea class="form-control" id="short_description" placeholder="Pizzas faites avec amour et cuite au feu de bois !" name="short_description">{{old('short_description', $store->short_description)}}</textarea>
     </div>
 
 
@@ -43,7 +44,7 @@
             Le numéro de téléphone de votre commerce est obligatoire.
         </div>
         @endif
-        <input type="text" class="form-control" id="phone" placeholder="Numéro" name="phone" value="{{old('phone', $store->phone)}}">
+        <input type="text" class="form-control" id="phone" placeholder="0612482598" name="phone" value="{{old('phone', $store->phone)}}">
     </div>
     <div class="form-group w-400 mw-full">
         <label for="mail" class="required">Adresse Mail</label>
@@ -52,7 +53,7 @@
             L'adresse mail de votre commerce est obligatoire.{{$errors->first('mail')}}
         </div>
         @endif
-        <input type="text" class="form-control" id="mail" placeholder="Mail" name="mail" value="{{old('mail', $store->mail)}}">
+        <input type="text" class="form-control" id="mail" placeholder="contact@pizza.com" name="mail" value="{{old('mail', $store->mail)}}">
     </div>
     <div class="form-group w-400 mw-full">
         <label for="SIRET" class="required">Numéro de SIRET</label>
@@ -61,11 +62,11 @@
             Le numéro de SIRET est obligatoire.
         </div>
         @endif
-        <input type="text" class="form-control" id="SIRET" placeholder="SIRET" name="SIRET" value="{{old('SIRET', $store->SIRET)}}">
+        <input type="text" class="form-control" id="SIRET" placeholder="36252187900034" name="SIRET" value="{{old('SIRET', $store->SIRET)}}">
     </div>
     <div class="form-group w-400 mw-full">
         <label for="url">URL de votre site internet</label>
-        <input type="text" class="form-control" id="url" placeholder="L'url" name="url" value="{{old('url', $store->url)}}">
+        <input type="text" class="form-control" id="url" placeholder="incroyable-pizza.fr" name="url" value="{{old('url', $store->url)}}">
     </div>
 
     <div class="form-group w-400 mw-full">
@@ -81,9 +82,11 @@
         </select>
     </div>
 
+    <p>Dans cet éditeur de texte, vous pouvez décrire en détail votre commerce, insérer des photos ou encore préciser vos horaires d'ouvertures.</p>
+
     <div class="form-group">
-        <textarea name="description" id="editor">{{old('description', isset($store->description) ? $store->description : 
-        
+        <textarea name="description" id="editor">{{old('description', isset($store->description) ? $store->description :
+
             '<h3>Horaires : </h3>
         <table border="1" width="60%">
             <thead>
@@ -131,7 +134,7 @@
         </table>'
 
         )}}
-        
+
         </textarea>
     </div>
 
@@ -139,6 +142,8 @@
     <h3 class="card-title">
         Localisation
     </h3>
+
+    <p>En précisant l'adresse exacte, nous pourrons localiser votre commerce afin que les utilisateurs puissent s'y rendre facilement.</p>
 
     <div class="w-400 mw-full">
         <label for="number" class="required">Adresse</label>
@@ -149,10 +154,10 @@
         @endif
         <div class="form-row row-eq-spacing">
             <div class="col">
-                <input type="text" class="form-control" id="number" placeholder="Numéro" name="number" required="required" value="{{old('number', $store->number)}}">
+                <input type="text" class="form-control" id="number" placeholder="25" name="number" required="required" value="{{old('number', $store->number)}}">
             </div>
             <div class="col">
-                <input type="text" class="form-control" id="street" placeholder="Rue" name="street" required="required" value="{{old('street', $store->street)}}">
+                <input type="text" class="form-control" id="street" placeholder="rue de france" name="street" required="required" value="{{old('street', $store->street)}}">
             </div>
         </div>
     </div>
@@ -164,17 +169,17 @@
             Vous devez sélectionner une ville dans la liste.
         </div>
         @endif
-        <input type="text" class="form-control" id="city" placeholder="Le nom de la ville" name="city" value="{{old('city', $store->city->name ?? '')}}" autocomplete="new-password">
+        <input type="text" class="form-control" id="city" placeholder="Paris" name="city" value="{{old('city', $store->city->name ?? '')}}" autocomplete="new-password">
         <ul class="position-absolute d-none auto-comp z-10 text-dark-lm text-light-dm bg-dark-light-dm bg-light-lm w-full" id="autocomplete">
         </ul>
-        <p>Cliquez sur votre ville quand elle apparraitera dans la liste.</p>
+
         @if($errors->has('lat'))
         <div class="invalid-feedback">
             Impossible de localiser votre adresse, si cette erreur persiste, contacté un administrateur.
         </div>
         @endif
     </div>
-
+    <p><span class="badge badge-secondary">Important :</span> Cliquez sur votre ville quand elle apparraitera dans la liste.</p>
     <input type="hidden" id="INSEE" name="INSEE" value="{{old('INSEE', $store->city_INSEE)}}">
     <input type="hidden" id="ZIPCode" name="ZIPCode" value="{{old('ZIPCode', $store->city->ZIPcode ?? '')}}">
     <input type="hidden" id="lng" name="lng" value="{{old('lng', $store->lng)}}">

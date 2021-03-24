@@ -41,12 +41,12 @@ class StoreController extends Controller
 
     public function showStore($idStore)
     {
-        $store = Store::find($idStore);
+        $store = Store::findOrFail($idStore);
         return view('pages/account/stores/showStore', ['store' =>  $store])->with('openingHours', json_decode($store->openingHours, true));
     }
     public function approve($idStore)
     {
-        $store = Store::find($idStore);
+        $store = Store::findOrFail($idStore);
         $store->state_id = State::where('label', '=', 'approved')->first()->id;
         $store->save();
         Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => Auth::user()->id, 'action' => 'approve']);
@@ -55,7 +55,7 @@ class StoreController extends Controller
 
     public function refuse($idStore)
     {
-        $store = Store::find($idStore);
+        $store = Store::findOrFail($idStore);
         $store->state_id = State::where('label', '=', 'refused')->first()->id;
         $store->save();
         Moderation::create(['date' => now(), 'store_id' => $store->id, 'user_id' => Auth::user()->id, 'action' => 'refuse']);
@@ -87,7 +87,7 @@ class StoreController extends Controller
 
     public function statsStore($idStore)
     {
-        $store = Store::find($idStore);
+        $store = Store::findOrFail($idStore);
 
         $consultationsByMonth = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -117,10 +117,10 @@ class StoreController extends Controller
 
     public function formStore($idStore = null)
     {
-        $store = Store::find($idStore);
-        if (isset($store)) {
+
+        if (isset($idStore)) {
             return view('pages/account/stores/editStoreForm', [
-                'store' => $store,
+                'store' => Store::findOrFail($idStore),
                 'categories' => Category::getCategoriesWithChild(),
             ]);
         } else {
@@ -134,7 +134,7 @@ class StoreController extends Controller
     public function postStore(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|max:100',
             'short_description' => 'required|max:255',
             'photo' => isset($request->id) ? '' : 'required|image',
             'phone' => 'required|digits:10',
@@ -142,13 +142,13 @@ class StoreController extends Controller
             'SIRET' => 'required|digits:14',
             'url' => 'nullable|url',
             'category_id' => 'required|exists:categories,id',
-            'number' => 'required',
-            'street' => 'required',
+            'number' => 'required|max:15',
+            'street' => 'required|max:45',
             'city' => 'required',
             'lat' => 'required',
         ]);
 
-        $store = isset($request->id) ? Store::find($request->id) : new Store();
+        $store = isset($request->id) ? Store::findOrFail($request->id) : new Store();
         $store->name = $request->name;
         $store->short_description = $request->short_description;
         $store->phone = $request->phone;
@@ -220,7 +220,7 @@ class StoreController extends Controller
             'confirmEmail' => 'required|exists:users,email'
         ]);
 
-        $store = Store::find($request->id);
+        $store = Store::findOrFail($request->id);
 
         if (Auth::id() != $store->user_id || Auth::user()->email != $request->confirmEmail) return redirect()->back();
 

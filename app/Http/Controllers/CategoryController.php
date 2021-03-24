@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index($id = null)
     {
         if (isset($id)) {
-            $categoryParrent = Category::find($id);
+            $categoryParrent = Category::findOrFail($id);
             return view('pages/account/categories/categories', [
                 'categoryParrent' => $categoryParrent,
                 'categories' => $categoryParrent->categoriesChild()->paginate(8),
@@ -30,7 +30,7 @@ class CategoryController extends Controller
 
     public function delete(Request $request)
     {
-        $category = Category::find($request->id);
+        $category = Category::findOrFail($request->id);
         if (!$category->isUse()) {
             $category->delete();
             return redirect()->back()->with('successDelete', 'Catégorie supprimée.');
@@ -42,7 +42,7 @@ class CategoryController extends Controller
     public function add(Request $request)
     {
         $this->validate($request, [
-            'label' => 'required|unique:categories,label'
+            'label' => 'required|unique:categories,label|max:60'
         ]);
 
         $category = new Category();
@@ -57,10 +57,10 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'id' => 'required|exists:categories,id',
-            'label' => 'required|unique:categories,label'
+            'label' => 'required|unique:categories,label|max:60'
         ]);
 
-        $category = Category::find($request->id);
+        $category = Category::findOrFail($request->id);
         $category->label = $request->label;
         $category->save();
 

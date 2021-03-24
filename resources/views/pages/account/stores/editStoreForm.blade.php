@@ -10,6 +10,9 @@
         </h2>
     </div>
 
+    <p class="p-10">Vous pouvez modifier les informations de votre commerce, chaque modification doit être validée par un modérateur avant de se retrouver publié sur notre application.</p>
+
+
     <div class="content">
         @if (session('success'))
         <div class="alert alert-success" role="alert">
