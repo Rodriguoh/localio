@@ -37,7 +37,7 @@
     <title>404 Error page</title>
 </head>
 
-<body>
+<body data-set-preferred-mode-onload="true">
 
     <style>
         .cercle-jaune {
@@ -51,7 +51,6 @@
             }
         }
     </style>
-
     <div class="page-wrapper mt-5 pt-5">
         <div class="alert alert-danger text-center">
             <h2 class="">404</h2>

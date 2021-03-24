@@ -24,12 +24,6 @@
     <meta name="msapplication-TileColor" content="#FFFFFF">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
-    <script src="{{ asset('js/mapScript.js')}}" defer></script>
-
-    <!-- Favicon and title -->
-    <link rel="icon" href="path/to/fav.png">
     <title>Login - Localio</title>
 
 </head>

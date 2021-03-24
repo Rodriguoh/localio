@@ -37,7 +37,7 @@
     <title>403 Error page</title>
 </head>
 
-<body>
+<body data-set-preferred-mode-onload="true">
 
     <style>
         .cercle-jaune {
