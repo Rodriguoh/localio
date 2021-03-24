@@ -61,7 +61,7 @@ class UserController extends Controller
         // dd($request);
         $this->validate($request, [
             'current-password' => $user->password ? ['required', function ($attribute, $value, $fail) use ($user) {if (!Hash::check($value, $user->password)) $fail($attribute); }] : '',
-            'password' => 'required|min:8',
+            'password' => 'required|min:8|different:current-password',
             'confirm-password' => 'same:password'
         ]);
 

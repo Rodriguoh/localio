@@ -95,7 +95,7 @@
         <div class="form-group">
             @if($errors->has('password'))
             <div class="invalid-feedback">
-                Le mots de passe doit comporter au moins 8 caractères.
+                Le mots de passe doit comporter au moins 8 caractères et être différent de l'ancien.
             </div>
             @endif
             <label for="password">Mon nouveau mots de passe</label>
