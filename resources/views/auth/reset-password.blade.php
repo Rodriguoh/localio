@@ -25,7 +25,7 @@
 
             <!-- Email Address -->
             <div class="login-input">
-                <x-input id="email" class="form-control form-control-lg" type="email" name="email" :value="old('email', $request->email)" style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0" required disabled autofocus />
+                <x-input id="email" class="form-control form-control-lg" type="email" name="email" :value="old('email', $request->email)" style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0" required readonly autofocus />
             </div>
 
             <!-- Password -->

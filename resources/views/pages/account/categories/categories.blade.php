@@ -8,7 +8,7 @@
         <a class="btn btn-square mb-20" href="{{ route('categories') }}" type="button">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </a>
-            {{$categoryParrent->label}} - Sous catégories
+            Sous catégories de {{$categoryParrent->label}}
         @else
             Les catégories
         @endif
@@ -63,7 +63,11 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Categorie</th>
+                    @if(!isset($categoryParrent))
+                        <th>Categorie</th>
+                    @else
+                        <th>Sous-categorie</th>
+                    @endif
                     @if(!isset($categoryParrent))
                         <th>Sous-categorie</th>
                     @endif
