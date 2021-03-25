@@ -15,7 +15,12 @@
     </h1>
     <div class="dropdown with-arrow">
         <button class="btn btn-success m-10" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
-            Ajouter <i class="fa fa-plus" aria-hidden="true"></i>
+            Ajouter une @if(!isset($categoryParrent))
+                            Categorie
+                        @else
+                            Sous-categorie
+                        @endif
+                        <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
         <div class="dropdown-menu w-200 w-sm-250 w-md-300 dropdown-menu-left" aria-labelledby="confirmer la supprission du commentaire">
             <div class="dropdown-content p-5 p-sm-10">
@@ -26,7 +31,11 @@
                 @endif
 
                 <div class="form-group">
-                    <label class="required" for="label">Nom de catégorie</label>
+                    <label class="required" for="label">Nom de la @if(!isset($categoryParrent))
+                        Categorie
+                    @else
+                        Sous-categorie
+                    @endif</label>
                     <input type="text" class="form-control" id="label" name="label">
                 </div>
                 <input type="submit" class="btn btn-success" value="Ajouter"/>

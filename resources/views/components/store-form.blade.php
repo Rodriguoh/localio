@@ -13,7 +13,7 @@
     </div>
 
     <div class="form-group w-400 mw-full">
-        <label for="short_description" class="required">Description courte</label>
+        <label for="short_description" class="required">Description courte (max: 255 charactèrs)</label>
         @if($errors->has('short_description'))
         <div class="invalid-feedback">
             La description courte est obligatoire.
@@ -70,7 +70,7 @@
     </div>
 
     <div class="form-group w-400 mw-full">
-        <label for="category" class="required">Categorie</label>
+        <label for="category" class="required">Catégorie</label>
         <select class="form-control" id="category" required name="category_id">
             <option value="" selected="selected" disabled="disabled">Choisir une catégorie</option>
             @foreach($categories as $category)

@@ -77,37 +77,37 @@
             <input id="disableEdit" type="reset" value="Annuler" class="btn d-none">
         </div>
     </form>
-    <div class="sidebar-divider"></div>
-    <h2 class="card-title">Modifier mon mots de passe</h2>
+    <div class="sidebar-divider mt-10"></div>
+    <h2 class="card-title">Modifier mon mot de passe</h2>
     <form action="{{route('editPassword')}}" method="POST" class="w-400 wm-full">
         @csrf
         @if($user->password)
         <div class="form-group">
             @if($errors->has('current-password'))
             <div class="invalid-feedback">
-                Le mots de passe ne correspond pas a l'ancien.
+                Le mot de passe ne correspond pas a l'ancien.
             </div>
             @endif
-            <label for="current-password">Mon ancien mots de passe</label>
+            <label for="current-password">Mon ancien mot de passe</label>
             <input type="password" class="form-control" id="current-password" name="current-password" autocomplete="new-password">
         </div>
         @endif
         <div class="form-group">
             @if($errors->has('password'))
             <div class="invalid-feedback">
-                Le mots de passe doit comporter au moins 8 caractères et être différent de l'ancien.
+                Le mot de passe doit comporter au moins 8 caractères et être différent de l'ancien.
             </div>
             @endif
-            <label for="password">Mon nouveau mots de passe</label>
+            <label for="password">Mon nouveau mot de passe</label>
             <input type="password" class="form-control" id="password" name="password" autocomplete="new-password">
         </div>
         <div class="form-group">
             @if($errors->has('confirm-password'))
             <div class="invalid-feedback">
-                Le mots de passe n'est pas identique.
+                Le mot de passe n'est pas identique.
             </div>
             @endif
-            <label for="confirm-password">Confirmer mon mots de passe</label>
+            <label for="confirm-password">Confirmer mon mot de passe</label>
             <input type="password" class="form-control" id="confirm-password" name="confirm-password" autocomplete="new-password">
         </div>
 
@@ -123,7 +123,7 @@
         form.map((input) => {
             input.removeAttribute('disabled');
         });
-        document.getElementById('switch-commercant').removeAttribute('disabled');
+        document.getElementById('switch-commercant')?.removeAttribute('disabled');
         document.getElementById('availableEdit').classList.add('d-none');
         document.getElementById('submitEdit').classList.remove('d-none');
         document.getElementById('disableEdit').classList.remove('d-none');
@@ -133,7 +133,7 @@
         form.map((input) => {
             input.setAttribute('disabled', 'disabled');
         });
-        document.getElementById('switch-commercant').setAttribute('disabled', 'disabled');
+        document.getElementById('switch-commercant')?.setAttribute('disabled', 'disabled');
         document.getElementById('availableEdit').classList.remove('d-none');
         document.getElementById('submitEdit').classList.add('d-none');
         document.getElementById('disableEdit').classList.add('d-none');

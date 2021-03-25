@@ -146,6 +146,9 @@ class StoreController extends Controller
             'street' => 'required|max:45',
             'city' => 'required',
             'lat' => 'required',
+            'INSEE' => 'required',
+            'ZIPCode' => 'required',
+            'lng' => 'required',
         ]);
 
         $store = isset($request->id) ? Store::findOrFail($request->id) : new Store();
