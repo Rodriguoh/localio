@@ -77,7 +77,7 @@
             <input id="disableEdit" type="reset" value="Annuler" class="btn d-none">
         </div>
     </form>
-    <div class="sidebar-divider"></div>
+    <div class="sidebar-divider mt-10"></div>
     <h2 class="card-title">Modifier mon mots de passe</h2>
     <form action="{{route('editPassword')}}" method="POST" class="w-400 wm-full">
         @csrf
@@ -123,7 +123,7 @@
         form.map((input) => {
             input.removeAttribute('disabled');
         });
-        document.getElementById('switch-commercant').removeAttribute('disabled');
+        document.getElementById('switch-commercant')?.removeAttribute('disabled');
         document.getElementById('availableEdit').classList.add('d-none');
         document.getElementById('submitEdit').classList.remove('d-none');
         document.getElementById('disableEdit').classList.remove('d-none');
@@ -133,7 +133,7 @@
         form.map((input) => {
             input.setAttribute('disabled', 'disabled');
         });
-        document.getElementById('switch-commercant').setAttribute('disabled', 'disabled');
+        document.getElementById('switch-commercant')?.setAttribute('disabled', 'disabled');
         document.getElementById('availableEdit').classList.remove('d-none');
         document.getElementById('submitEdit').classList.add('d-none');
         document.getElementById('disableEdit').classList.add('d-none');

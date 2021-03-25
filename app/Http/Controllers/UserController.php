@@ -26,9 +26,9 @@ class UserController extends Controller
         $this->validate($request, [
             'email' => $request->email != Auth::user()->email ? 'required|email|unique:users,email' : 'required|email',
             'isCommercant' => 'sometimes',
-            'firstname' => 'required_with:isCommercant,on',
-            'lastname' => 'required_with:isCommercant,on',
-            'phone' => $request->isCommercant ? 'digits:10' : '',
+            'firstname' => Auth::user()->role->name == 'owner' ? 'required|max:32' : 'required_with:isCommercant,on|max:32',
+            'lastname' => Auth::user()->role->name == 'owner' ? 'required|max:32' : 'required_with:isCommercant,on|max:32',
+            'phone' => Auth::user()->role->name == 'owner' || $request->isCommercant ? 'digits:10' : '',
         ]);
 
         $user = User::findOrFail($request->id);

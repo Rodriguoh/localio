@@ -35,6 +35,9 @@
         </div>
         @endif
         @endforeach
+        @if($favorites)
+            <p>Vous n'avez aucun commerce dans vos favoris !</p>
+        @endif
     </div>
     <div class="text-center">{{ $favorites->links() }}</div>
 </div>
