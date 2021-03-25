@@ -35,7 +35,7 @@
         </div>
         @endif
         @endforeach
-        @if($favorites)
+        @if($favorites->count() < 1)
             <p>Vous n'avez aucun commerce dans vos favoris !</p>
         @endif
     </div>
