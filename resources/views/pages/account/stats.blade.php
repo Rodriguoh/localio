@@ -10,21 +10,21 @@
     <h1 class="card-title m-10">Statistiques</h1>
         <div class="row row-eq-spacing">
             <div class="col-12 col-md-4">
-                <div class="card bg-dark-light-dm">
-                    <h2 class="card-title">Commentaires</h2>
-                    {{$nbCommentaire}}
+                <div class="card bg-dark-light-dm p-0">
+                    <h2 class="card-title p-5">Nombre de ommentaires</h2>
+                    <p class="text-center">{{$nbCommentaire}} commentaires</p>
                 </div>
             </div>
             <div class="col-12 col-md-4">
-                <div class="card bg-dark-light-dm">
-                    <h2 class="card-title">Visites</h2>
-                    {{$nbConsultations}}
+                <div class="card bg-dark-light-dm p-0">
+                    <h2 class="card-title p-5">Visites totales</h2>
+                    <p class="text-center">{{$nbConsultations}}</p>
                 </div>
             </div>
             <div class="col-12 col-md-4">
-                <div class="card bg-dark-light-dm">
-                    <h2 class="card-title">Utilisateurs</h2>
-                    {{$nbUtilisateurs}}
+                <div class="card bg-dark-light-dm p-0">
+                    <h2 class="card-title p-5">Inscrits</h2>
+                    <p class="text-center">{{$nbUtilisateurs}} utilisateurs</p>
                 </div>
             </div>
         </div>
