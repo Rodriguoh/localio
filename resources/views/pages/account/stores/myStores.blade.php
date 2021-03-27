@@ -26,7 +26,10 @@
                 <td>{{$store->name}}</td>
                 <td class="d-none d-md-table-cell">{{$store->city->name}}</td>
                 <td class="d-none d-sm-table-cell">{{$store->state->description}}</td>
-                <td class="text-right"><a href="{{ route('statsStore', ['idStore' => $store->id])}}" class="btn">Consulter</a></td>
+                <td class="text-right">
+                    <a href="{{ route('statsStore', ['idStore' => $store->id])}}" class="btn btn-success btn-square m-2 text-white"><i class="fa fa-line-chart" aria-hidden="true"></i></a>
+                    <a href="{{ route('createStore', ['idStore' => $store->id])}}" class="btn btn-secondary btn-square m-2 text-white"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                </td>
             </tr>
         @endForeach
         </tbody>
