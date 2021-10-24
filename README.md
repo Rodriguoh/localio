@@ -1,19 +1,25 @@
 # localio
-projet tutoré miw
 
+Projet Tutoré: formation MIW
 
-# Authentification : 
-commandes Breeze : 
+# Lancer le projet :
 
-composer require laravel/breeze --dev
+`ddev start`
 
-php artisan breeze:install
+`ddev composer install`
 
-npm install
+`npm install`
 
-npm run dev
+`ddev exec php artisan migrate`
 
+`ddev exec php artisan db:seed`
 
-# Images storage SFTP server 
+# Appliquer les styles :
 
-composer require league/flysystem-sftp ~1.0
+`npm run dev`
+
+# Passer en compte admin :
+
+`ddev sequelace`
+
+TABLE 'users', COLONE 'role_id', passer la valeur à `4`

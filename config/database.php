@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'heroku'), 
+    'default' => env('DB_CONNECTION', 'heroku'),
     //'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
@@ -86,6 +86,21 @@ return [
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
+        ],
+
+        'ddev' => [
+            'driver' => 'mysql',
+            'host' => 'db',
+            'port' => 3306,
+            'database' => 'db',
+            'username' => 'db',
+            'password' => 'db',
+            'unix_socket' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
         ],
 
         'pgsql' => [
