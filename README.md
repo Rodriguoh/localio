@@ -4,7 +4,7 @@ Projet Tutoré: formation MIW
 
 Localio est une plateforme de Click'n Collect. Elle liste sur une carte des commerçant pouvant chacun mettre en avant leur magasin (Photos, articles en vente) et ou les utilisateurs peuvent laisser leurs notes ainsi que des avis.
 
-![alt text](./public/img/photos/localio.png)
+![alt text](./public/img/photos/localio.PNG)
 
 
 # Lancer le projet :
