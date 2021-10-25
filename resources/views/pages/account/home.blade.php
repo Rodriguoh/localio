@@ -20,11 +20,13 @@
         <h4 class="alert-heading">{{session('successPassword')}}</h4>
     </div>
     @endif
+    <p><span class="badge badge-secondary"><label for="" class="required"></label> = Champ obligatoire</span></p>
+
     <form id="form-info" action="{{route('editUsersInformations')}}" method="POST" class="w-400 mw-full">
         @csrf
         <input type="hidden" name="id" value="{{$user->id}}">
         <div class="form-group">
-            <label for="lastname">Nom</label>
+            <label for="lastname" class="{{$user->role->name != 'user' ? 'required' : ''}}">Nom</label>
             @if($errors->has('lastname'))
                 <div class="invalid-feedback">
                     Le nom est obligatoire.
@@ -39,12 +41,12 @@
                 Le prénom est obligatoire.
             </div>
             @endif
-            <label for="firstname">Prénom</label>
+            <label for="firstname" class="{{$user->role->name != 'user' ? 'required' : ''}}">Prénom</label>
             <input type="text" class="form-control" id="firstname" name="firstname" value="{{$user->firstname}}" disabled>
         </div>
 
         <div class="form-group">
-            <label for="email" class="required">Adresse Email</label>
+            <label id="lmail" for="email" class="required">Adresse Email</label>
             @if($errors->has('email'))
             <div class="invalid-feedback">
                 L'adresse email est obligatoire.
@@ -54,7 +56,7 @@
         </div>
 
         <div class="form-group">
-            <label for="phone">Numéro de téléphone</label>
+            <label for="phone" class="{{$user->role->name != 'user' ? 'required' : ''}}">Numéro de téléphone</label>
             @if($errors->has('phone'))
             <div class="invalid-feedback">
                 Le numéro de téléphone est obligatoire.
@@ -88,7 +90,7 @@
                 Le mot de passe ne correspond pas a l'ancien.
             </div>
             @endif
-            <label for="current-password">Mon ancien mot de passe</label>
+            <label for="current-password" class="required">Mon ancien mot de passe</label>
             <input type="password" class="form-control" id="current-password" name="current-password" autocomplete="new-password">
         </div>
         @endif
@@ -98,7 +100,7 @@
                 Le mot de passe doit comporter au moins 8 caractères et être différent de l'ancien.
             </div>
             @endif
-            <label for="password">Mon nouveau mot de passe</label>
+            <label for="password" class="required">Mon nouveau mot de passe</label>
             <input type="password" class="form-control" id="password" name="password" autocomplete="new-password">
         </div>
         <div class="form-group">
@@ -107,7 +109,7 @@
                 Le mot de passe n'est pas identique.
             </div>
             @endif
-            <label for="confirm-password">Confirmer mon mot de passe</label>
+            <label for="confirm-password" class="required">Confirmer mon mot de passe</label>
             <input type="password" class="form-control" id="confirm-password" name="confirm-password" autocomplete="new-password">
         </div>
 
@@ -154,6 +156,18 @@
             document.getElementById('editPassword').setAttribute('disabled', 'disabled');
         }
     });
+
+    document.getElementById('switch-commercant').addEventListener('change', (event) => {
+            if(event.srcElement.checked) {
+                [...document.querySelectorAll('#form-info label:not(#lmail)')].map((label) => {
+                    label.classList.add('required');
+                });
+            } else {
+                [...document.querySelectorAll('#form-info label:not(#lmail)')].map((label) => {
+                    label.classList.remove('required');
+                });
+            }
+        });
 </script>
 
 
